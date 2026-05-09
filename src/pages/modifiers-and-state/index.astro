@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Modifiers and State"
+    description="Modifiers and state classes in Layered Semantic CSS."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Modifiers and state</p>
+
+            <h1>
+                Explicit modifiers and state classes
+            </h1>
+
+            <p class="intro">
+                LSCSS separates permanent visual variations from temporary
+                interface state.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Modifiers
+            </h2>
+
+<pre><code>.product-card--featured
+.product-card--compact
+.site-header--minimal</code></pre>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                State classes
+            </h2>
+
+<pre><code>.is_active
+.is_disabled
+.has_error
+.has_child</code></pre>
+
+            <p>
+                State classes should remain visible and predictable rather than
+                hidden inside complex selectors.
+            </p>
+        </section>
+    </main>
+</BaseLayout>
