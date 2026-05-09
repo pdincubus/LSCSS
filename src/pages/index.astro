@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CodeExample from '../components/CodeExample.astro';
+
+const folderStructureExample = `css/
+    settings/
+    base/
+    utilities/
+    layout/
+    components/
+    theme/
+    legacy/
+    hacks/`;
 ---
 
 <BaseLayout
@@ -18,6 +29,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 A practical CSS methodology for cascade layers, semantic naming,
                 shallow selectors, clear modifiers, and explicit state classes.
             </p>
+
+            <div class="hero-actions">
+                <a href="/principles/">Start reading</a>
+                <a href="/search/">Search the docs</a>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Popular paths
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3>
+                        <a href="/decision-trees/">I need to make a CSS decision</a>
+                    </h3>
+
+                    <p>
+                        Use the decision trees when choosing between layers,
+                        modifiers, state classes, @scope, utilities, or hacks.
+                    </p>
+                </article>
+
+                <article class="hub-card">
+                    <h3>
+                        <a href="/migration/">I need to migrate existing CSS</a>
+                    </h3>
+
+                    <p>
+                        Follow a gradual adoption path for legacy CSS without a
+                        full rewrite.
+                    </p>
+                </article>
+
+                <article class="hub-card">
+                    <h3>
+                        <a href="/examples/">I want practical examples</a>
+                    </h3>
+
+                    <p>
+                        Start with real component patterns, compare good and bad
+                        examples, then try them in the playground.
+                    </p>
+                </article>
+            </div>
         </section>
 
         <section class="content-block">
@@ -57,15 +114,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 Example structure
             </h2>
 
-<pre><code>css/
-    settings/
-    base/
-    utilities/
-    layout/
-    components/
-    theme/
-    legacy/
-    hacks/</code></pre>
+            <CodeExample code={folderStructureExample} language="text" />
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Explore by topic
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3><a href="/layers/">Core methodology</a></h3>
+                    <p>Understand layers, naming, architecture, utilities, theme rules, and hacks.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/modern-css/">Modern CSS</a></h3>
+                    <p>Learn how :where(), :has(), nesting, @scope, and container queries fit LSCSS.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/tools/">Tools and demos</a></h3>
+                    <p>Use interactive demos to explore specificity, scope, accessibility, and performance.</p>
+                </article>
+            </div>
         </section>
     </main>
 </BaseLayout>
