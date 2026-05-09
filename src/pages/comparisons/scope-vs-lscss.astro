@@ -1,5 +1,23 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const originalExample = `.product-card > .title {
+    margin: 0;
+}
+
+.product-card > .price {
+    color: var(--colour-accent);
+}`;
+
+const scopedExample = `@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+
+    .price {
+        color: var(--colour-accent);
+    }
+}`;
 ---
 
 <DocsLayout
@@ -24,13 +42,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             Original LSCSS approach
         </h2>
 
-<pre><code>.product-card > .title {
-    margin: 0;
-}
-
-.product-card > .price {
-    color: var(--colour-accent);
-}</code></pre>
+        <pre><code>{originalExample}</code></pre>
     </section>
 
     <section class="content-block">
@@ -38,15 +50,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             Scoped LSCSS approach
         </h2>
 
-<pre><code>@scope (.product-card) {
-    .title {
-        margin: 0;
-    }
-
-    .price {
-        color: var(--colour-accent);
-    }
-}</code></pre>
+        <pre><code>{scopedExample}</code></pre>
     </section>
 
     <section class="content-block">
