@@ -1,0 +1,79 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'CSS Modules vs LSCSS';
+const description = 'Compare CSS Modules and Layered Semantic CSS for scoping, naming, maintainability, framework use, and platform-native CSS architecture.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <article>
+        <p class="eyebrow">Comparison</p>
+
+        <h1>
+            CSS Modules vs LSCSS
+        </h1>
+
+        <p>
+            CSS Modules solve scoping by tying styles to components at build
+            time. LSCSS solves architecture by organising CSS around layers,
+            semantics, modifiers, and state.
+        </p>
+
+        <p>
+            These approaches can overlap, but they solve different problems.
+            Scoping is not the same as architecture.
+        </p>
+
+        <h2>
+            Main differences
+        </h2>
+
+        <ul>
+            <li>CSS Modules generate scoped class names</li>
+            <li>LSCSS uses explicit naming and cascade structure</li>
+            <li>CSS Modules are tied to build tooling and component imports</li>
+            <li>LSCSS works with plain CSS and platform features</li>
+            <li>CSS Modules reduce accidental global leakage</li>
+            <li>LSCSS gives wider rules for layers, state, modifiers, and migration</li>
+        </ul>
+
+        <h2>
+            Where CSS Modules work well</h2>
+
+        <ul>
+            <li>component-heavy framework applications</li>
+            <li>teams already using React, Vue, Svelte, or similar tooling</li>
+            <li>projects where local scoping is the main styling problem</li>
+        </ul>
+
+        <h2>
+            Where LSCSS helps more
+        </h2>
+
+        <ul>
+            <li>static-first sites and content-heavy projects</li>
+            <li>projects needing clear global architecture</li>
+            <li>legacy migration work</li>
+            <li>teams wanting CSS that stays understandable outside one framework</li>
+        </ul>
+
+        <h2>
+            Recommended reading
+        </h2>
+
+        <ul>
+            <li><a href="/layers/">Layers</a></li>
+            <li><a href="/naming/">Naming</a></li>
+            <li><a href="/modern-css/">Modern CSS</a></li>
+            <li><a href="/guides/migrating-legacy-css/">Migrating legacy CSS</a></li>
+        </ul>
+
+        <p>
+            CSS Modules can protect a component. LSCSS helps protect the system.
+            Useful projects often need both ideas, even if they do not use both tools.
+        </p>
+    </article>
+</DocsLayout>
