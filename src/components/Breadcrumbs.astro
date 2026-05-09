@@ -1,0 +1,36 @@
+---
+import { docsNavigation } from '../data/docsNavigation';
+
+const currentPath = Astro.url.pathname;
+const currentPage = docsNavigation.find((item) => item.href === currentPath);
+
+const sectionOverview = currentPage
+    ? docsNavigation.find((item) => item.section === currentPage.section)
+    : null;
+
+const showSection = currentPage && sectionOverview && sectionOverview.href !== currentPage.href;
+---
+
+{
+    currentPage && (
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+
+                {
+                    showSection && (
+                        <li>
+                            <a href={sectionOverview.href}>{currentPage.section}</a>
+                        </li>
+                    )
+                }
+
+                <li aria-current="page">
+                    {currentPage.label}
+                </li>
+            </ol>
+        </nav>
+    )
+}
