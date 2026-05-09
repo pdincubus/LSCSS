@@ -1,5 +1,15 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const tokenExample = `:root {
+    --colour-background: white;
+    --colour-text: black;
+
+    --space-s: 0.5rem;
+    --space-m: 1rem;
+    --space-l: 2rem;
+}`;
 ---
 
 <DocsLayout
@@ -19,14 +29,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>:root {
-    --colour-background: #fff;
-    --colour-text: #111;
-
-    --space-s: 0.5rem;
-    --space-m: 1rem;
-    --space-l: 2rem;
-}</code></pre>
+        <CodeExample code={tokenExample} />
     </section>
 
     <section class="content-block">
