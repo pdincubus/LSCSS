@@ -1,0 +1,66 @@
+.a11y-demo-card {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
+
+.demo-button {
+    inline-size: fit-content;
+    padding: var(--space-s) var(--space-m);
+    border: var(--border-thin) solid currentColor;
+    border-radius: var(--radius-s);
+    background: transparent;
+    color: inherit;
+    text-decoration: none;
+}
+
+.demo-button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 0.25rem;
+}
+
+.hover-demo > .hint {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hover-demo:hover > .hint,
+.hover-demo:focus-within > .hint {
+    opacity: 1;
+}
+
+.motion-demo {
+    inline-size: 4rem;
+    block-size: 4rem;
+    border-radius: 50%;
+    background: var(--colour-accent);
+    animation: pulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-demo {
+        animation: none;
+    }
+}
+
+.logical-demo {
+    margin-inline: auto;
+    padding-inline: var(--space-l);
+    padding-block: var(--space-m);
+    border-inline-start: 0.5rem solid var(--colour-accent);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
