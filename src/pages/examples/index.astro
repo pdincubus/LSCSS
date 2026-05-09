@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Examples"
+    description="Practical Layered Semantic CSS examples."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Examples</p>
+
+            <h1>
+                Practical examples
+            </h1>
+
+            <p class="intro">
+                LSCSS works best when the naming, structure, and layer strategy
+                stay visible in everyday code.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Product card
+            </h2>
+
+<pre><code>&lt;article class="product-card product-card--featured"&gt;
+    &lt;a class="link" href="/products/example/"&gt;
+        &lt;img class="image" src="/example.jpg" alt=""&gt;
+        &lt;h2 class="title"&gt;Example product&lt;/h2&gt;
+        &lt;p class="price"&gt;£24&lt;/p&gt;
+    &lt;/a&gt;
+&lt;/article&gt;</code></pre>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Component CSS
+            </h2>
+
+<pre><code>.product-card {
+    display: grid;
+    gap: var(--space-m);
+}
+
+.product-card > .link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.product-card > .link > .title {
+    margin-block: 0;
+}
+
+.product-card--featured {
+    border-color: var(--colour-accent);
+}</code></pre>
+        </section>
+    </main>
+</BaseLayout>
