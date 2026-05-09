@@ -7,7 +7,7 @@
         "dev": "astro dev",
         "start": "astro dev",
         "check": "astro check",
-        "build": "astro build",
+        "build": "astro build && pagefind --site dist",
         "preview": "astro preview"
     },
     "dependencies": {
@@ -17,6 +17,7 @@
     },
     "devDependencies": {
         "@astrojs/check": "latest",
+        "pagefind": "^1.1.1",
         "typescript": "latest"
     }
 }
