@@ -1,53 +1,141 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const layerOrderExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
+
+const legacyImportExample = `@import './legacy/site.css' layer(legacy);
+@import './components/product-card.css' layer(components);`;
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Migration"
     description="Migrating existing projects toward Layered Semantic CSS."
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Migration</p>
+    <section class="site-hero">
+        <p class="eyebrow">Migration</p>
 
-            <h1>
-                Migrating existing CSS
-            </h1>
+        <h1>
+            Migrating existing CSS
+        </h1>
 
-            <p class="intro">
-                LSCSS is designed to support gradual migration rather than full
-                rewrites.
-            </p>
-        </section>
+        <p class="intro">
+            LSCSS is designed for gradual adoption. You should not need to stop
+            work, rewrite the whole frontend, or pretend legacy CSS never
+            happened.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <h2>
-                Recommended migration path
-            </h2>
+    <section class="content-block">
+        <h2>
+            Migration principles
+        </h2>
 
-            <ol>
-                <li>introduce cascade layers</li>
-                <li>contain legacy CSS</li>
-                <li>split new components into partials</li>
-                <li>reduce selector depth</li>
-                <li>introduce semantic component naming</li>
-                <li>remove unnecessary specificity</li>
-                <li>delete legacy code over time</li>
-            </ol>
-        </section>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    Contain first
+                </h3>
 
-        <section class="content-block">
-            <h2>
-                Legacy layer
-            </h2>
+                <p>
+                    Put existing CSS in a known place before changing how new
+                    CSS is written.
+                </p>
+            </article>
 
-<pre><code>@layer legacy, settings, base, utilities,
-layout, components, theme, hacks;</code></pre>
+            <article class="hub-card">
+                <h3>
+                    Improve new work
+                </h3>
 
-            <p>
-                Existing CSS can temporarily live inside the legacy layer while
-                the rest of the architecture improves around it.
-            </p>
-        </section>
-    </main>
-</BaseLayout>
+                <p>
+                    Apply LSCSS to new components first. Do not pause delivery
+                    while chasing perfect old code.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    Delete over time
+                </h3>
+
+                <p>
+                    Migration is successful when legacy CSS gets smaller, not
+                    when it gets renamed.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Recommended migration path
+        </h2>
+
+        <ol>
+            <li>Introduce the layer order.</li>
+            <li>Move old CSS into the legacy layer.</li>
+            <li>Put design tokens and settings in the settings layer.</li>
+            <li>Move broad element defaults into the base layer.</li>
+            <li>Write new components as small component partials.</li>
+            <li>Reduce selector depth when touching existing components.</li>
+            <li>Replace unclear names with semantic component names.</li>
+            <li>Use modifiers for real variants and state classes for temporary states.</li>
+            <li>Move emergency fixes into the hacks layer with comments.</li>
+            <li>Delete old CSS when the related UI is replaced or refactored.</li>
+        </ol>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Step 1: define the cascade order
+        </h2>
+
+        <p>
+            Add the layer order before moving code. This gives the project a
+            stable override model from the start.
+        </p>
+
+        <CodeExample code={layerOrderExample} />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Step 2: isolate legacy CSS
+        </h2>
+
+        <p>
+            Existing CSS can temporarily live inside the legacy layer while new
+            work follows the modern structure.
+        </p>
+
+        <CodeExample code={legacyImportExample} />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            What not to do
+        </h2>
+
+        <ul>
+            <li>Do not rename every class without changing the architecture.</li>
+            <li>Do not move all legacy code into components and call it migrated.</li>
+            <li>Do not create a hacks layer and leave everything there forever.</li>
+            <li>Do not add specificity to beat legacy CSS when layer order can solve it.</li>
+            <li>Do not block feature work for a full rewrite unless the project genuinely needs one.</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Definition of done
+        </h2>
+
+        <p>
+            A migration is working when new CSS follows the system, old CSS is
+            contained, overrides are predictable, and the legacy layer keeps
+            getting smaller.
+        </p>
+    </section>
+</DocsLayout>
