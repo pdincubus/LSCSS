@@ -7,5 +7,6 @@
 
 @import './layout/page-shell.css' layer(layout);
 
+@import './components/site-header.css' layer(components);
 @import './components/site-hero.css' layer(components);
 @import './components/content-block.css' layer(components);
