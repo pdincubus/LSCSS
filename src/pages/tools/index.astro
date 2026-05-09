@@ -15,43 +15,126 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
         <p class="intro">
             Interactive examples for exploring specificity, scope, container
-            queries, accessibility, performance, and render behaviour.
+            queries, accessibility, performance, browser support, and render
+            behaviour.
         </p>
     </section>
 
     <section class="content-block">
         <h2>
-            CSS architecture tools
+            Start here
         </h2>
 
-        <ul>
-            <li><a href="/tools/specificity-calculator/">Specificity calculator</a></li>
-            <li><a href="/tools/specificity-graph/">Specificity graph</a></li>
-            <li><a href="/tools/scope-demo/">Scope demo</a></li>
-            <li><a href="/tools/devtools-inspector/">DevTools-style inspector</a></li>
-        </ul>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    <a href="/tools/specificity-calculator/">Specificity calculator</a>
+                </h3>
+
+                <p>
+                    Compare selector weight and understand why short selectors
+                    can still lose to higher-specificity rules.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/tools/scope-demo/">Scope demo</a>
+                </h3>
+
+                <p>
+                    See how scoped CSS can reduce naming noise while keeping
+                    component boundaries clearer.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/tools/container-query-visualiser/">Container query visualiser</a>
+                </h3>
+
+                <p>
+                    Resize a component container and see why container queries
+                    are useful for portable UI systems.
+                </p>
+            </article>
+        </div>
     </section>
 
     <section class="content-block">
         <h2>
-            Layout and browser support demos
+            Architecture and debugging
         </h2>
 
-        <ul>
-            <li><a href="/tools/container-query-visualiser/">Container query visualiser</a></li>
-            <li><a href="/tools/browser-support-demos/">Browser support demos</a></li>
-        </ul>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/tools/specificity-graph/">Specificity graph</a></h3>
+                <p>Visualise selector pressure and how specificity builds across a project.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/tools/devtools-inspector/">DevTools-style inspector</a></h3>
+                <p>Explore how layers, selectors, and overrides can be explained during debugging.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/specificity-visualiser/">Specificity visualiser</a></h3>
+                <p>Compare selector approaches such as component selectors, :where(), and @scope.</p>
+            </article>
+        </div>
     </section>
 
     <section class="content-block">
         <h2>
-            Accessibility and performance demos
+            Accessibility and browser support
         </h2>
 
-        <ul>
-            <li><a href="/tools/accessibility-demos/">Accessibility demos</a></li>
-            <li><a href="/tools/performance-demos/">Performance demos</a></li>
-            <li><a href="/tools/render-performance-demos/">Render performance demos</a></li>
-        </ul>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/tools/accessibility-demos/">Accessibility demos</a></h3>
+                <p>Review focus styles, reduced motion, logical properties, and interaction states.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/tools/browser-support-demos/">Browser support demos</a></h3>
+                <p>Explore progressive enhancement and feature-based support decisions.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Performance and rendering
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/tools/performance-demos/">Performance demos</a></h3>
+                <p>Compare bundle size, third-party CSS isolation, and architectural performance trade-offs.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/tools/render-performance-demos/">Render performance demos</a></h3>
+                <p>Compare animation choices, containment, layout cost, and paint behaviour.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Playgrounds
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/playground/">Playground</a></h3>
+                <p>Try simple LSCSS component patterns and naming structures.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/playground/live-editor/">Live editor</a></h3>
+                <p>Edit CSS directly and see the result on a live component example.</p>
+            </article>
+        </div>
     </section>
 </DocsLayout>
