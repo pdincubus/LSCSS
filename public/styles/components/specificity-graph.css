@@ -1,0 +1,19 @@
+.specificity-bars {
+    display: grid;
+    gap: var(--space-l);
+}
+
+.specificity-bar {
+    inline-size: 100%;
+    block-size: 1rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 10%);
+}
+
+.specificity-bar > span {
+    display: block;
+    block-size: 100%;
+    background: var(--colour-accent);
+    transition: inline-size 0.2s ease;
+}
