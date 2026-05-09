@@ -1,0 +1,15 @@
+.site-hero {
+    margin-block-end: var(--space-2xl);
+}
+
+.site-hero > .eyebrow {
+    color: var(--colour-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.site-hero > .intro {
+    max-width: var(--measure);
+    font-size: 1.2rem;
+    color: var(--colour-text-soft);
+}
