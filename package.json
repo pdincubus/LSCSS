@@ -12,7 +12,8 @@
     },
     "dependencies": {
         "@astrojs/mdx": "latest",
-        "astro": "latest"
+        "astro": "latest",
+        "prismjs": "^1.29.0"
     },
     "devDependencies": {
         "@astrojs/check": "latest",
