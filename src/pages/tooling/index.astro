@@ -1,0 +1,36 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Tooling"
+    description="Recommended tooling for Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tooling</p>
+
+        <h1>
+            Recommended tooling
+        </h1>
+
+        <p class="intro">
+            LSCSS relies on browser features first and tooling second.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            <li>PostCSS</li>
+            <li>Lightning CSS</li>
+            <li>Stylelint</li>
+            <li>Browserslist</li>
+            <li>Prettier</li>
+            <li>Astro</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+<pre><code>@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;</code></pre>
+    </section>
+</DocsLayout>
