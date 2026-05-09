@@ -1,0 +1,28 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Hacks"
+    description="Handling unavoidable CSS hacks in Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Hacks</p>
+
+        <h1>
+            Containing hacks
+        </h1>
+
+        <p class="intro">
+            Hacks should remain isolated, temporary, and visible.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>@layer hacks {
+    .legacy-slider {
+        inset-block-start: -1px;
+    }
+}</code></pre>
+    </section>
+</DocsLayout>
