@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Principles"
+    description="Core principles behind Layered Semantic CSS."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Principles</p>
+
+            <h1>
+                Core principles
+            </h1>
+
+            <p class="intro">
+                LSCSS focuses on maintainability, predictable overrides,
+                readability, and scalable CSS architecture.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <ul>
+                <li>organise CSS in explicit layers</li>
+                <li>keep styles in partials</li>
+                <li>use semantic component names</li>
+                <li>prefer shallow selectors</li>
+                <li>keep specificity low and predictable</li>
+                <li>use explicit modifier classes</li>
+                <li>use visible state classes</li>
+                <li>separate layout from components</li>
+                <li>contain hacks and legacy code</li>
+            </ul>
+        </section>
+    </main>
+</BaseLayout>
