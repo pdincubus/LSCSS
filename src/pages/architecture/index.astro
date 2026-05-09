@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Architecture"
+    description="Recommended folder structure and architecture for Layered Semantic CSS."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Architecture</p>
+
+            <h1>
+                File structure
+            </h1>
+
+            <p class="intro">
+                LSCSS encourages predictable organisation and small focused
+                partials.
+            </p>
+        </section>
+
+        <section class="content-block">
+<pre><code>css/
+    settings/
+    base/
+    utilities/
+    layout/
+    components/
+    theme/
+    legacy/
+    hacks/</code></pre>
+        </section>
+
+        <section class="content-block">
+            <p>
+                Components should live in isolated partials instead of giant
+                monolithic stylesheets.
+            </p>
+        </section>
+    </main>
+</BaseLayout>
