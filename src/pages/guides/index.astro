@@ -50,20 +50,34 @@ const guides = [
             a decorative opinion.
         </p>
 
-        <div class="hub-card-grid">
-            {
-                guides.map((guide) => (
-                    <article class="hub-card">
-                        <h2>
-                            <a href={guide.href}>{guide.title}</a>
-                        </h2>
+        <nav class="section-nav" aria-label="Guide sections">
+            <a href="#guide-list">Guides</a>
+            <a href="/guides/accessibility-and-css/">Accessibility</a>
+            <a href="/guides/performance-and-css/">Performance</a>
+            <a href="/guides/browser-support-strategy/">Browser support</a>
+            <a href="/guides/migrating-legacy-css/">Legacy CSS</a>
+        </nav>
 
-                        <p>
-                            {guide.description}
-                        </p>
-                    </article>
-                ))
-            }
-        </div>
+        <section id="guide-list" class="content-block">
+            <h2>
+                Guides
+            </h2>
+
+            <div class="hub-card-grid">
+                {
+                    guides.map((guide) => (
+                        <article class="hub-card">
+                            <h3>
+                                <a href={guide.href}>{guide.title}</a>
+                            </h3>
+
+                            <p>
+                                {guide.description}
+                            </p>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
     </article>
 </DocsLayout>
