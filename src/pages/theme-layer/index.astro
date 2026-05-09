@@ -1,5 +1,12 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const themeLayerExample = `@layer theme {
+    .product-card {
+        border-radius: 1rem;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -19,10 +26,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>@layer theme {
-    .product-card {
-        border-radius: 1rem;
-    }
-}</code></pre>
+        <CodeExample code={themeLayerExample} />
     </section>
 </DocsLayout>
