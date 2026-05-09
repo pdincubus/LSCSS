@@ -1,0 +1,35 @@
+---
+import { docsNavigation } from '../data/docsNavigation';
+
+const currentPath = Astro.url.pathname;
+const currentIndex = docsNavigation.findIndex((item) => item.href === currentPath);
+
+const previous = currentIndex > 0 ? docsNavigation[currentIndex - 1] : null;
+const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
+    ? docsNavigation[currentIndex + 1]
+    : null;
+---
+
+{
+    (previous || next) && (
+        <nav class="docs-pagination" aria-label="Page navigation">
+            {
+                previous ? (
+                    <a class="docs-pagination-link is-previous" href={previous.href}>
+                        <span class="docs-pagination-label">Previous</span>
+                        <strong>{previous.label}</strong>
+                    </a>
+                ) : <span></span>
+            }
+
+            {
+                next ? (
+                    <a class="docs-pagination-link is-next" href={next.href}>
+                        <span class="docs-pagination-label">Next</span>
+                        <strong>{next.label}</strong>
+                    </a>
+                ) : <span></span>
+            }
+        </nav>
+    )
+}
