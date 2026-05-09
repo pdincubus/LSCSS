@@ -1,0 +1,63 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="@scope vs CUBE CSS"
+    description="Comparing CSS @scope and CUBE CSS approaches."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Comparisons</p>
+
+        <h1>
+            CSS @scope vs CUBE CSS
+        </h1>
+
+        <p class="intro">
+            CUBE CSS and scoped CSS both favour lower specificity and practical
+            modern architecture.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Shared ideas
+        </h2>
+
+        <ul>
+            <li>low specificity</li>
+            <li>composition over complexity</li>
+            <li>modern CSS features</li>
+            <li>readability</li>
+            <li>maintainability</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Main difference
+        </h2>
+
+        <p>
+            CUBE focuses heavily on composition and utility-driven patterns,
+            while scoped LSCSS focuses more heavily on semantic components and
+            layered architecture.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Scoped component example
+        </h2>
+
+<pre><code>@scope (.site-header) {
+    .logo {
+        inline-size: 10rem;
+    }
+
+    .nav-list {
+        display: flex;
+    }
+}</code></pre>
+    </section>
+</DocsLayout>
