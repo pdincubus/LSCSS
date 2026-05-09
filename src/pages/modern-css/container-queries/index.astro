@@ -1,5 +1,12 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const containerQueryExample = `@container (min-width: 40rem) {
+    .product-card {
+        grid-template-columns: 1fr 1fr;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -20,11 +27,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>@container (min-width: 40rem) {
-    .product-card {
-        grid-template-columns: 1fr 1fr;
-    }
-}</code></pre>
+        <CodeExample code={containerQueryExample} />
     </section>
 
     <section class="content-block">
