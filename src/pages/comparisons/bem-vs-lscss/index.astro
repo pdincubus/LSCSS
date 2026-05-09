@@ -1,0 +1,80 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'BEM vs LSCSS';
+const description = 'Compare BEM and Layered Semantic CSS for naming, architecture, modifiers, state handling, scalability, and long-term maintainability.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <article>
+        <p class="eyebrow">Comparison</p>
+
+        <h1>
+            BEM vs LSCSS
+        </h1>
+
+        <p>
+            BEM helped solve real problems. It gave teams structure when CSS was
+            mostly organised by panic and inheritance accidents.
+        </p>
+
+        <p>
+            LSCSS keeps the useful discipline but removes the naming ceremony,
+            reduces selector noise, and leans harder on cascade layers and modern
+            CSS features instead of longer class names.
+        </p>
+
+        <h2>
+            Main differences
+        </h2>
+
+        <ul>
+            <li>BEM uses explicit block__element--modifier naming</li>
+            <li>LSCSS prefers semantic component names with shallow selectors</li>
+            <li>BEM often duplicates structure in class names</li>
+            <li>LSCSS uses layers and scope to reduce naming pressure</li>
+            <li>BEM modifiers are naming-heavy</li>
+            <li>LSCSS uses clearer modifier and state classes</li>
+        </ul>
+
+        <h2>
+            Where BEM works well
+        </h2>
+
+        <ul>
+            <li>large teams needing strict consistency</li>
+            <li>older codebases without modern CSS support</li>
+            <li>systems where explicit naming reduces onboarding pain</li>
+        </ul>
+
+        <h2>
+            Where LSCSS helps more
+        </h2>
+
+        <ul>
+            <li>modern front-end teams using cascade layers</li>
+            <li>projects focused on maintainability over naming rituals</li>
+            <li>systems where state and theme handling matter heavily</li>
+            <li>teams wanting less verbose HTML and CSS</li>
+        </ul>
+
+        <h2>
+            Recommended reading
+        </h2>
+
+        <ul>
+            <li><a href="/principles/">Core principles</a></li>
+            <li><a href="/state-classes/">State classes</a></li>
+            <li><a href="/theme-layer/">Theme layer</a></li>
+            <li><a href="/decision-trees/">Decision trees</a></li>
+        </ul>
+
+        <p>
+            BEM is not wrong. It is simply older architecture solving older
+            problems. CSS has moved on. Some naming conventions forgot to.
+        </p>
+    </article>
+</DocsLayout>
