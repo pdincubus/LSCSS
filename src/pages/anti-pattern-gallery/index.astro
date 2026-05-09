@@ -1,5 +1,47 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const deepSelectorProblem = `.page .wrapper .content .card .title {
+    margin: 0;
+}`;
+
+const deepSelectorFix = `.product-card > .title {
+    margin: 0;
+}`;
+
+const specificityProblem = `#app .product-list .product-card .title {
+    color: red !important;
+}`;
+
+const specificityFix = `@layer components, theme;
+
+@layer theme {
+    .product-card > .title {
+        color: red;
+    }
+}`;
+
+const utilityProblem = `<article class="p-l m-b-xl bg-dark text-light radius-m grid gap-m">
+    ...
+</article>`;
+
+const utilityFix = `<article class="product-card product-card--featured">
+    ...
+</article>`;
+
+const rootFileProblem = `site.css
+    8,000 lines
+    all components
+    all layouts
+    all hacks`;
+
+const rootFileFix = `components/
+    product-card.css
+    site-header.css
+    filter-panel.css`;
+
+const thirdPartyProblem = `@import './vendor/slider.css';`;
+const thirdPartyFix = `@import './vendor/slider.css' layer(legacy);`;
 ---
 
 <DocsLayout
@@ -28,9 +70,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
 
-<pre><code>.page .wrapper .content .card .title {
-    margin: 0;
-}</code></pre>
+                <pre><code>{deepSelectorProblem}</code></pre>
 
                 <p>
                     Deep selectors couple styles to markup structure and become
@@ -41,9 +81,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
 
-<pre><code>.product-card > .title {
-    margin: 0;
-}</code></pre>
+                <pre><code>{deepSelectorFix}</code></pre>
 
                 <p>
                     Use shallow scoped component selectors.
@@ -54,15 +92,14 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
     <section class="content-block">
         <h2>
-            Specificity escalation</h2>
+            Specificity escalation
+        </h2>
 
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
 
-<pre><code>#app .product-list .product-card .title {
-    color: red !important;
-}</code></pre>
+                <pre><code>{specificityProblem}</code></pre>
 
                 <p>
                     IDs and important declarations create override battles.
@@ -72,13 +109,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
 
-<pre><code>@layer components, theme;
-
-@layer theme {
-    .product-card > .title {
-        color: red;
-    }
-}</code></pre>
+                <pre><code>{specificityFix}</code></pre>
 
                 <p>
                     Use layer order before increasing specificity.
@@ -96,9 +127,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
 
-<pre><code>&lt;article class="p-l m-b-xl bg-dark text-light radius-m grid gap-m"&gt;
-    ...
-&lt;/article&gt;</code></pre>
+                <pre><code>{utilityProblem}</code></pre>
 
                 <p>
                     Too many utilities can hide component intent.
@@ -108,9 +137,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
 
-<pre><code>&lt;article class="product-card product-card--featured"&gt;
-    ...
-&lt;/article&gt;</code></pre>
+                <pre><code>{utilityFix}</code></pre>
 
                 <p>
                     Use semantic components and reserve utilities for small,
@@ -129,11 +156,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
 
-<pre><code>site.css
-    8,000 lines
-    all components
-    all layouts
-    all hacks</code></pre>
+                <pre><code>{rootFileProblem}</code></pre>
 
                 <p>
                     Large root files make ownership and review harder.
@@ -143,10 +166,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
 
-<pre><code>components/
-    product-card.css
-    site-header.css
-    filter-panel.css</code></pre>
+                <pre><code>{rootFileFix}</code></pre>
 
                 <p>
                     Keep root files as import maps, not dumping grounds.
@@ -164,7 +184,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
 
-<pre><code>@import './vendor/slider.css';</code></pre>
+                <pre><code>{thirdPartyProblem}</code></pre>
 
                 <p>
                     Unlayered third-party CSS can unexpectedly dominate your
@@ -175,7 +195,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
 
-<pre><code>@import './vendor/slider.css' layer(legacy);</code></pre>
+                <pre><code>{thirdPartyFix}</code></pre>
 
                 <p>
                     Isolate third-party CSS in a low-priority layer.
