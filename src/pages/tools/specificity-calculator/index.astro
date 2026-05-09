@@ -1,0 +1,54 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Specificity Calculator"
+    description="Interactive CSS specificity calculator."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            Specificity calculator
+        </h1>
+
+        <p class="intro">
+            Explore how selector structure affects specificity.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <form class="tool-panel" data-specificity-form>
+            <label for="selector-input">
+                CSS selector
+            </label>
+
+            <input
+                id="selector-input"
+                class="tool-input"
+                type="text"
+                value=".product-card > .title"
+                data-specificity-input
+            />
+
+            <p>
+                Specificity:
+                <strong data-specificity-output></strong>
+            </p>
+        </form>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Try these examples
+        </h2>
+
+<pre><code>.product-card > .title
+:where(.product-card) > .title
+#app .product-card .title
+.card:has(.error)</code></pre>
+    </section>
+
+    <script type="module" src="/scripts/specificity-calculator.js"></script>
+</DocsLayout>
