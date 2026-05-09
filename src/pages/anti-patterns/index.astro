@@ -1,0 +1,46 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="CSS Anti-patterns"
+    description="Common CSS architecture mistakes and how LSCSS avoids them."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Anti-patterns</p>
+
+        <h1>
+            Common CSS anti-patterns
+        </h1>
+
+        <p class="intro">
+            Most CSS problems are architectural problems rather than syntax
+            problems.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            <li>specificity spirals</li>
+            <li>deep selector nesting</li>
+            <li>global leakage</li>
+            <li>utility soup</li>
+            <li>component coupling</li>
+            <li>ID selectors</li>
+            <li>layout mixed into components</li>
+            <li>uncontained legacy CSS</li>
+            <li><code>!important</code> abuse</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Why these happen
+        </h2>
+
+        <p>
+            Teams often create accidental complexity when architecture is
+            missing, inconsistent, or disconnected from platform features.
+        </p>
+    </section>
+</DocsLayout>
