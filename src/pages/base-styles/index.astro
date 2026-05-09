@@ -1,0 +1,153 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const baseLayerExample = `@layer base {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        line-height: 1.5;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        margin: 0;
+        font-family: var(--font-body);
+        background: var(--colour-background);
+        color: var(--colour-text);
+    }
+}`;
+
+const typographyExample = `@layer base {
+    h1,
+    h2,
+    h3,
+    p,
+    ul,
+    ol {
+        margin-block-start: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-heading);
+        line-height: 1.1;
+    }
+
+    a {
+        color: currentColor;
+    }
+}`;
+
+const avoidExample = `.product-card h2 {
+    font-size: 32px;
+    line-height: 1.1;
+    margin-top: 0;
+}
+
+.article-card h2 {
+    font-size: 32px;
+    line-height: 1.1;
+    margin-top: 0;
+}`;
+---
+
+<DocsLayout
+    title="Base Styles"
+    description="How Layered Semantic CSS handles true global styles, reset rules, base typography, and shared element defaults."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Base styles</p>
+
+        <h1>
+            Base styles
+        </h1>
+
+        <p class="intro">
+            Some CSS should still be genuinely global. Resets, base typography,
+            document defaults, and shared element behaviour belong in the base
+            layer because they apply across the whole site.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Base styles sections">
+        <a href="#what-belongs-here">What belongs here</a>
+        <a href="#reset">Reset</a>
+        <a href="#typography">Typography</a>
+        <a href="#avoid">Avoid repetition</a>
+    </nav>
+
+    <section id="what-belongs-here" class="content-block">
+        <h2>
+            What belongs in base styles
+        </h2>
+
+        <p>
+            Base styles are for rules that should affect the whole project by
+            default. They are not component styles, theme overrides, or quick
+            fixes. They are the common ground the rest of the CSS builds on.
+        </p>
+
+        <ul>
+            <li>box sizing and safe reset rules</li>
+            <li>body defaults</li>
+            <li>base typography</li>
+            <li>default link and media behaviour</li>
+            <li>shared form element defaults</li>
+            <li>global focus defaults where appropriate</li>
+        </ul>
+    </section>
+
+    <section id="reset" class="content-block">
+        <h2>
+            Reset and document defaults
+        </h2>
+
+        <p>
+            A reset should create a predictable baseline without fighting every
+            browser default for sport. Keep it small and intentional.
+        </p>
+
+        <CodeExample code={baseLayerExample} />
+    </section>
+
+    <section id="typography" class="content-block">
+        <h2>
+            Base typography
+        </h2>
+
+        <p>
+            Typography defaults should usually be defined once. Components can
+            adjust typography when they need a specific pattern, but repeated
+            heading and paragraph defaults should not be copied into every
+            component partial.
+        </p>
+
+        <CodeExample code={typographyExample} />
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid repeated global rules in components
+        </h2>
+
+        <p>
+            If every card, panel, and article repeats the same heading reset or
+            text rhythm, that rule probably belongs in base styles or a shared
+            content pattern.
+        </p>
+
+        <CodeExample code={avoidExample} />
+
+        <p>
+            Keep globally global styles global. Use components for component
+            behaviour, not for repeating document defaults.
+        </p>
+    </section>
+</DocsLayout>
