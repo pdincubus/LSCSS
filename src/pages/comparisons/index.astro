@@ -1,23 +1,73 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const comparisons = [
+    {
+        title: 'BEM vs LSCSS',
+        href: '/comparisons/bem-vs-lscss/',
+        description: 'Naming conventions, modifiers, state classes, and modern CSS architecture.'
+    },
+    {
+        title: 'Tailwind vs LSCSS',
+        href: '/comparisons/tailwind-vs-lscss/',
+        description: 'Utility-first speed versus semantic structure and long-term maintainability.'
+    },
+    {
+        title: 'CSS Modules vs LSCSS',
+        href: '/comparisons/css-modules-vs-lscss/',
+        description: 'Component scoping, framework workflows, and system-wide architecture.'
+    },
+    {
+        title: 'Utility-first vs LSCSS',
+        href: '/comparisons/utility-first-vs-lscss/',
+        description: 'Markup-led styling versus layered semantic CSS systems.'
+    },
+    {
+        title: '@scope vs BEM',
+        href: '/comparisons/scope-vs-bem/',
+        description: 'Native browser scoping versus defensive naming conventions.'
+    }
+];
 ---
 
 <DocsLayout
-    title="LSCSS Comparisons"
-    description="Comparing Layered Semantic CSS with other CSS methodologies."
+    title="CSS Architecture Comparisons"
+    description="Compare BEM, Tailwind, CSS Modules, utility-first CSS, and modern CSS approaches against Layered Semantic CSS."
 >
     <section class="site-hero">
         <p class="eyebrow">Comparisons</p>
 
         <h1>
-            Methodology comparisons
+            CSS architecture comparisons
         </h1>
 
         <p class="intro">
-            Most CSS methodologies try to solve the same problems: scale,
-            maintainability, predictability, and developer sanity. They simply
-            choose different trade-offs.
+            Most front-end teams are not choosing CSS from a blank sheet. They
+            are choosing between existing habits, existing pain, and existing
+            opinions held with suspicious confidence.
         </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Comparison guides
+        </h2>
+
+        <div class="hub-card-grid">
+            {
+                comparisons.map((item) => (
+                    <article class="hub-card">
+                        <h3>
+                            <a href={item.href}>{item.title}</a>
+                        </h3>
+
+                        <p>
+                            {item.description}
+                        </p>
+                    </article>
+                ))
+            }
+        </div>
     </section>
 
     <section class="content-block">
@@ -28,35 +78,30 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <table class="comparison-table">
             <thead>
                 <tr>
-                    <th>Methodology</th>
+                    <th>Approach</th>
                     <th>Main focus</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <td>OOCSS</td>
-                    <td>reuse</td>
-                </tr>
-
-                <tr>
-                    <td>SMACSS</td>
-                    <td>categorisation</td>
-                </tr>
-
-                <tr>
                     <td>BEM</td>
-                    <td>naming clarity</td>
+                    <td>naming clarity and explicit relationships</td>
                 </tr>
 
                 <tr>
-                    <td>ITCSS</td>
-                    <td>specificity and layering</td>
+                    <td>Tailwind</td>
+                    <td>utility-first speed and design-token constraints</td>
                 </tr>
 
                 <tr>
-                    <td>CUBE</td>
-                    <td>modern practical architecture</td>
+                    <td>CSS Modules</td>
+                    <td>component-level scoping through build tooling</td>
+                </tr>
+
+                <tr>
+                    <td>@scope</td>
+                    <td>native browser scoping for selector boundaries</td>
                 </tr>
 
                 <tr>
@@ -69,57 +114,13 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
     <section class="content-block">
         <h2>
-            Start with these debates
+            How to use these comparisons
         </h2>
 
-        <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3>
-                    BEM vs LSCSS
-                </h3>
-
-                <p>
-                    Naming conventions versus semantic architecture. Useful for
-                    teams carrying heavy legacy CSS.
-                </p>
-            </article>
-
-            <article class="hub-card">
-                <h3>
-                    CUBE vs LSCSS
-                </h3>
-
-                <p>
-                    Two modern approaches with different opinions on naming,
-                    composition, and selector structure.
-                </p>
-            </article>
-
-            <article class="hub-card">
-                <h3>
-                    @scope vs LSCSS
-                </h3>
-
-                <p>
-                    Platform-native scoping versus architectural methodology.
-                    These are partners, not rivals.
-                </p>
-            </article>
-        </div>
-    </section>
-
-    <section class="content-block">
-        <h2>
-            Future comparison guides
-        </h2>
-
-        <ul>
-            <li>Utility-first CSS versus semantic CSS architecture</li>
-            <li>CSS Modules versus platform-native CSS</li>
-            <li>Framework scoping versus cascade layers</li>
-            <li>Tailwind versus LSCSS for long-term teams</li>
-            <li>Component libraries versus design token systems</li>
-            <li>When not to use LSCSS</li>
-        </ul>
+        <p>
+            Use these pages when choosing a CSS approach, reviewing an existing
+            codebase, or explaining why a familiar methodology may no longer be
+            the best fit for a modern project.
+        </p>
     </section>
 </DocsLayout>
