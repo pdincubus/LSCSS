@@ -2,30 +2,129 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
-const themeLayerExample = `@layer theme {
+const tokenThemeExample = `:root {
+    --colour-accent: #6f3cff;
+    --colour-surface: #ffffff;
+    --radius-card: 1rem;
+}
+
+@layer theme {
     .product-card {
-        border-radius: 1rem;
+        background: var(--colour-surface);
+        border-radius: var(--radius-card);
     }
+}`;
+
+const goodThemeExample = `@layer theme {
+    .button {
+        --button-background: var(--colour-accent);
+    }
+}`;
+
+const badThemeExample = `.button {
+    background: purple;
+}
+
+.checkout-button {
+    background: #7a32ff;
+}
+
+.hero-button {
+    background: rgb(118 45 255);
 }`;
 ---
 
 <DocsLayout
     title="LSCSS Theme Layer"
-    description="Theme layer guidance for Layered Semantic CSS."
+    description="Theme layer guidance for Layered Semantic CSS, including token-driven theming, safe visual overrides, and avoiding random one-off styling."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Theme layer</p>
 
         <h1>
-            Theme adjustments
+            Theme layer
         </h1>
 
         <p class="intro">
-            The theme layer provides optional brand and visual overrides.
+            The theme layer handles brand-level visual overrides. It changes how
+            components look, not how they work. Components own structure and
+            behaviour. Theme owns presentation.
         </p>
     </section>
 
-    <section class="content-block">
-        <CodeExample code={themeLayerExample} />
+    <nav class="section-nav" aria-label="Theme layer sections">
+        <a href="#purpose">Purpose</a>
+        <a href="#tokens">Tokens first</a>
+        <a href="#good-overrides">Good overrides</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
+
+    <section id="purpose" class="content-block">
+        <h2>
+            What belongs in the theme layer
+        </h2>
+
+        <p>
+            Theme should contain brand styling, colour decisions, spacing
+            adjustments, border radius changes, shadows, and other visual
+            presentation choices that apply across components.
+        </p>
+
+        <p>
+            Theme should not contain component logic, structural layout fixes,
+            accessibility patches, or emergency overrides pretending not to be
+            hacks.
+        </p>
+    </section>
+
+    <section id="tokens" class="content-block">
+        <h2>
+            Tokens first
+        </h2>
+
+        <p>
+            Theme should be driven by shared CSS variables. Change the token,
+            not twenty unrelated selectors. This keeps branding predictable and
+            prevents colour drift across the project.
+        </p>
+
+        <CodeExample code={tokenThemeExample} />
+    </section>
+
+    <section id="good-overrides" class="content-block">
+        <h2>
+            Safe visual overrides
+        </h2>
+
+        <p>
+            A good theme override adjusts presentation without rewriting the
+            component. Prefer component-level custom properties where the
+            component supports intentional visual configuration.
+        </p>
+
+        <CodeExample code={goodThemeExample} />
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid random one-off styling
+        </h2>
+
+        <p>
+            If only one button becomes purple for unclear reasons, the problem
+            is usually architecture, not branding. Random visual overrides make
+            systems inconsistent and difficult to maintain.
+        </p>
+
+        <CodeExample code={badThemeExample} />
+
+        <ul>
+            <li>Do not hard-code random colours inside components.</li>
+            <li>Do not use theme as a hiding place for hacks.</li>
+            <li>Do not override component structure from theme.</li>
+            <li>Keep theme decisions intentional and documented.</li>
+            <li>If the change is temporary, it belongs in hacks, not theme.</li>
+        </ul>
     </section>
 </DocsLayout>
