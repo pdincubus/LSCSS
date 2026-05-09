@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Layers"
+    description="Understanding cascade layers in Layered Semantic CSS."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Layers</p>
+
+            <h1>
+                Layer architecture
+            </h1>
+
+            <p class="intro">
+                LSCSS uses explicit cascade layers to create predictable
+                override behaviour and reduce specificity problems.
+            </p>
+        </section>
+
+        <section class="content-block">
+<pre><code>@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;</code></pre>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Layer order matters
+            </h2>
+
+            <p>
+                Layer order controls precedence. Source order inside a layer is
+                less important than the layer structure itself.
+            </p>
+        </section>
+    </main>
+</BaseLayout>
