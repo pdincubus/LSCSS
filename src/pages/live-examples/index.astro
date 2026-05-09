@@ -1,5 +1,15 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const exampleCardCss = `.example-card {
+    display: grid;
+    gap: var(--space-m);
+}
+
+.example-card > .title {
+    margin: 0;
+}`;
 ---
 
 <DocsLayout
@@ -36,13 +46,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.example-card {
-    display: grid;
-    gap: var(--space-m);
-}
-
-.example-card > .title {
-    margin: 0;
-}</code></pre>
+        <CodeExample code={exampleCardCss} />
     </section>
 </DocsLayout>
