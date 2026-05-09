@@ -1,5 +1,10 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const isExample = `:is(h1, h2, h3) {
+    line-height: 1.1;
+}`;
 ---
 
 <DocsLayout
@@ -19,9 +24,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>:is(h1, h2, h3) {
-    line-height: 1.1;
-}</code></pre>
+        <CodeExample code={isExample} />
     </section>
 
     <section class="content-block">
