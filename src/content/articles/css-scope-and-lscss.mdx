@@ -1,0 +1,95 @@
+---
+title: CSS @scope and LSCSS
+description: How CSS @scope fits into Layered Semantic CSS.
+publishedOn: 2026-05-09
+layout: ../../layouts/DocsLayout.astro
+---
+
+# CSS `@scope` and LSCSS
+
+CSS `@scope` fits naturally into the goals of LSCSS.
+
+It helps reduce selector leakage, keeps styles closer to components, and
+reduces the need for long selector chains.
+
+## What `@scope` solves
+
+- localised styling
+- safer component boundaries
+- reduced selector depth
+- fewer accidental overrides
+- easier migration from legacy CSS
+
+## Example
+
+```css
+@scope (.product-card) {
+    .title {
+        font-size: 1.25rem;
+    }
+
+    .price {
+        color: var(--colour-accent);
+    }
+}
+```
+
+This allows shorter internal selectors without relying on deeply nested
+component naming.
+
+## How this fits LSCSS
+
+LSCSS originally recommends shallow scoped selectors:
+
+```css
+.product-card > .title
+```
+
+With broad support for `@scope`, LSCSS could evolve toward:
+
+```css
+@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+}
+```
+
+## What `@scope` replaces
+
+`@scope` can reduce reliance on:
+
+- long descendant selectors
+- some BEM element naming
+- defensive specificity
+- tightly coupled selector structures
+
+## What `@scope` does not replace
+
+`@scope` does not replace:
+
+- semantic component naming
+- cascade layers
+- modifier classes
+- state classes
+- architectural organisation
+
+LSCSS still benefits from explicit layers and predictable file structure.
+
+## Recommended approach
+
+For modern browser targets:
+
+- keep semantic component names
+- keep explicit layers
+- use `@scope` inside component partials
+- avoid excessive nesting inside scopes
+- continue using modifiers and state classes
+
+## Browser support strategy
+
+Projects with modern evergreen browser targets can begin adopting
+`@scope` progressively.
+
+Projects with legacy support requirements should treat `@scope` as an
+enhancement until support requirements allow broader usage.
