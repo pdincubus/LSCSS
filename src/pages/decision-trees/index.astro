@@ -1,0 +1,122 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="CSS Architecture Decision Trees"
+    description="Decision trees for choosing modern CSS architecture patterns."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Decision trees</p>
+
+        <h1>
+            CSS architecture decision trees
+        </h1>
+
+        <p class="intro">
+            Use these decision trees to choose the right modern CSS feature or
+            architecture pattern for a given problem.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Which feature should I use?
+        </h2>
+
+        <div class="decision-tree">
+            <article class="decision-card">
+                <h3>
+                    Need predictable overrides?
+                </h3>
+
+                <p>
+                    Use cascade layers.
+                </p>
+
+<pre><code>@layer base, components, theme;</code></pre>
+            </article>
+
+            <article class="decision-card">
+                <h3>
+                    Need lower specificity?
+                </h3>
+
+                <p>
+                    Use :where() or simplify the selector.
+                </p>
+
+<pre><code>:where(.flow > *) + * {}</code></pre>
+            </article>
+
+            <article class="decision-card">
+                <h3>
+                    Need relational styling?
+                </h3>
+
+                <p>
+                    Use :has() where support allows, or state classes where it
+                    does not.
+                </p>
+
+<pre><code>.field:has(.error-message) {}</code></pre>
+            </article>
+
+            <article class="decision-card">
+                <h3>
+                    Need component boundaries?
+                </h3>
+
+                <p>
+                    Use @scope where support allows, or shallow component
+                    selectors elsewhere.
+                </p>
+
+<pre><code>@scope (.product-card) {
+    .title {}
+}</code></pre>
+            </article>
+
+            <article class="decision-card">
+                <h3>
+                    Need component responsiveness?
+                </h3>
+
+                <p>
+                    Use container queries instead of viewport assumptions.
+                </p>
+
+<pre><code>@container (min-width: 36rem) {}</code></pre>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Migration decision flow
+        </h2>
+
+        <ol class="decision-list">
+            <li>Can you change the whole codebase safely? If not, add layers first.</li>
+            <li>Is legacy CSS unpredictable? Move it to the legacy layer.</li>
+            <li>Are components hard to find? Split them into partials.</li>
+            <li>Are selectors too deep? Replace them with shallow component selectors.</li>
+            <li>Can browser support handle @scope? Use scoped component partials.</li>
+            <li>Are overrides still difficult? Review layer order before increasing specificity.</li>
+        </ol>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Accessibility decision flow
+        </h2>
+
+        <ol class="decision-list">
+            <li>Does this interaction rely on hover? Add focus and keyboard support.</li>
+            <li>Does this animation move or flash? Respect reduced motion.</li>
+            <li>Does this layout assume left and right? Use logical properties.</li>
+            <li>Does this element receive focus? Provide visible focus styling.</li>
+            <li>Does this component clip text? Test zoom, reflow, and wrapping.</li>
+        </ol>
+    </section>
+</DocsLayout>
