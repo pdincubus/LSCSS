@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
 const markupExample = `<article class="product-card product-card--featured">
@@ -29,38 +29,144 @@ const componentCssExample = `.product-card {
 }`;
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Examples"
     description="Practical Layered Semantic CSS examples."
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Examples</p>
+    <section class="site-hero">
+        <p class="eyebrow">Examples</p>
 
-            <h1>
-                Practical examples
-            </h1>
+        <h1>
+            Practical examples
+        </h1>
 
-            <p class="intro">
-                LSCSS works best when the naming, structure, and layer strategy
-                stay visible in everyday code.
-            </p>
-        </section>
+        <p class="intro">
+            LSCSS works best when the naming, structure, and layer strategy stay
+            visible in everyday code. These examples show the methodology in
+            real component shapes rather than abstract theory.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <h2>
-                Product card
-            </h2>
+    <section class="content-block">
+        <h2>
+            Start with the core pattern
+        </h2>
 
-            <CodeExample code={markupExample} language="html" />
-        </section>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    <a href="#product-card">Product card</a>
+                </h3>
 
-        <section class="content-block">
-            <h2>
-                Component CSS
-            </h2>
+                <p>
+                    A simple component showing semantic naming, shallow child
+                    selectors, and explicit modifiers.
+                </p>
+            </article>
 
-            <CodeExample code={componentCssExample} />
-        </section>
-    </main>
-</BaseLayout>
+            <article class="hub-card">
+                <h3>
+                    <a href="/live-examples/">Live examples</a>
+                </h3>
+
+                <p>
+                    Rendered component examples that connect naming, structure,
+                    accessibility, and visual output.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/starter-template/">Starter template</a>
+                </h3>
+
+                <p>
+                    A project scaffold for applying the folder structure,
+                    layers, and naming rules from the start.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section id="product-card" class="content-block">
+        <h2>
+            Product card markup
+        </h2>
+
+        <p>
+            The component name describes the block. Child classes stay short
+            because the parent component provides the context.
+        </p>
+
+        <CodeExample code={markupExample} language="html" />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Product card CSS
+        </h2>
+
+        <p>
+            The CSS keeps selectors shallow, uses a clear modifier, and avoids
+            leaking component internals into global naming.
+        </p>
+
+        <CodeExample code={componentCssExample} />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Compare good and bad patterns
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    <a href="/anti-pattern-gallery/">Anti-pattern gallery</a>
+                </h3>
+
+                <p>
+                    Examples of selector chaos, specificity battles,
+                    over-nesting, and unclear naming.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/comparisons/">Comparisons</a>
+                </h3>
+
+                <p>
+                    Compare LSCSS with BEM, CUBE, scoped CSS, and other common
+                    methodology choices.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/migration/">Migration examples</a>
+                </h3>
+
+                <p>
+                    Guidance for moving from legacy or inconsistent CSS toward
+                    a layered, semantic structure.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            What to practise next
+        </h2>
+
+        <ol>
+            <li>Pick a real component from an existing site.</li>
+            <li>Name the parent component semantically.</li>
+            <li>Use shallow child selectors scoped by the parent.</li>
+            <li>Add modifiers only when the component has a real variant.</li>
+            <li>Use state classes for temporary or conditional UI states.</li>
+            <li>Place the CSS in the correct layer and partial.</li>
+        </ol>
+    </section>
+</DocsLayout>
