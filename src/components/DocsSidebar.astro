@@ -1,85 +1,14 @@
 ---
-const currentPath = Astro.url.pathname;
+import { docsNavigation } from '../data/docsNavigation';
 
-const sections = [
-    {
-        title: 'Start here',
-        links: [
-            { href: '/', label: 'Overview' },
-            { href: '/principles/', label: 'Principles' },
-            { href: '/decision-trees/', label: 'Decision trees' },
-            { href: '/anti-pattern-gallery/', label: 'Anti-pattern gallery' }
-        ]
-    },
-    {
-        title: 'Core methodology',
-        links: [
-            { href: '/layers/', label: 'Layers' },
-            { href: '/naming/', label: 'Naming' },
-            { href: '/modifiers-and-state/', label: 'Modifiers and state' },
-            { href: '/architecture/', label: 'Architecture' },
-            { href: '/utilities/', label: 'Utilities' },
-            { href: '/theme-layer/', label: 'Theme layer' },
-            { href: '/hacks/', label: 'Hacks' },
-            { href: '/tooling/', label: 'Tooling' }
-        ]
-    },
-    {
-        title: 'Modern CSS',
-        links: [
-            { href: '/modern-css/where/', label: ':where()' },
-            { href: '/modern-css/is/', label: ':is()' },
-            { href: '/modern-css/has/', label: ':has()' },
-            { href: '/modern-css/not/', label: ':not()' },
-            { href: '/modern-css/nesting/', label: 'Nesting' },
-            { href: '/modern-css/container-queries/', label: 'Container queries' },
-            { href: '/modern-css/logical-properties/', label: 'Logical properties' },
-            { href: '/modern-css/view-transitions/', label: 'View transitions' }
-        ]
-    },
-    {
-        title: 'Practice',
-        links: [
-            { href: '/examples/', label: 'Examples' },
-            { href: '/live-examples/', label: 'Live examples' },
-            { href: '/comparisons/', label: 'Comparisons' },
-            { href: '/comparisons/scope-vs-bem/', label: '@scope vs BEM' },
-            { href: '/comparisons/scope-vs-cube/', label: '@scope vs CUBE' },
-            { href: '/comparisons/scope-vs-lscss/', label: '@scope and LSCSS' },
-            { href: '/migration/', label: 'Migration' },
-            { href: '/diagrams/', label: 'Diagrams' },
-            { href: '/starter-template/', label: 'Starter template' }
-        ]
-    },
-    {
-        title: 'Tools and demos',
-        links: [
-            { href: '/playground/', label: 'Playground' },
-            { href: '/playground/live-editor/', label: 'Live editor' },
-            { href: '/specificity-visualiser/', label: 'Specificity visualiser' },
-            { href: '/tools/specificity-calculator/', label: 'Specificity calculator' },
-            { href: '/tools/specificity-graph/', label: 'Specificity graph' },
-            { href: '/tools/scope-demo/', label: 'Scope demo' },
-            { href: '/tools/container-query-visualiser/', label: 'Container query visualiser' },
-            { href: '/tools/accessibility-demos/', label: 'Accessibility demos' },
-            { href: '/tools/performance-demos/', label: 'Performance demos' },
-            { href: '/tools/render-performance-demos/', label: 'Render performance demos' },
-            { href: '/tools/browser-support-demos/', label: 'Browser support demos' },
-            { href: '/tools/devtools-inspector/', label: 'DevTools-style inspector' }
-        ]
-    },
-    {
-        title: 'Reference',
-        links: [
-            { href: '/accessibility/', label: 'Accessibility' },
-            { href: '/design-tokens/', label: 'Design tokens' },
-            { href: '/articles/', label: 'Articles' },
-            { href: '/articles/css-scope-and-lscss/', label: '@scope article' },
-            { href: '/articles/methodology-evolution/', label: 'Methodology evolution' },
-            { href: '/faq/', label: 'FAQ' }
-        ]
-    }
-];
+const currentPath = Astro.url.pathname;
+const sectionNames = [...new Set(docsNavigation.map((item) => item.section))];
+const sections = sectionNames.map((sectionName) => {
+    return {
+        title: sectionName,
+        links: docsNavigation.filter((item) => item.section === sectionName)
+    };
+});
 
 function isActive(href: string): boolean {
     if (href === '/') {
