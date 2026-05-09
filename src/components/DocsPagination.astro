@@ -12,14 +12,15 @@ const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
 
 {
     (previous || next) && (
-        <nav class="docs-pagination" aria-label="Page navigation">
+        <nav class="docs-pagination" aria-label="Documentation pagination">
             {
                 previous ? (
                     <a class="docs-pagination-link is-previous" href={previous.href}>
                         <span class="docs-pagination-label">Previous</span>
                         <strong>{previous.label}</strong>
+                        <span class="docs-pagination-section">{previous.section}</span>
                     </a>
-                ) : <span></span>
+                ) : <span aria-hidden="true"></span>
             }
 
             {
@@ -27,8 +28,9 @@ const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
                     <a class="docs-pagination-link is-next" href={next.href}>
                         <span class="docs-pagination-label">Next</span>
                         <strong>{next.label}</strong>
+                        <span class="docs-pagination-section">{next.section}</span>
                     </a>
-                ) : <span></span>
+                ) : <span aria-hidden="true"></span>
             }
         </nav>
     )
