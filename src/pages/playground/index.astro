@@ -1,0 +1,35 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Playground"
+    description="Experimenting with Layered Semantic CSS patterns."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Playground</p>
+
+        <h1>
+            Playground
+        </h1>
+
+        <p class="intro">
+            A space for testing component structure, naming, and layering.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>.feature-panel {
+    display: grid;
+    gap: var(--space-m);
+}
+
+.feature-panel > .title {
+    margin: 0;
+}
+
+.feature-panel--highlighted {
+    border-color: var(--colour-accent);
+}</code></pre>
+    </section>
+</DocsLayout>
