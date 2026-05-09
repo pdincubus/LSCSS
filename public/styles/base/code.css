@@ -1,0 +1,28 @@
+pre {
+    overflow: auto;
+    padding: var(--space-l);
+    border-radius: var(--radius-m);
+    background: #111827;
+    color: #f3f4f6;
+}
+
+code {
+    font-family: monospace;
+    font-size: 0.95em;
+}
+
+.token-selector {
+    color: #93c5fd;
+}
+
+.token-property {
+    color: #fca5a5;
+}
+
+.token-value {
+    color: #86efac;
+}
+
+.token-at-rule {
+    color: #c4b5fd;
+}
