@@ -1,4 +1,6 @@
 ---
+import SiteNav from '../components/SiteNav.astro';
+
 export interface Props {
     title?: string;
     description?: string;
@@ -21,6 +23,16 @@ const {
     </head>
 
     <body>
+        <header class="site-header">
+            <div class="page-shell">
+                <a class="site-title" href="/">
+                    LSCSS
+                </a>
+
+                <SiteNav />
+            </div>
+        </header>
+
         <slot />
     </body>
 </html>
