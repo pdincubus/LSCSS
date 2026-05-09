@@ -1,0 +1,34 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'Utility-first vs LSCSS';
+const description = 'Compare utility-first CSS approaches and Layered Semantic CSS for maintainability, reuse, readability, and long-term front-end architecture.';
+---
+
+<DocsLayout title={title} description={description}>
+    <article>
+        <p class="eyebrow">Comparison</p>
+        <h1>Utility-first vs LSCSS</h1>
+
+        <p>
+            Utility-first CSS optimises for speed and consistency through small,
+            composable classes. LSCSS optimises for clarity and maintainability
+            through semantic components and layered architecture.
+        </p>
+
+        <h2>Main differences</h2>
+        <ul>
+            <li>utility-first styling lives mostly in markup</li>
+            <li>LSCSS keeps architectural decisions in CSS</li>
+            <li>utility-first reduces repeated declarations</li>
+            <li>LSCSS reduces repeated structural decisions</li>
+        </ul>
+
+        <h2>Recommended reading</h2>
+        <ul>
+            <li><a href="/utilities/">Utilities</a></li>
+            <li><a href="/components/">Components</a></li>
+            <li><a href="/theme-layer/">Theme layer</a></li>
+        </ul>
+    </article>
+</DocsLayout>
