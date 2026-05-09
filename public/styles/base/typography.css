@@ -1,0 +1,19 @@
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.1;
+}
+
+p,
+li {
+    max-width: var(--measure);
+}
+
+pre {
+    overflow-x: auto;
+    padding: var(--space-m);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
