@@ -10,6 +10,7 @@ export const docsNavigation: DocsNavItem[] = [
     { href: '/decision-trees/', label: 'Decision trees', section: 'Start here' },
     { href: '/anti-pattern-gallery/', label: 'Anti-pattern gallery', section: 'Start here' },
 
+    { href: '/methodology/', label: 'Core methodology overview', section: 'Core methodology' },
     { href: '/layers/', label: 'Layers', section: 'Core methodology' },
     { href: '/naming/', label: 'Naming', section: 'Core methodology' },
     { href: '/modifiers-and-state/', label: 'Modifiers and state', section: 'Core methodology' },
@@ -31,10 +32,6 @@ export const docsNavigation: DocsNavItem[] = [
 
     { href: '/examples/', label: 'Examples', section: 'Practice' },
     { href: '/live-examples/', label: 'Live examples', section: 'Practice' },
-    { href: '/comparisons/', label: 'Comparisons', section: 'Practice' },
-    { href: '/comparisons/scope-vs-bem/', label: '@scope vs BEM', section: 'Practice' },
-    { href: '/comparisons/scope-vs-cube/', label: '@scope vs CUBE', section: 'Practice' },
-    { href: '/comparisons/scope-vs-lscss/', label: '@scope and LSCSS', section: 'Practice' },
     { href: '/migration/', label: 'Migration', section: 'Practice' },
     { href: '/diagrams/', label: 'Diagrams', section: 'Practice' },
     { href: '/starter-template/', label: 'Starter template', section: 'Practice' },
@@ -52,6 +49,21 @@ export const docsNavigation: DocsNavItem[] = [
     { href: '/tools/render-performance-demos/', label: 'Render performance demos', section: 'Tools and demos' },
     { href: '/tools/browser-support-demos/', label: 'Browser support demos', section: 'Tools and demos' },
     { href: '/tools/devtools-inspector/', label: 'DevTools-style inspector', section: 'Tools and demos' },
+
+    { href: '/guides/', label: 'Guides overview', section: 'Guides' },
+    { href: '/guides/accessibility-and-css/', label: 'Accessibility and CSS', section: 'Guides' },
+    { href: '/guides/performance-and-css/', label: 'Performance and CSS', section: 'Guides' },
+    { href: '/guides/browser-support-strategy/', label: 'Browser support strategy', section: 'Guides' },
+    { href: '/guides/migrating-legacy-css/', label: 'Migrating legacy CSS', section: 'Guides' },
+
+    { href: '/comparisons/', label: 'Comparisons overview', section: 'Comparisons' },
+    { href: '/comparisons/bem-vs-lscss/', label: 'BEM vs LSCSS', section: 'Comparisons' },
+    { href: '/comparisons/tailwind-vs-lscss/', label: 'Tailwind vs LSCSS', section: 'Comparisons' },
+    { href: '/comparisons/css-modules-vs-lscss/', label: 'CSS Modules vs LSCSS', section: 'Comparisons' },
+    { href: '/comparisons/utility-first-vs-lscss/', label: 'Utility-first vs LSCSS', section: 'Comparisons' },
+    { href: '/comparisons/scope-vs-bem/', label: '@scope vs BEM', section: 'Comparisons' },
+    { href: '/comparisons/scope-vs-cube/', label: '@scope vs CUBE', section: 'Comparisons' },
+    { href: '/comparisons/scope-vs-lscss/', label: '@scope and LSCSS', section: 'Comparisons' },
 
     { href: '/accessibility/', label: 'Accessibility', section: 'Reference' },
     { href: '/design-tokens/', label: 'Design tokens', section: 'Reference' },
