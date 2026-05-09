@@ -1,0 +1,42 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Container Queries"
+    description="Container queries and component-driven responsiveness."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modern CSS</p>
+
+        <h1>
+            Container queries
+        </h1>
+
+        <p class="intro">
+            Container queries allow components to respond to their own layout
+            constraints instead of viewport assumptions.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>@container (min-width: 40rem) {
+    .product-card {
+        grid-template-columns: 1fr 1fr;
+    }
+}</code></pre>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Architecture impact
+        </h2>
+
+        <ul>
+            <li>improves component portability</li>
+            <li>reduces layout coupling</li>
+            <li>supports reusable UI systems</li>
+            <li>improves responsive architecture</li>
+        </ul>
+    </section>
+</DocsLayout>
