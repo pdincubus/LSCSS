@@ -1,0 +1,29 @@
+.tool-panel {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
+
+.tool-input {
+    inline-size: 100%;
+    padding: var(--space-s);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-s);
+    background: var(--colour-background);
+    color: var(--colour-text);
+}
+
+.layer-stack {
+    display: grid;
+    gap: var(--space-s);
+}
+
+.layer-item {
+    padding: var(--space-m);
+    border-radius: var(--radius-s);
+    background: var(--colour-surface);
+    border: var(--border-thin) solid var(--colour-border);
+}
