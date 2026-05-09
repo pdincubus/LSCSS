@@ -1,0 +1,12 @@
+.code-example {
+    overflow-x: auto;
+    padding: var(--space-l);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
+
+.code-example > code {
+    font-family: var(--font-family-monospace, monospace);
+    white-space: pre;
+}
