@@ -15,11 +15,20 @@ const scopeExample = `@scope (.product-card) {
 const containerExample = `@container (min-width: 36rem) {}`;
 const stateExample = `.is_active {}`;
 const modifierExample = `.product-card--featured {}`;
+const utilityExample = `.vh
+.a11y-link
+.a11y-link--focusable`;
+const themeExample = `@layer theme {
+    .button {
+        --button-background: var(--colour-accent);
+    }
+}`;
 ---
 
 <DocsLayout
     title="CSS Architecture Decision Trees"
-    description="Decision trees for choosing modern CSS architecture patterns."
+    description="Decision trees for choosing modern CSS architecture patterns, utilities, theme rules, hacks, modifiers, state, and component structure."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Decision trees</p>
@@ -35,7 +44,16 @@ const modifierExample = `.product-card--featured {}`;
         </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="Decision tree sections">
+        <a href="#start-here">Start here</a>
+        <a href="#feature-choice">Modern CSS</a>
+        <a href="#naming-flow">Naming</a>
+        <a href="#utility-flow">Utilities</a>
+        <a href="#theme-flow">Theme</a>
+        <a href="#file-size-flow">File size</a>
+    </nav>
+
+    <section id="start-here" class="content-block">
         <h2>
             Start here
         </h2>
@@ -82,7 +100,7 @@ const modifierExample = `.product-card--featured {}`;
         </div>
     </section>
 
-    <section class="content-block">
+    <section id="feature-choice" class="content-block">
         <h2>
             Which modern CSS feature should I use?
         </h2>
@@ -144,7 +162,7 @@ const modifierExample = `.product-card--featured {}`;
         </div>
     </section>
 
-    <section class="content-block">
+    <section id="naming-flow" class="content-block">
         <h2>
             Naming decision flow
         </h2>
@@ -153,9 +171,50 @@ const modifierExample = `.product-card--featured {}`;
             <li>Is it a standalone UI block? Give it a semantic component name.</li>
             <li>Is it a child of that component? Use a short child class scoped by the parent.</li>
             <li>Is it a reusable visual variation? Use a modifier class.</li>
-            <li>Is it temporary or conditional? Use a state or condition class.</li>
-            <li>Is the name only describing layout? Consider whether it belongs in layout or utilities instead.</li>
+            <li>Is it temporary interaction state? Use an <code>.is_*</code> state class.</li>
+            <li>Does it describe the presence of something? Use a <code>.has_*</code> condition class.</li>
             <li>Is the name describing appearance only? Check whether a design token or theme layer is the better fit.</li>
+        </ol>
+    </section>
+
+    <section id="utility-flow" class="content-block">
+        <h2>
+            Utility decision flow
+        </h2>
+
+        <p>
+            Utilities should be rare. Most styling belongs in semantic
+            components, not presentational class chains.
+        </p>
+
+        <CodeExample code={utilityExample} />
+
+        <ol class="decision-list">
+            <li>Does it solve a universal accessibility problem? A utility may be justified.</li>
+            <li>Does it only describe spacing, colour, layout, radius, or typography? Prefer component CSS or tokens.</li>
+            <li>Does the same group of utilities appear together often? Create a component.</li>
+            <li>Would the HTML become harder to scan? Do not use a utility chain.</li>
+            <li>Does it need local overrides? It is probably not a good utility.</li>
+        </ol>
+    </section>
+
+    <section id="theme-flow" class="content-block">
+        <h2>
+            Theme or component decision flow
+        </h2>
+
+        <p>
+            Theme changes presentation. Components own structure and behaviour.
+        </p>
+
+        <CodeExample code={themeExample} />
+
+        <ol class="decision-list">
+            <li>Is it a brand-level colour, spacing, radius, or visual treatment? Consider the theme layer.</li>
+            <li>Is it component structure, layout, or behaviour? Keep it in the component.</li>
+            <li>Is it a reusable visual value? Use a design token.</li>
+            <li>Is it a temporary urgent fix? Put it in hacks, not theme.</li>
+            <li>Is it a one-off hard-coded colour? Stop and review the token strategy.</li>
         </ol>
     </section>
 
@@ -172,6 +231,20 @@ const modifierExample = `.product-card--featured {}`;
             <li>Can browser support handle @scope? Use scoped component partials for suitable components.</li>
             <li>Are overrides still difficult? Review layer order before increasing specificity.</li>
             <li>Is the fix ugly but necessary? Put it in hacks, comment it, and review it later.</li>
+        </ol>
+    </section>
+
+    <section id="file-size-flow" class="content-block">
+        <h2>
+            File size decision flow
+        </h2>
+
+        <ol class="decision-list">
+            <li>Can you skim the component file quickly? If not, review it.</li>
+            <li>Is the file approaching 300 to 400 lines? Check for hidden sub-components.</li>
+            <li>Are repeated groups of rules appearing? Extract or name the pattern.</li>
+            <li>Are old hacks still inside normal component CSS? Move or remove them.</li>
+            <li>Does the file own too many states, variants, or layouts? Split responsibilities.</li>
         </ol>
     </section>
 
