@@ -1,5 +1,16 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const scopeExample = `@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+
+    .price {
+        color: var(--colour-accent);
+    }
+}`;
 ---
 
 <DocsLayout
@@ -20,15 +31,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>@scope (.product-card) {
-    .title {
-        margin: 0;
-    }
-
-    .price {
-        color: var(--colour-accent);
-    }
-}</code></pre>
+        <CodeExample code={scopeExample} />
     </section>
 
     <section class="content-block">
