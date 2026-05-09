@@ -1,20 +1,27 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import SearchBox from '../../components/SearchBox.astro';
 ---
 
-<Layout
+<BaseLayout
     title="Search"
     description="Search the LSCSS documentation"
 >
-    <section class="page-section">
-        <div class="container">
-            <h1>Search</h1>
-            <p>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Search</p>
+
+            <h1>
+                Search documentation
+            </h1>
+
+            <p class="intro">
                 Search documentation, examples, patterns, and reference pages.
             </p>
+        </section>
 
+        <section class="content-block">
             <SearchBox />
-        </div>
-    </section>
-</Layout>
+        </section>
+    </main>
+</BaseLayout>
