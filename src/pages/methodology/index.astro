@@ -2,7 +2,7 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const title = 'Core Methodology';
-const description = 'The core Layered Semantic CSS methodology: layers, naming, architecture, utilities, theme rules, hacks, tooling, and breakpoint organisation.';
+const description = 'The core Layered Semantic CSS methodology: layers, naming, architecture, utilities, theme rules, hacks, tooling, breakpoint organisation, and long-term maintainability.';
 
 const sections = [
     {
@@ -69,10 +69,10 @@ const sections = [
 
     <nav class="section-nav" aria-label="Core methodology sections">
         <a href="#methodology-sections">Sections</a>
+        <a href="#layers-of-protection">Layers of protection</a>
         <a href="#recommended-path">Recommended path</a>
         <a href="/architecture/#media-queries">Media queries</a>
         <a href="/decision-trees/">Decision trees</a>
-        <a href="/guides/migrating-legacy-css/">Migration guide</a>
     </nav>
 
     <section id="methodology-sections" class="content-block">
@@ -95,6 +95,34 @@ const sections = [
                 ))
             }
         </div>
+    </section>
+
+    <section id="layers-of-protection" class="content-block">
+        <h2>
+            Layers of protection
+        </h2>
+
+        <p>
+            These rules are not separate preferences. They work together.
+            Each part of the methodology adds protection against a different
+            kind of maintenance problem.
+        </p>
+
+        <ul>
+            <li>Cascade layers protect override order and reduce specificity battles.</li>
+            <li>CSS variables protect design consistency and stop random values spreading.</li>
+            <li>Custom media queries protect breakpoint clarity and remove magic numbers.</li>
+            <li>Scoped child selectors protect component ownership and readability.</li>
+            <li>Modifiers protect reusable variant meaning.</li>
+            <li>State classes protect interaction clarity and temporary UI behaviour.</li>
+            <li>File-size guidance protects cognitive load and long-term maintainability.</li>
+        </ul>
+
+        <p>
+            None of these rules are complicated on their own. Together they make
+            the system more predictable, easier to debug, and much harder to
+            accidentally ruin.
+        </p>
     </section>
 
     <section id="recommended-path" class="content-block">
