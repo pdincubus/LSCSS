@@ -1,5 +1,14 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const defaultCss = `.playground-card {
+    padding: 1rem;
+    border: 1px solid currentColor;
+}
+
+.playground-card > .title {
+    margin: 0;
+}`;
 ---
 
 <DocsLayout
@@ -24,14 +33,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
                 CSS
             </label>
 
-            <textarea id="live-css" class="tool-input" rows="12" data-live-css>.playground-card {
-    padding: 1rem;
-    border: 1px solid currentColor;
-}
-
-.playground-card > .title {
-    margin: 0;
-}</textarea>
+            <textarea id="live-css" class="tool-input" rows="12" data-live-css>{defaultCss}</textarea>
         </div>
     </section>
 
