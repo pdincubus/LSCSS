@@ -1,0 +1,104 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const title = 'Core Methodology';
+const description = 'The core Layered Semantic CSS methodology: layers, naming, architecture, utilities, theme rules, hacks, and tooling.';
+
+const sections = [
+    {
+        title: 'Layers',
+        href: '/layers/',
+        description: 'Use explicit cascade layers to control precedence and reduce specificity battles.'
+    },
+    {
+        title: 'Naming',
+        href: '/naming/',
+        description: 'Use semantic component names, short child classes, modifiers, and state classes.'
+    },
+    {
+        title: 'Modifiers and state',
+        href: '/modifiers-and-state/',
+        description: 'Separate reusable variants from temporary or conditional UI state.'
+    },
+    {
+        title: 'Architecture',
+        href: '/architecture/',
+        description: 'Structure CSS files, partials, folders, and responsibilities in a predictable way.'
+    },
+    {
+        title: 'Utilities',
+        href: '/utilities/',
+        description: 'Use utilities deliberately, not as a replacement for component architecture.'
+    },
+    {
+        title: 'Theme layer',
+        href: '/theme-layer/',
+        description: 'Keep visual overrides and brand-level styling isolated from component logic.'
+    },
+    {
+        title: 'Hacks',
+        href: '/hacks/',
+        description: 'Contain temporary fixes so they do not become permanent architecture.'
+    },
+    {
+        title: 'Tooling',
+        href: '/tooling/',
+        description: 'Let build tools handle browser support, checks, and repetitive processing work.'
+    }
+];
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <section class="site-hero">
+        <p class="eyebrow">Core methodology</p>
+
+        <h1>
+            Core methodology
+        </h1>
+
+        <p class="intro">
+            LSCSS is built from a small set of practical rules: clear layers,
+            semantic naming, shallow selectors, explicit modifiers, state
+            classes, isolated hacks, and sensible tooling.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Methodology sections
+        </h2>
+
+        <div class="hub-card-grid">
+            {
+                sections.map((section) => (
+                    <article class="hub-card">
+                        <h3>
+                            <a href={section.href}>{section.title}</a>
+                        </h3>
+
+                        <p>
+                            {section.description}
+                        </p>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Recommended path
+        </h2>
+
+        <ol>
+            <li>Start with layers.</li>
+            <li>Move on to naming.</li>
+            <li>Understand modifiers and state.</li>
+            <li>Review architecture and folder structure.</li>
+            <li>Use utilities, theme rules, hacks, and tooling with intent.</li>
+        </ol>
+    </section>
+</DocsLayout>
