@@ -1,42 +1,110 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Layers"
-    description="Understanding cascade layers in Layered Semantic CSS."
+    description="Understanding cascade layers in Layered Semantic CSS, including legacy and hacks layers."
+    schemaType="TechArticle"
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Layers</p>
+    <section class="site-hero">
+        <p class="eyebrow">Layers</p>
 
-            <h1>
-                Layer architecture
-            </h1>
+        <h1>
+            Layer architecture
+        </h1>
 
-            <p class="intro">
-                LSCSS uses explicit cascade layers to create predictable
-                override behaviour and reduce specificity problems.
-            </p>
-        </section>
+        <p class="intro">
+            LSCSS uses explicit cascade layers to create predictable override
+            behaviour, reduce specificity problems, and stop CSS from turning
+            into a knife fight.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <CodeExample code={layerExample} />
-        </section>
+    <nav class="section-nav" aria-label="Layer sections">
+        <a href="#layer-order">Layer order</a>
+        <a href="#legacy-layer">Legacy</a>
+        <a href="#hacks-layer">Hacks</a>
+        <a href="#why-it-matters">Why it matters</a>
+    </nav>
 
-        <section class="content-block">
-            <h2>
-                Layer order matters
-            </h2>
+    <section class="content-block">
+        <CodeExample code={layerExample} />
+    </section>
 
-            <p>
-                Layer order controls precedence. Source order inside a layer is
-                less important than the layer structure itself.
-            </p>
-        </section>
-    </main>
-</BaseLayout>
+    <section id="layer-order" class="content-block">
+        <h2>
+            Layer order matters
+        </h2>
+
+        <p>
+            Layer order controls precedence. Source order inside a layer matters
+            less than the layer structure itself. Lower layers lose to higher
+            layers, even if they appear later in the source.
+        </p>
+
+        <p>
+            This allows architecture to control overrides instead of relying on
+            selector weight and repeated specificity escalation.
+        </p>
+    </section>
+
+    <section id="legacy-layer" class="content-block">
+        <h2>
+            Why the legacy layer exists
+        </h2>
+
+        <p>
+            The <code>legacy</code> layer exists so older project CSS and
+            third-party styles can be imported first at the lowest priority.
+            This means your structured layers immediately become more important
+            without needing heavier selectors or override battles.
+        </p>
+
+        <p>
+            Legacy CSS should not be allowed to define the architecture of a new
+            system. It should be contained low in the cascade and gradually
+            replaced over time.
+        </p>
+    </section>
+
+    <section id="hacks-layer" class="content-block">
+        <h2>
+            Why the hacks layer exists
+        </h2>
+
+        <p>
+            The <code>hacks</code> layer is a controlled place for temporary,
+            urgent fixes. Sometimes production needs a fast correction before a
+            full refactor is realistic.
+        </p>
+
+        <p>
+            Hacks should be visible, isolated, and treated like technical debt,
+            not hidden inside normal component CSS where they quietly become
+            permanent.
+        </p>
+
+        <p>
+            A hack should be moved, rewritten, or removed as soon as possible.
+            The hacks layer is a quarantine zone, not a retirement home.
+        </p>
+    </section>
+
+    <section id="why-it-matters" class="content-block">
+        <h2>
+            Why this matters
+        </h2>
+
+        <p>
+            Legacy and hacks layers stop teams from solving every problem with
+            stronger selectors, more <code>!important</code>, and quiet regret.
+            They make technical debt visible and keep the rest of the system
+            cleaner.
+        </p>
+    </section>
+</DocsLayout>
