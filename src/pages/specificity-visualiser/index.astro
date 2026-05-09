@@ -1,5 +1,12 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const specificityExamples = `.product-card .title
+:where(.product-card) .title
+@scope (.product-card) {
+    .title {}
+}`;
 ---
 
 <DocsLayout
@@ -35,18 +42,16 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
     <section class="content-block">
         <h2>
-            Example comparisons</h2>
+            Example comparisons
+        </h2>
 
-<pre><code>.product-card .title
-:where(.product-card) .title
-@scope (.product-card) {
-    .title {}
-}</code></pre>
+        <CodeExample code={specificityExamples} />
     </section>
 
     <section class="content-block">
         <h2>
-            LSCSS position</h2>
+            LSCSS position
+        </h2>
 
         <p>
             LSCSS aims to reduce specificity pressure before it needs solving.
