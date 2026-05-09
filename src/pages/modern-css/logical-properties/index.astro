@@ -1,5 +1,11 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const logicalPropertiesExample = `.card {
+    padding-inline: 1rem;
+    margin-block: 2rem;
+}`;
 ---
 
 <DocsLayout
@@ -20,10 +26,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.card {
-    padding-inline: 1rem;
-    margin-block: 2rem;
-}</code></pre>
+        <CodeExample code={logicalPropertiesExample} />
     </section>
 
     <section class="content-block">
