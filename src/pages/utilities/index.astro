@@ -4,12 +4,38 @@ import CodeExample from '../../components/CodeExample.astro';
 
 const utilityExamples = `.visually-hidden
 .flow
-.text-center`;
+.text-center
+.cluster
+.switcher`;
+
+const usefulUtilities = `.visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.flow > * + * {
+    margin-block-start: var(--flow-space, 1em);
+}`;
+
+const avoidExample = `<article class="p-4 mb-4 bg-white rounded shadow text-center grid gap-4">
+    <h2 class="text-xl font-bold mb-2">Product title</h2>
+    <p class="text-sm text-muted mb-4">Product description</p>
+</article>`;
+
+const betterExample = `<article class="product-card">
+    <h2 class="title">Product title</h2>
+    <p class="description">Product description</p>
+</article>`;
 ---
 
 <DocsLayout
     title="LSCSS Utilities"
-    description="Utility classes in Layered Semantic CSS."
+    description="Utility classes in Layered Semantic CSS, including when to use utilities, when to use components, and how to avoid class soup."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Utilities</p>
@@ -19,17 +45,85 @@ const utilityExamples = `.visually-hidden
         </h1>
 
         <p class="intro">
-            Utilities should remain small, explicit, and low complexity.
+            Utilities should remain small, explicit, reusable, and boring. They
+            support component architecture. They do not replace it.
         </p>
     </section>
 
-    <section class="content-block">
-        <CodeExample code={utilityExamples} />
-    </section>
+    <nav class="section-nav" aria-label="Utilities sections">
+        <a href="#good-utilities">Good utilities</a>
+        <a href="#examples">Examples</a>
+        <a href="#components-vs-utilities">Components vs utilities</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
 
-    <section class="content-block">
+    <section id="good-utilities" class="content-block">
+        <h2>
+            What makes a good utility
+        </h2>
+
         <p>
-            Utilities should not replace semantic component structure.
+            A useful utility does one small job. It should be predictable across
+            the project and should not need local overrides to behave properly.
         </p>
+
+        <ul>
+            <li>Use utilities for repeated low-level patterns.</li>
+            <li>Keep utilities independent of specific components.</li>
+            <li>Prefer semantic components for meaningful UI structures.</li>
+            <li>Avoid utilities that hide complex design decisions.</li>
+            <li>Do not use utilities as a dumping ground for missing architecture.</li>
+        </ul>
+    </section>
+
+    <section id="examples" class="content-block">
+        <h2>
+            Common utility names
+        </h2>
+
+        <CodeExample code={utilityExamples} />
+
+        <p>
+            These names describe small repeatable behaviours, not whole
+            components.
+        </p>
+
+        <CodeExample code={usefulUtilities} />
+    </section>
+
+    <section id="components-vs-utilities" class="content-block">
+        <h2>
+            Components vs utilities
+        </h2>
+
+        <p>
+            Use a component when the structure has meaning. Use a utility when
+            the behaviour is small, generic, and reusable in many places.
+        </p>
+
+        <p>
+            If a group of utilities keeps appearing together, it is probably a
+            component trying to escape.
+        </p>
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid class soup
+        </h2>
+
+        <p>
+            A long chain of utilities can make markup harder to scan, harder to
+            refactor, and harder to explain to the next developer.
+        </p>
+
+        <CodeExample code={avoidExample} language="html" />
+
+        <p>
+            Prefer a semantic component when the HTML represents a real UI
+            pattern.
+        </p>
+
+        <CodeExample code={betterExample} language="html" />
     </section>
 </DocsLayout>
