@@ -1,0 +1,38 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = '@scope vs BEM';
+const description = 'Compare CSS @scope and BEM for selector control, naming pressure, maintainability, and modern CSS architecture.';
+---
+
+<DocsLayout title={title} description={description}>
+    <article>
+        <p class="eyebrow">Comparison</p>
+        <h1>@scope vs BEM</h1>
+
+        <p>
+            BEM solves accidental styling collisions with naming conventions.
+            @scope solves many of the same problems with native browser behaviour.
+        </p>
+
+        <p>
+            One asks developers to be disciplined. The other asks the platform
+            to help. Both matter.
+        </p>
+
+        <h2>Main differences</h2>
+        <ul>
+            <li>BEM uses longer class names for safety</li>
+            <li>@scope uses selector boundaries for safety</li>
+            <li>BEM is convention-driven</li>
+            <li>@scope is platform-native behaviour</li>
+        </ul>
+
+        <h2>Recommended reading</h2>
+        <ul>
+            <li><a href="/modern-css/css-scope-and-lscss/">@scope and LSCSS</a></li>
+            <li><a href="/comparisons/bem-vs-lscss/">BEM vs LSCSS</a></li>
+            <li><a href="/modern-css/">Modern CSS</a></li>
+        </ul>
+    </article>
+</DocsLayout>
