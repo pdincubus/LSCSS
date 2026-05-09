@@ -1,0 +1,56 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Specificity Visualiser"
+    description="A practical guide to selector specificity, cascade layers, and scoped CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            Specificity visualiser
+        </h1>
+
+        <p class="intro">
+            A future interactive tool for comparing selector weight, layer
+            precedence, and scoped component rules.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            What it should explain
+        </h2>
+
+        <ul>
+            <li>why selector length is not the same as specificity</li>
+            <li>why IDs quickly create override problems</li>
+            <li>how <code>:where()</code> removes specificity weight</li>
+            <li>how cascade layers change precedence</li>
+            <li>how <code>@scope</code> reduces selector leakage</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Example comparisons</h2>
+
+<pre><code>.product-card .title
+:where(.product-card) .title
+@scope (.product-card) {
+    .title {}
+}</code></pre>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            LSCSS position</h2>
+
+        <p>
+            LSCSS aims to reduce specificity pressure before it needs solving.
+            Layers, scope, and shallow selectors should prevent most escalation.
+        </p>
+    </section>
+</DocsLayout>
