@@ -1,0 +1,32 @@
+---
+import { currentVersion, versions } from '../data/versions';
+---
+
+<div class="version-switcher">
+    <label for="version-select">
+        Version
+    </label>
+
+    <select id="version-select" class="version-select">
+        {
+            versions.map((version) => (
+                <option
+                    value={version.href}
+                    selected={version.version === currentVersion}
+                >
+                    {version.label} ({version.status})
+                </option>
+            ))
+        }
+    </select>
+</div>
+
+<script>
+    const select = document.querySelector('.version-select');
+
+    if (select) {
+        select.addEventListener('change', (event) => {
+            window.location.href = event.target.value;
+        });
+    }
+</script>
