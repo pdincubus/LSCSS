@@ -14,26 +14,92 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </h1>
 
         <p class="intro">
-            Modern CSS features reduce the need for heavy naming systems,
-            defensive selectors, and JavaScript-driven styling.
+            Modern CSS features reduce defensive selectors, heavy naming
+            systems, and JavaScript-driven styling. Used well, they make LSCSS
+            simpler and clearer.
         </p>
     </section>
 
     <section class="content-block">
         <h2>
-            Feature guides
+            Start with these
         </h2>
 
-        <ul>
-            <li><a href="/modern-css/where/">:where()</a></li>
-            <li><a href="/modern-css/is/">:is()</a></li>
-            <li><a href="/modern-css/has/">:has()</a></li>
-            <li><a href="/modern-css/not/">:not()</a></li>
-            <li><a href="/modern-css/nesting/">CSS nesting</a></li>
-            <li><a href="/modern-css/container-queries/">container queries</a></li>
-            <li><a href="/modern-css/logical-properties/">logical properties</a></li>
-            <li><a href="/modern-css/view-transitions/">view transitions</a></li>
-        </ul>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    <a href="/modern-css/where/">:where()</a>
+                </h3>
+
+                <p>
+                    Use expressive selectors without adding specificity weight.
+                    This is one of the safest modern CSS tools for architecture.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/modern-css/has/">:has()</a>
+                </h3>
+
+                <p>
+                    Style components based on their contents or state without
+                    reaching for extra JavaScript hooks too early.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/modern-css/container-queries/">Container queries</a>
+                </h3>
+
+                <p>
+                    Make components respond to their container instead of the
+                    viewport. This supports more portable UI patterns.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Selector tools
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/modern-css/is/">:is()</a></h3>
+                <p>Reduce selector repetition while keeping grouped patterns readable.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/modern-css/not/">:not()</a></h3>
+                <p>Use simple exclusions without turning selectors into puzzles.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/modern-css/nesting/">CSS nesting</a></h3>
+                <p>Keep related rules together, but avoid recreating deep selector chains.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Layout and experience tools
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/modern-css/logical-properties/">Logical properties</a></h3>
+                <p>Reduce left/right assumptions and improve support for different writing directions.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/modern-css/view-transitions/">View transitions</a></h3>
+                <p>Enhance navigation and interface changes while respecting progressive enhancement.</p>
+            </article>
+        </div>
     </section>
 
     <section class="content-block">
@@ -43,7 +109,8 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
         <p>
             LSCSS uses modern CSS to reduce architectural friction. The goal is
-            not more abstraction. The goal is clearer, simpler CSS.
+            not more abstraction. The goal is clearer, simpler CSS with fewer
+            override battles.
         </p>
     </section>
 </DocsLayout>
