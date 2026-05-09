@@ -3,6 +3,7 @@
 @import './settings/tokens.css' layer(settings);
 
 @import './base/reset.css' layer(base);
+@import './base/typography.css' layer(base);
 
 @import './layout/page-shell.css' layer(layout);
 
