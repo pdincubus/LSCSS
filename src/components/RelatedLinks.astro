@@ -1,0 +1,30 @@
+---
+export interface Props {
+    links: {
+        href: string;
+        label: string;
+    }[];
+}
+
+const {
+    links = []
+} = Astro.props;
+---
+
+<aside class="related-links">
+    <h2>
+        Related pages
+    </h2>
+
+    <ul>
+        {
+            links.map((link) => (
+                <li>
+                    <a href={link.href}>
+                        {link.label}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</aside>
