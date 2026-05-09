@@ -11,3 +11,4 @@
 @import './components/site-hero.css' layer(components);
 @import './components/content-block.css' layer(components);
 @import './components/example-card.css' layer(components);
+@import './components/tool-panel.css' layer(components);
