@@ -12,6 +12,7 @@ export const docsNavigation: DocsNavItem[] = [
 
     { href: '/methodology/', label: 'Core methodology overview', section: 'Core methodology' },
     { href: '/layers/', label: 'Layers', section: 'Core methodology' },
+    { href: '/base-styles/', label: 'Base styles', section: 'Core methodology' },
     { href: '/naming/', label: 'Naming', section: 'Core methodology' },
     { href: '/modifiers-and-state/', label: 'Modifiers and state', section: 'Core methodology' },
     { href: '/architecture/', label: 'Architecture', section: 'Core methodology' },
