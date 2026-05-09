@@ -1,5 +1,19 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const widthTransitionExample = `.panel {
+    transition: width 0.3s ease;
+}`;
+
+const transformTransitionExample = `.panel {
+    transition: transform 0.3s ease;
+}`;
+
+const isolationExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;
+
+@import './vendor/slider.css' layer(legacy);`;
 ---
 
 <DocsLayout
@@ -95,9 +109,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
                     Avoid
                 </h3>
 
-<pre><code>.panel {
-    transition: width 0.3s ease;
-}</code></pre>
+                <CodeExample code={widthTransitionExample} />
             </article>
 
             <article class="performance-card">
@@ -105,9 +117,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
                     Prefer
                 </h3>
 
-<pre><code>.panel {
-    transition: transform 0.3s ease;
-}</code></pre>
+                <CodeExample code={transformTransitionExample} />
             </article>
         </div>
     </section>
@@ -117,10 +127,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
             Third-party CSS isolation
         </h2>
 
-<pre><code>@layer legacy, settings, base, utilities,
-layout, components, theme, hacks;
-
-@import './vendor/slider.css' layer(legacy);</code></pre>
+        <CodeExample code={isolationExample} />
 
         <p>
             Third-party CSS should be contained. It should not quietly dominate
