@@ -1,0 +1,41 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="View Transitions"
+    description="View transitions and progressive enhancement in modern CSS architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modern CSS</p>
+
+        <h1>
+            View transitions
+        </h1>
+
+        <p class="intro">
+            View transitions provide smoother navigation and interface state
+            changes with progressive enhancement.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.3s;
+}</code></pre>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Architecture impact
+        </h2>
+
+        <ul>
+            <li>supports progressive enhancement</li>
+            <li>reduces JavaScript animation complexity</li>
+            <li>improves navigation continuity</li>
+            <li>requires accessibility consideration</li>
+        </ul>
+    </section>
+</DocsLayout>
