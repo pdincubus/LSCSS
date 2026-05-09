@@ -1,5 +1,14 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const errorExample = `.card:has(.error-message) {
+    border-color: red;
+}`;
+
+const focusExample = `.form-group:has(:focus-visible) {
+    outline: 2px solid currentColor;
+}`;
 ---
 
 <DocsLayout
@@ -20,15 +29,11 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.card:has(.error-message) {
-    border-color: red;
-}</code></pre>
+        <CodeExample code={errorExample} />
     </section>
 
     <section class="content-block">
-<pre><code>.form-group:has(:focus-visible) {
-    outline: 2px solid currentColor;
-}</code></pre>
+        <CodeExample code={focusExample} />
     </section>
 
     <section class="content-block">
