@@ -1,66 +1,125 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Comparisons"
     description="Comparing Layered Semantic CSS with other CSS methodologies."
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Comparisons</p>
+    <section class="site-hero">
+        <p class="eyebrow">Comparisons</p>
 
-            <h1>
-                Methodology comparisons
-            </h1>
+        <h1>
+            Methodology comparisons
+        </h1>
 
-            <p class="intro">
-                Most CSS methodologies attempt to solve similar problems, but
-                they approach them from different angles.
-            </p>
-        </section>
+        <p class="intro">
+            Most CSS methodologies try to solve the same problems: scale,
+            maintainability, predictability, and developer sanity. They simply
+            choose different trade-offs.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Methodology</th>
-                        <th>Main focus</th>
-                    </tr>
-                </thead>
+    <section class="content-block">
+        <h2>
+            Quick reference
+        </h2>
 
-                <tbody>
-                    <tr>
-                        <td>OOCSS</td>
-                        <td>reuse</td>
-                    </tr>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Methodology</th>
+                    <th>Main focus</th>
+                </tr>
+            </thead>
 
-                    <tr>
-                        <td>SMACSS</td>
-                        <td>categorisation</td>
-                    </tr>
+            <tbody>
+                <tr>
+                    <td>OOCSS</td>
+                    <td>reuse</td>
+                </tr>
 
-                    <tr>
-                        <td>BEM</td>
-                        <td>naming clarity</td>
-                    </tr>
+                <tr>
+                    <td>SMACSS</td>
+                    <td>categorisation</td>
+                </tr>
 
-                    <tr>
-                        <td>ITCSS</td>
-                        <td>specificity and layering</td>
-                    </tr>
+                <tr>
+                    <td>BEM</td>
+                    <td>naming clarity</td>
+                </tr>
 
-                    <tr>
-                        <td>CUBE</td>
-                        <td>modern practical architecture</td>
-                    </tr>
+                <tr>
+                    <td>ITCSS</td>
+                    <td>specificity and layering</td>
+                </tr>
 
-                    <tr>
-                        <td>LSCSS</td>
-                        <td>layers, semantics, readability, maintainability</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
-</BaseLayout>
+                <tr>
+                    <td>CUBE</td>
+                    <td>modern practical architecture</td>
+                </tr>
+
+                <tr>
+                    <td>LSCSS</td>
+                    <td>layers, semantics, readability, maintainability</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Start with these debates
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    BEM vs LSCSS
+                </h3>
+
+                <p>
+                    Naming conventions versus semantic architecture. Useful for
+                    teams carrying heavy legacy CSS.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    CUBE vs LSCSS
+                </h3>
+
+                <p>
+                    Two modern approaches with different opinions on naming,
+                    composition, and selector structure.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    @scope vs LSCSS
+                </h3>
+
+                <p>
+                    Platform-native scoping versus architectural methodology.
+                    These are partners, not rivals.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Future comparison guides
+        </h2>
+
+        <ul>
+            <li>Utility-first CSS versus semantic CSS architecture</li>
+            <li>CSS Modules versus platform-native CSS</li>
+            <li>Framework scoping versus cascade layers</li>
+            <li>Tailwind versus LSCSS for long-term teams</li>
+            <li>Component libraries versus design token systems</li>
+            <li>When not to use LSCSS</li>
+        </ul>
+    </section>
+</DocsLayout>
