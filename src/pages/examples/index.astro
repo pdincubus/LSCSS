@@ -1,5 +1,32 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const markupExample = `<article class="product-card product-card--featured">
+    <a class="link" href="/products/example/">
+        <img class="image" src="/example.jpg" alt="">
+        <h2 class="title">Example product</h2>
+        <p class="price">£24</p>
+    </a>
+</article>`;
+
+const componentCssExample = `.product-card {
+    display: grid;
+    gap: var(--space-m);
+}
+
+.product-card > .link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.product-card > .link > .title {
+    margin-block: 0;
+}
+
+.product-card--featured {
+    border-color: var(--colour-accent);
+}`;
 ---
 
 <BaseLayout
@@ -25,13 +52,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 Product card
             </h2>
 
-<pre><code>&lt;article class="product-card product-card--featured"&gt;
-    &lt;a class="link" href="/products/example/"&gt;
-        &lt;img class="image" src="/example.jpg" alt=""&gt;
-        &lt;h2 class="title"&gt;Example product&lt;/h2&gt;
-        &lt;p class="price"&gt;£24&lt;/p&gt;
-    &lt;/a&gt;
-&lt;/article&gt;</code></pre>
+            <CodeExample code={markupExample} language="html" />
         </section>
 
         <section class="content-block">
@@ -39,23 +60,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 Component CSS
             </h2>
 
-<pre><code>.product-card {
-    display: grid;
-    gap: var(--space-m);
-}
-
-.product-card > .link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.product-card > .link > .title {
-    margin-block: 0;
-}
-
-.product-card--featured {
-    border-color: var(--colour-accent);
-}</code></pre>
+            <CodeExample code={componentCssExample} />
         </section>
     </main>
 </BaseLayout>
