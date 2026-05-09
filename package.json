@@ -10,10 +10,11 @@
         "preview": "astro preview"
     },
     "dependencies": {
+        "@astrojs/mdx": "latest",
         "astro": "latest"
     },
     "devDependencies": {
-        "typescript": "latest",
-        "@astrojs/check": "latest"
+        "@astrojs/check": "latest",
+        "typescript": "latest"
     }
 }
