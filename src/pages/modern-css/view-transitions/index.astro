@@ -1,5 +1,10 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const transitionExample = `.transition-layer {
+    animation-duration: 0.3s;
+}`;
 ---
 
 <DocsLayout
@@ -20,10 +25,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: 0.3s;
-}</code></pre>
+        <CodeExample code={transitionExample} />
     </section>
 
     <section class="content-block">
