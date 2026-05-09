@@ -1,5 +1,10 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const notExample = `.button:not(.is_disabled) {
+    cursor: pointer;
+}`;
 ---
 
 <DocsLayout
@@ -19,9 +24,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.button:not(.is_disabled) {
-    cursor: pointer;
-}</code></pre>
+        <CodeExample code={notExample} />
     </section>
 
     <section class="content-block">
