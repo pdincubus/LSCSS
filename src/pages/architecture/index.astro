@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
 const folderStructureExample = `css/
@@ -11,35 +11,166 @@ const folderStructureExample = `css/
     theme/
     legacy/
     hacks/`;
+
+const mediaQueryExample = `.modal {
+    /* Styles that do not change across breakpoints */
+
+    &.is_large {
+        /* Variant styles that do not change across breakpoints */
+    }
+
+    @media (--desktop) {
+        /* Styles just for this breakpoint */
+
+        &.is_large {
+            /* Variant styles just for this breakpoint */
+        }
+    }
+
+    @media (--tablet) {
+        /* Styles just for this breakpoint */
+    }
+
+    @media (--mobile) {
+        /* Styles just for this breakpoint */
+    }
+}
+
+.modal > .title {
+    /* Styles that do not change across breakpoints */
+
+    @media (--desktop) {
+        /* Styles just for this breakpoint */
+    }
+
+    @media (--tablet) {
+        /* Styles just for this breakpoint */
+    }
+
+    @media (--mobile) {
+        /* Styles just for this breakpoint */
+    }
+}
+
+.modal > .content {
+    /* Styles that do not change across breakpoints */
+
+    @media (--desktop) {
+        /* Styles just for this breakpoint */
+    }
+
+    @media (--tablet) {
+        /* Styles just for this breakpoint */
+    }
+
+    @media (--mobile) {
+        /* Styles just for this breakpoint */
+    }
+}
+
+.modal > .link {
+    /* Styles that do not change across breakpoints */
+
+    &:hover,
+    &:focus-visible {
+        /* State styles that do not change across breakpoints */
+    }
+
+    @media (--desktop) {
+        /* Styles just for this breakpoint */
+
+        &:hover,
+        &:focus-visible {
+            /* State styles just for this breakpoint */
+        }
+    }
+
+    @media (--tablet) {
+        /* Styles just for this breakpoint */
+    }
+
+    @media (--mobile) {
+        /* Styles just for this breakpoint */
+    }
+}`;
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Architecture"
-    description="Recommended folder structure and architecture for Layered Semantic CSS."
+    description="Recommended folder structure, partial organisation, and breakpoint strategy for Layered Semantic CSS."
+    schemaType="TechArticle"
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Architecture</p>
+    <section class="site-hero">
+        <p class="eyebrow">Architecture</p>
 
-            <h1>
-                File structure
-            </h1>
+        <h1>
+            CSS architecture
+        </h1>
 
-            <p class="intro">
-                LSCSS encourages predictable organisation and small focused
-                partials.
-            </p>
-        </section>
+        <p class="intro">
+            LSCSS encourages predictable organisation, small focused partials,
+            stable defaults, and breakpoint styles that only contain what
+            changes at that breakpoint.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <CodeExample code={folderStructureExample} language="text" />
-        </section>
+    <nav class="section-nav" aria-label="Architecture sections">
+        <a href="#file-structure">File structure</a>
+        <a href="#partials">Partials</a>
+        <a href="#media-queries">Media queries</a>
+        <a href="/methodology/">Methodology</a>
+    </nav>
 
-        <section class="content-block">
-            <p>
-                Components should live in isolated partials instead of giant
-                monolithic stylesheets.
-            </p>
-        </section>
-    </main>
-</BaseLayout>
+    <section id="file-structure" class="content-block">
+        <h2>
+            File structure
+        </h2>
+
+        <CodeExample code={folderStructureExample} language="text" />
+    </section>
+
+    <section id="partials" class="content-block">
+        <h2>
+            Component partials
+        </h2>
+
+        <p>
+            Components should live in isolated partials instead of giant
+            monolithic stylesheets. Each partial should contain the component's
+            stable styles, child selectors, modifiers, states, and breakpoint
+            changes.
+        </p>
+    </section>
+
+    <section id="media-queries" class="content-block">
+        <h2>
+            Media query organisation
+        </h2>
+
+        <p>
+            Put styles that apply across all breakpoints first. Then add media
+            queries inside the component only for styles that change at that
+            breakpoint.
+        </p>
+
+        <p>
+            Avoid repeating the same declarations in every media query. A
+            breakpoint should describe a change, not restate the whole component.
+        </p>
+
+        <CodeExample code={mediaQueryExample} />
+
+        <h3>
+            Rules of thumb
+        </h3>
+
+        <ul>
+            <li>Start with the shared component styles.</li>
+            <li>Keep breakpoint-specific styles inside the relevant component partial.</li>
+            <li>Only put declarations in a media query when they change at that breakpoint.</li>
+            <li>Keep child selector breakpoint styles near the child selector they affect.</li>
+            <li>Keep modifier and state breakpoint changes near the modifier or state they affect.</li>
+            <li>Avoid setting a desktop value, then overriding it again for tablet and mobile when a shared default would work.</li>
+        </ul>
+    </section>
+</DocsLayout>
