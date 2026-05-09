@@ -97,7 +97,7 @@ const mediaQueryExample = `.modal {
 
 <DocsLayout
     title="LSCSS Architecture"
-    description="Recommended folder structure, partial organisation, and breakpoint strategy for Layered Semantic CSS."
+    description="Recommended folder structure, partial organisation, breakpoint strategy, and maintainable component size for Layered Semantic CSS."
     schemaType="TechArticle"
 >
     <section class="site-hero">
@@ -140,6 +140,37 @@ const mediaQueryExample = `.modal {
             stable styles, child selectors, modifiers, states, and breakpoint
             changes.
         </p>
+
+        <h3>
+            File size and cognitive load
+        </h3>
+
+        <p>
+            If a component CSS file feels too big to understand quickly, it is
+            too big. Maintainability depends on how fast another developer can
+            open the file and understand what it owns.
+        </p>
+
+        <p>
+            Most component partials should stay fairly small. Around 50 to 250
+            lines is common. Larger and genuinely complex components may reach
+            300 to 400 lines, but once a file approaches that size it should
+            trigger review rather than acceptance.
+        </p>
+
+        <p>
+            A 400-line component is not automatically wrong, but it often means
+            there are hidden sub-components, repeated patterns, old hacks, or
+            too many responsibilities living in one place.
+        </p>
+
+        <ul>
+            <li>CSS files should be easy to skim.</li>
+            <li>You should quickly understand what the file owns.</li>
+            <li>Modifiers, state, breakpoints, and hacks should be easy to find.</li>
+            <li>If a group of rules feels like its own component, it probably is.</li>
+            <li>Review large files before they become permanent architecture.</li>
+        </ul>
     </section>
 
     <section id="media-queries" class="content-block">
