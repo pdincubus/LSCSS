@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Naming"
+    description="Naming conventions used in Layered Semantic CSS."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Naming</p>
+
+            <h1>
+                Semantic naming
+            </h1>
+
+            <p class="intro">
+                LSCSS prefers readable semantic names over tightly coupled
+                structural naming.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Components
+            </h2>
+
+<pre><code>.product-card
+.site-header
+.filter-panel</code></pre>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Child selectors
+            </h2>
+
+<pre><code>.product-card > .title
+.site-header > .logo</code></pre>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Modifiers and state
+            </h2>
+
+<pre><code>.product-card--featured
+.is_active
+.has_error</code></pre>
+        </section>
+    </main>
+</BaseLayout>
