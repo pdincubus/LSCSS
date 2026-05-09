@@ -1,5 +1,16 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const layerExample = `@layer base, components, theme;`;
+const whereExample = `:where(.flow > *) + * {}`;
+const hasExample = `.field:has(.error-message) {}`;
+
+const scopeExample = `@scope (.product-card) {
+    .title {}
+}`;
+
+const containerExample = `@container (min-width: 36rem) {}`;
 ---
 
 <DocsLayout
@@ -34,7 +45,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
                     Use cascade layers.
                 </p>
 
-<pre><code>@layer base, components, theme;</code></pre>
+                <CodeExample code={layerExample} />
             </article>
 
             <article class="decision-card">
@@ -46,7 +57,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
                     Use :where() or simplify the selector.
                 </p>
 
-<pre><code>:where(.flow > *) + * {}</code></pre>
+                <CodeExample code={whereExample} />
             </article>
 
             <article class="decision-card">
@@ -59,7 +70,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
                     does not.
                 </p>
 
-<pre><code>.field:has(.error-message) {}</code></pre>
+                <CodeExample code={hasExample} />
             </article>
 
             <article class="decision-card">
@@ -72,9 +83,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
                     selectors elsewhere.
                 </p>
 
-<pre><code>@scope (.product-card) {
-    .title {}
-}</code></pre>
+                <CodeExample code={scopeExample} />
             </article>
 
             <article class="decision-card">
@@ -86,7 +95,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
                     Use container queries instead of viewport assumptions.
                 </p>
 
-<pre><code>@container (min-width: 36rem) {}</code></pre>
+                <CodeExample code={containerExample} />
             </article>
         </div>
     </section>
