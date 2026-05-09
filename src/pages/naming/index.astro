@@ -1,52 +1,139 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const componentNames = `.product-card
+.site-header
+.filter-panel`;
+
+const childSelectors = `.product-card > .title
+.product-card > .price
+.site-header > .logo
+.filter-panel > .actions`;
+
+const modifierAndStateClasses = `.product-card--featured
+.product-card--compact
+.is_active
+.has_error`;
+
+const comparisonExample = `/* BEM-style element naming */
+.product-card__title {}
+.product-card__price {}
+
+/* LSCSS-style contextual child selectors */
+.product-card > .title {}
+.product-card > .price {}`;
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Naming"
-    description="Naming conventions used in Layered Semantic CSS."
+    description="Naming conventions used in Layered Semantic CSS, including semantic components, RSCSS-style child selectors, BEM-style modifiers, and explicit state classes."
+    schemaType="TechArticle"
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Naming</p>
+    <section class="site-hero">
+        <p class="eyebrow">Naming</p>
 
-            <h1>
-                Semantic naming
-            </h1>
+        <h1>
+            Semantic naming
+        </h1>
 
-            <p class="intro">
-                LSCSS prefers readable semantic names over tightly coupled
-                structural naming.
-            </p>
-        </section>
+        <p class="intro">
+            LSCSS prefers readable semantic names over tightly coupled structural
+            naming. Component names describe what something is. Child selectors
+            stay short because the parent component gives them context.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <h2>
-                Components
-            </h2>
+    <nav class="section-nav" aria-label="Naming sections">
+        <a href="#influences">Influences</a>
+        <a href="#components">Components</a>
+        <a href="#child-selectors">Child selectors</a>
+        <a href="#modifiers-and-state">Modifiers and state</a>
+        <a href="#comparison">Comparison</a>
+    </nav>
 
-<pre><code>.product-card
-.site-header
-.filter-panel</code></pre>
-        </section>
+    <section id="influences" class="content-block">
+        <h2>
+            Methodology influences
+        </h2>
 
-        <section class="content-block">
-            <h2>
-                Child selectors
-            </h2>
+        <p>
+            LSCSS is not pretending CSS history started from scratch. It borrows
+            useful ideas from existing methodologies, then adapts them for
+            modern CSS features, cascade layers, and simpler markup.
+        </p>
 
-<pre><code>.product-card > .title
-.site-header > .logo</code></pre>
-        </section>
+        <ul>
+            <li>RSCSS-style selectors influence the use of short child classes scoped by the parent component.</li>
+            <li>BEM-style modifier classes influence the use of explicit component variants.</li>
+            <li>ITCSS influences the focus on ordered layers and predictable specificity.</li>
+            <li>Modern CSS adds tools such as :where(), :has(), nesting, @scope, and container queries.</li>
+        </ul>
+    </section>
 
-        <section class="content-block">
-            <h2>
-                Modifiers and state
-            </h2>
+    <section id="components" class="content-block">
+        <h2>
+            Components
+        </h2>
 
-<pre><code>.product-card--featured
-.is_active
-.has_error</code></pre>
-        </section>
-    </main>
-</BaseLayout>
+        <p>
+            Component names should be semantic and readable. They should describe
+            the role of the component, not its current visual treatment.
+        </p>
+
+        <CodeExample code={componentNames} />
+    </section>
+
+    <section id="child-selectors" class="content-block">
+        <h2>
+            Child selectors
+        </h2>
+
+        <p>
+            LSCSS uses short child classes inside the context of a parent
+            component. This borrows from the RSCSS preference for simple element
+            names such as <code>.title</code>, <code>.content</code>, and
+            <code>.actions</code>, scoped by the parent selector.
+        </p>
+
+        <CodeExample code={childSelectors} />
+
+        <p>
+            This keeps HTML easier to read while still making ownership clear in
+            the CSS.
+        </p>
+    </section>
+
+    <section id="modifiers-and-state" class="content-block">
+        <h2>
+            Modifiers and state
+        </h2>
+
+        <p>
+            LSCSS keeps the useful BEM idea of explicit modifiers for component
+            variants. State classes remain separate because temporary UI state is
+            not the same thing as a reusable component variant.
+        </p>
+
+        <CodeExample code={modifierAndStateClasses} />
+    </section>
+
+    <section id="comparison" class="content-block">
+        <h2>
+            BEM-style elements vs contextual child selectors
+        </h2>
+
+        <p>
+            BEM encodes the parent-child relationship into the class name.
+            LSCSS usually keeps that relationship in the selector instead.
+        </p>
+
+        <CodeExample code={comparisonExample} />
+
+        <p>
+            Neither approach is magic. LSCSS chooses the shorter form because
+            the parent component already provides the context and cascade layers
+            help control the wider architecture.
+        </p>
+    </section>
+</DocsLayout>
