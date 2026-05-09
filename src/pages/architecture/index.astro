@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const folderStructureExample = `css/
+    settings/
+    base/
+    utilities/
+    layout/
+    components/
+    theme/
+    legacy/
+    hacks/`;
 ---
 
 <BaseLayout
@@ -21,15 +32,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </section>
 
         <section class="content-block">
-<pre><code>css/
-    settings/
-    base/
-    utilities/
-    layout/
-    components/
-    theme/
-    legacy/
-    hacks/</code></pre>
+            <CodeExample code={folderStructureExample} language="text" />
         </section>
 
         <section class="content-block">
