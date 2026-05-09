@@ -1,10 +1,33 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const layerExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
+
+const customMediaExample = `@custom-media --mobile (width < 48rem);
+@custom-media --tablet (48rem <= width < 64rem);
+@custom-media --desktop (width >= 64rem);`;
+
+const mediaQueryUsageExample = `.product-card {
+    /* Shared styles */
+
+    @media (--desktop) {
+        /* Desktop-only changes */
+    }
+}`;
+
+const avoidExample = `.product-card {
+    @media (min-width: 1024px) {
+        /* What does 1024px mean here? */
+    }
+}`;
 ---
 
 <DocsLayout
     title="LSCSS Tooling"
-    description="Recommended tooling for Layered Semantic CSS."
+    description="Recommended tooling for Layered Semantic CSS, including PostCSS, custom media queries, browserslist, Stylelint, and build-step support."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Tooling</p>
@@ -14,23 +37,116 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </h1>
 
         <p class="intro">
-            LSCSS relies on browser features first and tooling second.
+            LSCSS relies on browser features first and tooling second. Tooling
+            should make the CSS easier to maintain, not hide poor architecture
+            behind more processing.
         </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="Tooling sections">
+        <a href="#recommended-tools">Tools</a>
+        <a href="#custom-media">Custom media</a>
+        <a href="#browserslist">Browserslist</a>
+        <a href="#linting">Linting</a>
+        <a href="#layers">Layers</a>
+    </nav>
+
+    <section id="recommended-tools" class="content-block">
+        <h2>
+            Recommended tools
+        </h2>
+
         <ul>
             <li>PostCSS</li>
             <li>Lightning CSS</li>
             <li>Stylelint</li>
             <li>Browserslist</li>
             <li>Prettier</li>
-            <li>Astro</li>
+            <li>Astro, Eleventy, or another static-first build system</li>
         </ul>
     </section>
 
-    <section class="content-block">
-<pre><code>@layer legacy, settings, base, utilities,
-layout, components, theme, hacks;</code></pre>
+    <section id="custom-media" class="content-block">
+        <h2>
+            Custom media queries
+        </h2>
+
+        <p>
+            Named breakpoints make media queries easier to read and easier to
+            change. Component CSS should say what breakpoint it targets, not ask
+            every developer to remember what a number means.
+        </p>
+
+        <CodeExample code={customMediaExample} />
+
+        <p>
+            This pattern needs a build step such as PostCSS or similar tooling,
+            unless your browser support target already handles the feature you
+            are using directly.
+        </p>
+
+        <CodeExample code={mediaQueryUsageExample} />
+
+        <p>
+            Avoid scattering raw breakpoint numbers through component files.
+        </p>
+
+        <CodeExample code={avoidExample} />
+    </section>
+
+    <section id="browserslist" class="content-block">
+        <h2>
+            Browserslist and feature support
+        </h2>
+
+        <p>
+            Tooling should follow a written browser support strategy. Use
+            browserslist where your tools support it, and prefer feature-based
+            support decisions over guessing browser versions by habit.
+        </p>
+
+        <p>
+            Browser support choices should be documented, reviewed, and based on
+            the project. They should not live as folklore in old build config.
+        </p>
+    </section>
+
+    <section id="linting" class="content-block">
+        <h2>
+            Linting and formatting
+        </h2>
+
+        <p>
+            Stylelint and formatting tools should support the methodology. They
+            should catch avoidable mistakes, not force a naming system the
+            project does not use.
+        </p>
+
+        <ul>
+            <li>Disallow styling with IDs.</li>
+            <li>Discourage unnecessary <code>!important</code>.</li>
+            <li>Flag unknown custom properties where possible.</li>
+            <li>Keep formatting consistent across partials.</li>
+            <li>Allow the project’s chosen naming style.</li>
+        </ul>
+    </section>
+
+    <section id="layers" class="content-block">
+        <h2>
+            Layer support
+        </h2>
+
+        <p>
+            The build should preserve cascade layers and process imports in a
+            way that keeps layer order predictable.
+        </p>
+
+        <CodeExample code={layerExample} />
+
+        <p>
+            Read the <a href="/architecture/#media-queries">media query organisation</a>
+            guidance alongside this page. Tooling only helps when the CSS rules
+            are clear first.
+        </p>
     </section>
 </DocsLayout>
