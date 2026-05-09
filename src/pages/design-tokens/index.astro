@@ -3,18 +3,41 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
 const tokenExample = `:root {
-    --colour-background: white;
-    --colour-text: black;
+    --colour-background: #ffffff;
+    --colour-surface: #f7f7f7;
+    --colour-text: #111111;
+    --colour-accent: #6f3cff;
 
+    --space-xs: 0.25rem;
     --space-s: 0.5rem;
     --space-m: 1rem;
     --space-l: 2rem;
+    --space-xl: 4rem;
+
+    --radius-s: 0.25rem;
+    --radius-m: 0.5rem;
+    --radius-l: 1rem;
+}`;
+
+const goodExample = `.product-card {
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+    color: var(--colour-text);
+}`;
+
+const badExample = `.product-card {
+    padding: 17px;
+    border-radius: 13px;
+    background: #f3f2f9;
+    color: #222222;
 }`;
 ---
 
 <DocsLayout
     title="Design Tokens"
-    description="Design token strategy in Layered Semantic CSS."
+    description="Design token strategy in Layered Semantic CSS, including CSS variables, spacing scales, colour tokens, and avoiding arbitrary values."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Design tokens</p>
@@ -24,21 +47,72 @@ const tokenExample = `:root {
         </h1>
 
         <p class="intro">
-            Design tokens should remain semantic, predictable, and scalable.
+            CSS variables should define the shared design language. Colours,
+            spacing, radii, font sizes, borders, shadows, and layout values
+            should not be invented randomly inside component styles.
         </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="Design token sections">
+        <a href="#tokens">Tokens</a>
+        <a href="#good-usage">Good usage</a>
+        <a href="#avoid">Avoid</a>
+        <a href="#rules">Rules</a>
+    </nav>
+
+    <section id="tokens" class="content-block">
+        <h2>
+            Shared CSS variables
+        </h2>
+
+        <p>
+            Define project-wide values once, then use them throughout the CSS.
+            This keeps visual decisions consistent and makes later design changes
+            safer.
+        </p>
+
         <CodeExample code={tokenExample} />
     </section>
 
-    <section class="content-block">
+    <section id="good-usage" class="content-block">
+        <h2>
+            Use tokens in components
+        </h2>
+
+        <p>
+            Component CSS should refer to shared variables rather than hard-coded
+            numbers and colours.
+        </p>
+
+        <CodeExample code={goodExample} />
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid arbitrary values
+        </h2>
+
+        <p>
+            Random spacing, colours, radii, and one-off values make a codebase
+            harder to maintain. They also make a site feel visually inconsistent
+            over time.
+        </p>
+
+        <CodeExample code={badExample} />
+    </section>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Rules of thumb
+        </h2>
+
         <ul>
-            <li>prefer semantic naming</li>
-            <li>avoid arbitrary values</li>
-            <li>keep spacing predictable</li>
-            <li>support theming cleanly</li>
-            <li>avoid token duplication</li>
+            <li>Use CSS variables for shared design values.</li>
+            <li>Prefer named spacing values over one-off measurements.</li>
+            <li>Do not add random colours directly inside components.</li>
+            <li>Keep token names predictable and consistent.</li>
+            <li>Only add a new token when it represents a reusable decision.</li>
+            <li>Use component-level custom properties only when the component genuinely needs local configuration.</li>
         </ul>
     </section>
 </DocsLayout>
