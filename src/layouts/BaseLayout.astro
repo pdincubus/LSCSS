@@ -4,12 +4,35 @@ import SiteNav from '../components/SiteNav.astro';
 export interface Props {
     title?: string;
     description?: string;
+    schemaType?: 'Article' | 'TechArticle' | 'WebPage';
 }
 
 const {
     title = 'LSCSS',
-    description = 'Layered Semantic CSS'
+    description = 'Layered Semantic CSS',
+    schemaType = 'WebPage'
 } = Astro.props;
+
+const siteUrl = Astro.site?.href ?? Astro.url.origin;
+const pageUrl = Astro.url.href;
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': schemaType,
+    name: title,
+    headline: title,
+    description,
+    url: pageUrl,
+    isPartOf: {
+        '@type': 'WebSite',
+        name: 'LSCSS',
+        url: siteUrl
+    },
+    author: {
+        '@type': 'Person',
+        name: 'Phil Donkin'
+    },
+    inLanguage: 'en-GB'
+};
 ---
 
 <!doctype html>
@@ -20,6 +43,7 @@ const {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="stylesheet" href="/styles/site.css" />
+        <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     </head>
 
     <body>
