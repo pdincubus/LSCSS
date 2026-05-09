@@ -1,5 +1,16 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const scopedComponentExample = `@scope (.site-header) {
+    .logo {
+        inline-size: 10rem;
+    }
+
+    .nav-list {
+        display: flex;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -50,14 +61,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             Scoped component example
         </h2>
 
-<pre><code>@scope (.site-header) {
-    .logo {
-        inline-size: 10rem;
-    }
-
-    .nav-list {
-        display: flex;
-    }
-}</code></pre>
+        <CodeExample code={scopedComponentExample} />
     </section>
 </DocsLayout>
