@@ -1,0 +1,46 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Scope Demo"
+    description="Demonstrating scoped CSS architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            Scope demo
+        </h1>
+
+        <p class="intro">
+            Scoped CSS allows shorter selectors with safer component
+            boundaries.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+
+    .price {
+        color: var(--colour-accent);
+    }
+}</code></pre>
+    </section>
+
+    <section class="content-block">
+        <article class="example-card">
+            <h2 class="title">
+                Scoped component example
+            </h2>
+
+            <p>
+                This example demonstrates semantic structure with reduced
+                selector verbosity.
+            </p>
+        </article>
+    </section>
+</DocsLayout>
