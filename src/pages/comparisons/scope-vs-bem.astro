@@ -1,5 +1,38 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const bemExample = `.product-card__title {
+    margin: 0;
+}
+
+.product-card__price {
+    color: var(--colour-accent);
+}`;
+
+const scopeExample = `@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+
+    .price {
+        color: var(--colour-accent);
+    }
+}`;
+
+const lscssExample = `@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+}
+
+.product-card--featured {
+    border-color: var(--colour-accent);
+}
+
+.is_active {
+    opacity: 1;
+}`;
 ---
 
 <DocsLayout
@@ -23,13 +56,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             Traditional BEM
         </h2>
 
-<pre><code>.product-card__title {
-    margin: 0;
-}
-
-.product-card__price {
-    color: var(--colour-accent);
-}</code></pre>
+        <CodeExample code={bemExample} />
 
         <p>
             BEM creates explicit relationships through naming.
@@ -41,15 +68,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             Scoped CSS
         </h2>
 
-<pre><code>@scope (.product-card) {
-    .title {
-        margin: 0;
-    }
-
-    .price {
-        color: var(--colour-accent);
-    }
-}</code></pre>
+        <CodeExample code={scopeExample} />
 
         <p>
             Scope creates relationships through explicit scoping boundaries.
@@ -93,18 +112,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             not a replacement for architecture.
         </p>
 
-<pre><code>@scope (.product-card) {
-    .title {
-        margin: 0;
-    }
-}
-
-.product-card--featured {
-    border-color: var(--colour-accent);
-}
-
-.is_active {
-    opacity: 1;
-}</code></pre>
+        <CodeExample code={lscssExample} />
     </section>
 </DocsLayout>
