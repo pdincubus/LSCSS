@@ -10,6 +10,7 @@ const {
 } = Astro.props;
 
 const label = `${language.toUpperCase()} code example`;
+const languageClass = `language-${language}`;
 ---
 
 <figure class="code-example" data-code-example data-language={language}>
@@ -21,9 +22,10 @@ const label = `${language.toUpperCase()} code example`;
         </button>
     </figcaption>
 
-    <pre><code>{code}</code></pre>
+    <pre class={languageClass}><code class={languageClass}>{code}</code></pre>
 
     <p class="copy-code-status" data-copy-status aria-live="polite"></p>
 </figure>
 
 <script type="module" src="/scripts/code-example.js"></script>
+<script type="module" src="/scripts/prism-init.js"></script>
