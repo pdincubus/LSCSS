@@ -1,5 +1,17 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const accessibilityExample = `.demo-button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-demo {
+        animation: none;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -107,16 +119,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.demo-button:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 0.25rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .motion-demo {
-        animation: none;
-    }
-}</code></pre>
+        <CodeExample code={accessibilityExample} />
     </section>
 
     <script type="module" src="/scripts/accessibility-demos.js"></script>
