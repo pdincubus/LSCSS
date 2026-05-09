@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS Migration"
+    description="Migrating existing projects toward Layered Semantic CSS."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Migration</p>
+
+            <h1>
+                Migrating existing CSS
+            </h1>
+
+            <p class="intro">
+                LSCSS is designed to support gradual migration rather than full
+                rewrites.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Recommended migration path
+            </h2>
+
+            <ol>
+                <li>introduce cascade layers</li>
+                <li>contain legacy CSS</li>
+                <li>split new components into partials</li>
+                <li>reduce selector depth</li>
+                <li>introduce semantic component naming</li>
+                <li>remove unnecessary specificity</li>
+                <li>delete legacy code over time</li>
+            </ol>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Legacy layer
+            </h2>
+
+<pre><code>@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;</code></pre>
+
+            <p>
+                Existing CSS can temporarily live inside the legacy layer while
+                the rest of the architecture improves around it.
+            </p>
+        </section>
+    </main>
+</BaseLayout>
