@@ -8,17 +8,20 @@ import RelatedLinks from '../components/RelatedLinks.astro';
 export interface Props {
     title?: string;
     description?: string;
+    schemaType?: 'Article' | 'TechArticle' | 'WebPage';
 }
 
 const {
     title,
-    description
+    description,
+    schemaType = 'WebPage'
 } = Astro.props;
 ---
 
 <BaseLayout
     title={title}
     description={description}
+    schemaType={schemaType}
 >
     <main class="page-shell docs-layout">
         <DocsSidebar />
