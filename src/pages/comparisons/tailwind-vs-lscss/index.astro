@@ -1,0 +1,80 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'Tailwind vs LSCSS';
+const description = 'Compare Tailwind CSS and Layered Semantic CSS for maintainability, speed, naming, reuse, design systems, and long-term front-end architecture.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <article>
+        <p class="eyebrow">Comparison</p>
+
+        <h1>
+            Tailwind vs LSCSS
+        </h1>
+
+        <p>
+            Tailwind solves speed and consistency by pushing styling decisions
+            directly into HTML. LSCSS solves maintainability by keeping styling
+            architecture in CSS where it belongs.
+        </p>
+
+        <p>
+            Both approaches try to reduce chaos. They simply choose different
+            battlefields.
+        </p>
+
+        <h2>
+            Main differences
+        </h2>
+
+        <ul>
+            <li>Tailwind uses utility classes directly in markup</li>
+            <li>LSCSS uses semantic component names and layered CSS</li>
+            <li>Tailwind reduces custom CSS writing</li>
+            <li>LSCSS reduces HTML noise and preserves clearer structure</li>
+            <li>Tailwind relies heavily on utility composition</li>
+            <li>LSCSS prefers explicit components, modifiers, and state classes</li>
+        </ul>
+
+        <h2>
+            Where Tailwind works well
+        </h2>
+
+        <ul>
+            <li>fast product delivery with small teams</li>
+            <li>design systems with strict tokens and constraints</li>
+            <li>applications where utility speed matters more than semantic markup</li>
+        </ul>
+
+        <h2>
+            Where LSCSS helps more
+        </h2>
+
+        <ul>
+            <li>content-heavy websites and long-lived platforms</li>
+            <li>teams prioritising readable HTML and maintainable CSS</li>
+            <li>projects with strong accessibility and progressive enhancement goals</li>
+            <li>systems where component architecture matters more than rapid utility composition</li>
+        </ul>
+
+        <h2>
+            Recommended reading
+        </h2>
+
+        <ul>
+            <li><a href="/principles/">Core principles</a></li>
+            <li><a href="/utilities/">Utilities</a></li>
+            <li><a href="/theme-layer/">Theme layer</a></li>
+            <li><a href="/guides/performance-and-css/">Performance and CSS</a></li>
+        </ul>
+
+        <p>
+            Tailwind is fast. LSCSS is calm. Choose based on the project, not
+            because somebody on the internet called one of them dead.
+        </p>
+    </article>
+</DocsLayout>
