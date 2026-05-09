@@ -1,0 +1,48 @@
+.render-demo-stage {
+    overflow: hidden;
+    padding: var(--space-l);
+    border-radius: var(--radius-m);
+    border: var(--border-thin) solid var(--colour-border);
+    background: var(--colour-surface);
+}
+
+.render-demo-box {
+    inline-size: 5rem;
+    block-size: 5rem;
+    border-radius: var(--radius-s);
+    background: var(--colour-accent);
+}
+
+.render-demo-box.is_transform {
+    animation: move-transform 1s infinite alternate ease-in-out;
+}
+
+.render-demo-box.is_width {
+    animation: move-width 1s infinite alternate ease-in-out;
+}
+
+@keyframes move-transform {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(12rem);
+    }
+}
+
+@keyframes move-width {
+    from {
+        width: 5rem;
+    }
+
+    to {
+        width: 18rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .render-demo-box {
+        animation: none;
+    }
+}
