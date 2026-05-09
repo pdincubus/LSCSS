@@ -1,0 +1,27 @@
+.anti-pattern-pair {
+    display: grid;
+    gap: var(--space-l);
+}
+
+@media (min-width: 50rem) {
+    .anti-pattern-pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.anti-pattern-card {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    border-radius: var(--radius-m);
+    border: var(--border-thin) solid var(--colour-border);
+    background: var(--colour-surface);
+}
+
+.anti-pattern-card--bad {
+    border-color: #b00020;
+}
+
+.anti-pattern-card--good {
+    border-color: #007a3d;
+}
