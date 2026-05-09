@@ -1,80 +1,10 @@
-@layer settings, base, utilities, layout, components, theme, hacks;
+@layer legacy, settings, base, utilities, layout, components, theme, hacks;
 
-@layer settings {
-    :root {
-        --colour-background: #0f172a;
-        --colour-surface: #111827;
-        --colour-text: #f8fafc;
-        --colour-border: #334155;
-        --colour-accent: #38bdf8;
+@import './settings/tokens.css' layer(settings);
 
-        --font-body: Inter, Arial, sans-serif;
+@import './base/reset.css' layer(base);
 
-        --space-s: 0.5rem;
-        --space-m: 1rem;
-        --space-l: 2rem;
-        --space-xl: 4rem;
+@import './layout/page-shell.css' layer(layout);
 
-        --container: 72rem;
-    }
-}
-
-@layer base {
-    * {
-        box-sizing: border-box;
-    }
-
-    html {
-        color-scheme: dark;
-    }
-
-    body {
-        margin: 0;
-        font-family: var(--font-body);
-        line-height: 1.6;
-        background: var(--colour-background);
-        color: var(--colour-text);
-    }
-
-    h1,
-    h2 {
-        line-height: 1.1;
-    }
-
-    pre {
-        overflow-x: auto;
-        padding: var(--space-m);
-        border: 1px solid var(--colour-border);
-        border-radius: 0.5rem;
-        background: var(--colour-surface);
-    }
-}
-
-@layer layout {
-    .page-shell {
-        width: min(calc(100% - 2rem), var(--container));
-        margin-inline: auto;
-        padding-block: var(--space-xl);
-    }
-}
-
-@layer components {
-    .hero {
-        margin-block-end: var(--space-xl);
-    }
-
-    .eyebrow {
-        color: var(--colour-accent);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-    }
-
-    .intro {
-        max-width: 42rem;
-        font-size: 1.2rem;
-    }
-
-    .content-block {
-        margin-block-start: var(--space-xl);
-    }
-}
+@import './components/site-hero.css' layer(components);
+@import './components/content-block.css' layer(components);
