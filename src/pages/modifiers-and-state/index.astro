@@ -1,49 +1,145 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const modifierExample = `.product-card--featured
+.product-card--compact
+.site-header--minimal`;
+
+const stateExample = `.is_active
+.is_disabled
+.is_expanded
+.is_loading`;
+
+const conditionExample = `.has_error
+.has_results
+.has_child
+.has_media`;
+
+const combinedExample = `.product-card--featured.is_loading {}
+.form-field.has_error {}
+.disclosure.is_expanded {}`;
+
+const avoidExample = `/* Avoid unclear state names */
+.active {}
+.open {}
+.error {}
+
+/* Prefer explicit state or condition names */
+.is_active {}
+.is_open {}
+.has_error {}`;
 ---
 
-<BaseLayout
+<DocsLayout
     title="LSCSS Modifiers and State"
-    description="Modifiers and state classes in Layered Semantic CSS."
+    description="Modifiers, state classes, condition classes, and UI state naming in Layered Semantic CSS."
+    schemaType="TechArticle"
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Modifiers and state</p>
+    <section class="site-hero">
+        <p class="eyebrow">Modifiers and state</p>
 
-            <h1>
-                Explicit modifiers and state classes
-            </h1>
+        <h1>
+            Modifiers and state classes
+        </h1>
 
-            <p class="intro">
-                LSCSS separates permanent visual variations from temporary
-                interface state.
-            </p>
-        </section>
+        <p class="intro">
+            LSCSS separates reusable component variants from temporary interface
+            state. This keeps component design, JavaScript behaviour, and visual
+            conditions easier to reason about.
+        </p>
+    </section>
 
-        <section class="content-block">
-            <h2>
-                Modifiers
-            </h2>
+    <nav class="section-nav" aria-label="Modifiers and state sections">
+        <a href="#modifiers">Modifiers</a>
+        <a href="#state-classes">State classes</a>
+        <a href="#condition-classes">Condition classes</a>
+        <a href="#combined-patterns">Combined patterns</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
 
-<pre><code>.product-card--featured
-.product-card--compact
-.site-header--minimal</code></pre>
-        </section>
+    <section id="modifiers" class="content-block">
+        <h2>
+            Modifiers
+        </h2>
 
-        <section class="content-block">
-            <h2>
-                State classes
-            </h2>
+        <p>
+            Use modifiers for deliberate component variants. A modifier should
+            describe a version of the component that can be reused, documented,
+            and understood without reading JavaScript.
+        </p>
 
-<pre><code>.is_active
-.is_disabled
-.has_error
-.has_child</code></pre>
+        <CodeExample code={modifierExample} />
 
-            <p>
-                State classes should remain visible and predictable rather than
-                hidden inside complex selectors.
-            </p>
-        </section>
-    </main>
-</BaseLayout>
+        <p>
+            This borrows the useful BEM idea of explicit variants, without
+            requiring BEM-style element naming everywhere else.
+        </p>
+    </section>
+
+    <section id="state-classes" class="content-block">
+        <h2>
+            State classes
+        </h2>
+
+        <p>
+            Use <code>.is_*</code> classes for temporary UI states. These often
+            change because of interaction, validation, async loading, or
+            progressive enhancement.
+        </p>
+
+        <CodeExample code={stateExample} />
+
+        <p>
+            State classes should remain visible and predictable rather than
+            hidden inside complex selectors.
+        </p>
+    </section>
+
+    <section id="condition-classes" class="content-block">
+        <h2>
+            Condition classes
+        </h2>
+
+        <p>
+            Use <code>.has_*</code> classes when the component has a particular
+            condition or child content. These describe what is present, not what
+            the component permanently is.
+        </p>
+
+        <CodeExample code={conditionExample} />
+    </section>
+
+    <section id="combined-patterns" class="content-block">
+        <h2>
+            Combined patterns
+        </h2>
+
+        <p>
+            Modifiers, state classes, and condition classes can be combined when
+            they describe different concerns.
+        </p>
+
+        <CodeExample code={combinedExample} />
+
+        <p>
+            A featured product card can still be loading. A field can have an
+            error. A disclosure can be expanded. These are separate facts and
+            should stay separate in the CSS.
+        </p>
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid vague state names
+        </h2>
+
+        <p>
+            Generic class names such as <code>.active</code>, <code>.open</code>,
+            and <code>.error</code> are easy to reuse badly. Prefer explicit
+            state or condition prefixes.
+        </p>
+
+        <CodeExample code={avoidExample} />
+    </section>
+</DocsLayout>
