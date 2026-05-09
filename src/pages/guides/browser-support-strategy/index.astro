@@ -1,0 +1,80 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'Browser Support Strategy';
+const description = 'How to decide browser support using progressive enhancement, feature support, browserslist, and sensible business decisions instead of guesswork.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <article>
+        <p class="eyebrow">Guide</p>
+
+        <h1>
+            Browser Support Strategy
+        </h1>
+
+        <p>
+            Supporting every browser forever is not a strategy. It is a slow,
+            expensive argument wearing a project plan.
+        </p>
+
+        <p>
+            Good browser support decisions come from user needs, business risk,
+            and progressive enhancement, not fear of one ancient laptop in a
+            meeting room somewhere.
+        </p>
+
+        <h2>
+            Common mistakes
+        </h2>
+
+        <ul>
+            <li>supporting browsers nobody actually uses</li>
+            <li>building for browser versions instead of features</li>
+            <li>treating perfect visual parity as a requirement</li>
+            <li>shipping large polyfills for tiny edge cases</li>
+            <li>blocking modern improvements because of old assumptions</li>
+            <li>having no written support policy at all</li>
+        </ul>
+
+        <h2>
+            Better rules
+        </h2>
+
+        <ul>
+            <li>define a clear support matrix</li>
+            <li>use browserslist where tooling supports it</li>
+            <li>prefer feature support over version support</li>
+            <li>progressively enhance instead of forcing equality</li>
+            <li>test critical journeys, not every pixel everywhere</li>
+        </ul>
+
+        <h2>
+            How LSCSS helps
+        </h2>
+
+        <p>
+            Layered CSS architecture makes progressive enhancement easier.
+            Modern features like @scope, nesting, logical properties, and
+            container queries fit cleanly when older browsers still receive a
+            stable baseline experience.
+        </p>
+
+        <h2>
+            Start here
+        </h2>
+
+        <p>
+            Review browser support demos, compare feature support decisions,
+            and document what your project supports before development starts.
+        </p>
+
+        <p>
+            Browser support should be a policy, not a haunted house people keep
+            wandering into.
+        </p>
+    </article>
+</DocsLayout>
