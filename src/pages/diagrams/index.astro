@@ -1,0 +1,56 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Diagrams"
+    description="Visual diagrams for Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Diagrams</p>
+
+        <h1>
+            Visual architecture
+        </h1>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Cascade precedence
+        </h2>
+
+<pre><code>legacy
+  ↓
+settings
+  ↓
+base
+  ↓
+utilities
+  ↓
+layout
+  ↓
+components
+  ↓
+theme
+  ↓
+hacks</code></pre>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Migration flow
+        </h2>
+
+<pre><code>legacy CSS
+    ↓
+layer separation
+    ↓
+component extraction
+    ↓
+semantic naming
+    ↓
+reduced specificity
+    ↓
+legacy removal</code></pre>
+    </section>
+</DocsLayout>
