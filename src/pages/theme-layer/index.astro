@@ -1,0 +1,28 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Theme Layer"
+    description="Theme layer guidance for Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Theme layer</p>
+
+        <h1>
+            Theme adjustments
+        </h1>
+
+        <p class="intro">
+            The theme layer provides optional brand and visual overrides.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>@layer theme {
+    .product-card {
+        border-radius: 1rem;
+    }
+}</code></pre>
+    </section>
+</DocsLayout>
