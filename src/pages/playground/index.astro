@@ -1,5 +1,19 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const playgroundExample = `.feature-panel {
+    display: grid;
+    gap: var(--space-m);
+}
+
+.feature-panel > .title {
+    margin: 0;
+}
+
+.feature-panel--highlighted {
+    border-color: var(--colour-accent);
+}`;
 ---
 
 <DocsLayout
@@ -19,17 +33,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.feature-panel {
-    display: grid;
-    gap: var(--space-m);
-}
-
-.feature-panel > .title {
-    margin: 0;
-}
-
-.feature-panel--highlighted {
-    border-color: var(--colour-accent);
-}</code></pre>
+        <CodeExample code={playgroundExample} />
     </section>
 </DocsLayout>
