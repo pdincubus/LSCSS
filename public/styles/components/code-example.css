@@ -1,12 +1,38 @@
 .code-example {
-    overflow-x: auto;
-    padding: var(--space-l);
+    margin: var(--space-l) 0;
     border: var(--border-thin) solid var(--colour-border);
     border-radius: var(--radius-m);
     background: var(--colour-surface);
+    overflow: hidden;
 }
 
-.code-example > code {
+.code-example > figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-m);
+    padding: var(--space-m) var(--space-l);
+    border-bottom: var(--border-thin) solid var(--colour-border);
+    font-size: var(--step--1);
+}
+
+.code-example pre {
+    overflow-x: auto;
+    margin: 0;
+    padding: var(--space-l);
+}
+
+.code-example code {
     font-family: var(--font-family-monospace, monospace);
     white-space: pre;
+}
+
+.copy-code-button {
+    cursor: pointer;
+}
+
+.copy-code-status {
+    margin: 0;
+    padding: 0 var(--space-l) var(--space-m);
+    font-size: var(--step--1);
 }
