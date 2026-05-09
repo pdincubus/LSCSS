@@ -2,7 +2,9 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
-const layerExample = `@layer base, components, theme;`;
+const layerExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
+
 const whereExample = `:where(.flow > *) + * {}`;
 const hasExample = `.field:has(.error-message) {}`;
 
@@ -11,6 +13,8 @@ const scopeExample = `@scope (.product-card) {
 }`;
 
 const containerExample = `@container (min-width: 36rem) {}`;
+const stateExample = `.is_active {}`;
+const modifierExample = `.product-card--featured {}`;
 ---
 
 <DocsLayout
@@ -25,36 +29,74 @@ const containerExample = `@container (min-width: 36rem) {}`;
         </h1>
 
         <p class="intro">
-            Use these decision trees to choose the right modern CSS feature or
-            architecture pattern for a given problem.
+            Use these decision trees when you need to choose a CSS pattern,
+            settle a code review debate, or avoid adding another layer of
+            accidental complexity.
         </p>
     </section>
 
     <section class="content-block">
         <h2>
-            Which feature should I use?
+            Start here
         </h2>
 
-        <div class="decision-tree">
-            <article class="decision-card">
+        <div class="hub-card-grid">
+            <article class="hub-card">
                 <h3>
-                    Need predictable overrides?
+                    Changing override behaviour?
                 </h3>
 
                 <p>
-                    Use cascade layers.
+                    Start with cascade layers. Do not increase specificity until
+                    you have checked layer order.
                 </p>
 
                 <CodeExample code={layerExample} />
             </article>
 
+            <article class="hub-card">
+                <h3>
+                    Styling a component variant?
+                </h3>
+
+                <p>
+                    Use a modifier class when the component has a deliberate,
+                    reusable variant.
+                </p>
+
+                <CodeExample code={modifierExample} />
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    Styling temporary state?
+                </h3>
+
+                <p>
+                    Use a state class for temporary or conditional UI state.
+                    Keep it obvious.
+                </p>
+
+                <CodeExample code={stateExample} />
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Which modern CSS feature should I use?
+        </h2>
+
+        <div class="decision-tree">
             <article class="decision-card">
                 <h3>
                     Need lower specificity?
                 </h3>
 
                 <p>
-                    Use :where() or simplify the selector.
+                    Use :where() when you need expressive selectors without
+                    extra specificity weight. Also ask whether the selector can
+                    be simpler.
                 </p>
 
                 <CodeExample code={whereExample} />
@@ -66,8 +108,9 @@ const containerExample = `@container (min-width: 36rem) {}`;
                 </h3>
 
                 <p>
-                    Use :has() where support allows, or state classes where it
-                    does not.
+                    Use :has() when the parent or wrapper should respond to its
+                    contents. Use a state class when browser support or clarity
+                    makes that safer.
                 </p>
 
                 <CodeExample code={hasExample} />
@@ -79,8 +122,8 @@ const containerExample = `@container (min-width: 36rem) {}`;
                 </h3>
 
                 <p>
-                    Use @scope where support allows, or shallow component
-                    selectors elsewhere.
+                    Use @scope when support allows. Otherwise use shallow
+                    component selectors and keep child names scoped by context.
                 </p>
 
                 <CodeExample code={scopeExample} />
@@ -92,12 +135,28 @@ const containerExample = `@container (min-width: 36rem) {}`;
                 </h3>
 
                 <p>
-                    Use container queries instead of viewport assumptions.
+                    Use container queries when a component should respond to its
+                    own available space instead of the whole viewport.
                 </p>
 
                 <CodeExample code={containerExample} />
             </article>
         </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Naming decision flow
+        </h2>
+
+        <ol class="decision-list">
+            <li>Is it a standalone UI block? Give it a semantic component name.</li>
+            <li>Is it a child of that component? Use a short child class scoped by the parent.</li>
+            <li>Is it a reusable visual variation? Use a modifier class.</li>
+            <li>Is it temporary or conditional? Use a state or condition class.</li>
+            <li>Is the name only describing layout? Consider whether it belongs in layout or utilities instead.</li>
+            <li>Is the name describing appearance only? Check whether a design token or theme layer is the better fit.</li>
+        </ol>
     </section>
 
     <section class="content-block">
@@ -109,9 +168,10 @@ const containerExample = `@container (min-width: 36rem) {}`;
             <li>Can you change the whole codebase safely? If not, add layers first.</li>
             <li>Is legacy CSS unpredictable? Move it to the legacy layer.</li>
             <li>Are components hard to find? Split them into partials.</li>
-            <li>Are selectors too deep? Replace them with shallow component selectors.</li>
-            <li>Can browser support handle @scope? Use scoped component partials.</li>
+            <li>Are selectors too deep? Replace them with shallow component selectors when you touch that code.</li>
+            <li>Can browser support handle @scope? Use scoped component partials for suitable components.</li>
             <li>Are overrides still difficult? Review layer order before increasing specificity.</li>
+            <li>Is the fix ugly but necessary? Put it in hacks, comment it, and review it later.</li>
         </ol>
     </section>
 
@@ -126,6 +186,20 @@ const containerExample = `@container (min-width: 36rem) {}`;
             <li>Does this layout assume left and right? Use logical properties.</li>
             <li>Does this element receive focus? Provide visible focus styling.</li>
             <li>Does this component clip text? Test zoom, reflow, and wrapping.</li>
+            <li>Does styling depend on JavaScript state? Ensure the HTML state is still understandable.</li>
         </ol>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            When to leave it alone
+        </h2>
+
+        <p>
+            Not every old selector needs immediate refactoring. Leave it alone
+            when it is isolated, stable, rarely changed, and not blocking new
+            work. Spend the effort where the code is active, brittle, or
+            confusing.
+        </p>
     </section>
 </DocsLayout>
