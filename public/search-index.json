@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Principles",
+        "url": "/principles/",
+        "keywords": ["layers", "selectors", "semantics"]
+    },
+    {
+        "title": "Modern CSS",
+        "url": "/modern-css/",
+        "keywords": ["scope", "where", "has", "container queries"]
+    },
+    {
+        "title": "Accessibility",
+        "url": "/accessibility/",
+        "keywords": ["focus", "motion", "contrast"]
+    },
+    {
+        "title": "Performance",
+        "url": "/performance/",
+        "keywords": ["css", "rendering", "architecture"]
+    }
+]
