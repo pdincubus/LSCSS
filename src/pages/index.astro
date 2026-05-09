@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="LSCSS. Layered Semantic CSS"
+    description="A practical CSS methodology for cascade layers, semantic naming, shallow selectors, clear modifiers, and explicit state classes."
+>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">CSS methodology</p>
+
+            <h1>
+                Layered Semantic CSS
+            </h1>
+
+            <p class="intro">
+                A practical CSS methodology for cascade layers, semantic naming,
+                shallow selectors, clear modifiers, and explicit state classes.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                What CSS methodologies try to solve
+            </h2>
+
+            <ul>
+                <li>naming inconsistency</li>
+                <li>selector chaos</li>
+                <li>specificity battles</li>
+                <li>reuse problems</li>
+                <li>maintenance pain at scale</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Core principles
+            </h2>
+
+            <ul>
+                <li>organise CSS in explicit layers</li>
+                <li>keep styles in partials, not root files</li>
+                <li>use semantic component names</li>
+                <li>use shallow scoped child selectors</li>
+                <li>use explicit modifier classes</li>
+                <li>use state classes for temporary or conditional states</li>
+                <li>keep nesting minimal</li>
+                <li>avoid hacks and isolate them when unavoidable</li>
+                <li>let tooling handle browser support work</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Example structure
+            </h2>
+
+<pre><code>css/
+    settings/
+    base/
+    utilities/
+    layout/
+    components/
+    theme/
+    legacy/
+    hacks/</code></pre>
+        </section>
+    </main>
+</BaseLayout>
