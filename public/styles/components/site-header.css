@@ -1,0 +1,40 @@
+.site-header {
+    position: sticky;
+    top: 0;
+    border-block-end: var(--border-thin) solid var(--colour-border);
+    background: rgb(15 23 42 / 90%);
+    backdrop-filter: blur(12px);
+}
+
+.site-header > .page-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-l);
+    padding-block: var(--space-m);
+}
+
+.site-title {
+    color: var(--colour-text);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-m);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list a {
+    color: var(--colour-text-soft);
+    text-decoration: none;
+}
+
+.nav-list a:hover,
+.nav-list a:focus-visible {
+    color: var(--colour-text);
+}
