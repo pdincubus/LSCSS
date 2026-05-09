@@ -1,0 +1,53 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Live CSS Playground"
+    description="Interactive live CSS playground for Layered Semantic CSS experiments."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Playground</p>
+
+        <h1>
+            Live CSS playground
+        </h1>
+
+        <p class="intro">
+            Edit CSS and immediately see the architectural effects.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <div class="tool-panel">
+            <label for="live-css">
+                CSS
+            </label>
+
+            <textarea id="live-css" class="tool-input" rows="12" data-live-css>.playground-card {
+    padding: 1rem;
+    border: 1px solid currentColor;
+}
+
+.playground-card > .title {
+    margin: 0;
+}</textarea>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <style data-playground-style></style>
+
+        <article class="playground-card">
+            <h2 class="title">
+                Playground component
+            </h2>
+
+            <p>
+                Live CSS rendering example.
+            </p>
+        </article>
+    </section>
+
+    <script type="module" src="/scripts/live-playground.js"></script>
+</DocsLayout>
