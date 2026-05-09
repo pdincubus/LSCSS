@@ -1,0 +1,41 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Design Tokens"
+    description="Design token strategy in Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Design tokens</p>
+
+        <h1>
+            Design token strategy
+        </h1>
+
+        <p class="intro">
+            Design tokens should remain semantic, predictable, and scalable.
+        </p>
+    </section>
+
+    <section class="content-block">
+<pre><code>:root {
+    --colour-background: #fff;
+    --colour-text: #111;
+
+    --space-s: 0.5rem;
+    --space-m: 1rem;
+    --space-l: 2rem;
+}</code></pre>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            <li>prefer semantic naming</li>
+            <li>avoid arbitrary values</li>
+            <li>keep spacing predictable</li>
+            <li>support theming cleanly</li>
+            <li>avoid token duplication</li>
+        </ul>
+    </section>
+</DocsLayout>
