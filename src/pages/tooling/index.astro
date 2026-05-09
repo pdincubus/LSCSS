@@ -5,15 +5,23 @@ import CodeExample from '../../components/CodeExample.astro';
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
 
-const customMediaExample = `@custom-media --mobile (width < 48rem);
-@custom-media --tablet (48rem <= width < 64rem);
-@custom-media --desktop (width >= 64rem);`;
+const customMediaExample = `@custom-media --mobile (width < 768px);
+@custom-media --from-tablet (width >= 768px);
+@custom-media --tablet (768px <= width < 1280px);
+@custom-media --until-desktop (width < 1280px);
+@custom-media --desktop (width >= 1280px);
+@custom-media --large-desktop (width >= 1680px);
+@custom-media --reduced-motion (prefers-reduced-motion: reduce);`;
 
 const mediaQueryUsageExample = `.product-card {
     /* Shared styles */
 
     @media (--desktop) {
         /* Desktop-only changes */
+    }
+
+    @media (--reduced-motion) {
+        transition: none;
     }
 }`;
 
@@ -73,11 +81,20 @@ const avoidExample = `.product-card {
 
         <p>
             Named breakpoints make media queries easier to read and easier to
-            change. Component CSS should say what breakpoint it targets, not ask
-            every developer to remember what a number means.
+            change. Breakpoints should describe layout needs, not specific
+            devices. Component CSS should say what breakpoint it targets, not
+            ask every developer to remember what a number means.
         </p>
 
         <CodeExample code={customMediaExample} />
+
+        <p>
+            Directional helpers such as <code>--from-tablet</code> and
+            <code>--until-desktop</code> are often more useful than rigid device
+            labels. Accessibility queries such as
+            <code>--reduced-motion</code> should be treated as first-class
+            breakpoints too.
+        </p>
 
         <p>
             This pattern needs a build step such as PostCSS or similar tooling,
