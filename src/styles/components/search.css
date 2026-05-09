@@ -1,0 +1,32 @@
+.docs-search {
+    margin-block: 2rem;
+}
+
+.docs-search-input {
+    inline-size: 100%;
+    max-inline-size: 48rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border, currentColor);
+    border-radius: 0.5rem;
+    background: var(--color-surface, #fff);
+    font: inherit;
+}
+
+.docs-search-results {
+    margin-block-start: 1.5rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.docs-search-results a {
+    display: block;
+    padding: 1rem;
+    border: 1px solid var(--color-border, currentColor);
+    border-radius: 0.5rem;
+    text-decoration: none;
+}
+
+.docs-search-results a:hover,
+.docs-search-results a:focus-visible {
+    text-decoration: underline;
+}
