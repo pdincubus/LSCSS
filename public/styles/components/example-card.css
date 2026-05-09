@@ -1,0 +1,21 @@
+.example-card {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
+
+.example-card > .title {
+    margin: 0;
+}
+
+.example-card > .button {
+    inline-size: fit-content;
+    padding: var(--space-s) var(--space-m);
+    border-radius: var(--radius-s);
+    background: var(--colour-accent);
+    color: var(--colour-background);
+    text-decoration: none;
+}
