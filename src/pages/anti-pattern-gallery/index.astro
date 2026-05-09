@@ -1,0 +1,186 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="CSS Anti-pattern Gallery"
+    description="Common CSS architecture anti-patterns and modern LSCSS fixes."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Anti-pattern gallery</p>
+
+        <h1>
+            CSS anti-pattern gallery
+        </h1>
+
+        <p class="intro">
+            Common CSS failures often begin as small shortcuts. These examples
+            show why they become painful and how LSCSS avoids them.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Deep selectors
+        </h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+
+<pre><code>.page .wrapper .content .card .title {
+    margin: 0;
+}</code></pre>
+
+                <p>
+                    Deep selectors couple styles to markup structure and become
+                    difficult to override.
+                </p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+
+<pre><code>.product-card > .title {
+    margin: 0;
+}</code></pre>
+
+                <p>
+                    Use shallow scoped component selectors.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Specificity escalation</h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+
+<pre><code>#app .product-list .product-card .title {
+    color: red !important;
+}</code></pre>
+
+                <p>
+                    IDs and important declarations create override battles.
+                </p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+
+<pre><code>@layer components, theme;
+
+@layer theme {
+    .product-card > .title {
+        color: red;
+    }
+}</code></pre>
+
+                <p>
+                    Use layer order before increasing specificity.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Utility overload
+        </h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+
+<pre><code>&lt;article class="p-l m-b-xl bg-dark text-light radius-m grid gap-m"&gt;
+    ...
+&lt;/article&gt;</code></pre>
+
+                <p>
+                    Too many utilities can hide component intent.
+                </p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+
+<pre><code>&lt;article class="product-card product-card--featured"&gt;
+    ...
+&lt;/article&gt;</code></pre>
+
+                <p>
+                    Use semantic components and reserve utilities for small,
+                    clear helpers.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Massive root files
+        </h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+
+<pre><code>site.css
+    8,000 lines
+    all components
+    all layouts
+    all hacks</code></pre>
+
+                <p>
+                    Large root files make ownership and review harder.
+                </p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+
+<pre><code>components/
+    product-card.css
+    site-header.css
+    filter-panel.css</code></pre>
+
+                <p>
+                    Keep root files as import maps, not dumping grounds.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Third-party CSS leakage
+        </h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+
+<pre><code>@import './vendor/slider.css';</code></pre>
+
+                <p>
+                    Unlayered third-party CSS can unexpectedly dominate your
+                    project styles.
+                </p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+
+<pre><code>@import './vendor/slider.css' layer(legacy);</code></pre>
+
+                <p>
+                    Isolate third-party CSS in a low-priority layer.
+                </p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>
