@@ -1,5 +1,16 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const containerQueryExample = `.container-demo-wrap {
+    container-type: inline-size;
+}
+
+@container (min-width: 36rem) {
+    .container-demo-card {
+        grid-template-columns: 12rem 1fr;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -62,15 +73,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>.container-demo-wrap {
-    container-type: inline-size;
-}
-
-@container (min-width: 36rem) {
-    .container-demo-card {
-        grid-template-columns: 12rem 1fr;
-    }
-}</code></pre>
+        <CodeExample code={containerQueryExample} />
     </section>
 
     <script type="module" src="/scripts/container-query-visualiser.js"></script>
