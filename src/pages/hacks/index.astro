@@ -1,5 +1,12 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const hacksExample = `@layer hacks {
+    .legacy-slider {
+        inset-block-start: -1px;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -19,10 +26,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-<pre><code>@layer hacks {
-    .legacy-slider {
-        inset-block-start: -1px;
-    }
-}</code></pre>
+        <CodeExample code={hacksExample} />
     </section>
 </DocsLayout>
