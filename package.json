@@ -1,0 +1,19 @@
+{
+    "name": "lscss",
+    "type": "module",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro check && astro build",
+        "preview": "astro preview"
+    },
+    "dependencies": {
+        "astro": "latest"
+    },
+    "devDependencies": {
+        "typescript": "latest",
+        "@astrojs/check": "latest"
+    }
+}
