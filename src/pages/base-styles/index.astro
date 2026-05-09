@@ -78,6 +78,7 @@ const avoidExample = `.product-card h2 {
 
     <nav class="section-nav" aria-label="Base styles sections">
         <a href="#what-belongs-here">What belongs here</a>
+        <a href="#base-layer">Base layer</a>
         <a href="#reset">Reset</a>
         <a href="#typography">Typography</a>
         <a href="#avoid">Avoid repetition</a>
@@ -102,6 +103,23 @@ const avoidExample = `.product-card h2 {
             <li>shared form element defaults</li>
             <li>global focus defaults where appropriate</li>
         </ul>
+    </section>
+
+    <section id="base-layer" class="content-block">
+        <h2>
+            These rules belong in the base layer
+        </h2>
+
+        <p>
+            Global styles still need the correct cascade position. Reset rules,
+            body defaults, and base typography should sit in <code>@layer base</code>,
+            below component, theme, and hacks layers.
+        </p>
+
+        <p>
+            This gives the project stable defaults without making global element
+            selectors more powerful than component styles.
+        </p>
     </section>
 
     <section id="reset" class="content-block">
@@ -146,8 +164,9 @@ const avoidExample = `.product-card h2 {
         <CodeExample code={avoidExample} />
 
         <p>
-            Keep globally global styles global. Use components for component
-            behaviour, not for repeating document defaults.
+            Keep globally global styles global, but keep them in the correct
+            layer. Use components for component behaviour, not for repeating
+            document defaults.
         </p>
     </section>
 </DocsLayout>
