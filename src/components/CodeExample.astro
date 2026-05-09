@@ -1,0 +1,13 @@
+---
+export interface Props {
+    code: string;
+    language?: string;
+}
+
+const {
+    code,
+    language = 'css'
+} = Astro.props;
+---
+
+<pre class="code-example" data-language={language}><code>{code}</code></pre>
