@@ -1,0 +1,81 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'Migrating Legacy CSS';
+const description = 'How to improve large legacy CSS codebases safely using gradual adoption, cascade layers, scoped refactors, and practical front-end standards.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <article>
+        <p class="eyebrow">Guide</p>
+
+        <h1>
+            Migrating Legacy CSS
+        </h1>
+
+        <p>
+            Nobody wakes up and decides to build a 9,000 line stylesheet with
+            six layers of overrides and seventeen !important declarations.
+            It happens slowly, like mould.
+        </p>
+
+        <p>
+            Rewriting everything is rarely realistic. Good migration work is
+            controlled, boring, and intentionally incremental.
+        </p>
+
+        <h2>
+            Common legacy problems
+        </h2>
+
+        <ul>
+            <li>global styles leaking into unrelated components</li>
+            <li>specificity wars and endless overrides</li>
+            <li>duplicate patterns with slightly different behaviour</li>
+            <li>framework leftovers nobody wants to touch</li>
+            <li>deep nesting and selector archaeology</li>
+            <li>critical behaviour hidden inside hacks</li>
+        </ul>
+
+        <h2>
+            Safer migration rules
+        </h2>
+
+        <ul>
+            <li>do not start with a full rewrite</li>
+            <li>introduce layers before rewriting components</li>
+            <li>move new work into the new structure first</li>
+            <li>document hacks before removing them</li>
+            <li>refactor around real journeys, not abstract purity</li>
+            <li>measure regressions before celebrating cleanup</li>
+        </ul>
+
+        <h2>
+            How LSCSS helps
+        </h2>
+
+        <p>
+            LSCSS supports gradual adoption. Legacy code can remain isolated
+            while new components use explicit layers, semantic naming, and
+            predictable modifiers. Progress matters more than ideological purity.
+        </p>
+
+        <h2>
+            Start here
+        </h2>
+
+        <p>
+            Begin with the migration guide, decision trees, and examples. Pick
+            one painful area, improve it properly, then repeat without starting
+            a civil war in the team.
+        </p>
+
+        <p>
+            Legacy CSS is usually a history lesson written in selectors.
+            Read it carefully before deleting it.
+        </p>
+    </article>
+</DocsLayout>
