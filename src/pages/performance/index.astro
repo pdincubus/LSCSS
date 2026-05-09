@@ -1,0 +1,40 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Performance and CSS"
+    description="Performance-focused CSS architecture guidance."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Performance</p>
+
+        <h1>
+            Performance-first CSS
+        </h1>
+
+        <p class="intro">
+            CSS architecture affects maintainability, rendering behaviour, and
+            long-term performance.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            <li>reduce unused CSS</li>
+            <li>split CSS by responsibility</li>
+            <li>avoid giant global stylesheets</li>
+            <li>prefer static-first rendering</li>
+            <li>avoid framework CSS overhead where unnecessary</li>
+            <li>keep selectors predictable</li>
+            <li>contain legacy CSS</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <p>
+            Most CSS performance problems in production systems come from scale,
+            architecture, and maintainability rather than raw selector speed.
+        </p>
+    </section>
+</DocsLayout>
