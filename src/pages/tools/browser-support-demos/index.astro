@@ -1,5 +1,27 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const progressiveEnhancementExample = `.feature-card {
+    display: block;
+}
+
+@supports (container-type: inline-size) {
+    .feature-card-wrap {
+        container-type: inline-size;
+    }
+
+    @container (min-width: 36rem) {
+        .feature-card {
+            display: grid;
+            grid-template-columns: 12rem 1fr;
+        }
+    }
+}`;
+
+const browserslistExample = `supports es6-module
+supports css-cascade-layers
+supports css-container-queries
+supports css-logical-props`;
 ---
 
 <DocsLayout
@@ -52,22 +74,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
             Progressive enhancement example
         </h2>
 
-<pre><code>.feature-card {
-    display: block;
-}
-
-@supports (container-type: inline-size) {
-    .feature-card-wrap {
-        container-type: inline-size;
-    }
-
-    @container (min-width: 36rem) {
-        .feature-card {
-            display: grid;
-            grid-template-columns: 12rem 1fr;
-        }
-    }
-}</code></pre>
+        <pre><code>{progressiveEnhancementExample}</code></pre>
     </section>
 
     <section class="content-block">
@@ -117,10 +124,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
             Browserslist-style thinking
         </h2>
 
-<pre><code>supports es6-module
-supports css-cascade-layers
-supports css-container-queries
-supports css-logical-props</code></pre>
+        <pre><code>{browserslistExample}</code></pre>
 
         <p>
             Feature-based support targets make architectural intent clearer than
