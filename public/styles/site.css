@@ -12,3 +12,4 @@
 @import './components/content-block.css' layer(components);
 @import './components/example-card.css' layer(components);
 @import './components/tool-panel.css' layer(components);
+@import './components/docs-sidebar.css' layer(components);
