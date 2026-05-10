@@ -1,112 +1,128 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const firstQuestionExample = `Ask first:
+Does this make the system calmer,
+or only make this ticket disappear?
+
+Good CSS reduces future decisions.
+Bad CSS creates new ones.`;
 ---
 
-<BaseLayout
-    title="LSCSS Principles"
-    description="Core principles behind Layered Semantic CSS."
+<DocsLayout
+    title="Core Principles"
+    description="The non-negotiable principles behind Layered Semantic CSS."
+    schemaType="TechArticle"
 >
-    <main class="page-shell">
-        <section class="site-hero">
-            <p class="eyebrow">Principles</p>
+    <section class="site-hero">
+        <p class="eyebrow">Principles</p>
+        <h1>The non-negotiables</h1>
+        <p class="intro">
+            These are the rules underneath everything else. If these stay true,
+            the system stays healthy. If these drift, the architecture quietly
+            becomes archaeology.
+        </p>
+    </section>
 
-            <h1>
-                Core principles
-            </h1>
+    <nav class="section-nav" aria-label="Principles sections">
+        <a href="#first">Start first</a>
+        <a href="#ownership">Ownership first</a>
+        <a href="#layers">Layers before specificity</a>
+        <a href="#selectors">Shallow selectors</a>
+        <a href="#utilities">Utilities are exceptions</a>
+        <a href="#hacks">Hacks are temporary</a>
+        <a href="#tokens">Tokens before values</a>
+        <a href="#calm">Calm CSS</a>
+    </nav>
 
-            <p class="intro">
-                LSCSS exists to make CSS easier to understand, safer to change,
-                and harder to accidentally ruin. Good architecture should reduce
-                decisions, not create new ones.
-            </p>
-        </section>
+    <section id="first" class="content-block">
+        <h2>Ask this first</h2>
+        <CodeExample code={firstQuestionExample} language="text" />
+        <p>
+            Most architectural damage starts when short-term speed defeats
+            long-term ownership. The first question should always be where this belongs.
+        </p>
+    </section>
 
-        <nav class="section-nav" aria-label="Principles sections">
-            <a href="#why">Why it exists</a>
-            <a href="#rules">Core rules</a>
-            <a href="#protects">What it protects</a>
-            <a href="#next">Where next</a>
-        </nav>
+    <section id="ownership" class="content-block">
+        <h2>Ownership before selectors</h2>
+        <p>
+            Decide whether something belongs in base, layout, component,
+            theme, utility, or hacks before writing selectors. Wrong ownership
+            creates most bad CSS long before specificity joins the argument.
+        </p>
+    </section>
 
-        <section id="why" class="content-block">
-            <h2>
-                Why LSCSS exists
-            </h2>
+    <section id="layers" class="content-block">
+        <h2>Layers before specificity</h2>
+        <p>
+            If styles are fighting, check layer order first. Do not reach for
+            deeper selectors, IDs, or important declarations before checking
+            precedence. Most specificity problems are architecture problems.
+        </p>
+    </section>
 
-            <p>
-                Most CSS problems are not caused by missing features. They come
-                from unclear ownership, hidden technical debt, unpredictable
-                overrides, and systems nobody wants to touch twice.
-            </p>
+    <section id="selectors" class="content-block">
+        <h2>Prefer shallow selectors</h2>
+        <p>
+            Components should use short, scoped selectors with obvious
+            ownership. Deep selectors couple styling to markup structure and
+            turn safe changes into archaeological digs.
+        </p>
+    </section>
 
-            <p>
-                LSCSS is designed to reduce that. It gives teams a predictable
-                structure for layers, naming, modifiers, state, utilities,
-                theme, legacy code, and temporary fixes.
-            </p>
-        </section>
+    <section id="utilities" class="content-block">
+        <h2>Utilities are exceptions, not architecture</h2>
+        <p>
+            Utilities are useful for accessibility helpers and truly universal
+            patterns. If utility combinations keep repeating, they are probably
+            a component asking to be named, not a permanent utility strategy.
+        </p>
+    </section>
 
-        <section id="rules" class="content-block">
-            <h2>
-                Core rules
-            </h2>
+    <section id="hacks" class="content-block">
+        <h2>Hacks are temporary by definition</h2>
+        <p>
+            The hacks layer exists for urgent delivery needs, not permanent
+            residency. If a fix will still exist in six months, it is probably
+            a real architectural problem pretending to be temporary.
+        </p>
+    </section>
 
-            <ul>
-                <li>Organise CSS in explicit cascade layers.</li>
-                <li>Keep globally global styles in the base layer.</li>
-                <li>Use semantic component names and short child selectors.</li>
-                <li>Prefer shallow selectors over deep selector archaeology.</li>
-                <li>Keep specificity low and predictable.</li>
-                <li>Use modifiers for reusable variants.</li>
-                <li>Use <code>.is_*</code> and <code>.has_*</code> for visible state and conditions.</li>
-                <li>Keep utilities rare and intentional.</li>
-                <li>Theme changes presentation, not structure.</li>
-                <li>Legacy CSS stays low. Hacks stay visible.</li>
-                <li>Large files trigger review, not pride.</li>
-            </ul>
-        </section>
+    <section id="tokens" class="content-block">
+        <h2>Tokens before values</h2>
+        <p>
+            Spacing, colour, typography, and radius should come from tokens,
+            not deadline-driven invention. Random values create design folklore,
+            not maintainable systems.
+        </p>
+    </section>
 
-        <section id="protects" class="content-block">
-            <h2>
-                What this protects
-            </h2>
+    <section id="calm" class="content-block">
+        <h2>Calm CSS beats clever CSS</h2>
+        <p>
+            Good CSS should feel boring. Predictable selectors, clear naming,
+            obvious ownership, and fewer surprises matter more than cleverness.
+            Future developers should not need detective work to ship safely.
+        </p>
+    </section>
 
-            <ul>
-                <li>Layers protect override order.</li>
-                <li>Tokens protect consistency.</li>
-                <li>Custom media protects breakpoint clarity.</li>
-                <li>Scoped selectors protect ownership.</li>
-                <li>Modifiers and state protect intent.</li>
-                <li>File size guidance protects cognitive load.</li>
-            </ul>
-
-            <p>
-                None of these rules are complicated alone. Together they make
-                the system easier to debug and much harder to quietly break.
-            </p>
-        </section>
-
-        <section id="next" class="content-block">
-            <h2>
-                Where next
-            </h2>
-
-            <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/methodology/">Core methodology</a></h3>
-                    <p>Learn how layers, naming, architecture, utilities, and theme fit together.</p>
-                </article>
-
-                <article class="hub-card">
-                    <h3><a href="/decision-trees/">Decision trees</a></h3>
-                    <p>Use practical rules when a CSS decision stops being obvious.</p>
-                </article>
-
-                <article class="hub-card">
-                    <h3><a href="/playground/">Playground</a></h3>
-                    <p>Break components on purpose and learn how to fix them properly.</p>
-                </article>
-            </div>
-        </section>
-    </main>
-</BaseLayout>
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/decision-trees/">Decision trees</a></h3>
+                <p>Turn principles into repeatable day-to-day decisions.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/contributing/">Contribution standards</a></h3>
+                <p>Use these principles during pull requests and code reviews.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+                <p>See what happens when the principles get ignored.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>
