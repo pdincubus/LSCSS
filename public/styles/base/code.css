@@ -2,27 +2,27 @@ pre {
     overflow: auto;
     padding: var(--space-l);
     border-radius: var(--radius-m);
-    background: #111827;
-    color: #f3f4f6;
+    background: var(--colour-code-background);
+    color: var(--colour-code-text);
 }
 
 code {
     font-family: monospace;
-    font-size: 0.95em;
+    font-size: var(--font-size-code);
 }
 
 .token-selector {
-    color: #93c5fd;
+    color: var(--colour-code-selector);
 }
 
 .token-property {
-    color: #fca5a5;
+    color: var(--colour-code-property);
 }
 
 .token-value {
-    color: #86efac;
+    color: var(--colour-code-value);
 }
 
 .token-at-rule {
-    color: #c4b5fd;
+    color: var(--colour-code-at-rule);
 }

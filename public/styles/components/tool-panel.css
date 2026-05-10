@@ -17,8 +17,8 @@
 }
 
 .tool-input:focus-visible {
-    outline: 2px solid var(--colour-accent);
-    outline-offset: 2px;
+    outline: var(--outline-width) solid var(--colour-accent);
+    outline-offset: var(--outline-width);
     border-color: var(--colour-accent);
 }
 

@@ -7,8 +7,8 @@
 }
 
 .render-demo-box {
-    inline-size: 5rem;
-    block-size: 5rem;
+    inline-size: var(--demo-size-m);
+    block-size: var(--demo-size-m);
     border-radius: var(--radius-s);
     background: var(--colour-accent);
 }
@@ -27,17 +27,17 @@
     }
 
     to {
-        transform: translateX(12rem);
+        transform: translateX(var(--demo-shift));
     }
 }
 
 @keyframes move-width {
     from {
-        width: 5rem;
+        width: var(--demo-size-m);
     }
 
     to {
-        width: 18rem;
+        width: var(--demo-width-wide);
     }
 }
 

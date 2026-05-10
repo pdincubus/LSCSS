@@ -12,8 +12,8 @@ li {
 
 a {
     color: var(--colour-accent-dark);
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.18em;
+    text-decoration-thickness: var(--text-decoration-thickness);
+    text-underline-offset: var(--text-underline-offset);
 }
 
 a:hover,
@@ -22,8 +22,8 @@ a:focus-visible {
 }
 
 a:focus-visible {
-    outline: 2px solid var(--colour-accent);
-    outline-offset: 3px;
+    outline: var(--outline-width) solid var(--colour-accent);
+    outline-offset: var(--outline-offset);
 }
 
 pre {

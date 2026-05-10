@@ -19,32 +19,32 @@
 }
 
 .performance-card--bad {
-    border-color: #b00020;
+    border-color: var(--colour-status-bad);
 }
 
 .performance-card--good {
-    border-color: #007a3d;
+    border-color: var(--colour-status-good);
 }
 
 .performance-meter {
     inline-size: 100%;
-    block-size: 1rem;
+    block-size: var(--space-m);
     overflow: hidden;
-    border-radius: 999px;
-    background: rgb(0 0 0 / 10%);
+    border-radius: var(--radius-pill);
+    background: var(--colour-track);
 }
 
 .performance-meter > span {
     display: block;
     block-size: 100%;
-    background: #007a3d;
-    transition: inline-size 0.2s ease;
+    background: var(--colour-status-good);
+    transition: inline-size var(--duration-fast) ease;
 }
 
 .performance-meter > span[data-state='warning'] {
-    background: #b77900;
+    background: var(--colour-status-warning);
 }
 
 .performance-meter > span[data-state='bad'] {
-    background: #b00020;
+    background: var(--colour-status-bad);
 }

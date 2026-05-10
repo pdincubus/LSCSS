@@ -18,11 +18,11 @@
 }
 
 .failure-card--bad {
-    border-color: #b00020;
+    border-color: var(--colour-status-bad);
 }
 
 .failure-card--good {
-    border-color: #007a3d;
+    border-color: var(--colour-status-good);
 }
 
 .bad-focus-button:focus {
@@ -30,8 +30,8 @@
 }
 
 .good-focus-button:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 0.25rem;
+    outline: var(--outline-width-strong) solid currentColor;
+    outline-offset: var(--space-xs);
 }
 
 .hover-only-card > .hint {
@@ -52,17 +52,17 @@
 }
 
 .low-contrast-card {
-    background: #f5f5f5;
-    color: #c9c9c9;
+    background: var(--colour-low-contrast-surface);
+    color: var(--colour-low-contrast-text);
 }
 
 .readable-contrast-card {
-    background: #fff;
-    color: #111;
+    background: var(--colour-surface);
+    color: var(--colour-text);
 }
 
 .clipped-card {
-    inline-size: 16rem;
+    inline-size: var(--failure-clipped-width);
     overflow: hidden;
     white-space: nowrap;
 }
@@ -74,10 +74,10 @@
 
 .problem-spinner,
 .safe-spinner {
-    inline-size: 4rem;
-    block-size: 4rem;
-    border-radius: 50%;
-    border: 0.5rem solid var(--colour-border);
+    inline-size: var(--demo-size-s);
+    block-size: var(--demo-size-s);
+    border-radius: var(--radius-round);
+    border: var(--space-s) solid var(--colour-border);
     border-top-color: var(--colour-accent);
 }
 

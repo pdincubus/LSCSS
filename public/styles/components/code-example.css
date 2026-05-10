@@ -40,7 +40,7 @@
     overflow-x: auto;
     margin: 0;
     padding: var(--space-xs) var(--space-s);
-    background: transparent;
+    background: var(--colour-transparent);
 }
 
 .code-example code {

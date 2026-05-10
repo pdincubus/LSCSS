@@ -19,7 +19,7 @@
 .site-footer__meta,
 .site-footer__credits {
     color: var(--colour-text-soft);
-    font-size: 0.9rem;
+    font-size: var(--font-size-meta);
 }
 
 .site-footer__credits {
