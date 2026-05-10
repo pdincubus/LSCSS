@@ -1,5 +1,34 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const cascadeDiagram = `legacy
+  ↓
+settings
+  ↓
+base
+  ↓
+utilities
+  ↓
+layout
+  ↓
+components
+  ↓
+theme
+  ↓
+hacks`;
+
+const migrationDiagram = `legacy CSS
+    ↓
+layer separation
+    ↓
+component extraction
+    ↓
+semantic naming
+    ↓
+reduced specificity
+    ↓
+legacy removal`;
 ---
 
 <DocsLayout
@@ -19,21 +48,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
             Cascade precedence
         </h2>
 
-<pre><code>legacy
-  ↓
-settings
-  ↓
-base
-  ↓
-utilities
-  ↓
-layout
-  ↓
-components
-  ↓
-theme
-  ↓
-hacks</code></pre>
+        <CodeExample code={cascadeDiagram} language="text" />
     </section>
 
     <section class="content-block">
@@ -41,16 +56,6 @@ hacks</code></pre>
             Migration flow
         </h2>
 
-<pre><code>legacy CSS
-    ↓
-layer separation
-    ↓
-component extraction
-    ↓
-semantic naming
-    ↓
-reduced specificity
-    ↓
-legacy removal</code></pre>
+        <CodeExample code={migrationDiagram} language="text" />
     </section>
 </DocsLayout>
