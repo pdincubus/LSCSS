@@ -32,6 +32,16 @@ const badThemeExample = `.button {
 .hero-button {
     background: rgb(118 45 255);
 }`;
+
+const decisionExample = `Ask:
+Is this changing presentation only?
+→ Theme
+
+Is this changing structure or behaviour?
+→ Component
+
+Is this temporary or urgent?
+→ Hacks, not theme`;
 ---
 
 <DocsLayout
@@ -47,18 +57,32 @@ const badThemeExample = `.button {
         </h1>
 
         <p class="intro">
-            The theme layer handles brand-level visual overrides. It changes how
-            components look, not how they work. Components own structure and
-            behaviour. Theme owns presentation.
+            Theme changes presentation, not structure. It handles brand styling,
+            tokens, and visual consistency without quietly rewriting component
+            architecture behind everyone’s back.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Theme layer sections">
+        <a href="#rules">Decision rules</a>
         <a href="#purpose">Purpose</a>
         <a href="#tokens">Tokens first</a>
         <a href="#good-overrides">Good overrides</a>
         <a href="#avoid">Avoid</a>
     </nav>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Quick decision rules
+        </h2>
+
+        <CodeExample code={decisionExample} language="text" />
+
+        <p>
+            Theme should be predictable. If a visual change needs detective
+            work to explain, the architecture is already drifting.
+        </p>
+    </section>
 
     <section id="purpose" class="content-block">
         <h2>
@@ -66,15 +90,15 @@ const badThemeExample = `.button {
         </h2>
 
         <p>
-            Theme should contain brand styling, colour decisions, spacing
-            adjustments, border radius changes, shadows, and other visual
-            presentation choices that apply across components.
+            Theme contains colour, spacing adjustments, radius, shadows,
+            typography presentation, and brand-level visual decisions shared
+            across components.
         </p>
 
         <p>
-            Theme should not contain component logic, structural layout fixes,
-            accessibility patches, or emergency overrides pretending not to be
-            hacks.
+            Theme does not contain layout fixes, accessibility repairs,
+            JavaScript state handling, or emergency overrides pretending not to
+            be hacks.
         </p>
     </section>
 
@@ -84,9 +108,9 @@ const badThemeExample = `.button {
         </h2>
 
         <p>
-            Theme should be driven by shared CSS variables. Change the token,
-            not twenty unrelated selectors. This keeps branding predictable and
-            prevents colour drift across the project.
+            Change the token, not twenty unrelated selectors. Tokens protect
+            consistency and stop branding from becoming a treasure hunt for the
+            correct shade of purple.
         </p>
 
         <CodeExample code={tokenThemeExample} />
@@ -98,12 +122,17 @@ const badThemeExample = `.button {
         </h2>
 
         <p>
-            A good theme override adjusts presentation without rewriting the
-            component. Prefer component-level custom properties where the
-            component supports intentional visual configuration.
+            Good theme overrides adjust presentation without rewriting the
+            component. Prefer intentional custom properties exposed by the
+            component instead of surprise selector overrides.
         </p>
 
         <CodeExample code={goodThemeExample} />
+
+        <p>
+            If the theme needs to change layout or behaviour, the problem is
+            probably in the component layer, not the theme layer.
+        </p>
     </section>
 
     <section id="avoid" class="content-block">
@@ -111,13 +140,13 @@ const badThemeExample = `.button {
             Avoid random one-off styling
         </h2>
 
-        <p>
-            If only one button becomes purple for unclear reasons, the problem
-            is usually architecture, not branding. Random visual overrides make
-            systems inconsistent and difficult to maintain.
-        </p>
-
         <CodeExample code={badThemeExample} />
+
+        <p>
+            Random visual overrides spread inconsistency and turn brand styling
+            into folklore. If one button becomes purple for unclear reasons, the
+            problem is architecture, not creativity.
+        </p>
 
         <ul>
             <li>Do not hard-code random colours inside components.</li>
