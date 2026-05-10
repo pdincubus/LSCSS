@@ -19,18 +19,21 @@
 }
 
 .code-example pre {
+    display: block;
     max-inline-size: 100%;
     min-inline-size: 0;
     overflow-x: auto;
     margin: 0;
-    padding: var(--space-s);
-    scrollbar-gutter: stable;
+    padding: var(--space-xs) var(--space-s);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 }
 
 .code-example code {
     display: block;
-    inline-size: max-content;
-    min-inline-size: 100%;
+    min-inline-size: max-content;
+    padding: 0;
     font-family: var(--font-family-monospace, monospace);
     white-space: pre;
 }
@@ -47,14 +50,8 @@
 }
 
 @media (width < 40rem) {
-    .code-example > figcaption {
-        padding-inline: var(--space-xs);
-    }
-
-    .code-example pre {
-        padding-inline: var(--space-xs);
-    }
-
+    .code-example > figcaption,
+    .code-example pre,
     .copy-code-status {
         padding-inline: var(--space-xs);
     }
