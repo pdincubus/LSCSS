@@ -10,6 +10,22 @@ li {
     max-width: var(--measure);
 }
 
+a {
+    color: var(--colour-accent-dark);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--colour-accent);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--colour-accent);
+    outline-offset: 3px;
+}
+
 pre {
     max-inline-size: 100%;
     overflow-x: auto;
