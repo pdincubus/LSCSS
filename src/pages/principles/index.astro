@@ -15,23 +15,98 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             </h1>
 
             <p class="intro">
-                LSCSS focuses on maintainability, predictable overrides,
-                readability, and scalable CSS architecture.
+                LSCSS exists to make CSS easier to understand, safer to change,
+                and harder to accidentally ruin. Good architecture should reduce
+                decisions, not create new ones.
             </p>
         </section>
 
-        <section class="content-block">
+        <nav class="section-nav" aria-label="Principles sections">
+            <a href="#why">Why it exists</a>
+            <a href="#rules">Core rules</a>
+            <a href="#protects">What it protects</a>
+            <a href="#next">Where next</a>
+        </nav>
+
+        <section id="why" class="content-block">
+            <h2>
+                Why LSCSS exists
+            </h2>
+
+            <p>
+                Most CSS problems are not caused by missing features. They come
+                from unclear ownership, hidden technical debt, unpredictable
+                overrides, and systems nobody wants to touch twice.
+            </p>
+
+            <p>
+                LSCSS is designed to reduce that. It gives teams a predictable
+                structure for layers, naming, modifiers, state, utilities,
+                theme, legacy code, and temporary fixes.
+            </p>
+        </section>
+
+        <section id="rules" class="content-block">
+            <h2>
+                Core rules
+            </h2>
+
             <ul>
-                <li>organise CSS in explicit layers</li>
-                <li>keep styles in partials</li>
-                <li>use semantic component names</li>
-                <li>prefer shallow selectors</li>
-                <li>keep specificity low and predictable</li>
-                <li>use explicit modifier classes</li>
-                <li>use visible state classes</li>
-                <li>separate layout from components</li>
-                <li>contain hacks and legacy code</li>
+                <li>Organise CSS in explicit cascade layers.</li>
+                <li>Keep globally global styles in the base layer.</li>
+                <li>Use semantic component names and short child selectors.</li>
+                <li>Prefer shallow selectors over deep selector archaeology.</li>
+                <li>Keep specificity low and predictable.</li>
+                <li>Use modifiers for reusable variants.</li>
+                <li>Use <code>.is_*</code> and <code>.has_*</code> for visible state and conditions.</li>
+                <li>Keep utilities rare and intentional.</li>
+                <li>Theme changes presentation, not structure.</li>
+                <li>Legacy CSS stays low. Hacks stay visible.</li>
+                <li>Large files trigger review, not pride.</li>
             </ul>
+        </section>
+
+        <section id="protects" class="content-block">
+            <h2>
+                What this protects
+            </h2>
+
+            <ul>
+                <li>Layers protect override order.</li>
+                <li>Tokens protect consistency.</li>
+                <li>Custom media protects breakpoint clarity.</li>
+                <li>Scoped selectors protect ownership.</li>
+                <li>Modifiers and state protect intent.</li>
+                <li>File size guidance protects cognitive load.</li>
+            </ul>
+
+            <p>
+                None of these rules are complicated alone. Together they make
+                the system easier to debug and much harder to quietly break.
+            </p>
+        </section>
+
+        <section id="next" class="content-block">
+            <h2>
+                Where next
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3><a href="/methodology/">Core methodology</a></h3>
+                    <p>Learn how layers, naming, architecture, utilities, and theme fit together.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/decision-trees/">Decision trees</a></h3>
+                    <p>Use practical rules when a CSS decision stops being obvious.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/playground/">Playground</a></h3>
+                    <p>Break components on purpose and learn how to fix them properly.</p>
+                </article>
+            </div>
         </section>
     </main>
 </BaseLayout>
