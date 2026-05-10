@@ -8,11 +8,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 >
     <section class="site-hero">
         <p class="eyebrow">FAQ</p>
-
-        <h1>
-            Frequently asked questions
-        </h1>
-
+        <h1>Frequently asked questions</h1>
         <p class="intro">
             The questions people usually ask before adopting a CSS system, or
             after inheriting one held together by hope and important declarations.
@@ -21,60 +17,95 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
     <nav class="section-nav" aria-label="FAQ sections">
         <a href="#utilities">Utilities</a>
+        <a href="#tailwind">Tailwind</a>
         <a href="#bem">BEM</a>
         <a href="#frameworks">Frameworks</a>
+        <a href="#modules">CSS Modules</a>
         <a href="#scope">@scope</a>
+        <a href="#important">!important</a>
         <a href="#legacy">Legacy CSS</a>
         <a href="#files">File size</a>
     </nav>
 
     <section id="utilities" class="content-block">
-        <h2>
-            Is LSCSS anti-utility?
-        </h2>
+        <h2>Are utility classes always bad?</h2>
 
         <p>
-            No. It is anti-unnecessary utility chains pretending to be
-            architecture. Utilities are useful for accessibility helpers and
-            genuinely universal patterns such as <code>.vh</code> and
+            No. They are bad when they quietly become your architecture.
+            Utilities are useful for accessibility helpers and genuinely
+            universal patterns such as <code>.vh</code> and
             <code>.a11y-link</code>.
         </p>
 
         <p>
             If the same utility group keeps appearing together, it should
-            probably become a named component.
+            probably become a named component instead of a lifestyle choice.
+        </p>
+    </section>
+
+    <section id="tailwind" class="content-block">
+        <h2>Is Tailwind bad?</h2>
+
+        <p>
+            No. Tailwind is good at fast delivery, consistency, and strict
+            utility workflows. It solves real problems.
+        </p>
+
+        <p>
+            The trade-off is long-term maintainability. Utility-first often
+            wins launch week. LSCSS usually wins year two.
+        </p>
+
+        <p>
+            Choose based on the project, not internet religion.
         </p>
     </section>
 
     <section id="bem" class="content-block">
-        <h2>
-            Does LSCSS replace BEM?
-        </h2>
+        <h2>Does LSCSS replace BEM?</h2>
 
         <p>
-            It borrows useful parts of BEM, especially explicit modifiers, but
-            removes much of the naming ceremony. Short scoped child selectors,
-            layers, and state classes reduce the need for long
+            It keeps the useful parts of BEM, especially explicit modifiers,
+            but removes much of the naming ceremony. Short scoped child
+            selectors, layers, and state classes reduce the need for long
             <code>block__element--modifier</code> chains.
+        </p>
+
+        <p>
+            BEM helps naming. LSCSS fixes wider architectural problems first.
         </p>
     </section>
 
     <section id="frameworks" class="content-block">
-        <h2>
-            Does this work with frameworks?
-        </h2>
+        <h2>Does this work with React, Astro, Vue, or other frameworks?</h2>
 
         <p>
             Yes. LSCSS is CSS architecture, not a framework choice. It works
             with Astro, React, Vue, Svelte, Eleventy, server-rendered sites,
-            and large legacy systems that still have emotional ties to jQuery.
+            and large legacy systems still emotionally attached to jQuery.
+        </p>
+    </section>
+
+    <section id="modules" class="content-block">
+        <h2>What about CSS Modules?</h2>
+
+        <p>
+            CSS Modules solve local class collisions. They do not solve full
+            project architecture.
+        </p>
+
+        <p>
+            Scoped class names prevent collisions. They do not decide override
+            order, theme ownership, migration strategy, or hack management.
+        </p>
+
+        <p>
+            CSS Modules are tooling. LSCSS is methodology.
         </p>
     </section>
 
     <section id="scope" class="content-block">
-        <h2>
-            Does @scope replace LSCSS?
-        </h2>
+        <h2>Does @scope replace LSCSS?</h2>
 
         <p>
             No. <code>@scope</code> improves selector boundaries and reduces
@@ -87,10 +118,23 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </p>
     </section>
 
+    <section id="important" class="content-block">
+        <h2>Should I avoid !important completely?</h2>
+
+        <p>
+            Mostly, yes. It is usually a sign that layer order or ownership is
+            already broken.
+        </p>
+
+        <p>
+            Rare exceptions exist, especially for accessibility helpers or
+            unavoidable third-party behaviour, but if your first instinct is
+            <code>!important</code>, stop and check the architecture first.
+        </p>
+    </section>
+
     <section id="legacy" class="content-block">
-        <h2>
-            What about old projects and legacy CSS?
-        </h2>
+        <h2>What about old projects and legacy CSS?</h2>
 
         <p>
             Do not rewrite everything for sport. Start by adding layers,
@@ -100,9 +144,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </section>
 
     <section id="files" class="content-block">
-        <h2>
-            Should CSS files have a strict line limit?
-        </h2>
+        <h2>How big should a CSS file be?</h2>
 
         <p>
             No fixed number solves maintainability. The real rule is simple:
@@ -110,9 +152,29 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         </p>
 
         <p>
-            Around 300 to 400 lines is often the point where hidden
-            sub-components, repeated patterns, or old hacks start asking for
-            attention.
+            Around 300 to 400 lines is often where hidden sub-components,
+            repeated patterns, or old hacks start asking for attention.
         </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules when the answer depends on the situation.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/comparisons/">Comparisons</a></h3>
+                <p>See how LSCSS compares with BEM, Tailwind, CSS Modules, and utility-first systems.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/migration/">Migration</a></h3>
+                <p>Learn how to improve old systems without rewriting civilisation.</p>
+            </article>
+        </div>
     </section>
 </DocsLayout>
