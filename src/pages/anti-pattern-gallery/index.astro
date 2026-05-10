@@ -42,6 +42,26 @@ const rootFileFix = `components/
 
 const thirdPartyProblem = `@import './vendor/slider.css';`;
 const thirdPartyFix = `@import './vendor/slider.css' layer(legacy);`;
+
+const randomValuesProblem = `.card {
+    padding: 17px;
+    border-radius: 13px;
+    color: #4a2cff;
+}`;
+
+const randomValuesFix = `.card {
+    padding: var(--space-m);
+    border-radius: var(--br-m);
+    color: var(--colour-accent);
+}`;
+
+const stateProblem = `.button--loading {}
+.button--disabled {}
+.button--active {}`;
+
+const stateFix = `.button {}
+.button.is_loading {}
+.button.is_disabled {}`;
 ---
 
 <DocsLayout
@@ -56,150 +76,142 @@ const thirdPartyFix = `@import './vendor/slider.css' layer(legacy);`;
         </h1>
 
         <p class="intro">
-            Common CSS failures often begin as small shortcuts. These examples
-            show why they become painful and how LSCSS avoids them.
+            Most CSS disasters start as small shortcuts. These examples show
+            what breaks, why it breaks, and how LSCSS avoids the slow descent
+            into selector archaeology.
         </p>
     </section>
 
-    <section class="content-block">
-        <h2>
-            Deep selectors
-        </h2>
+    <nav class="section-nav" aria-label="Anti-pattern sections">
+        <a href="#deep-selectors">Deep selectors</a>
+        <a href="#specificity">Specificity</a>
+        <a href="#utilities">Utilities</a>
+        <a href="#random-values">Random values</a>
+        <a href="#state">State</a>
+    </nav>
+
+    <section id="deep-selectors" class="content-block">
+        <h2>Deep selectors</h2>
 
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-
                 <pre><code>{deepSelectorProblem}</code></pre>
-
-                <p>
-                    Deep selectors couple styles to markup structure and become
-                    difficult to override.
-                </p>
+                <p>Deep selectors couple styles to markup structure and become difficult to override.</p>
             </article>
 
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-
                 <pre><code>{deepSelectorFix}</code></pre>
-
-                <p>
-                    Use shallow scoped component selectors.
-                </p>
+                <p>Use shallow scoped component selectors.</p>
             </article>
         </div>
     </section>
 
-    <section class="content-block">
-        <h2>
-            Specificity escalation
-        </h2>
+    <section id="specificity" class="content-block">
+        <h2>Specificity escalation</h2>
 
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-
                 <pre><code>{specificityProblem}</code></pre>
-
-                <p>
-                    IDs and important declarations create override battles.
-                </p>
+                <p>IDs and important declarations create override battles.</p>
             </article>
 
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-
                 <pre><code>{specificityFix}</code></pre>
-
-                <p>
-                    Use layer order before increasing specificity.
-                </p>
+                <p>Use layer order before increasing specificity.</p>
             </article>
         </div>
     </section>
 
-    <section class="content-block">
-        <h2>
-            Utility overload
-        </h2>
+    <section id="utilities" class="content-block">
+        <h2>Utility overload</h2>
 
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-
                 <pre><code>{utilityProblem}</code></pre>
-
-                <p>
-                    Too many utilities can hide component intent.
-                </p>
+                <p>Too many utilities hide component intent and ownership.</p>
             </article>
 
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-
                 <pre><code>{utilityFix}</code></pre>
+                <p>Use semantic components and keep utilities rare.</p>
+            </article>
+        </div>
+    </section>
 
-                <p>
-                    Use semantic components and reserve utilities for small,
-                    clear helpers.
-                </p>
+    <section id="random-values" class="content-block">
+        <h2>Random values everywhere</h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <pre><code>{randomValuesProblem}</code></pre>
+                <p>Magic numbers and random colours destroy consistency fast.</p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <pre><code>{randomValuesFix}</code></pre>
+                <p>Use tokens so spacing, colour, and radius stay consistent.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="state" class="content-block">
+        <h2>State disguised as modifiers</h2>
+
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <pre><code>{stateProblem}</code></pre>
+                <p>Temporary UI state gets mixed with reusable component variants.</p>
+            </article>
+
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <pre><code>{stateFix}</code></pre>
+                <p>Use modifiers for variants and .is_* classes for temporary state.</p>
             </article>
         </div>
     </section>
 
     <section class="content-block">
-        <h2>
-            Massive root files
-        </h2>
+        <h2>Massive root files</h2>
 
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-
                 <pre><code>{rootFileProblem}</code></pre>
-
-                <p>
-                    Large root files make ownership and review harder.
-                </p>
+                <p>Large root files make ownership and review harder.</p>
             </article>
 
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-
                 <pre><code>{rootFileFix}</code></pre>
-
-                <p>
-                    Keep root files as import maps, not dumping grounds.
-                </p>
+                <p>Keep root files as import maps, not dumping grounds.</p>
             </article>
         </div>
     </section>
 
     <section class="content-block">
-        <h2>
-            Third-party CSS leakage
-        </h2>
+        <h2>Third-party CSS leakage</h2>
 
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-
                 <pre><code>{thirdPartyProblem}</code></pre>
-
-                <p>
-                    Unlayered third-party CSS can unexpectedly dominate your
-                    project styles.
-                </p>
+                <p>Unlayered third-party CSS can unexpectedly dominate project styles.</p>
             </article>
 
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-
                 <pre><code>{thirdPartyFix}</code></pre>
-
-                <p>
-                    Isolate third-party CSS in a low-priority layer.
-                </p>
+                <p>Isolate third-party CSS in a low-priority legacy layer.</p>
             </article>
         </div>
     </section>
