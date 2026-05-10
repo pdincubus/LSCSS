@@ -18,6 +18,18 @@ const playgroundExample = `.feature-panel {
 const stateExample = `.feature-panel.is_active {
     border-color: var(--colour-accent);
 }`;
+
+const brokenExample = `.page .wrapper .feature-panel .title {
+    color: red !important;
+}`;
+
+const fixedExample = `@layer components, theme;
+
+@layer theme {
+    .feature-panel > .title {
+        color: var(--colour-accent);
+    }
+}`;
 ---
 
 <DocsLayout
@@ -33,101 +45,104 @@ const stateExample = `.feature-panel.is_active {
 
         <p class="intro">
             A lab for testing component structure, naming, modifiers, state,
-            scope, and layering without dragging a production codebase into the
-            experiment.
+            scope, and layering without dragging production code into the fire.
         </p>
     </section>
 
-    <section class="content-block">
-        <h2>
-            Start experimenting
-        </h2>
+    <nav class="section-nav" aria-label="Playground sections">
+        <a href="#start">Start here</a>
+        <a href="#component">Component experiment</a>
+        <a href="#break">Break it</a>
+        <a href="#debug">Debug it</a>
+        <a href="#next">Next demos</a>
+    </nav>
+
+    <section id="start" class="content-block">
+        <h2>Start experimenting</h2>
 
         <div class="hub-card-grid">
             <article class="hub-card">
-                <h3>
-                    <a href="/playground/live-editor/">Live CSS editor</a>
-                </h3>
-
-                <p>
-                    Edit CSS directly and see changes against a small component
-                    example.
-                </p>
+                <h3><a href="/playground/live-editor/">Live CSS editor</a></h3>
+                <p>Edit CSS directly and test decisions against a real component.</p>
             </article>
 
             <article class="hub-card">
-                <h3>
-                    <a href="/tools/specificity-calculator/">Specificity calculator</a>
-                </h3>
-
-                <p>
-                    Test selector weight before you create an override problem
-                    that follows the team home.
-                </p>
+                <h3><a href="/tools/specificity-calculator/">Specificity calculator</a></h3>
+                <p>Check selector weight before you create an override crime scene.</p>
             </article>
 
             <article class="hub-card">
-                <h3>
-                    <a href="/tools/scope-demo/">Scope demo</a>
-                </h3>
-
-                <p>
-                    Compare scoped selectors with traditional component
-                    selectors.
-                </p>
+                <h3><a href="/tools/scope-demo/">Scope demo</a></h3>
+                <p>Compare native @scope with traditional shallow component selectors.</p>
             </article>
         </div>
     </section>
 
-    <section class="content-block">
-        <h2>
-            Basic component experiment
-        </h2>
+    <section id="component" class="content-block">
+        <h2>Basic component experiment</h2>
 
         <p>
             Start with one semantic parent component, short child classes, and
-            one deliberate modifier.
+            one deliberate modifier. If it needs five utilities and three nested
+            wrappers, the component is already filing a complaint.
         </p>
 
         <CodeExample code={playgroundExample} />
     </section>
 
     <section class="content-block">
-        <h2>
-            State experiment
-        </h2>
+        <h2>State experiment</h2>
 
         <p>
-            Use state classes for temporary or conditional UI state. Do not turn
-            every visual difference into a modifier.
+            Use state classes for temporary UI behaviour. Do not turn loading,
+            disabled, or active states into permanent modifiers.
         </p>
 
         <CodeExample code={stateExample} />
     </section>
 
-    <section class="content-block">
-        <h2>
-            Try breaking it on purpose
-        </h2>
+    <section id="break" class="content-block">
+        <h2>Break it on purpose</h2>
+
+        <p>
+            Learning is faster when you deliberately create bad CSS and then
+            fix it.
+        </p>
 
         <ol>
             <li>Add one extra level of selector nesting.</li>
-            <li>Add a modifier for something that is really temporary state.</li>
+            <li>Add a modifier for something that is temporary state.</li>
             <li>Add a utility class that duplicates component CSS.</li>
-            <li>Move the component to the wrong layer.</li>
-            <li>Fix each issue using the decision trees.</li>
+            <li>Move a theme override into the wrong layer.</li>
+            <li>Replace a token with a random hard-coded value.</li>
         </ol>
     </section>
 
-    <section class="content-block">
-        <h2>
-            Useful next demos
-        </h2>
+    <section id="debug" class="content-block">
+        <h2>Debugging flow</h2>
+
+        <p>Bad version:</p>
+        <CodeExample code={brokenExample} />
+
+        <p>Better version:</p>
+        <CodeExample code={fixedExample} />
+
+        <ol>
+            <li>Check layer order before touching specificity.</li>
+            <li>Check whether the selector is deeper than it needs to be.</li>
+            <li>Check whether state and modifier meaning are mixed together.</li>
+            <li>Check whether the value should be a token instead.</li>
+            <li>Only then decide whether the code needs a real refactor.</li>
+        </ol>
+    </section>
+
+    <section id="next" class="content-block">
+        <h2>Useful next demos</h2>
 
         <div class="hub-card-grid">
             <article class="hub-card">
                 <h3><a href="/tools/container-query-visualiser/">Container query visualiser</a></h3>
-                <p>Test component responsiveness without relying on viewport assumptions.</p>
+                <p>Test component responsiveness without viewport guesswork.</p>
             </article>
 
             <article class="hub-card">
