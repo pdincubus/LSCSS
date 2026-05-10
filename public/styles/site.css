@@ -13,4 +13,5 @@
 @import './components/example-card.css' layer(components);
 @import './components/tool-panel.css' layer(components);
 @import './components/docs-sidebar.css' layer(components);
+@import './components/code-example.css' layer(components);
 @import './components/site-footer.css' layer(components);
