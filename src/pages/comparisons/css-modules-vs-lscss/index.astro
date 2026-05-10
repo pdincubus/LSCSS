@@ -1,13 +1,28 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
 
 const title = 'CSS Modules vs LSCSS';
 const description = 'Compare CSS Modules and Layered Semantic CSS for scoping, naming, maintainability, framework use, and platform-native CSS architecture.';
+
+const modulesExample = `import styles from './ProductCard.module.css';
+
+<article className={styles.card}>
+    <h2 className={styles.title}>Product title</h2>
+</article>`;
+
+const lscssExample = `<article class="product-card">
+    <h2 class="title">Product title</h2>
+</article>`;
+
+const layerExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
 ---
 
 <DocsLayout
     title={title}
     description={description}
+    schemaType="TechArticle"
 >
     <article>
         <p class="eyebrow">Comparison</p>
@@ -19,7 +34,7 @@ const description = 'Compare CSS Modules and Layered Semantic CSS for scoping, n
         <p>
             CSS Modules solve scoping by tying styles to components at build
             time. LSCSS solves architecture by organising CSS around layers,
-            semantics, modifiers, and state.
+            semantics, modifiers, state, and predictable ownership.
         </p>
 
         <p>
@@ -27,53 +42,113 @@ const description = 'Compare CSS Modules and Layered Semantic CSS for scoping, n
             Scoping is not the same as architecture.
         </p>
 
-        <h2>
-            Main differences
-        </h2>
+        <nav class="section-nav" aria-label="CSS Modules and LSCSS comparison sections">
+            <a href="#differences">Differences</a>
+            <a href="#scoping">Scoping</a>
+            <a href="#layers">Architecture</a>
+            <a href="#when-to-use">When to use</a>
+        </nav>
 
-        <ul>
-            <li>CSS Modules generate scoped class names</li>
-            <li>LSCSS uses explicit naming and cascade structure</li>
-            <li>CSS Modules are tied to build tooling and component imports</li>
-            <li>LSCSS works with plain CSS and platform features</li>
-            <li>CSS Modules reduce accidental global leakage</li>
-            <li>LSCSS gives wider rules for layers, state, modifiers, and migration</li>
-        </ul>
+        <section id="differences" class="content-block">
+            <h2>
+                Main differences
+            </h2>
 
-        <h2>
-            Where CSS Modules work well</h2>
+            <ul>
+                <li>CSS Modules generate scoped class names.</li>
+                <li>LSCSS uses explicit naming and cascade structure.</li>
+                <li>CSS Modules are tied to build tooling and component imports.</li>
+                <li>LSCSS works with plain CSS and platform features.</li>
+                <li>CSS Modules reduce accidental global leakage.</li>
+                <li>LSCSS adds wider rules for layers, state, modifiers, and migration.</li>
+            </ul>
+        </section>
 
-        <ul>
-            <li>component-heavy framework applications</li>
-            <li>teams already using React, Vue, Svelte, or similar tooling</li>
-            <li>projects where local scoping is the main styling problem</li>
-        </ul>
+        <section id="scoping" class="content-block">
+            <h2>
+                Scoping comparison
+            </h2>
 
-        <h2>
-            Where LSCSS helps more
-        </h2>
+            <p>
+                CSS Modules create ownership through generated local class names.
+            </p>
 
-        <ul>
-            <li>static-first sites and content-heavy projects</li>
-            <li>projects needing clear global architecture</li>
-            <li>legacy migration work</li>
-            <li>teams wanting CSS that stays understandable outside one framework</li>
-        </ul>
+            <CodeExample code={modulesExample} language="jsx" />
 
-        <h2>
-            Recommended reading
-        </h2>
+            <p>
+                LSCSS creates ownership through semantic naming and shallow
+                scoped selectors.
+            </p>
 
-        <ul>
-            <li><a href="/layers/">Layers</a></li>
-            <li><a href="/naming/">Naming</a></li>
-            <li><a href="/modern-css/">Modern CSS</a></li>
-            <li><a href="/guides/migrating-legacy-css/">Migrating legacy CSS</a></li>
-        </ul>
+            <CodeExample code={lscssExample} language="html" />
+
+            <p>
+                CSS Modules protect against accidental collisions. LSCSS focuses
+                more on making the system readable and predictable across the
+                whole project.
+            </p>
+        </section>
+
+        <section id="layers" class="content-block">
+            <h2>
+                Architecture beyond scoping
+            </h2>
+
+            <p>
+                Scoped class names do not solve override order, legacy CSS,
+                theme ownership, or temporary hacks. LSCSS uses explicit layers
+                for that.
+            </p>
+
+            <CodeExample code={layerExample} />
+
+            <p>
+                This is the biggest difference. CSS Modules protect a component.
+                LSCSS protects the wider system.
+            </p>
+        </section>
+
+        <section id="when-to-use" class="content-block">
+            <h2>
+                Where CSS Modules work well
+            </h2>
+
+            <ul>
+                <li>component-heavy framework applications</li>
+                <li>teams already using React, Vue, Svelte, or similar tooling</li>
+                <li>projects where local scoping is the main styling problem</li>
+                <li>teams wanting strict import-based ownership</li>
+            </ul>
+
+            <h2>
+                Where LSCSS helps more
+            </h2>
+
+            <ul>
+                <li>static-first sites and content-heavy projects</li>
+                <li>projects needing clear global architecture</li>
+                <li>legacy migration work</li>
+                <li>teams wanting CSS that stays understandable outside one framework</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Recommended reading
+            </h2>
+
+            <ul>
+                <li><a href="/layers/">Layers</a></li>
+                <li><a href="/naming/">Naming</a></li>
+                <li><a href="/architecture/">Architecture</a></li>
+                <li><a href="/guides/migrating-legacy-css/">Migrating legacy CSS</a></li>
+            </ul>
+        </section>
 
         <p>
-            CSS Modules can protect a component. LSCSS helps protect the system.
-            Useful projects often need both ideas, even if they do not use both tools.
+            CSS Modules help stop collisions. LSCSS helps stop confusion.
+            Useful teams often borrow both ideas, even when they only use one
+            formal system.
         </p>
     </article>
 </DocsLayout>
