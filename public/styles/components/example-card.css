@@ -16,6 +16,11 @@
     padding: var(--space-s) var(--space-m);
     border-radius: var(--radius-s);
     background: var(--colour-accent);
-    color: var(--colour-background);
+    color: var(--c-white);
     text-decoration: none;
+}
+
+.example-card > .button:hover,
+.example-card > .button:focus-visible {
+    background: var(--colour-accent-dark);
 }
