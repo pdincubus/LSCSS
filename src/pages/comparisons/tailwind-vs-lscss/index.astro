@@ -18,6 +18,16 @@ const lscssExample = `<article class="product-card">
 const utilityExample = `.vh
 .a11y-link
 .a11y-link--focusable`;
+
+const firstQuestionExample = `Ask first:
+Do you need speed today,
+or maintainability six months later?
+
+Fast delivery and strict utility workflows
+→ Tailwind often wins early
+
+Long-lived systems and readable ownership
+→ LSCSS usually wins later`;
 ---
 
 <DocsLayout
@@ -39,16 +49,30 @@ const utilityExample = `.vh
         </p>
 
         <p>
-            Both approaches try to reduce chaos. They simply choose different
-            places to store the decisions.
+            Both approaches reduce chaos. They simply choose different places to
+            store the decisions, and different kinds of pain to live with.
         </p>
 
         <nav class="section-nav" aria-label="Tailwind and LSCSS comparison sections">
+            <a href="#first">Start first</a>
             <a href="#differences">Differences</a>
             <a href="#markup">Markup</a>
             <a href="#utilities">Utilities</a>
             <a href="#when-to-use">When to use</a>
         </nav>
+
+        <section id="first" class="content-block">
+            <h2>
+                Ask this first
+            </h2>
+
+            <CodeExample code={firstQuestionExample} language="text" />
+
+            <p>
+                Most teams are not choosing between good and bad. They are
+                choosing which trade-off hurts less for their project.
+            </p>
+        </section>
 
         <section id="differences" class="content-block">
             <h2>
@@ -62,6 +86,8 @@ const utilityExample = `.vh
                 <li>LSCSS reduces HTML noise and keeps design decisions in CSS.</li>
                 <li>Tailwind relies heavily on utility composition.</li>
                 <li>LSCSS prefers explicit components, modifiers, and state classes.</li>
+                <li>Tailwind optimises delivery speed.</li>
+                <li>LSCSS optimises long-term ownership and maintainability.</li>
             </ul>
         </section>
 
@@ -78,14 +104,19 @@ const utilityExample = `.vh
             <CodeExample code={tailwindExample} language="html" />
 
             <p>
+                This is fast, explicit, and easy to ship. It is also noisier,
+                and long-lived projects can end up reading like a styling spreadsheet.
+            </p>
+
+            <p>
                 LSCSS keeps the structure semantic and lets CSS own styling.
             </p>
 
             <CodeExample code={lscssExample} language="html" />
 
             <p>
-                Neither is automatically right or wrong. The trade-off is speed
-                versus long-term readability and maintainability.
+                This creates cleaner ownership and calmer HTML, but requires
+                stronger architectural discipline instead of utility convenience.
             </p>
         </section>
 
@@ -104,7 +135,7 @@ const utilityExample = `.vh
 
             <p>
                 In LSCSS, if a group of utilities keeps appearing together, it
-                is usually a component asking to be named.
+                is usually a component asking to be named, not a lifestyle choice.
             </p>
         </section>
 
@@ -116,7 +147,7 @@ const utilityExample = `.vh
             <ul>
                 <li>fast product delivery with small teams</li>
                 <li>design systems with strict tokens and strong constraints</li>
-                <li>applications where delivery speed matters more than semantic HTML</li>
+                <li>applications where shipping speed matters more than semantic HTML</li>
                 <li>teams already heavily invested in utility-first workflows</li>
             </ul>
 
@@ -130,19 +161,33 @@ const utilityExample = `.vh
                 <li>projects with strong accessibility and progressive enhancement goals</li>
                 <li>systems where component architecture matters more than rapid utility composition</li>
             </ul>
+
+            <p>
+                Tailwind wins launch week more often. LSCSS usually wins year two.
+            </p>
         </section>
 
         <section class="content-block">
             <h2>
-                Recommended reading
+                Next useful pages
             </h2>
 
-            <ul>
-                <li><a href="/utilities/">Utilities</a></li>
-                <li><a href="/architecture/">Architecture</a></li>
-                <li><a href="/theme-layer/">Theme layer</a></li>
-                <li><a href="/decision-trees/">Decision trees</a></li>
-            </ul>
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3><a href="/methodology/">Core methodology</a></h3>
+                    <p>See how LSCSS works as a full system, not only a naming preference.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/starter-template/">Starter template</a></h3>
+                    <p>See what a semantic layered project looks like without utility-first markup.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/decision-trees/">Decision trees</a></h3>
+                    <p>Use practical rules when deciding whether something should be a utility or a component.</p>
+                </article>
+            </div>
         </section>
 
         <p>
