@@ -55,6 +55,16 @@ const avoidExample = `.product-card h2 {
     line-height: 1.1;
     margin-top: 0;
 }`;
+
+const decisionExample = `Ask:
+Should this apply across the whole site by default?
+→ Base layer
+
+Is this specific to one component?
+→ Component
+
+Is this visual branding only?
+→ Theme, not base`;
 ---
 
 <DocsLayout
@@ -72,17 +82,31 @@ const avoidExample = `.product-card h2 {
         <p class="intro">
             Some CSS should still be genuinely global. Resets, base typography,
             document defaults, and shared element behaviour belong in the base
-            layer because they apply across the whole site.
+            layer. The goal is sensible defaults, not styling the entire internet.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Base styles sections">
+        <a href="#rules">Decision rules</a>
         <a href="#what-belongs-here">What belongs here</a>
         <a href="#base-layer">Base layer</a>
         <a href="#reset">Reset</a>
         <a href="#typography">Typography</a>
         <a href="#avoid">Avoid repetition</a>
     </nav>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Quick decision rules
+        </h2>
+
+        <CodeExample code={decisionExample} language="text" />
+
+        <p>
+            Base styles should be predictable and boring. If a global rule feels
+            surprising, it probably belongs somewhere else.
+        </p>
+    </section>
 
     <section id="what-belongs-here" class="content-block">
         <h2>
@@ -118,7 +142,7 @@ const avoidExample = `.product-card h2 {
 
         <p>
             This gives the project stable defaults without making global element
-            selectors more powerful than component styles.
+            selectors stronger than component ownership.
         </p>
     </section>
 
@@ -144,7 +168,7 @@ const avoidExample = `.product-card h2 {
             Typography defaults should usually be defined once. Components can
             adjust typography when they need a specific pattern, but repeated
             heading and paragraph defaults should not be copied into every
-            component partial.
+            component partial like an apology note.
         </p>
 
         <CodeExample code={typographyExample} />
