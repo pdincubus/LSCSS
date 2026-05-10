@@ -1,5 +1,53 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
+
+const folderStructure = `css/
+    site.css
+
+    settings/
+        variables.css
+        custom-media.css
+        fonts.css
+
+    base/
+        reset.css
+        typography.css
+        forms.css
+
+    utilities/
+        accessibility.css
+
+    layout/
+        site-header.css
+        site-footer.css
+        grid.css
+
+    components/
+        product-card.css
+        feature-panel.css
+        modal.css
+
+    theme/
+        brand.css
+        dark-mode.css
+
+    legacy/
+        vendor.css
+        old-site.css
+
+    hacks/
+        temporary-fixes.css`;
+
+const siteCssExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;
+
+@import './legacy/vendor.css' layer(legacy);
+@import './settings/variables.css' layer(settings);
+@import './base/reset.css' layer(base);
+@import './components/product-card.css' layer(components);
+@import './theme/brand.css' layer(theme);
+@import './hacks/temporary-fixes.css' layer(hacks);`;
 ---
 
 <DocsLayout
@@ -12,24 +60,79 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <h1>
             Starter structure
         </h1>
+
+        <p class="intro">
+            Start with a predictable structure. Good architecture should remove
+            decisions, not create new ones every Monday morning.
+        </p>
     </section>
 
-    <section class="content-block">
-<pre><code>css/
-    settings/
-    base/
-    utilities/
-    layout/
-    components/
-    theme/
-    legacy/
-    hacks/</code></pre>
-    </section>
+    <nav class="section-nav" aria-label="Starter template sections">
+        <a href="#structure">Folder structure</a>
+        <a href="#site-css">Root file</a>
+        <a href="#rules">Rules</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
 
-    <section class="content-block">
+    <section id="structure" class="content-block">
+        <h2>
+            Recommended folder structure
+        </h2>
+
+        <CodeExample code={folderStructure} language="text" />
+
         <p>
-            Each component should live in its own partial and belong to a clear
-            layer.
+            Root files should be import maps, not giant CSS graveyards. Each
+            component should live in its own partial with a clear responsibility.
+        </p>
+    </section>
+
+    <section id="site-css" class="content-block">
+        <h2>
+            Root CSS file
+        </h2>
+
+        <p>
+            Your main stylesheet should define layer order first, then import
+            files into the correct layer. This controls precedence before a
+            single selector is written.
+        </p>
+
+        <CodeExample code={siteCssExample} />
+    </section>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Working rules
+        </h2>
+
+        <ul>
+            <li>One component, one partial.</li>
+            <li>Base styles stay in the base layer.</li>
+            <li>Utilities stay rare and purposeful.</li>
+            <li>Theme changes presentation, not structure.</li>
+            <li>Legacy CSS stays low in the cascade.</li>
+            <li>Hacks are temporary and visible.</li>
+            <li>Large files trigger review, not pride.</li>
+        </ul>
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            What to avoid
+        </h2>
+
+        <ul>
+            <li>One giant site.css containing everything.</li>
+            <li>Component styles mixed into reset or base files.</li>
+            <li>Random colours and spacing values spread across components.</li>
+            <li>Third-party CSS imported without a legacy layer.</li>
+            <li>Temporary fixes hidden inside normal component files.</li>
+            <li>Utility chains replacing actual component architecture.</li>
+        </ul>
+
+        <p>
+            If the project becomes difficult to explain, it will become worse to maintain.
         </p>
     </section>
 </DocsLayout>
