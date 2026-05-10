@@ -62,17 +62,40 @@ const sections = [
         <p class="intro">
             LSCSS is not a naming trick. It is a full operating model for CSS:
             layers, ownership, predictable overrides, safe defaults, and rules
-            that stop small shortcuts becoming expensive maintenance.
+            that stop small shortcuts becoming expensive maintenance contracts.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Core methodology sections">
+        <a href="#first">Start first</a>
         <a href="#sections">Sections</a>
         <a href="#protects">What it protects</a>
         <a href="#entry-points">Where to start</a>
         <a href="/decision-trees/">Decision trees</a>
-        <a href="/starter-template/">Starter template</a>
     </nav>
+
+    <section id="first" class="content-block">
+        <h2>
+            Ask this first
+        </h2>
+
+        <p>
+            Before writing CSS, decide what you are protecting.
+        </p>
+
+        <ul>
+            <li>Are you protecting override order?</li>
+            <li>Are you protecting ownership and readability?</li>
+            <li>Are you protecting accessibility and performance?</li>
+            <li>Are you protecting maintainability for the next developer?</li>
+            <li>Or are you only solving today and billing tomorrow?</li>
+        </ul>
+
+        <p>
+            Good methodology is not about stricter rules. It is about making
+            the safe choice easier than the quick mistake.
+        </p>
+    </section>
 
     <section id="sections" class="content-block">
         <h2>
@@ -141,8 +164,13 @@ const sections = [
 
             <article class="hub-card">
                 <h3><a href="/starter-template/">Use the starter structure</a></h3>
-                <p>Begin with a predictable folder structure before site.css becomes folklore.</p>
+                <p>Begin with predictable architecture before site.css becomes local folklore.</p>
             </article>
         </div>
+
+        <p>
+            The goal is not perfect CSS. The goal is CSS people can trust six
+            months later without opening the browser and preparing emotionally.
+        </p>
     </section>
 </DocsLayout>
