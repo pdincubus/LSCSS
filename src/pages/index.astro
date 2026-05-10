@@ -15,7 +15,7 @@ const folderStructureExample = `css/
 
 <BaseLayout
     title="LSCSS. Layered Semantic CSS"
-    description="A practical CSS methodology for cascade layers, semantic naming, shallow selectors, clear modifiers, and explicit state classes."
+    description="A practical CSS methodology for layers, semantic naming, shallow selectors, modifiers, state classes, and maintainable front-end architecture."
 >
     <main class="page-shell">
         <section class="site-hero">
@@ -26,13 +26,56 @@ const folderStructureExample = `css/
             </h1>
 
             <p class="intro">
-                A practical CSS methodology for cascade layers, semantic naming,
-                shallow selectors, clear modifiers, and explicit state classes.
+                CSS architecture for teams tired of specificity wars, giant
+                stylesheets, random utility chains, and one button turning
+                purple for no documented reason.
             </p>
 
             <div class="hero-actions">
-                <a href="/principles/">Start reading</a>
-                <a href="/search/">Search the docs</a>
+                <a href="/methodology/">Start with the methodology</a>
+                <a href="/playground/">Try the playground</a>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                What LSCSS solves
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3>
+                        Predictable overrides
+                    </h3>
+
+                    <p>
+                        Use cascade layers before specificity fights begin.
+                        Override order should be architecture, not luck.
+                    </p>
+                </article>
+
+                <article class="hub-card">
+                    <h3>
+                        Maintainable components
+                    </h3>
+
+                    <p>
+                        Use semantic component names, shallow selectors,
+                        explicit modifiers, and state classes people can still
+                        understand six months later.
+                    </p>
+                </article>
+
+                <article class="hub-card">
+                    <h3>
+                        Safer long-term systems
+                    </h3>
+
+                    <p>
+                        Keep legacy low, hacks visible, tokens consistent, and
+                        file size under control so maintenance stays possible.
+                    </p>
+                </article>
             </div>
         </section>
 
@@ -59,19 +102,19 @@ const folderStructureExample = `css/
                     </h3>
 
                     <p>
-                        Work out whether you need a utility, modifier, state
-                        class, @scope rule, theme layer, or isolated hack.
+                        Decide whether something belongs in utilities, theme,
+                        modifiers, state, hacks, or a proper component.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/tools/">3. Try the tools</a>
+                        <a href="/starter-template/">3. Start with the template</a>
                     </h3>
 
                     <p>
-                        Use live demos and visualisers to test decisions before
-                        they become expensive technical debt.
+                        Use a sensible project structure before your root CSS
+                        file becomes an archaeological dig site.
                     </p>
                 </article>
             </div>
@@ -79,7 +122,7 @@ const folderStructureExample = `css/
 
         <section class="content-block">
             <h2>
-                Popular paths
+                Common routes
             </h2>
 
             <div class="hub-card-grid">
@@ -89,30 +132,30 @@ const folderStructureExample = `css/
                     </h3>
 
                     <p>
-                        Use the decision trees when choosing between layers,
-                        modifiers, state classes, @scope, utilities, or hacks.
+                        Use decision trees for layers, modifiers, state,
+                        utilities, @scope, theme, and hacks.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/migration/">I need to migrate existing CSS</a>
+                        <a href="/migration/">I need to migrate legacy CSS</a>
                     </h3>
 
                     <p>
-                        Follow a gradual adoption path for legacy CSS without a
-                        full rewrite.
+                        Improve existing projects without rewriting everything
+                        for sport and upsetting everyone involved.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/examples/">I want practical examples</a>
+                        <a href="/comparisons/">I need to compare approaches</a>
                     </h3>
 
                     <p>
-                        Start with real component patterns, compare good and bad
-                        examples, then try them in the playground.
+                        Compare LSCSS with BEM, Tailwind, CSS Modules,
+                        utility-first workflows, and native @scope.
                     </p>
                 </article>
             </div>
@@ -125,43 +168,33 @@ const folderStructureExample = `css/
 
             <div class="hub-card-grid">
                 <article class="hub-card">
-                    <h3><a href="/tools/specificity-calculator/">Specificity calculator</a></h3>
-                    <p>Compare selector weight and avoid override chaos before it starts.</p>
-                </article>
-
-                <article class="hub-card">
-                    <h3><a href="/tools/container-query-visualiser/">Container query visualiser</a></h3>
-                    <p>See how component-led responsiveness behaves inside real containers.</p>
-                </article>
-
-                <article class="hub-card">
-                    <h3><a href="/tools/accessibility-demos/">Accessibility demos</a></h3>
-                    <p>Explore focus states, reduced motion, and interaction patterns.</p>
-                </article>
-
-                <article class="hub-card">
-                    <h3><a href="/tools/performance-demos/">Performance demos</a></h3>
-                    <p>Review animation cost, CSS weight, and long-term performance trade-offs.</p>
-                </article>
-
-                <article class="hub-card">
-                    <h3><a href="/tools/browser-support-demos/">Browser support demos</a></h3>
-                    <p>Use feature support instead of outdated browser version guessing.</p>
+                    <h3><a href="/specificity-visualiser/">Specificity visualiser</a></h3>
+                    <p>See why selectors win and why layers usually matter first.</p>
                 </article>
 
                 <article class="hub-card">
                     <h3><a href="/playground/live-editor/">Live CSS editor</a></h3>
-                    <p>Test LSCSS patterns directly in a small live component sandbox.</p>
+                    <p>Break components on purpose and learn how to fix them properly.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/tools/container-query-visualiser/">Container query visualiser</a></h3>
+                    <p>Test component-led responsiveness without viewport guesswork.</p>
                 </article>
             </div>
         </section>
 
         <section class="content-block">
             <h2>
-                Example structure
+                Starter structure
             </h2>
 
             <CodeExample code={folderStructureExample} language="text" />
+
+            <p>
+                Good architecture should remove repeated decisions. Start with
+                structure first, not emergency fixes later.
+            </p>
         </section>
     </main>
 </BaseLayout>
