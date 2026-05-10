@@ -1,7 +1,7 @@
 .code-example {
     max-inline-size: 100%;
     min-inline-size: 0;
-    margin: var(--space-m) 0;
+    margin-block: var(--space-m);
     border: var(--border-thin) solid var(--colour-border);
     border-radius: var(--radius-m);
     background: var(--colour-surface);
@@ -10,29 +10,24 @@
 
 .code-example > figcaption {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: var(--space-s);
     padding: var(--space-xs) var(--space-s);
-    border-bottom: var(--border-thin) solid var(--colour-border);
+    border-block-end: var(--border-thin) solid var(--colour-border);
     font-size: var(--step--1);
 }
 
 .code-example pre {
-    display: block;
-    max-inline-size: 100%;
-    min-inline-size: 0;
     overflow-x: auto;
     margin: 0;
     padding: var(--space-xs) var(--space-s);
     background: transparent;
-    border: 0;
-    border-radius: 0;
 }
 
 .code-example code {
-    display: block;
-    min-inline-size: max-content;
+    display: inline-block;
+    min-inline-size: 100%;
     padding: 0;
     font-family: var(--font-family-monospace, monospace);
     white-space: pre;
@@ -47,6 +42,10 @@
     margin: 0;
     padding: 0 var(--space-s) var(--space-xs);
     font-size: var(--step--1);
+}
+
+.copy-code-status:empty {
+    display: none;
 }
 
 @media (width < 40rem) {
