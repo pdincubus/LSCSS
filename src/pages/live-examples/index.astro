@@ -9,6 +9,27 @@ const exampleCardCss = `.example-card {
 
 .example-card > .title {
     margin: 0;
+}
+
+.example-card--featured {
+    border-color: var(--colour-accent);
+}`;
+
+const stateExample = `.example-card.is_loading {
+    opacity: 0.7;
+    pointer-events: none;
+}`;
+
+const badExample = `.page .wrapper .card .title {
+    color: red !important;
+}`;
+
+const betterExample = `@layer components, theme;
+
+@layer theme {
+    .example-card > .title {
+        color: var(--colour-accent);
+    }
 }`;
 ---
 
@@ -24,28 +45,114 @@ const exampleCardCss = `.example-card {
         </h1>
 
         <p class="intro">
-            Practical examples combining semantic structure, layers,
-            accessibility, and modern CSS features.
+            This is where theory has to behave in public. Real rendered examples
+            showing semantic structure, layers, accessibility, and modern CSS
+            decisions without hiding behind diagrams.
         </p>
     </section>
 
-    <section class="content-block">
-        <article class="example-card">
-            <h2 class="title">
-                Product card
-            </h2>
+    <nav class="section-nav" aria-label="Live examples sections">
+        <a href="#product-card">Product card</a>
+        <a href="#state">State example</a>
+        <a href="#compare">Bad vs better</a>
+        <a href="#next">Next examples</a>
+    </nav>
+
+    <section id="product-card" class="content-block">
+        <h2>
+            Product card example
+        </h2>
+
+        <article class="example-card example-card--featured">
+            <h3 class="title">
+                Example product
+            </h3>
 
             <p>
-                Example semantic component structure using shallow selectors.
+                Semantic component structure using shallow selectors, deliberate
+                modifiers, and predictable ownership.
             </p>
 
             <a class="button" href="#">
                 View product
             </a>
         </article>
+
+        <p>
+            One clear parent. Short child classes. One real modifier. No utility
+            soup. No selector archaeology.
+        </p>
     </section>
 
     <section class="content-block">
+        <h2>
+            Product card CSS
+        </h2>
+
         <CodeExample code={exampleCardCss} />
+    </section>
+
+    <section id="state" class="content-block">
+        <h2>
+            State example
+        </h2>
+
+        <p>
+            Temporary behaviour should be visible and explicit. Loading is not
+            a modifier pretending to be permanent architecture.
+        </p>
+
+        <CodeExample code={stateExample} />
+    </section>
+
+    <section id="compare" class="content-block">
+        <h2>
+            Bad versus better
+        </h2>
+
+        <p>
+            Seeing the broken version first makes the architectural decision
+            easier to recognise.
+        </p>
+
+        <p>
+            Bad version:
+        </p>
+
+        <CodeExample code={badExample} />
+
+        <p>
+            Better version:
+        </p>
+
+        <CodeExample code={betterExample} />
+
+        <p>
+            Check layer order before increasing specificity. Most CSS fights are
+            ownership problems wearing selector costumes.
+        </p>
+    </section>
+
+    <section id="next" class="content-block">
+        <h2>
+            Useful next examples
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/examples/">Practical examples</a></h3>
+                <p>Compare code structure and learn what good patterns look like.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/playground/">Playground</a></h3>
+                <p>Break things safely and learn how architecture fails.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+                <p>Recognise common CSS crimes before they become family traditions.</p>
+            </article>
+        </div>
     </section>
 </DocsLayout>
