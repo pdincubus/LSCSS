@@ -1,218 +1,152 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
-import CodeExample from '../../components/CodeExample.astro';
 
-const markupExample = `<article class="product-card product-card--featured">
-    <a class="link" href="/products/example/">
-        <img class="image" src="/example.jpg" alt="">
-        <h2 class="title">Example product</h2>
-        <p class="price">£24</p>
-    </a>
+const deepBad = `.page .content .card .header .title {
+    margin-bottom: 1rem;
+}`;
+
+const deepGood = `.product-card > .title {
+    margin-block-end: var(--space);
+}`;
+
+const utilityBad = `<article class="p-l m-b-xl bg-dark text-light radius-m grid gap-m">
+    ...
 </article>`;
 
-const componentCssExample = `.product-card {
-    display: grid;
-    gap: var(--space-m);
-}
+const utilityGood = `<article class="product-card product-card--featured">
+    ...
+</article>`;
 
-.product-card > .link {
-    color: inherit;
-    text-decoration: none;
-}
+const stateBad = `.button--loading {}
+.button--active {}
+.button--disabled {}`;
 
-.product-card > .link > .title {
-    margin-block: 0;
-}
-
-.product-card--featured {
-    border-color: var(--colour-accent);
-}`;
-
-const badExample = `.featured-product-card-box {
-    margin-bottom: 16px;
-}
-
-.featured-product-card-box .product-title {
-    font-size: 32px;
-}
-
-.active {
-    border: 2px solid purple;
-}`;
+const stateGood = `.button {}
+.button.is_loading {}
+.button.is_disabled {}`;
 ---
 
 <DocsLayout
-    title="LSCSS Examples"
-    description="Practical Layered Semantic CSS examples."
+    title="Examples Library"
+    description="Practical before and after examples for Layered Semantic CSS."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Examples</p>
-
-        <h1>
-            Practical examples
-        </h1>
-
+        <h1>Show me, do not merely explain</h1>
         <p class="intro">
-            Good CSS is easier to recognise when you can compare it with the bad
-            version first. These examples show how naming, layers, ownership,
-            and state look in real components instead of theory slides.
+            Principles matter. Examples end arguments. These before and after
+            patterns show what architectural improvement looks like in real CSS,
+            not only in confident documentation.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Examples sections">
-        <a href="#start">Start here</a>
-        <a href="#before-after">Before and after</a>
-        <a href="#product-card">Component example</a>
-        <a href="#practice">What to practise</a>
+        <a href="#selectors">Deep selectors</a>
+        <a href="#utilities">Utility overload</a>
+        <a href="#state">Modifier vs state</a>
+        <a href="#legacy">Legacy migration</a>
+        <a href="#hacks">Temporary fixes</a>
     </nav>
 
-    <section id="start" class="content-block">
-        <h2>
-            Start with the core pattern
-        </h2>
+    <section id="selectors" class="content-block">
+        <h2>Deep selectors to shallow ownership</h2>
 
-        <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3>
-                    <a href="#product-card">Product card</a>
-                </h3>
+        <h3>Before</h3>
+        <pre><code>{deepBad}</code></pre>
 
-                <p>
-                    Semantic naming, shallow selectors, clear modifiers, and
-                    predictable ownership.
-                </p>
-            </article>
-
-            <article class="hub-card">
-                <h3>
-                    <a href="/live-examples/">Live examples</a>
-                </h3>
-
-                <p>
-                    Rendered components connecting structure, accessibility,
-                    and visible output.
-                </p>
-            </article>
-
-            <article class="hub-card">
-                <h3>
-                    <a href="/starter-template/">Starter template</a>
-                </h3>
-
-                <p>
-                    Apply folder structure, layers, and naming correctly from day one.
-                </p>
-            </article>
-        </div>
-    </section>
-
-    <section id="before-after" class="content-block">
-        <h2>
-            Before and after
-        </h2>
+        <h3>After</h3>
+        <pre><code>{deepGood}</code></pre>
 
         <p>
-            Most teams do not start with clean architecture. They inherit vague
-            names, deep selectors, and state classes that explain nothing.
-        </p>
-
-        <p>
-            Bad version:
-        </p>
-
-        <CodeExample code={badExample} />
-
-        <p>
-            Better version:
-        </p>
-
-        <CodeExample code={componentCssExample} />
-
-        <p>
-            The goal is not prettier code for screenshots. It is predictable
-            ownership and easier debugging six months later.
+            Deep selectors couple CSS to markup structure. Short scoped
+            selectors make ownership obvious and safe to change.
         </p>
     </section>
 
-    <section id="product-card" class="content-block">
-        <h2>
-            Product card markup
-        </h2>
+    <section id="utilities" class="content-block">
+        <h2>Utility overload to semantic components</h2>
+
+        <h3>Before</h3>
+        <pre><code>{utilityBad}</code></pre>
+
+        <h3>After</h3>
+        <pre><code>{utilityGood}</code></pre>
 
         <p>
-            The component name describes the block. Child classes stay short
-            because the parent already provides context.
+            Repeated utility stacks usually mean a component is trying to exist.
+            Name it once instead of explaining it forever.
         </p>
-
-        <CodeExample code={markupExample} language="html" />
     </section>
 
-    <section class="content-block">
-        <h2>
-            Product card CSS
-        </h2>
+    <section id="state" class="content-block">
+        <h2>State disguised as modifiers</h2>
+
+        <h3>Before</h3>
+        <pre><code>{stateBad}</code></pre>
+
+        <h3>After</h3>
+        <pre><code>{stateGood}</code></pre>
 
         <p>
-            Keep selectors shallow, use modifiers deliberately, and avoid
-            turning temporary state into permanent naming decisions.
+            Permanent reusable variants are modifiers. Temporary UI behaviour
+            should be visible as state.
+        </p>
+    </section>
+
+    <section id="legacy" class="content-block">
+        <h2>Legacy migration example</h2>
+
+        <p>
+            Do not move old CSS into new components and call it progress.
+            Create a legacy layer first, then improve active work safely.
         </p>
 
-        <CodeExample code={componentCssExample} />
+        <pre><code>@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;</code></pre>
+
+        <p>
+            Legacy should stay visible and low priority, not quietly spread.
+        </p>
+    </section>
+
+    <section id="hacks" class="content-block">
+        <h2>Temporary fixes becoming permanent residents</h2>
+
+        <p>
+            If a hack will still exist in six months, it is probably a real fix
+            pretending to be temporary.
+        </p>
+
+        <pre><code>@layer hacks {
+    .checkout-banner {
+        margin-top: -3px;
+    }
+}</code></pre>
+
+        <p>
+            Keep hacks visible. Hidden hacks become architecture by accident.
+        </p>
     </section>
 
     <section class="content-block">
-        <h2>
-            Compare good and bad patterns
-        </h2>
+        <h2>Next useful pages</h2>
 
         <div class="hub-card-grid">
             <article class="hub-card">
-                <h3>
-                    <a href="/anti-pattern-gallery/">Anti-pattern gallery</a>
-                </h3>
-
-                <p>
-                    Selector chaos, specificity fights, over-nesting, and names
-                    that aged badly.
-                </p>
+                <h3><a href="/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+                <p>Recognise the bad patterns before they become normal.</p>
             </article>
 
             <article class="hub-card">
-                <h3>
-                    <a href="/comparisons/">Comparisons</a>
-                </h3>
-
-                <p>
-                    Compare LSCSS with BEM, scoped CSS, utility-first systems,
-                    and modern CSS features.
-                </p>
+                <h3><a href="/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules when deciding how to improve code.</p>
             </article>
 
             <article class="hub-card">
-                <h3>
-                    <a href="/migration/">Migration examples</a>
-                </h3>
-
-                <p>
-                    Move from legacy CSS toward a layered, semantic structure
-                    without setting fire to delivery.
-                </p>
+                <h3><a href="/audit-checklist/">Audit checklist</a></h3>
+                <p>Review existing codebases using the same standards shown here.</p>
             </article>
         </div>
-    </section>
-
-    <section id="practice" class="content-block">
-        <h2>
-            What to practise next
-        </h2>
-
-        <ol>
-            <li>Pick a real component from an existing project.</li>
-            <li>Name the parent semantically.</li>
-            <li>Replace deep selectors with shallow child selectors.</li>
-            <li>Add modifiers only for real reusable variants.</li>
-            <li>Use explicit state classes for temporary behaviour.</li>
-            <li>Place the CSS in the correct layer and partial.</li>
-        </ol>
     </section>
 </DocsLayout>
