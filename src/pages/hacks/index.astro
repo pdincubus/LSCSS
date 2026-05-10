@@ -7,11 +7,30 @@ const hacksExample = `@layer hacks {
         inset-block-start: -1px;
     }
 }`;
+
+const badExample = `.product-card {
+    margin-block-end: 12px !important;
+}
+
+.site-header {
+    z-index: 999999;
+}`;
+
+const decisionExample = `Ask:
+Is this temporary and urgent?
+→ Hacks
+
+Is this a real structural fix?
+→ Component or layout
+
+Is this only visual presentation?
+→ Theme, not hacks`;
 ---
 
 <DocsLayout
     title="LSCSS Hacks"
     description="Handling unavoidable CSS hacks in Layered Semantic CSS."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Hacks</p>
@@ -21,11 +40,97 @@ const hacksExample = `@layer hacks {
         </h1>
 
         <p class="intro">
-            Hacks should remain isolated, temporary, and visible.
+            Hacks are sometimes necessary. The problem is not using one. The
+            problem is pretending it is not a hack and letting it quietly become
+            architecture with a desk and calendar invite.
         </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="Hacks sections">
+        <a href="#rules">Decision rules</a>
+        <a href="#purpose">Why hacks exist</a>
+        <a href="#good-hacks">Visible hacks</a>
+        <a href="#avoid">Avoid</a>
+        <a href="#working-rules">Working rules</a>
+    </nav>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Quick decision rules
+        </h2>
+
+        <CodeExample code={decisionExample} language="text" />
+
+        <p>
+            A hack should be obvious, justified, and easier to remove later
+            than it was to add today.
+        </p>
+    </section>
+
+    <section id="purpose" class="content-block">
+        <h2>
+            Why the hacks layer exists
+        </h2>
+
+        <p>
+            Production sometimes needs a fast correction before the real
+            refactor is possible. The hacks layer gives those urgent fixes a
+            visible quarantine zone instead of hiding them inside normal
+            component files.
+        </p>
+
+        <p>
+            This protects the rest of the system from temporary decisions
+            pretending to be design choices.
+        </p>
+    </section>
+
+    <section id="good-hacks" class="content-block">
+        <h2>
+            Visible hacks
+        </h2>
+
         <CodeExample code={hacksExample} />
+
+        <p>
+            A good hack is isolated in the hacks layer, clearly named, and
+            documented enough that nobody has to perform archaeology to remove
+            it later.
+        </p>
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Hidden hacks and permanent emergencies
+        </h2>
+
+        <CodeExample code={badExample} />
+
+        <p>
+            These are not fixes. They are future debugging invoices. Hidden
+            important declarations and panic z-index values create folklore,
+            not maintainable systems.
+        </p>
+
+        <ul>
+            <li>Do not hide hacks inside normal component files.</li>
+            <li>Do not use theme as a hiding place for temporary fixes.</li>
+            <li>Do not leave undocumented important declarations behind.</li>
+            <li>Do not let emergency values become permanent architecture.</li>
+        </ul>
+    </section>
+
+    <section id="working-rules" class="content-block">
+        <h2>
+            Working rules
+        </h2>
+
+        <ul>
+            <li>If it survives long enough to feel normal, review it.</li>
+            <li>If it needs explaining twice, it probably needs a real fix.</li>
+            <li>If it exists because of legacy CSS, keep it near that legacy context.</li>
+            <li>If it is no longer temporary, move it or remove it.</li>
+            <li>Hacks should be visible enough to make people slightly uncomfortable.</li>
+        </ul>
     </section>
 </DocsLayout>
