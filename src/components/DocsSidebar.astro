@@ -20,30 +20,36 @@ function isActive(href: string): boolean {
 ---
 
 <aside class="docs-sidebar">
-    <nav class="docs-nav" aria-label="Documentation">
-        {
-            sections.map((section) => (
-                <section class="docs-nav-section">
-                    <h2 class="nav-heading">
-                        {section.title}
-                    </h2>
+    <details class="docs-nav-disclosure">
+        <summary>
+            Documentation navigation
+        </summary>
 
-                    <ul class="nav-list">
-                        {
-                            section.links.map((link) => (
-                                <li>
-                                    <a
-                                        href={link.href}
-                                        aria-current={isActive(link.href) ? 'page' : undefined}
-                                    >
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </section>
-            ))
-        }
-    </nav>
+        <nav class="docs-nav" aria-label="Documentation">
+            {
+                sections.map((section) => (
+                    <section class="docs-nav-section">
+                        <h2 class="docs-nav-heading">
+                            {section.title}
+                        </h2>
+
+                        <ul class="docs-nav-list">
+                            {
+                                section.links.map((link) => (
+                                    <li>
+                                        <a
+                                            href={link.href}
+                                            aria-current={isActive(link.href) ? 'page' : undefined}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </section>
+                ))
+            }
+        </nav>
+    </details>
 </aside>
