@@ -19,102 +19,78 @@ const folderStructureExample = `css/
 >
     <main class="page-shell">
         <section class="site-hero">
-            <p class="eyebrow">CSS methodology</p>
+            <p class="eyebrow">Layered Semantic CSS</p>
 
             <h1>
-                Layered Semantic CSS
+                CSS architecture that stays calm under pressure
             </h1>
 
             <p class="intro">
-                CSS architecture for teams tired of specificity wars, giant
-                stylesheets, random utility chains, and one button turning
-                purple for no documented reason.
+                A practical front-end methodology for teams tired of specificity
+                wars, fragile overrides, utility soup, and shared stylesheets
+                treated like archaeological sites.
             </p>
 
             <div class="hero-actions">
-                <a href="/methodology/">Start with the methodology</a>
-                <a href="/playground/">Try the playground</a>
+                <a href="/what-is-lscss/">Start here</a>
+                <a href="/teaching-deck/">Explain it to a team</a>
             </div>
         </section>
 
         <section class="content-block">
             <h2>
-                What LSCSS solves
+                The shortest explanation
             </h2>
 
-            <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3>
-                        Predictable overrides
-                    </h3>
+            <p>
+                LSCSS means Layered Semantic CSS.
+            </p>
 
-                    <p>
-                        Use cascade layers before specificity fights begin.
-                        Override order should be architecture, not luck.
-                    </p>
-                </article>
+            <p>
+                The goal is not clever CSS. The goal is calm CSS.
+            </p>
 
-                <article class="hub-card">
-                    <h3>
-                        Maintainable components
-                    </h3>
-
-                    <p>
-                        Use semantic component names, shallow selectors,
-                        explicit modifiers, and state classes people can still
-                        understand six months later.
-                    </p>
-                </article>
-
-                <article class="hub-card">
-                    <h3>
-                        Safer long-term systems
-                    </h3>
-
-                    <p>
-                        Keep legacy low, hacks visible, tokens consistent, and
-                        file size under control so maintenance stays possible.
-                    </p>
-                </article>
-            </div>
+            <p>
+                Good CSS should feel boring, predictable, and safe to change.
+                If nobody is afraid to touch it, the architecture is probably working.
+            </p>
         </section>
 
         <section class="content-block">
             <h2>
-                Quick start
+                Start here
             </h2>
 
             <div class="hub-card-grid">
                 <article class="hub-card">
                     <h3>
-                        <a href="/principles/">1. Learn the principles</a>
+                        <a href="/what-is-lscss/">1. What is LSCSS?</a>
                     </h3>
 
                     <p>
-                        Understand layers, naming, modifiers, state classes,
-                        shallow selectors, and how the architecture fits together.
+                        The front door. Understand what it is, why it exists,
+                        and what problems it solves.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/decision-trees/">2. Use the decision trees</a>
+                        <a href="/principles/">2. Learn the principles</a>
                     </h3>
 
                     <p>
-                        Decide whether something belongs in utilities, theme,
-                        modifiers, state, hacks, or a proper component.
+                        The non-negotiables. Ownership, layers, utilities,
+                        hacks, tokens, and calm CSS.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/starter-template/">3. Start with the template</a>
+                        <a href="/decision-trees/">3. Use the decision trees</a>
                     </h3>
 
                     <p>
-                        Use a sensible project structure before your root CSS
-                        file becomes an archaeological dig site.
+                        Decide where CSS belongs before specificity gets involved.
                     </p>
                 </article>
             </div>
@@ -128,34 +104,69 @@ const folderStructureExample = `css/
             <div class="hub-card-grid">
                 <article class="hub-card">
                     <h3>
-                        <a href="/decision-trees/">I need to make a CSS decision</a>
+                        <a href="/examples/">Show me examples</a>
                     </h3>
 
                     <p>
-                        Use decision trees for layers, modifiers, state,
-                        utilities, @scope, theme, and hacks.
+                        Before and after code examples for real architectural problems.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/migration/">I need to migrate legacy CSS</a>
+                        <a href="/migration/">I need to improve legacy CSS</a>
                     </h3>
 
                     <p>
-                        Improve existing projects without rewriting everything
-                        for sport and upsetting everyone involved.
+                        Reduce risk without rewriting everything for dramatic effect.
                     </p>
                 </article>
 
                 <article class="hub-card">
                     <h3>
-                        <a href="/comparisons/">I need to compare approaches</a>
+                        <a href="/audit-checklist/">I need to audit a codebase</a>
                     </h3>
 
                     <p>
-                        Compare LSCSS with BEM, Tailwind, CSS Modules,
-                        utility-first workflows, and native @scope.
+                        Review ownership, overrides, tokens, utilities, and delivery risk.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Team adoption
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3>
+                        <a href="/adoption/">Adoption</a>
+                    </h3>
+
+                    <p>
+                        Introduce LSCSS without starting a rewrite cult.
+                    </p>
+                </article>
+
+                <article class="hub-card">
+                    <h3>
+                        <a href="/governance/">Governance</a>
+                    </h3>
+
+                    <p>
+                        Keep standards healthy after the kickoff meeting ends.
+                    </p>
+                </article>
+
+                <article class="hub-card">
+                    <h3>
+                        <a href="/contributing/">Contribution standards</a>
+                    </h3>
+
+                    <p>
+                        Protect pull requests from becoming future invoices.
                     </p>
                 </article>
             </div>
@@ -192,7 +203,7 @@ const folderStructureExample = `css/
             <CodeExample code={folderStructureExample} language="text" />
 
             <p>
-                Good architecture should remove repeated decisions. Start with
+                Good architecture removes repeated decisions. Start with
                 structure first, not emergency fixes later.
             </p>
         </section>
