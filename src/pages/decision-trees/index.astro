@@ -23,6 +23,12 @@ const themeExample = `@layer theme {
         --button-background: var(--colour-accent);
     }
 }`;
+
+const firstQuestionExample = `Ask first:
+Am I changing behaviour, presentation, structure,
+or temporary state?
+
+That answer decides the destination before writing CSS.`;
 ---
 
 <DocsLayout
@@ -38,14 +44,15 @@ const themeExample = `@layer theme {
         </h1>
 
         <p class="intro">
-            Use these decision trees when you need to choose a CSS pattern,
-            settle a code review debate, or avoid adding another layer of
-            accidental complexity.
+            Use these when you need to decide where CSS belongs, settle a code
+            review argument, or stop someone adding a sixth utility class and
+            calling it a strategy.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Decision tree sections">
-        <a href="#start-here">Start here</a>
+        <a href="#first-question">Start first</a>
+        <a href="#start-here">Common decisions</a>
         <a href="#feature-choice">Modern CSS</a>
         <a href="#naming-flow">Naming</a>
         <a href="#utility-flow">Utilities</a>
@@ -53,9 +60,22 @@ const themeExample = `@layer theme {
         <a href="#file-size-flow">File size</a>
     </nav>
 
+    <section id="first-question" class="content-block">
+        <h2>
+            Ask this first
+        </h2>
+
+        <CodeExample code={firstQuestionExample} language="text" />
+
+        <p>
+            Most CSS mistakes happen because people start writing before deciding
+            ownership. The first question is usually more important than the selector.
+        </p>
+    </section>
+
     <section id="start-here" class="content-block">
         <h2>
-            Start here
+            Common decisions
         </h2>
 
         <div class="hub-card-grid">
@@ -105,6 +125,11 @@ const themeExample = `@layer theme {
             Which modern CSS feature should I use?
         </h2>
 
+        <p>
+            Use features because they solve a problem, not because a browser blog
+            made them look fashionable.
+        </p>
+
         <div class="decision-tree">
             <article class="decision-card">
                 <h3>
@@ -113,8 +138,7 @@ const themeExample = `@layer theme {
 
                 <p>
                     Use :where() when you need expressive selectors without
-                    extra specificity weight. Also ask whether the selector can
-                    be simpler.
+                    extra specificity weight.
                 </p>
 
                 <CodeExample code={whereExample} />
@@ -126,9 +150,7 @@ const themeExample = `@layer theme {
                 </h3>
 
                 <p>
-                    Use :has() when the parent or wrapper should respond to its
-                    contents. Use a state class when browser support or clarity
-                    makes that safer.
+                    Use :has() when the parent should respond to its contents.
                 </p>
 
                 <CodeExample code={hasExample} />
@@ -140,8 +162,7 @@ const themeExample = `@layer theme {
                 </h3>
 
                 <p>
-                    Use @scope when support allows. Otherwise use shallow
-                    component selectors and keep child names scoped by context.
+                    Use @scope when support allows. Otherwise keep selectors shallow.
                 </p>
 
                 <CodeExample code={scopeExample} />
@@ -153,8 +174,7 @@ const themeExample = `@layer theme {
                 </h3>
 
                 <p>
-                    Use container queries when a component should respond to its
-                    own available space instead of the whole viewport.
+                    Use container queries when the component should respond to itself.
                 </p>
 
                 <CodeExample code={containerExample} />
@@ -173,7 +193,7 @@ const themeExample = `@layer theme {
             <li>Is it a reusable visual variation? Use a modifier class.</li>
             <li>Is it temporary interaction state? Use an <code>.is_*</code> state class.</li>
             <li>Does it describe the presence of something? Use a <code>.has_*</code> condition class.</li>
-            <li>Is the name describing appearance only? Check whether a design token or theme layer is the better fit.</li>
+            <li>Is the name describing appearance only? Review theme or tokens first.</li>
         </ol>
     </section>
 
@@ -182,18 +202,13 @@ const themeExample = `@layer theme {
             Utility decision flow
         </h2>
 
-        <p>
-            Utilities should be rare. Most styling belongs in semantic
-            components, not presentational class chains.
-        </p>
-
         <CodeExample code={utilityExample} />
 
         <ol class="decision-list">
             <li>Does it solve a universal accessibility problem? A utility may be justified.</li>
-            <li>Does it only describe spacing, colour, layout, radius, or typography? Prefer component CSS or tokens.</li>
-            <li>Does the same group of utilities appear together often? Create a component.</li>
-            <li>Would the HTML become harder to scan? Do not use a utility chain.</li>
+            <li>Does it only describe spacing, colour, layout, radius, or typography? Prefer component CSS.</li>
+            <li>Does the same group repeat together? Create a component.</li>
+            <li>Would the HTML become harder to scan? Stop using utility chains.</li>
             <li>Does it need local overrides? It is probably not a good utility.</li>
         </ol>
     </section>
@@ -203,34 +218,14 @@ const themeExample = `@layer theme {
             Theme or component decision flow
         </h2>
 
-        <p>
-            Theme changes presentation. Components own structure and behaviour.
-        </p>
-
         <CodeExample code={themeExample} />
 
         <ol class="decision-list">
-            <li>Is it a brand-level colour, spacing, radius, or visual treatment? Consider the theme layer.</li>
-            <li>Is it component structure, layout, or behaviour? Keep it in the component.</li>
-            <li>Is it a reusable visual value? Use a design token.</li>
-            <li>Is it a temporary urgent fix? Put it in hacks, not theme.</li>
-            <li>Is it a one-off hard-coded colour? Stop and review the token strategy.</li>
-        </ol>
-    </section>
-
-    <section class="content-block">
-        <h2>
-            Migration decision flow
-        </h2>
-
-        <ol class="decision-list">
-            <li>Can you change the whole codebase safely? If not, add layers first.</li>
-            <li>Is legacy CSS unpredictable? Move it to the legacy layer.</li>
-            <li>Are components hard to find? Split them into partials.</li>
-            <li>Are selectors too deep? Replace them with shallow component selectors when you touch that code.</li>
-            <li>Can browser support handle @scope? Use scoped component partials for suitable components.</li>
-            <li>Are overrides still difficult? Review layer order before increasing specificity.</li>
-            <li>Is the fix ugly but necessary? Put it in hacks, comment it, and review it later.</li>
+            <li>Is it a brand-level visual decision? Consider theme.</li>
+            <li>Is it structure, layout, or behaviour? Keep it in the component.</li>
+            <li>Is it a reusable visual value? Use a token.</li>
+            <li>Is it temporary and urgent? Put it in hacks, not theme.</li>
+            <li>Is it a random hard-coded colour? Review the token strategy.</li>
         </ol>
     </section>
 
@@ -240,39 +235,11 @@ const themeExample = `@layer theme {
         </h2>
 
         <ol class="decision-list">
-            <li>Can you skim the component file quickly? If not, review it.</li>
-            <li>Is the file approaching 300 to 400 lines? Check for hidden sub-components.</li>
-            <li>Are repeated groups of rules appearing? Extract or name the pattern.</li>
-            <li>Are old hacks still inside normal component CSS? Move or remove them.</li>
-            <li>Does the file own too many states, variants, or layouts? Split responsibilities.</li>
+            <li>Can you skim the file quickly? If not, review it.</li>
+            <li>Is it approaching 300 to 400 lines? Check for hidden sub-components.</li>
+            <li>Are repeated groups of rules appearing? Extract the pattern.</li>
+            <li>Are old hacks still inside normal CSS? Move or remove them.</li>
+            <li>Does the file own too many responsibilities? Split it.</li>
         </ol>
-    </section>
-
-    <section class="content-block">
-        <h2>
-            Accessibility decision flow
-        </h2>
-
-        <ol class="decision-list">
-            <li>Does this interaction rely on hover? Add focus and keyboard support.</li>
-            <li>Does this animation move or flash? Respect reduced motion.</li>
-            <li>Does this layout assume left and right? Use logical properties.</li>
-            <li>Does this element receive focus? Provide visible focus styling.</li>
-            <li>Does this component clip text? Test zoom, reflow, and wrapping.</li>
-            <li>Does styling depend on JavaScript state? Ensure the HTML state is still understandable.</li>
-        </ol>
-    </section>
-
-    <section class="content-block">
-        <h2>
-            When to leave it alone
-        </h2>
-
-        <p>
-            Not every old selector needs immediate refactoring. Leave it alone
-            when it is isolated, stable, rarely changed, and not blocking new
-            work. Spend the effort where the code is active, brittle, or
-            confusing.
-        </p>
     </section>
 </DocsLayout>
