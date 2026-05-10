@@ -1,34 +1,151 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
 
 const title = 'Utility-first vs LSCSS';
 const description = 'Compare utility-first CSS approaches and Layered Semantic CSS for maintainability, reuse, readability, and long-term front-end architecture.';
+
+const utilityMarkupExample = `<section class="grid gap-4 p-4 rounded bg-surface shadow-sm">
+    <h2 class="text-xl font-bold">Section title</h2>
+    <p class="text-sm">Content goes here</p>
+</section>`;
+
+const semanticExample = `<section class="feature-panel">
+    <h2 class="title">Section title</h2>
+    <p class="content">Content goes here</p>
+</section>`;
+
+const allowedUtilities = `.vh
+.a11y-link
+.a11y-link--focusable`;
 ---
 
-<DocsLayout title={title} description={description}>
+<DocsLayout
+    title={title}
+    description={description}
+    schemaType="TechArticle"
+>
     <article>
         <p class="eyebrow">Comparison</p>
-        <h1>Utility-first vs LSCSS</h1>
+
+        <h1>
+            Utility-first vs LSCSS
+        </h1>
 
         <p>
             Utility-first CSS optimises for speed and consistency through small,
             composable classes. LSCSS optimises for clarity and maintainability
-            through semantic components and layered architecture.
+            through semantic components, layered architecture, and deliberate
+            ownership of styling decisions.
         </p>
 
-        <h2>Main differences</h2>
-        <ul>
-            <li>utility-first styling lives mostly in markup</li>
-            <li>LSCSS keeps architectural decisions in CSS</li>
-            <li>utility-first reduces repeated declarations</li>
-            <li>LSCSS reduces repeated structural decisions</li>
-        </ul>
+        <p>
+            Both aim to reduce CSS chaos. They disagree about where the solution
+            should live.
+        </p>
 
-        <h2>Recommended reading</h2>
-        <ul>
-            <li><a href="/utilities/">Utilities</a></li>
-            <li><a href="/components/">Components</a></li>
-            <li><a href="/theme-layer/">Theme layer</a></li>
-        </ul>
+        <nav class="section-nav" aria-label="Utility-first and LSCSS comparison sections">
+            <a href="#differences">Differences</a>
+            <a href="#markup">Markup</a>
+            <a href="#utilities">Utilities</a>
+            <a href="#when-to-use">When to use</a>
+        </nav>
+
+        <section id="differences" class="content-block">
+            <h2>
+                Main differences
+            </h2>
+
+            <ul>
+                <li>Utility-first styling lives mostly in markup.</li>
+                <li>LSCSS keeps architectural decisions in CSS.</li>
+                <li>Utility-first reduces repeated declarations.</li>
+                <li>LSCSS reduces repeated structural decisions.</li>
+                <li>Utility-first prefers composition through class combinations.</li>
+                <li>LSCSS prefers named components, modifiers, and state classes.</li>
+            </ul>
+        </section>
+
+        <section id="markup" class="content-block">
+            <h2>
+                Markup comparison
+            </h2>
+
+            <CodeExample code={utilityMarkupExample} language="html" />
+
+            <p>
+                Compared with semantic component markup:
+            </p>
+
+            <CodeExample code={semanticExample} language="html" />
+
+            <p>
+                Utility-first makes visual decisions obvious in markup. LSCSS
+                keeps markup quieter and pushes styling responsibility back into
+                CSS architecture.
+            </p>
+        </section>
+
+        <section id="utilities" class="content-block">
+            <h2>
+                Utility philosophy
+            </h2>
+
+            <p>
+                In utility-first systems, utilities are the system. In LSCSS,
+                utilities are exceptions.
+            </p>
+
+            <CodeExample code={allowedUtilities} />
+
+            <p>
+                LSCSS usually limits utilities to accessibility helpers and
+                genuinely universal patterns. If the same utility group keeps
+                appearing together, it should probably become a named component.
+            </p>
+        </section>
+
+        <section id="when-to-use" class="content-block">
+            <h2>
+                Where utility-first works well
+            </h2>
+
+            <ul>
+                <li>rapid product delivery and prototyping</li>
+                <li>small teams moving quickly</li>
+                <li>strict design token systems with strong constraints</li>
+                <li>applications where delivery speed matters more than semantic structure</li>
+            </ul>
+
+            <h2>
+                Where LSCSS helps more
+            </h2>
+
+            <ul>
+                <li>long-lived platforms and content-heavy websites</li>
+                <li>teams prioritising maintainable HTML and CSS ownership</li>
+                <li>projects with strong accessibility and progressive enhancement goals</li>
+                <li>systems where architecture matters more than shipping the next screen by lunch</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Recommended reading
+            </h2>
+
+            <ul>
+                <li><a href="/utilities/">Utilities</a></li>
+                <li><a href="/architecture/">Architecture</a></li>
+                <li><a href="/theme-layer/">Theme layer</a></li>
+                <li><a href="/decision-trees/">Decision trees</a></li>
+            </ul>
+        </section>
+
+        <p>
+            Utility-first is fast and direct. LSCSS is quieter and more
+            architectural. The right choice depends on the project, not which
+            approach currently has the loudest conference talk.
+        </p>
     </article>
 </DocsLayout>
