@@ -3,34 +3,34 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeExample from '../../components/CodeExample.astro';
 
 const folderStructure = `css/
-    site.css
+    critical.css
 
     settings/
         variables.css
-        custom-media.css
+        media.css
         fonts.css
 
     base/
         reset.css
         typography.css
-        forms.css
 
-    utilities/
-        accessibility.css
+    helpers/
+        vh.css
+        a11y-link.css
 
-    layout/
-        site-header.css
-        site-footer.css
-        grid.css
+    atoms/
+        logo.css
+        button.css
 
-    components/
-        product-card.css
-        feature-panel.css
-        modal.css
+    molecules/
+        main-nav.css
+        card.css
+
+    organisms/
+        site-head.css
 
     theme/
         brand.css
-        dark-mode.css
 
     legacy/
         vendor.css
@@ -39,15 +39,49 @@ const folderStructure = `css/
     hacks/
         temporary-fixes.css`;
 
-const siteCssExample = `@layer legacy, settings, base, utilities,
-layout, components, theme, hacks;
+const rootCssExample = `@layer settings, base, utilities,
+atoms, molecules, organisms, theme, legacy, hacks;
 
-@import './legacy/vendor.css' layer(legacy);
-@import './settings/variables.css' layer(settings);
-@import './base/reset.css' layer(base);
-@import './components/product-card.css' layer(components);
-@import './theme/brand.css' layer(theme);
-@import './hacks/temporary-fixes.css' layer(hacks);`;
+@import 'settings/variables' layer(settings);
+@import 'settings/media' layer(settings);
+@import 'settings/fonts' layer(settings);
+
+@import 'base/reset' layer(base);
+
+@import 'helpers/vh' layer(utilities);
+
+@import 'atoms/logo' layer(atoms);
+@import 'atoms/button' layer(atoms);
+
+@import 'molecules/main-nav' layer(molecules);
+@import 'molecules/card' layer(molecules);
+
+@import 'organisms/site-head' layer(organisms);`;
+
+const tokenExample = `:root {
+    --ff: 'Funnel Sans', system-ui;
+    --ff-display: 'Funnel Display', system-ui;
+
+    --fs: 1rem;
+    --fs-l: 1.5rem;
+
+    --space: 1rem;
+    --space-m: 1.5rem;
+
+    --c-red: hsl(343 100% 45.5%);
+    --c-blue: hsl(222 53% 35%);
+
+    --shadow-m: 0 2px 8px rgba(0, 0, 0, 0.12);
+}`;
+
+const fontExample = `@font-face {
+    font-family: 'Funnel Display';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300 800;
+    src: url('/fonts/funnel-display-variable.woff2')
+        format('woff2-variations');
+}`;
 ---
 
 <DocsLayout
@@ -63,42 +97,79 @@ layout, components, theme, hacks;
 
         <p class="intro">
             Start with a predictable structure. Good architecture should remove
-            decisions, not create new ones every Monday morning.
+            decisions, not create new ones every Monday morning. The goal is a
+            system people can explain without opening seven files first.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Starter template sections">
         <a href="#structure">Folder structure</a>
-        <a href="#site-css">Root file</a>
+        <a href="#root-file">Root file</a>
+        <a href="#tokens">Tokens</a>
+        <a href="#fonts">Fonts</a>
         <a href="#rules">Rules</a>
         <a href="#avoid">Avoid</a>
     </nav>
 
     <section id="structure" class="content-block">
         <h2>
-            Recommended folder structure
+            Real-world folder structure
         </h2>
 
         <CodeExample code={folderStructure} language="text" />
 
         <p>
-            Root files should be import maps, not giant CSS graveyards. Each
-            component should live in its own partial with a clear responsibility.
+            Folder names may vary. Some teams prefer components. Some use
+            atoms, molecules, and organisms. The important rule is ownership,
+            not folder worship.
         </p>
     </section>
 
-    <section id="site-css" class="content-block">
+    <section id="root-file" class="content-block">
         <h2>
-            Root CSS file
+            Root CSS file as an import map
         </h2>
 
         <p>
             Your main stylesheet should define layer order first, then import
-            files into the correct layer. This controls precedence before a
-            single selector is written.
+            files into the correct place. It should not become the place where
+            emergency CSS goes to retire.
         </p>
 
-        <CodeExample code={siteCssExample} />
+        <CodeExample code={rootCssExample} />
+    </section>
+
+    <section id="tokens" class="content-block">
+        <h2>
+            Tokens first
+        </h2>
+
+        <p>
+            Use variables for spacing, typography, colour, shadows, radius, and
+            layout decisions. Random values spread inconsistency fast and turn
+            design into folklore.
+        </p>
+
+        <CodeExample code={tokenExample} />
+
+        <p>
+            Change the token, not twenty unrelated selectors hunting for the
+            correct shade of red.
+        </p>
+    </section>
+
+    <section id="fonts" class="content-block">
+        <h2>
+            Fonts belong in settings
+        </h2>
+
+        <p>
+            Font loading belongs in the settings layer. Typography defaults
+            belong in base. Components should not be quietly importing font
+            decisions like suspicious luggage.
+        </p>
+
+        <CodeExample code={fontExample} />
     </section>
 
     <section id="rules" class="content-block">
@@ -108,6 +179,8 @@ layout, components, theme, hacks;
 
         <ul>
             <li>One component, one partial.</li>
+            <li>No IDs for styling.</li>
+            <li>No important declarations unless there is a real emergency.</li>
             <li>Base styles stay in the base layer.</li>
             <li>Utilities stay rare and purposeful.</li>
             <li>Theme changes presentation, not structure.</li>
