@@ -9,13 +9,13 @@
 }
 
 .code-example--before {
-    border-color: rgb(248 113 113 / 55%);
-    background: rgb(127 29 29 / 28%);
+    border-color: var(--colour-before);
+    background: var(--colour-before-bg);
 }
 
 .code-example--after {
-    border-color: rgb(74 222 128 / 55%);
-    background: rgb(20 83 45 / 28%);
+    border-color: var(--colour-after);
+    background: var(--colour-after-bg);
 }
 
 .code-example > figcaption {
@@ -29,11 +29,11 @@
 }
 
 .code-example--before > figcaption {
-    border-block-end-color: rgb(248 113 113 / 45%);
+    border-block-end-color: var(--colour-before);
 }
 
 .code-example--after > figcaption {
-    border-block-end-color: rgb(74 222 128 / 45%);
+    border-block-end-color: var(--colour-after);
 }
 
 .code-example pre {
