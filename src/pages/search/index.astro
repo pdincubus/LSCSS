@@ -16,12 +16,75 @@ import SearchBox from '../../components/SearchBox.astro';
             </h1>
 
             <p class="intro">
-                Search documentation, examples, patterns, and reference pages.
+                Find methodology, examples, comparisons, debugging help, and
+                the answer to the CSS problem currently ruining your afternoon.
             </p>
         </section>
 
-        <section class="content-block">
+        <nav class="section-nav" aria-label="Search sections">
+            <a href="#search-box">Search</a>
+            <a href="#common">Common searches</a>
+            <a href="#routes">Quick routes</a>
+        </nav>
+
+        <section id="search-box" class="content-block">
+            <h2>
+                Search the docs
+            </h2>
+
+            <p>
+                Search by problem, not only by page name. Good examples:
+                specificity, modifiers vs state, utility classes, base layer,
+                legacy CSS, @scope, container queries.
+            </p>
+
             <SearchBox />
+        </section>
+
+        <section id="common" class="content-block">
+            <h2>
+                Common searches
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3><a href="/decision-trees/">Should this be a utility or component?</a></h3>
+                    <p>Use the decision trees for utilities, theme, state, and hacks.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/specificity-visualiser/">Why is this selector winning?</a></h3>
+                    <p>Check layers, specificity, :where(), and scope before reaching for important.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/base-styles/">Where should this global style live?</a></h3>
+                    <p>Reset rules, typography, and document defaults belong in the right layer.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="routes" class="content-block">
+            <h2>
+                Quick routes
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3><a href="/methodology/">I am learning the system</a></h3>
+                    <p>Start with layers, naming, architecture, and core methodology.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/migration/">I inherited legacy CSS</a></h3>
+                    <p>Improve old systems without rewriting everything for sport.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/comparisons/">I need to compare approaches</a></h3>
+                    <p>Compare LSCSS with BEM, Tailwind, CSS Modules, and @scope.</p>
+                </article>
+            </div>
         </section>
     </main>
 </BaseLayout>
