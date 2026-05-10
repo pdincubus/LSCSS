@@ -2,13 +2,9 @@
 import { docsNavigation } from '../data/docsNavigation';
 
 const currentPath = Astro.url.pathname;
-const sectionNames = [...new Set(docsNavigation.map((item) => item.section))];
-const sections = sectionNames.map((sectionName) => {
-    return {
-        title: sectionName,
-        links: docsNavigation.filter((item) => item.section === sectionName)
-    };
-});
+const currentPage = docsNavigation.find((item) => item.href === currentPath);
+const currentSection = currentPage?.section ?? 'Start here';
+const links = docsNavigation.filter((item) => item.section === currentSection);
 
 function isActive(href: string): boolean {
     if (href === '/') {
@@ -22,34 +18,45 @@ function isActive(href: string): boolean {
 <aside class="docs-sidebar">
     <details class="docs-nav-disclosure">
         <summary>
-            Documentation navigation
+            {currentSection} navigation
         </summary>
 
-        <nav class="docs-nav" aria-label="Documentation">
-            {
-                sections.map((section) => (
-                    <section class="docs-nav-section">
-                        <h2 class="docs-nav-heading">
-                            {section.title}
-                        </h2>
+        <nav class="docs-nav" aria-label={`${currentSection} navigation`}>
+            <section class="docs-nav-section">
+                <h2 class="docs-nav-heading">
+                    {currentSection}
+                </h2>
 
-                        <ul class="docs-nav-list">
-                            {
-                                section.links.map((link) => (
-                                    <li>
-                                        <a
-                                            href={link.href}
-                                            aria-current={isActive(link.href) ? 'page' : undefined}
-                                        >
-                                            {link.label}
-                                        </a>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </section>
-                ))
-            }
+                <ul class="docs-nav-list">
+                    {
+                        links.map((link) => (
+                            <li>
+                                <a
+                                    href={link.href}
+                                    aria-current={isActive(link.href) ? 'page' : undefined}
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
+
+            <section class="docs-nav-section docs-nav-section--secondary">
+                <h2 class="docs-nav-heading">
+                    Other routes
+                </h2>
+
+                <ul class="docs-nav-list">
+                    <li><a href="/what-is-lscss/">Learn</a></li>
+                    <li><a href="/decision-trees/">Apply</a></li>
+                    <li><a href="/adoption/">Teams</a></li>
+                    <li><a href="/comparisons/">Compare</a></li>
+                    <li><a href="/tools/">Tools</a></li>
+                    <li><a href="/search/">Search</a></li>
+                </ul>
+            </section>
         </nav>
     </details>
 </aside>
