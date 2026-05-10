@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
 
 const progressiveEnhancementExample = `.feature-card {
     display: block;
@@ -74,7 +75,7 @@ supports css-logical-props`;
             Progressive enhancement example
         </h2>
 
-        <pre><code>{progressiveEnhancementExample}</code></pre>
+        <CodeExample code={progressiveEnhancementExample} language="css" />
     </section>
 
     <section class="content-block">
@@ -124,7 +125,7 @@ supports css-logical-props`;
             Browserslist-style thinking
         </h2>
 
-        <pre><code>{browserslistExample}</code></pre>
+        <CodeExample code={browserslistExample} language="text" />
 
         <p>
             Feature-based support targets make architectural intent clearer than
