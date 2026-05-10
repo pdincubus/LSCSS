@@ -1,16 +1,62 @@
 :root {
-    --colour-background: #0f172a;
-    --colour-surface: #111827;
-    --colour-text: #f8fafc;
-    --colour-text-soft: #cbd5e1;
-    --colour-border: #334155;
-    --colour-accent: #38bdf8;
+    --c-white: hsl(0 100% 100%);
+    --c-black: hsl(0 0% 10%);
+    --c-grey: hsl(0 0% 80%);
+    --c-grey-dark: hsl(0 0% 30%);
+    --c-grey-light: hsl(0 0% 92%);
+    --c-grey-extralight: hsl(0 0% 97%);
 
-    --font-body: Inter, Arial, sans-serif;
+    --c-red: hsl(343 100% 45.5%);
+    --c-red-dark: hsl(343 100% 33.5%);
+    --c-red-light: hsl(343 100% 55.5%);
 
-    --space-2xs: 0.25rem;
-    --space-xs: 0.5rem;
-    --space-s: 0.75rem;
+    --c-blue: hsl(222 53% 35%);
+    --c-blue-dark: hsl(222 53% 20%);
+    --c-blue-light: hsl(222 53% 50%);
+    --c-blue-darkest: hsl(222 53% 15%);
+
+    --c-teal: hsl(180 100% 35%);
+    --c-teal-dark: hsl(180 100% 25%);
+    --c-teal-light: hsl(170 100% 50%);
+
+    --c-yellow: hsl(60 100% 50%);
+    --c-yellow-dark: hsl(60 60% 50%);
+    --c-yellow-light: hsl(60 100% 70%);
+
+    --c-purple: hsl(310 100% 26%);
+    --c-purple-dark: hsl(310 100% 12%);
+    --c-purple-light: hsl(310 100% 60%);
+
+    --c-green: hsl(120 100% 45%);
+    --c-green-dark: hsl(120 100% 35%);
+    --c-green-light: hsl(120 100% 65%);
+
+    --c-pink: hsl(324 100% 54%);
+    --c-pink-dark: hsl(324 100% 39%);
+    --c-pink-light: hsl(324 100% 69%);
+
+    --colour-background: var(--c-grey-extralight);
+    --colour-surface: var(--c-white);
+    --colour-surface-alt: hsl(222 53% 97%);
+    --colour-text: var(--c-black);
+    --colour-text-soft: var(--c-grey-dark);
+    --colour-border: hsl(222 20% 84%);
+    --colour-accent: var(--c-red);
+    --colour-accent-dark: var(--c-red-dark);
+    --colour-accent-soft: hsl(343 100% 45.5% / 0.1);
+
+    --colour-before: var(--c-red);
+    --colour-before-bg: hsl(343 100% 45.5% / 0.08);
+    --colour-after: var(--c-green-dark);
+    --colour-after-bg: hsl(120 100% 45% / 0.1);
+
+    --font-body: "Funnel Sans", system-ui, sans-serif;
+    --font-display: "Funnel Display", system-ui, sans-serif;
+    --font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --space-2xs: 0.125rem;
+    --space-xs: 0.25rem;
+    --space-s: 0.5rem;
     --space-m: 1rem;
     --space-l: 1.5rem;
     --space-xl: 2rem;
@@ -20,7 +66,7 @@
     --measure: 42rem;
 
     --radius-s: 0.375rem;
-    --radius-m: 0.5rem;
+    --radius-m: 0.75rem;
 
     --border-thin: 1px;
 }
