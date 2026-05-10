@@ -12,37 +12,107 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <h1>
             Frequently asked questions
         </h1>
+
+        <p class="intro">
+            The questions people usually ask before adopting a CSS system, or
+            after inheriting one held together by hope and important declarations.
+        </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="FAQ sections">
+        <a href="#utilities">Utilities</a>
+        <a href="#bem">BEM</a>
+        <a href="#frameworks">Frameworks</a>
+        <a href="#scope">@scope</a>
+        <a href="#legacy">Legacy CSS</a>
+        <a href="#files">File size</a>
+    </nav>
+
+    <section id="utilities" class="content-block">
         <h2>
             Is LSCSS anti-utility?
         </h2>
 
         <p>
-            No. Utilities exist, but they should remain small and intentional.
+            No. It is anti-unnecessary utility chains pretending to be
+            architecture. Utilities are useful for accessibility helpers and
+            genuinely universal patterns such as <code>.vh</code> and
+            <code>.a11y-link</code>.
+        </p>
+
+        <p>
+            If the same utility group keeps appearing together, it should
+            probably become a named component.
         </p>
     </section>
 
-    <section class="content-block">
+    <section id="bem" class="content-block">
         <h2>
             Does LSCSS replace BEM?
         </h2>
 
         <p>
-            LSCSS borrows ideas from BEM but focuses more heavily on layers,
-            shallow selectors, and semantic readability.
+            It borrows useful parts of BEM, especially explicit modifiers, but
+            removes much of the naming ceremony. Short scoped child selectors,
+            layers, and state classes reduce the need for long
+            <code>block__element--modifier</code> chains.
         </p>
     </section>
 
-    <section class="content-block">
+    <section id="frameworks" class="content-block">
         <h2>
             Does this work with frameworks?
         </h2>
 
         <p>
-            Yes. The methodology focuses on CSS architecture rather than a
-            specific framework.
+            Yes. LSCSS is CSS architecture, not a framework choice. It works
+            with Astro, React, Vue, Svelte, Eleventy, server-rendered sites,
+            and large legacy systems that still have emotional ties to jQuery.
+        </p>
+    </section>
+
+    <section id="scope" class="content-block">
+        <h2>
+            Does @scope replace LSCSS?
+        </h2>
+
+        <p>
+            No. <code>@scope</code> improves selector boundaries and reduces
+            naming ceremony. It does not replace layers, modifiers, state
+            rules, theme ownership, tokens, or hack management.
+        </p>
+
+        <p>
+            <code>@scope</code> is a feature. LSCSS is the wider methodology.
+        </p>
+    </section>
+
+    <section id="legacy" class="content-block">
+        <h2>
+            What about old projects and legacy CSS?
+        </h2>
+
+        <p>
+            Do not rewrite everything for sport. Start by adding layers,
+            isolate old CSS in the legacy layer, and improve active components
+            as you touch them. Migration should be controlled, not theatrical.
+        </p>
+    </section>
+
+    <section id="files" class="content-block">
+        <h2>
+            Should CSS files have a strict line limit?
+        </h2>
+
+        <p>
+            No fixed number solves maintainability. The real rule is simple:
+            if a file feels too large to understand quickly, review it.
+        </p>
+
+        <p>
+            Around 300 to 400 lines is often the point where hidden
+            sub-components, repeated patterns, or old hacks start asking for
+            attention.
         </p>
     </section>
 </DocsLayout>
