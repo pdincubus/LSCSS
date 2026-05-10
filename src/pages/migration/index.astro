@@ -7,6 +7,12 @@ layout, components, theme, hacks;`;
 
 const legacyImportExample = `@import './legacy/site.css' layer(legacy);
 @import './components/product-card.css' layer(components);`;
+
+const firstDecisionExample = `Ask first:
+Can this be safely replaced now?
+
+Yes → Replace properly
+No → Contain it and improve around it`;
 ---
 
 <DocsLayout
@@ -21,13 +27,34 @@ const legacyImportExample = `@import './legacy/site.css' layer(legacy);
         </h1>
 
         <p class="intro">
-            LSCSS is designed for gradual adoption. You should not need to stop
-            work, rewrite the whole frontend, or pretend legacy CSS never
-            happened.
+            Good migration is not heroic rewrites. It is controlled improvement.
+            You should not need to pause delivery, rebuild the whole frontend,
+            or pretend the old CSS is not still in the room.
         </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="Migration sections">
+        <a href="#first-decision">Start first</a>
+        <a href="#principles">Principles</a>
+        <a href="#path">Recommended path</a>
+        <a href="#legacy">Legacy layer</a>
+        <a href="#avoid">What not to do</a>
+    </nav>
+
+    <section id="first-decision" class="content-block">
+        <h2>
+            Ask this first
+        </h2>
+
+        <CodeExample code={firstDecisionExample} language="text" />
+
+        <p>
+            Most migration mistakes come from trying to fix everything at once.
+            Decide whether the code should be replaced or safely contained.
+        </p>
+    </section>
+
+    <section id="principles" class="content-block">
         <h2>
             Migration principles
         </h2>
@@ -39,19 +66,19 @@ const legacyImportExample = `@import './legacy/site.css' layer(legacy);
                 </h3>
 
                 <p>
-                    Put existing CSS in a known place before changing how new
-                    CSS is written.
+                    Put existing CSS somewhere predictable before changing how
+                    new CSS is written.
                 </p>
             </article>
 
             <article class="hub-card">
                 <h3>
-                    Improve new work
+                    Improve active code
                 </h3>
 
                 <p>
-                    Apply LSCSS to new components first. Do not pause delivery
-                    while chasing perfect old code.
+                    Fix the CSS people touch every week, not the fossil no one
+                    has opened since 2018.
                 </p>
             </article>
 
@@ -61,29 +88,29 @@ const legacyImportExample = `@import './legacy/site.css' layer(legacy);
                 </h3>
 
                 <p>
-                    Migration is successful when legacy CSS gets smaller, not
-                    when it gets renamed.
+                    Migration succeeds when legacy CSS gets smaller, not when it
+                    gets renamed and promoted.
                 </p>
             </article>
         </div>
     </section>
 
-    <section class="content-block">
+    <section id="path" class="content-block">
         <h2>
             Recommended migration path
         </h2>
 
         <ol>
-            <li>Introduce the layer order.</li>
+            <li>Introduce the layer order first.</li>
             <li>Move old CSS into the legacy layer.</li>
-            <li>Put design tokens and settings in the settings layer.</li>
-            <li>Move broad element defaults into the base layer.</li>
-            <li>Write new components as small component partials.</li>
-            <li>Reduce selector depth when touching existing components.</li>
-            <li>Replace unclear names with semantic component names.</li>
-            <li>Use modifiers for real variants and state classes for temporary states.</li>
-            <li>Move emergency fixes into the hacks layer with comments.</li>
-            <li>Delete old CSS when the related UI is replaced or refactored.</li>
+            <li>Put tokens and settings in the settings layer.</li>
+            <li>Move broad element defaults into base.</li>
+            <li>Write all new work as proper component partials.</li>
+            <li>Reduce selector depth when touching existing code.</li>
+            <li>Replace unclear names with semantic component ownership.</li>
+            <li>Use modifiers for variants and state classes for temporary state.</li>
+            <li>Move emergency fixes into hacks with comments.</li>
+            <li>Delete old CSS when the UI is replaced.</li>
         </ol>
     </section>
 
@@ -93,38 +120,47 @@ const legacyImportExample = `@import './legacy/site.css' layer(legacy);
         </h2>
 
         <p>
-            Add the layer order before moving code. This gives the project a
-            stable override model from the start.
+            Add layer order before moving code. This gives the project a stable
+            override model immediately and stops specificity wars from breeding.
         </p>
 
         <CodeExample code={layerOrderExample} />
     </section>
 
-    <section class="content-block">
+    <section id="legacy" class="content-block">
         <h2>
             Step 2: isolate legacy CSS
         </h2>
 
         <p>
-            Existing CSS can temporarily live inside the legacy layer while new
-            work follows the modern structure.
+            Legacy CSS belongs in the legacy layer so the rest of the project
+            can move forward without pretending old code is modern architecture.
         </p>
 
         <CodeExample code={legacyImportExample} />
+
+        <p>
+            Importing old CSS first means every intentional layer above it has
+            clearer ownership and safer override behaviour.
+        </p>
     </section>
 
-    <section class="content-block">
+    <section id="avoid" class="content-block">
         <h2>
             What not to do
         </h2>
 
         <ul>
-            <li>Do not rename every class without changing the architecture.</li>
-            <li>Do not move all legacy code into components and call it migrated.</li>
-            <li>Do not create a hacks layer and leave everything there forever.</li>
-            <li>Do not add specificity to beat legacy CSS when layer order can solve it.</li>
-            <li>Do not block feature work for a full rewrite unless the project genuinely needs one.</li>
+            <li>Do not rename every class and call it migration.</li>
+            <li>Do not move legacy CSS into components and call it clean.</li>
+            <li>Do not let hacks become permanent architecture.</li>
+            <li>Do not add specificity when layer order solves the problem.</li>
+            <li>Do not block delivery for a rewrite fantasy nobody approved.</li>
         </ul>
+
+        <p>
+            Migration should reduce risk, not create a dramatic new source of it.
+        </p>
     </section>
 
     <section class="content-block">
@@ -133,9 +169,9 @@ const legacyImportExample = `@import './legacy/site.css' layer(legacy);
         </h2>
 
         <p>
-            A migration is working when new CSS follows the system, old CSS is
+            Migration is working when new CSS follows the system, old CSS is
             contained, overrides are predictable, and the legacy layer keeps
-            getting smaller.
+            shrinking instead of applying for citizenship.
         </p>
     </section>
 </DocsLayout>
