@@ -23,9 +23,9 @@ const comparisons = [
         description: 'Markup-led styling versus layered semantic CSS systems.'
     },
     {
-        title: '@scope vs BEM',
-        href: '/comparisons/scope-vs-bem/',
-        description: 'Native browser scoping versus defensive naming conventions.'
+        title: '@scope and LSCSS',
+        href: '/comparisons/scope-vs-lscss/',
+        description: 'Native browser scoping and what modern CSS changes for architecture.'
     }
 ];
 ---
@@ -42,9 +42,10 @@ const comparisons = [
         </h1>
 
         <p class="intro">
-            Most front-end teams are not choosing CSS from a blank sheet. They
-            are choosing between existing habits, existing pain, and existing
-            opinions held with suspicious confidence.
+            Most teams are not choosing CSS from a blank sheet. They are
+            choosing between existing habits, existing pain, and opinions held
+            with suspicious confidence. These comparisons help separate useful
+            structure from expensive tradition.
         </p>
     </section>
 
@@ -52,13 +53,18 @@ const comparisons = [
         <a href="#comparison-guides">Guides</a>
         <a href="#quick-reference">Quick reference</a>
         <a href="#how-to-use">How to use this</a>
-        <a href="/methodology/">Core methodology</a>
+        <a href="#starting-point">Where to start</a>
     </nav>
 
     <section id="comparison-guides" class="content-block">
         <h2>
             Comparison guides
         </h2>
+
+        <p>
+            These are not framework popularity contests. They explain trade-offs,
+            maintenance costs, and where each approach helps or hurts over time.
+        </p>
 
         <div class="hub-card-grid">
             {
@@ -87,33 +93,39 @@ const comparisons = [
                 <tr>
                     <th>Approach</th>
                     <th>Main focus</th>
+                    <th>Main trade-off</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
                     <td>BEM</td>
-                    <td>naming clarity and explicit relationships</td>
+                    <td>explicit naming and ownership</td>
+                    <td>verbosity and naming overhead</td>
                 </tr>
 
                 <tr>
                     <td>Tailwind</td>
-                    <td>utility-first speed and design-token constraints</td>
+                    <td>speed and utility-first delivery</td>
+                    <td>HTML noise and architectural drift</td>
                 </tr>
 
                 <tr>
                     <td>CSS Modules</td>
-                    <td>component-level scoping through build tooling</td>
+                    <td>local component scoping</td>
+                    <td>scoping without wider system rules</td>
                 </tr>
 
                 <tr>
                     <td>@scope</td>
-                    <td>native browser scoping for selector boundaries</td>
+                    <td>native selector boundaries</td>
+                    <td>scope without full architecture</td>
                 </tr>
 
                 <tr>
                     <td>LSCSS</td>
-                    <td>layers, semantics, readability, maintainability</td>
+                    <td>layers, semantics, maintainability</td>
+                    <td>requires discipline, not shortcuts</td>
                 </tr>
             </tbody>
         </table>
@@ -125,9 +137,37 @@ const comparisons = [
         </h2>
 
         <p>
-            Use these pages when choosing a CSS approach, reviewing an existing
-            codebase, or explaining why a familiar methodology may no longer be
-            the best fit for a modern project.
+            Use these pages when reviewing an inherited codebase, choosing a
+            methodology for a new project, or explaining why the current CSS
+            setup feels like it was designed during an office fire drill.
         </p>
+
+        <p>
+            The goal is not to prove one approach is universally correct. The
+            goal is to understand which trade-offs you are choosing.
+        </p>
+    </section>
+
+    <section id="starting-point" class="content-block">
+        <h2>
+            Where to start
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/methodology/">Core methodology</a></h3>
+                <p>Learn the full system before comparing individual tools and naming styles.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules when a CSS choice stops being obvious.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/playground/">Playground</a></h3>
+                <p>Test architecture decisions before they become production folklore.</p>
+            </article>
+        </div>
     </section>
 </DocsLayout>
