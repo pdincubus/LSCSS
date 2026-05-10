@@ -112,12 +112,12 @@ const zIndexFix = `.modal {
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <CodeExample code={deepSelectorProblem} language="css" />
+                <CodeExample code={deepSelectorProblem} language="css" variant="before" />
                 <p>Deep selectors couple styles to markup structure and make safe overrides harder.</p>
             </article>
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <CodeExample code={deepSelectorFix} language="css" />
+                <CodeExample code={deepSelectorFix} language="css" variant="after" />
                 <p>Use shallow scoped component selectors with clear ownership.</p>
             </article>
         </div>
@@ -128,12 +128,12 @@ const zIndexFix = `.modal {
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <CodeExample code={specificityProblem} language="css" />
+                <CodeExample code={specificityProblem} language="css" variant="before" />
                 <p>IDs and important declarations create override battles and future debugging invoices.</p>
             </article>
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <CodeExample code={specificityFix} language="css" />
+                <CodeExample code={specificityFix} language="css" variant="after" />
                 <p>Check layer order before increasing specificity.</p>
             </article>
         </div>
@@ -144,12 +144,12 @@ const zIndexFix = `.modal {
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <CodeExample code={utilityProblem} language="html" />
+                <CodeExample code={utilityProblem} language="html" variant="before" />
                 <p>Too many utilities hide component intent and turn HTML into a styling spreadsheet.</p>
             </article>
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <CodeExample code={utilityFix} language="html" />
+                <CodeExample code={utilityFix} language="html" variant="after" />
                 <p>Use semantic components and keep utilities rare.</p>
             </article>
         </div>
@@ -160,12 +160,12 @@ const zIndexFix = `.modal {
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <CodeExample code={randomValuesProblem} language="css" />
+                <CodeExample code={randomValuesProblem} language="css" variant="before" />
                 <p>Magic numbers and random colours destroy consistency and turn design into folklore.</p>
             </article>
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <CodeExample code={randomValuesFix} language="css" />
+                <CodeExample code={randomValuesFix} language="css" variant="after" />
                 <p>Use tokens so spacing, colour, and radius stay predictable.</p>
             </article>
         </div>
@@ -176,12 +176,12 @@ const zIndexFix = `.modal {
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <CodeExample code={stateProblem} language="css" />
+                <CodeExample code={stateProblem} language="css" variant="before" />
                 <p>Temporary UI behaviour gets mixed with reusable component variants.</p>
             </article>
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <CodeExample code={stateFix} language="css" />
+                <CodeExample code={stateFix} language="css" variant="after" />
                 <p>Use modifiers for variants and <code>.is_*</code> classes for temporary state.</p>
             </article>
         </div>
@@ -192,12 +192,12 @@ const zIndexFix = `.modal {
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <CodeExample code={zIndexProblem} language="css" />
+                <CodeExample code={zIndexProblem} language="css" variant="before" />
                 <p>If your z-index needs six digits, the problem is probably not ambition.</p>
             </article>
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <CodeExample code={zIndexFix} language="css" />
+                <CodeExample code={zIndexFix} language="css" variant="after" />
                 <p>Use named layer tokens and predictable stacking rules instead of panic numbers.</p>
             </article>
         </div>
