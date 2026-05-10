@@ -3,7 +3,8 @@
 }
 
 .site-hero > .eyebrow {
-    color: var(--colour-accent);
+    color: var(--colour-accent-dark);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
