@@ -36,6 +36,16 @@ const betterExample = `<article class="product-card">
     <h2 class="title">Product title</h2>
     <p class="description">Product description</p>
 </article>`;
+
+const decisionExample = `Ask:
+Does this solve a universal accessibility problem?
+→ Utility
+
+Does this keep repeating as a UI pattern?
+→ Component
+
+Is this only visual presentation?
+→ Theme or component, not utility`;
 ---
 
 <DocsLayout
@@ -51,36 +61,30 @@ const betterExample = `<article class="product-card">
         </h1>
 
         <p class="intro">
-            In LSCSS, utility classes are rare exceptions. Most styling should
-            live in semantic components, not in long chains of presentational
-            classes in the HTML.
+            Utilities should be rare helpers, not a second styling system hiding
+            in your HTML. If utilities become the architecture, the architecture
+            has quietly left the building.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Utilities sections">
-        <a href="#position">Position</a>
+        <a href="#rules">Decision rules</a>
         <a href="#accessibility-utilities">Accessibility utilities</a>
         <a href="#when-to-use">When to use one</a>
         <a href="#avoid">Avoid</a>
     </nav>
 
-    <section id="position" class="content-block">
+    <section id="rules" class="content-block">
         <h2>
-            Most utilities should not exist
+            Quick decision rules
         </h2>
 
-        <p>
-            LSCSS does not treat utility classes as a styling strategy. If a
-            class exists mainly to push layout, spacing, typography, colour, or
-            decoration into the HTML, it usually belongs in a component, theme,
-            or layout partial instead.
-        </p>
+        <CodeExample code={decisionExample} language="text" />
 
         <p>
-            A utility should have to justify its existence. Accessibility
-            helpers are the main exception because they solve universal browser
-            and assistive technology problems rather than component-specific
-            styling problems.
+            A utility should have to justify its existence. Most spacing,
+            layout, colour, and typography decisions belong in components,
+            layout, or theme instead.
         </p>
     </section>
 
@@ -90,8 +94,9 @@ const betterExample = `<article class="product-card">
         </h2>
 
         <p>
-            These are the kind of utilities that fit LSCSS because they provide
-            consistent accessibility behaviour across the whole project.
+            These are the utilities that fit naturally because they solve
+            universal browser and assistive technology problems, not temporary
+            design decisions.
         </p>
 
         <CodeExample code={accessibilityUtilities} />
@@ -100,24 +105,24 @@ const betterExample = `<article class="product-card">
             Visually hidden text
         </h3>
 
-        <p>
-            Use <code>.vh</code> for content that should be available to screen
-            readers but visually hidden.
-        </p>
-
         <CodeExample code={vhExample} />
+
+        <p>
+            Use <code>.vh</code> for content that should remain available to
+            screen readers while staying visually hidden.
+        </p>
 
         <h3>
             Accessible jump links
         </h3>
+
+        <CodeExample code={skipLinkExample} />
 
         <p>
             Use <code>.a11y-link</code> with
             <code>.a11y-link--focusable</code> for skip links that become visible
             when focused.
         </p>
-
-        <CodeExample code={skipLinkExample} />
     </section>
 
     <section id="when-to-use" class="content-block">
@@ -129,13 +134,13 @@ const betterExample = `<article class="product-card">
             <li>It solves a universal accessibility problem.</li>
             <li>It behaves consistently across the whole project.</li>
             <li>It does not replace a meaningful component class.</li>
-            <li>It does not encourage long presentational class chains.</li>
-            <li>It remains understandable without checking several other utilities.</li>
+            <li>It stays understandable without requiring six companion utilities.</li>
+            <li>It improves clarity instead of creating class soup.</li>
         </ul>
 
         <p>
-            If the same group of styling utilities keeps appearing together, it
-            is not a utility pattern. It is a component asking to be named.
+            If the same utility group keeps appearing together, it is not a
+            utility pattern. It is a component asking to be named.
         </p>
     </section>
 
@@ -144,19 +149,18 @@ const betterExample = `<article class="product-card">
             Avoid class soup
         </h2>
 
-        <p>
-            Spacing, colour, typography, shadow, radius, and layout utilities can
-            make HTML harder to scan and harder to refactor. They also spread
-            design decisions across markup instead of keeping them in CSS.
-        </p>
-
         <CodeExample code={avoidExample} language="html" />
 
         <p>
-            Prefer a semantic component when the HTML represents a real UI
-            pattern.
+            This pushes layout, spacing, colour, and typography decisions into
+            the markup and turns HTML into a styling spreadsheet.
         </p>
 
         <CodeExample code={betterExample} language="html" />
+
+        <p>
+            Prefer semantic components when the markup represents a real UI
+            pattern. Components scale. Utility soup spreads like ivy.
+        </p>
     </section>
 </DocsLayout>
