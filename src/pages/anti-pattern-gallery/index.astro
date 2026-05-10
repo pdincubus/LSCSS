@@ -29,20 +29,6 @@ const utilityFix = `<article class="product-card product-card--featured">
     ...
 </article>`;
 
-const rootFileProblem = `site.css
-    8,000 lines
-    all components
-    all layouts
-    all hacks`;
-
-const rootFileFix = `components/
-    product-card.css
-    site-header.css
-    filter-panel.css`;
-
-const thirdPartyProblem = `@import './vendor/slider.css';`;
-const thirdPartyFix = `@import './vendor/slider.css' layer(legacy);`;
-
 const randomValuesProblem = `.card {
     padding: 17px;
     border-radius: 13px;
@@ -62,6 +48,14 @@ const stateProblem = `.button--loading {}
 const stateFix = `.button {}
 .button.is_loading {}
 .button.is_disabled {}`;
+
+const zIndexProblem = `.modal {
+    z-index: 999999;
+}`;
+
+const zIndexFix = `.modal {
+    z-index: var(--layer-modal);
+}`;
 ---
 
 <DocsLayout
@@ -70,15 +64,12 @@ const stateFix = `.button {}
 >
     <section class="site-hero">
         <p class="eyebrow">Anti-pattern gallery</p>
-
-        <h1>
-            CSS anti-pattern gallery
-        </h1>
-
+        <h1>CSS anti-pattern gallery</h1>
         <p class="intro">
             Most CSS disasters do not arrive dramatically. They start as one
             harmless shortcut, one quick fix, and one selector nobody wants to
-            question. This gallery helps you recognise the warning signs early.
+            question. This gallery helps you recognise the crimes before they
+            become team traditions.
         </p>
     </section>
 
@@ -89,12 +80,11 @@ const stateFix = `.button {}
         <a href="#utilities">Utilities</a>
         <a href="#random-values">Random values</a>
         <a href="#state">State</a>
+        <a href="#z-index">Z-index archaeology</a>
     </nav>
 
     <section id="recognise" class="content-block">
-        <h2>
-            Recognise the pattern first
-        </h2>
+        <h2>Recognise the root cause first</h2>
 
         <p>
             Most anti-patterns are symptoms, not root causes. Before fixing the
@@ -107,19 +97,23 @@ const stateFix = `.button {}
             <li>Utility overload usually means missing components.</li>
             <li>Random values usually mean missing tokens.</li>
             <li>Modifier confusion usually means state and variants were mixed.</li>
+            <li>Panic z-index values usually mean missing layering rules.</li>
         </ul>
+
+        <p>
+            Fixing symptoms without fixing ownership creates cleaner-looking
+            bad CSS. The ghost is still in the walls.
+        </p>
     </section>
 
     <section id="deep-selectors" class="content-block">
         <h2>Deep selectors</h2>
-
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
                 <pre><code>{deepSelectorProblem}</code></pre>
                 <p>Deep selectors couple styles to markup structure and make safe overrides harder.</p>
             </article>
-
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
                 <pre><code>{deepSelectorFix}</code></pre>
@@ -130,14 +124,12 @@ const stateFix = `.button {}
 
     <section id="specificity" class="content-block">
         <h2>Specificity escalation</h2>
-
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
                 <pre><code>{specificityProblem}</code></pre>
                 <p>IDs and important declarations create override battles and future debugging invoices.</p>
             </article>
-
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
                 <pre><code>{specificityFix}</code></pre>
@@ -148,14 +140,12 @@ const stateFix = `.button {}
 
     <section id="utilities" class="content-block">
         <h2>Utility overload</h2>
-
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
                 <pre><code>{utilityProblem}</code></pre>
                 <p>Too many utilities hide component intent and turn HTML into a styling spreadsheet.</p>
             </article>
-
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
                 <pre><code>{utilityFix}</code></pre>
@@ -166,14 +156,12 @@ const stateFix = `.button {}
 
     <section id="random-values" class="content-block">
         <h2>Random values everywhere</h2>
-
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
                 <pre><code>{randomValuesProblem}</code></pre>
                 <p>Magic numbers and random colours destroy consistency and turn design into folklore.</p>
             </article>
-
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
                 <pre><code>{randomValuesFix}</code></pre>
@@ -184,14 +172,12 @@ const stateFix = `.button {}
 
     <section id="state" class="content-block">
         <h2>State disguised as modifiers</h2>
-
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
                 <pre><code>{stateProblem}</code></pre>
                 <p>Temporary UI behaviour gets mixed with reusable component variants.</p>
             </article>
-
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
                 <pre><code>{stateFix}</code></pre>
@@ -200,38 +186,36 @@ const stateFix = `.button {}
         </div>
     </section>
 
-    <section class="content-block">
-        <h2>Massive root files</h2>
-
+    <section id="z-index" class="content-block">
+        <h2>Z-index archaeology</h2>
         <div class="anti-pattern-pair">
             <article class="anti-pattern-card anti-pattern-card--bad">
                 <h3>Problem</h3>
-                <pre><code>{rootFileProblem}</code></pre>
-                <p>Large root files destroy ownership and make review feel like hostage negotiation.</p>
+                <pre><code>{zIndexProblem}</code></pre>
+                <p>If your z-index needs six digits, the problem is probably not ambition.</p>
             </article>
-
             <article class="anti-pattern-card anti-pattern-card--good">
                 <h3>Fix</h3>
-                <pre><code>{rootFileFix}</code></pre>
-                <p>Keep root files as import maps, not dumping grounds.</p>
+                <pre><code>{zIndexFix}</code></pre>
+                <p>Use named layer tokens and predictable stacking rules instead of panic numbers.</p>
             </article>
         </div>
     </section>
 
     <section class="content-block">
-        <h2>Third-party CSS leakage</h2>
-
-        <div class="anti-pattern-pair">
-            <article class="anti-pattern-card anti-pattern-card--bad">
-                <h3>Problem</h3>
-                <pre><code>{thirdPartyProblem}</code></pre>
-                <p>Unlayered third-party CSS can quietly dominate the project and start making decisions.</p>
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules to prevent these problems before they happen.</p>
             </article>
-
-            <article class="anti-pattern-card anti-pattern-card--good">
-                <h3>Fix</h3>
-                <pre><code>{thirdPartyFix}</code></pre>
-                <p>Isolate third-party CSS inside the low-priority legacy layer.</p>
+            <article class="hub-card">
+                <h3><a href="/layers/">Layers</a></h3>
+                <p>Most specificity crimes begin when override order is accidental.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/migration/">Migration</a></h3>
+                <p>Legacy systems create most anti-patterns. Learn how to reduce them safely.</p>
             </article>
         </div>
     </section>
