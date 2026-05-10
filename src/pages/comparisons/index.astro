@@ -42,19 +42,38 @@ const comparisons = [
         </h1>
 
         <p class="intro">
-            Most teams are not choosing CSS from a blank sheet. They are
-            choosing between existing habits, existing pain, and opinions held
-            with suspicious confidence. These comparisons help separate useful
-            structure from expensive tradition.
+            Most teams are not choosing CSS from a blank sheet. They are choosing
+            between existing habits, inherited pain, and opinions defended like
+            family heirlooms. These comparisons focus on trade-offs, not ideology.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Comparison sections">
+        <a href="#first">Start first</a>
         <a href="#comparison-guides">Guides</a>
         <a href="#quick-reference">Quick reference</a>
         <a href="#how-to-use">How to use this</a>
         <a href="#starting-point">Where to start</a>
     </nav>
+
+    <section id="first" class="content-block">
+        <h2>
+            Ask this first
+        </h2>
+
+        <p>
+            Before comparing methodologies, decide what problem you are solving.
+            Faster delivery, cleaner ownership, safer scaling, easier onboarding,
+            better accessibility, or fewer debugging séances are different goals.
+        </p>
+
+        <ul>
+            <li>If speed today matters most, utility-heavy systems often win early.</li>
+            <li>If maintainability matters most, architecture matters more than shortcuts.</li>
+            <li>If multiple teams touch the same frontend, predictability becomes expensive to ignore.</li>
+            <li>If accessibility and performance matter, discipline beats convenience fast.</li>
+        </ul>
+    </section>
 
     <section id="comparison-guides" class="content-block">
         <h2>
@@ -62,8 +81,9 @@ const comparisons = [
         </h2>
 
         <p>
-            These are not framework popularity contests. They explain trade-offs,
-            maintenance costs, and where each approach helps or hurts over time.
+            These are not framework popularity contests. They explain where each
+            approach helps, where it creates debt, and what happens six months
+            after the launch celebration ends.
         </p>
 
         <div class="hub-card-grid">
@@ -129,6 +149,11 @@ const comparisons = [
                 </tr>
             </tbody>
         </table>
+
+        <p>
+            No system removes trade-offs. Good architecture means choosing them
+            deliberately instead of inheriting them by accident.
+        </p>
     </section>
 
     <section id="how-to-use" class="content-block">
@@ -144,7 +169,7 @@ const comparisons = [
 
         <p>
             The goal is not to prove one approach is universally correct. The
-            goal is to understand which trade-offs you are choosing.
+            goal is to understand which pain you are choosing to live with.
         </p>
     </section>
 
@@ -156,7 +181,7 @@ const comparisons = [
         <div class="hub-card-grid">
             <article class="hub-card">
                 <h3><a href="/methodology/">Core methodology</a></h3>
-                <p>Learn the full system before comparing individual tools and naming styles.</p>
+                <p>Learn the full system before comparing naming styles and tooling choices.</p>
             </article>
 
             <article class="hub-card">
