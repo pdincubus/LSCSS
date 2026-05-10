@@ -1,5 +1,11 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const selectorExamples = `.product-card > .title
+:where(.product-card) > .title
+#app .product-card .title
+.card:has(.error)`;
 ---
 
 <DocsLayout
@@ -44,10 +50,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
             Try these examples
         </h2>
 
-<pre><code>.product-card > .title
-:where(.product-card) > .title
-#app .product-card .title
-.card:has(.error)</code></pre>
+        <CodeExample code={selectorExamples} language="css" />
     </section>
 
     <script type="module" src="/scripts/specificity-calculator.js"></script>
