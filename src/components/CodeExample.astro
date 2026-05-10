@@ -2,18 +2,31 @@
 export interface Props {
     code: string;
     language?: string;
+    variant?: 'neutral' | 'before' | 'after';
 }
 
 const {
     code,
-    language = 'css'
+    language = 'css',
+    variant = 'neutral'
 } = Astro.props;
 
-const label = `${language.toUpperCase()} code example`;
+const variantLabels = {
+    neutral: `${language.toUpperCase()} code example`,
+    before: `Before, ${language.toUpperCase()} code example`,
+    after: `After, ${language.toUpperCase()} code example`
+};
+
+const label = variantLabels[variant];
 const languageClass = `language-${language}`;
 ---
 
-<figure class="code-example" data-code-example data-language={language}>
+<figure
+    class:list={['code-example', `code-example--${variant}`]}
+    data-code-example
+    data-language={language}
+    data-variant={variant}
+>
     <figcaption>
         <span>{label}</span>
 
