@@ -27,6 +27,18 @@ const componentCssExample = `.product-card {
 .product-card--featured {
     border-color: var(--colour-accent);
 }`;
+
+const badExample = `.featured-product-card-box {
+    margin-bottom: 16px;
+}
+
+.featured-product-card-box .product-title {
+    font-size: 32px;
+}
+
+.active {
+    border: 2px solid purple;
+}`;
 ---
 
 <DocsLayout
@@ -41,13 +53,20 @@ const componentCssExample = `.product-card {
         </h1>
 
         <p class="intro">
-            LSCSS works best when the naming, structure, and layer strategy stay
-            visible in everyday code. These examples show the methodology in
-            real component shapes rather than abstract theory.
+            Good CSS is easier to recognise when you can compare it with the bad
+            version first. These examples show how naming, layers, ownership,
+            and state look in real components instead of theory slides.
         </p>
     </section>
 
-    <section class="content-block">
+    <nav class="section-nav" aria-label="Examples sections">
+        <a href="#start">Start here</a>
+        <a href="#before-after">Before and after</a>
+        <a href="#product-card">Component example</a>
+        <a href="#practice">What to practise</a>
+    </nav>
+
+    <section id="start" class="content-block">
         <h2>
             Start with the core pattern
         </h2>
@@ -59,8 +78,8 @@ const componentCssExample = `.product-card {
                 </h3>
 
                 <p>
-                    A simple component showing semantic naming, shallow child
-                    selectors, and explicit modifiers.
+                    Semantic naming, shallow selectors, clear modifiers, and
+                    predictable ownership.
                 </p>
             </article>
 
@@ -70,8 +89,8 @@ const componentCssExample = `.product-card {
                 </h3>
 
                 <p>
-                    Rendered component examples that connect naming, structure,
-                    accessibility, and visual output.
+                    Rendered components connecting structure, accessibility,
+                    and visible output.
                 </p>
             </article>
 
@@ -81,11 +100,38 @@ const componentCssExample = `.product-card {
                 </h3>
 
                 <p>
-                    A project scaffold for applying the folder structure,
-                    layers, and naming rules from the start.
+                    Apply folder structure, layers, and naming correctly from day one.
                 </p>
             </article>
         </div>
+    </section>
+
+    <section id="before-after" class="content-block">
+        <h2>
+            Before and after
+        </h2>
+
+        <p>
+            Most teams do not start with clean architecture. They inherit vague
+            names, deep selectors, and state classes that explain nothing.
+        </p>
+
+        <p>
+            Bad version:
+        </p>
+
+        <CodeExample code={badExample} />
+
+        <p>
+            Better version:
+        </p>
+
+        <CodeExample code={componentCssExample} />
+
+        <p>
+            The goal is not prettier code for screenshots. It is predictable
+            ownership and easier debugging six months later.
+        </p>
     </section>
 
     <section id="product-card" class="content-block">
@@ -95,7 +141,7 @@ const componentCssExample = `.product-card {
 
         <p>
             The component name describes the block. Child classes stay short
-            because the parent component provides the context.
+            because the parent already provides context.
         </p>
 
         <CodeExample code={markupExample} language="html" />
@@ -107,8 +153,8 @@ const componentCssExample = `.product-card {
         </h2>
 
         <p>
-            The CSS keeps selectors shallow, uses a clear modifier, and avoids
-            leaking component internals into global naming.
+            Keep selectors shallow, use modifiers deliberately, and avoid
+            turning temporary state into permanent naming decisions.
         </p>
 
         <CodeExample code={componentCssExample} />
@@ -126,8 +172,8 @@ const componentCssExample = `.product-card {
                 </h3>
 
                 <p>
-                    Examples of selector chaos, specificity battles,
-                    over-nesting, and unclear naming.
+                    Selector chaos, specificity fights, over-nesting, and names
+                    that aged badly.
                 </p>
             </article>
 
@@ -137,8 +183,8 @@ const componentCssExample = `.product-card {
                 </h3>
 
                 <p>
-                    Compare LSCSS with BEM, CUBE, scoped CSS, and other common
-                    methodology choices.
+                    Compare LSCSS with BEM, scoped CSS, utility-first systems,
+                    and modern CSS features.
                 </p>
             </article>
 
@@ -148,24 +194,24 @@ const componentCssExample = `.product-card {
                 </h3>
 
                 <p>
-                    Guidance for moving from legacy or inconsistent CSS toward
-                    a layered, semantic structure.
+                    Move from legacy CSS toward a layered, semantic structure
+                    without setting fire to delivery.
                 </p>
             </article>
         </div>
     </section>
 
-    <section class="content-block">
+    <section id="practice" class="content-block">
         <h2>
             What to practise next
         </h2>
 
         <ol>
-            <li>Pick a real component from an existing site.</li>
-            <li>Name the parent component semantically.</li>
-            <li>Use shallow child selectors scoped by the parent.</li>
-            <li>Add modifiers only when the component has a real variant.</li>
-            <li>Use state classes for temporary or conditional UI states.</li>
+            <li>Pick a real component from an existing project.</li>
+            <li>Name the parent semantically.</li>
+            <li>Replace deep selectors with shallow child selectors.</li>
+            <li>Add modifiers only for real reusable variants.</li>
+            <li>Use explicit state classes for temporary behaviour.</li>
             <li>Place the CSS in the correct layer and partial.</li>
         </ol>
     </section>
