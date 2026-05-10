@@ -1,22 +1,22 @@
 .breadcrumbs {
-    margin-block-end: 2rem;
+    margin-block-end: var(--space-xl);
 }
 
 .breadcrumbs ol {
     display: flex;
     flex-wrap: wrap;
-    gap: .5rem;
+    gap: var(--space-s);
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: .95rem;
+    font-size: var(--font-size-breadcrumb);
     opacity: .85;
 }
 
 .breadcrumbs li {
     display: inline-flex;
     align-items: center;
-    gap: .5rem;
+    gap: var(--space-s);
 }
 
 .breadcrumbs li:not(:last-child)::after {

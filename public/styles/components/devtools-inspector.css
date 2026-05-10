@@ -34,7 +34,7 @@
 .render-stages > li {
     padding: var(--space-s);
     border-radius: var(--radius-s);
-    background: rgb(0 0 0 / 8%);
+    background: var(--colour-interactive-subtle);
 }
 
 .render-stages > .is_active {

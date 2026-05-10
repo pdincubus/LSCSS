@@ -19,9 +19,9 @@
 }
 
 .anti-pattern-card--bad {
-    border-color: #b00020;
+    border-color: var(--colour-status-bad);
 }
 
 .anti-pattern-card--good {
-    border-color: #007a3d;
+    border-color: var(--colour-status-good);
 }

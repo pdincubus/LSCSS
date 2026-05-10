@@ -27,11 +27,11 @@
     display: grid;
     place-items: center;
     padding: var(--space-l);
-    background: rgb(0 0 0 / 70%);
+    background: var(--colour-backdrop);
 }
 
 .command-panel {
-    inline-size: min(40rem, 100%);
+    inline-size: min(var(--panel-max-inline-size), 100%);
     padding: var(--space-l);
     border-radius: var(--radius-m);
     background: var(--colour-background);

@@ -1,41 +1,41 @@
 .docs-pagination {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-m, 1rem);
-    margin-block-start: 4rem;
-    padding-block-start: 2rem;
-    border-top: 1px solid var(--color-border, rgba(255,255,255,.12));
+    gap: var(--space-m);
+    margin-block-start: var(--space-2xl);
+    padding-block-start: var(--space-xl);
+    border-top: var(--border-thin) solid var(--colour-border);
 }
 
 .docs-pagination-link {
     display: flex;
     flex-direction: column;
-    gap: .4rem;
-    padding: 1rem;
-    border: 1px solid var(--color-border, rgba(255,255,255,.12));
-    border-radius: .75rem;
+    gap: var(--space-pagination-gap);
+    padding: var(--space-m);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
     text-decoration: none;
-    transition: border-color .2s ease;
+    transition: border-color var(--duration-fast) ease;
 }
 
 .docs-pagination-link:hover,
 .docs-pagination-link:focus-visible {
-    border-color: var(--color-accent, currentColor);
+    border-color: var(--colour-accent);
 }
 
 .docs-pagination-link strong {
-    font-size: 1rem;
+    font-size: var(--font-size-m);
 }
 
 .docs-pagination-label {
-    font-size: .875rem;
+    font-size: var(--font-size-s);
     opacity: .75;
     text-transform: uppercase;
-    letter-spacing: .04em;
+    letter-spacing: var(--letter-spacing-label);
 }
 
 .docs-pagination-section {
-    font-size: .875rem;
+    font-size: var(--font-size-s);
     opacity: .7;
 }
 
@@ -44,7 +44,7 @@
     align-items: flex-end;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 50rem) {
     .docs-pagination {
         grid-template-columns: 1fr;
     }

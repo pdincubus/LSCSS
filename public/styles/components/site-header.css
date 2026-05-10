@@ -3,8 +3,8 @@
     top: 0;
     z-index: 10;
     border-block-end: var(--border-thin) solid var(--colour-border);
-    background: hsl(0 100% 100% / 0.94);
-    backdrop-filter: blur(12px);
+    background: var(--colour-surface-translucent);
+    backdrop-filter: blur(var(--blur-site-header));
 }
 
 .site-header > .page-shell {
@@ -70,8 +70,8 @@
 }
 
 .nav-list a:focus-visible {
-    outline: 2px solid var(--colour-accent);
-    outline-offset: 3px;
+    outline: var(--outline-width) solid var(--colour-accent);
+    outline-offset: var(--outline-offset);
 }
 
 .nav-list > li > ul {
@@ -79,12 +79,12 @@
     position: absolute;
     inset-block-start: calc(100% + var(--space-xs));
     inset-inline-start: 0;
-    min-inline-size: 14rem;
+    min-inline-size: var(--nav-dropdown-min);
     padding: var(--space-xs);
     border: var(--border-thin) solid var(--colour-border);
     border-radius: var(--radius-m);
     background: var(--colour-surface);
-    box-shadow: var(--shadow-m, 0 0.5rem 1.5rem hsl(0 0% 0% / 0.14));
+    box-shadow: var(--shadow-m);
 }
 
 .nav-list > li:hover > ul,
@@ -130,7 +130,7 @@
         border: 0;
         border-inline-start: var(--border-thin) solid var(--colour-border);
         border-radius: 0;
-        background: transparent;
+        background: var(--colour-transparent);
         box-shadow: none;
     }
 

@@ -6,11 +6,11 @@
     color: var(--colour-accent-dark);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--letter-spacing-eyebrow);
 }
 
 .site-hero > .intro {
     max-width: var(--measure);
-    font-size: 1.2rem;
+    font-size: var(--font-size-intro);
     color: var(--colour-text-soft);
 }

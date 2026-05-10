@@ -1,5 +1,5 @@
 .container-demo-wrap {
-    inline-size: 420px;
+    inline-size: var(--demo-container-width);
     max-inline-size: 100%;
     margin-inline: auto;
     resize: horizontal;
@@ -19,7 +19,7 @@
 .container-demo-card > .media {
     display: grid;
     place-items: center;
-    min-block-size: 8rem;
+    min-block-size: var(--demo-size-l);
     border-radius: var(--radius-s);
     background: var(--colour-accent);
     color: var(--colour-background);
@@ -31,7 +31,7 @@
 
 @container (min-width: 36rem) {
     .container-demo-card {
-        grid-template-columns: 12rem 1fr;
+        grid-template-columns: var(--demo-shift) 1fr;
         align-items: center;
     }
 }
