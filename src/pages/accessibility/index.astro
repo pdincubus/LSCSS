@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
 
 const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
     * {
@@ -38,6 +39,6 @@ const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
     </section>
 
     <section class="content-block">
-        <pre><code>{reducedMotionExample}</code></pre>
+        <CodeExample code={reducedMotionExample} language="css" />
     </section>
 </DocsLayout>
