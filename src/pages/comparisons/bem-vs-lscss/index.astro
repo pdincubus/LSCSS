@@ -1,13 +1,28 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
 
 const title = 'BEM vs LSCSS';
 const description = 'Compare BEM and Layered Semantic CSS for naming, architecture, modifiers, state handling, scalability, and long-term maintainability.';
+
+const bemExample = `.product-card {}
+.product-card__title {}
+.product-card__price {}
+.product-card--featured {}`;
+
+const lscssExample = `.product-card {}
+.product-card > .title {}
+.product-card > .price {}
+.product-card--featured {}`;
+
+const stateExample = `.product-card--featured.is_loading {}
+.product-card.has_error {}`;
 ---
 
 <DocsLayout
     title={title}
     description={description}
+    schemaType="TechArticle"
 >
     <article>
         <p class="eyebrow">Comparison</p>
@@ -18,63 +33,143 @@ const description = 'Compare BEM and Layered Semantic CSS for naming, architectu
 
         <p>
             BEM helped solve real problems. It gave teams structure when CSS was
-            mostly organised by panic and inheritance accidents.
+            mostly organised by panic, inheritance accidents, and selectors that
+            behaved like loose cables in a server room.
         </p>
 
         <p>
-            LSCSS keeps the useful discipline but removes the naming ceremony,
-            reduces selector noise, and leans harder on cascade layers and modern
-            CSS features instead of longer class names.
+            LSCSS keeps some of that discipline, especially explicit component
+            variants, but removes much of the naming ceremony. It relies more on
+            cascade layers, short scoped child selectors, design tokens, and
+            explicit state classes.
         </p>
 
-        <h2>
-            Main differences
-        </h2>
+        <nav class="section-nav" aria-label="BEM and LSCSS comparison sections">
+            <a href="#main-differences">Differences</a>
+            <a href="#naming">Naming</a>
+            <a href="#modifiers">Modifiers</a>
+            <a href="#state">State</a>
+            <a href="#when-to-use">When to use</a>
+        </nav>
 
-        <ul>
-            <li>BEM uses explicit block__element--modifier naming</li>
-            <li>LSCSS prefers semantic component names with shallow selectors</li>
-            <li>BEM often duplicates structure in class names</li>
-            <li>LSCSS uses layers and scope to reduce naming pressure</li>
-            <li>BEM modifiers are naming-heavy</li>
-            <li>LSCSS uses clearer modifier and state classes</li>
-        </ul>
+        <section id="main-differences" class="content-block">
+            <h2>
+                Main differences
+            </h2>
 
-        <h2>
-            Where BEM works well
-        </h2>
+            <ul>
+                <li>BEM uses explicit <code>block__element--modifier</code> naming.</li>
+                <li>LSCSS uses semantic component names with short contextual child selectors.</li>
+                <li>BEM encodes structure into class names.</li>
+                <li>LSCSS usually keeps structure in the selector and markup hierarchy.</li>
+                <li>BEM depends heavily on naming discipline.</li>
+                <li>LSCSS combines naming discipline with cascade layers, tokens, and modern CSS.</li>
+            </ul>
+        </section>
 
-        <ul>
-            <li>large teams needing strict consistency</li>
-            <li>older codebases without modern CSS support</li>
-            <li>systems where explicit naming reduces onboarding pain</li>
-        </ul>
+        <section id="naming" class="content-block">
+            <h2>
+                Element naming
+            </h2>
 
-        <h2>
-            Where LSCSS helps more
-        </h2>
+            <p>
+                BEM makes ownership clear by repeating the block name in every
+                element class.
+            </p>
 
-        <ul>
-            <li>modern front-end teams using cascade layers</li>
-            <li>projects focused on maintainability over naming rituals</li>
-            <li>systems where state and theme handling matter heavily</li>
-            <li>teams wanting less verbose HTML and CSS</li>
-        </ul>
+            <CodeExample code={bemExample} />
 
-        <h2>
-            Recommended reading
-        </h2>
+            <p>
+                LSCSS usually keeps child names short and lets the parent
+                component provide context.
+            </p>
 
-        <ul>
-            <li><a href="/principles/">Core principles</a></li>
-            <li><a href="/state-classes/">State classes</a></li>
-            <li><a href="/theme-layer/">Theme layer</a></li>
-            <li><a href="/decision-trees/">Decision trees</a></li>
-        </ul>
+            <CodeExample code={lscssExample} />
+
+            <p>
+                This borrows from RSCSS-style selectors. The aim is readable
+                markup without losing component ownership.
+            </p>
+        </section>
+
+        <section id="modifiers" class="content-block">
+            <h2>
+                Modifiers
+            </h2>
+
+            <p>
+                LSCSS keeps the useful BEM idea of explicit modifiers for
+                reusable component variants. A modifier should describe a stable
+                version of a component, not a temporary interaction state.
+            </p>
+
+            <p>
+                This is one of the areas where BEM still gives LSCSS a useful
+                foundation.
+            </p>
+        </section>
+
+        <section id="state" class="content-block">
+            <h2>
+                State and conditions
+            </h2>
+
+            <p>
+                LSCSS separates modifiers from state and condition classes.
+                A featured card and a loading card are not the same kind of
+                information.
+            </p>
+
+            <CodeExample code={stateExample} />
+
+            <p>
+                Use <code>.is_*</code> for temporary state and <code>.has_*</code>
+                for conditions or content presence. This keeps behaviour easier
+                to read and easier to manage from JavaScript.
+            </p>
+        </section>
+
+        <section id="when-to-use" class="content-block">
+            <h2>
+                When BEM works well
+            </h2>
+
+            <ul>
+                <li>large teams needing strict naming consistency</li>
+                <li>older codebases without cascade layers or modern CSS support</li>
+                <li>projects where explicit naming reduces onboarding risk</li>
+                <li>systems where every element must be identifiable from its class alone</li>
+            </ul>
+
+            <h2>
+                When LSCSS helps more
+            </h2>
+
+            <ul>
+                <li>modern front-end teams using cascade layers and tokens</li>
+                <li>projects focused on readable HTML and lower naming noise</li>
+                <li>systems where state, theme, and legacy CSS need clear separation</li>
+                <li>teams that want structure without turning every class into a family tree</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Recommended reading
+            </h2>
+
+            <ul>
+                <li><a href="/naming/">Naming</a></li>
+                <li><a href="/modifiers-and-state/">Modifiers and state</a></li>
+                <li><a href="/layers/">Layers</a></li>
+                <li><a href="/decision-trees/">Decision trees</a></li>
+            </ul>
+        </section>
 
         <p>
-            BEM is not wrong. It is simply older architecture solving older
-            problems. CSS has moved on. Some naming conventions forgot to.
+            BEM is not wrong. It solved real problems. LSCSS takes the useful
+            parts, removes some verbosity, and adds more protection through
+            layers, tokens, state naming, and modern CSS.
         </p>
     </article>
 </DocsLayout>
