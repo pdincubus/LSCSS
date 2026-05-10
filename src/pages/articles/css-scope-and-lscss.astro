@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
 
 const scopeExample = `@scope (.product-card) {
     .title {
@@ -44,7 +45,7 @@ const scopeExample = `@scope (.product-card) {
     </section>
 
     <section class="content-block">
-        <pre><code>{scopeExample}</code></pre>
+        <CodeExample code={scopeExample} language="css" />
     </section>
 
     <section class="content-block">
