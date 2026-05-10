@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeExample from '../../components/CodeExample.astro';
 
 const deepBad = `.page .content .card .header .title {
     margin-bottom: 1rem;
@@ -24,6 +25,15 @@ const stateBad = `.button--loading {}
 const stateGood = `.button {}
 .button.is_loading {}
 .button.is_disabled {}`;
+
+const legacyLayerExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
+
+const hacksExample = `@layer hacks {
+    .checkout-banner {
+        margin-top: -3px;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -53,10 +63,10 @@ const stateGood = `.button {}
         <h2>Deep selectors to shallow ownership</h2>
 
         <h3>Before</h3>
-        <pre><code>{deepBad}</code></pre>
+        <CodeExample code={deepBad} language="css" />
 
         <h3>After</h3>
-        <pre><code>{deepGood}</code></pre>
+        <CodeExample code={deepGood} language="css" />
 
         <p>
             Deep selectors couple CSS to markup structure. Short scoped
@@ -68,10 +78,10 @@ const stateGood = `.button {}
         <h2>Utility overload to semantic components</h2>
 
         <h3>Before</h3>
-        <pre><code>{utilityBad}</code></pre>
+        <CodeExample code={utilityBad} language="html" />
 
         <h3>After</h3>
-        <pre><code>{utilityGood}</code></pre>
+        <CodeExample code={utilityGood} language="html" />
 
         <p>
             Repeated utility stacks usually mean a component is trying to exist.
@@ -83,10 +93,10 @@ const stateGood = `.button {}
         <h2>State disguised as modifiers</h2>
 
         <h3>Before</h3>
-        <pre><code>{stateBad}</code></pre>
+        <CodeExample code={stateBad} language="css" />
 
         <h3>After</h3>
-        <pre><code>{stateGood}</code></pre>
+        <CodeExample code={stateGood} language="css" />
 
         <p>
             Permanent reusable variants are modifiers. Temporary UI behaviour
@@ -102,8 +112,7 @@ const stateGood = `.button {}
             Create a legacy layer first, then improve active work safely.
         </p>
 
-        <pre><code>@layer legacy, settings, base, utilities,
-layout, components, theme, hacks;</code></pre>
+        <CodeExample code={legacyLayerExample} language="css" />
 
         <p>
             Legacy should stay visible and low priority, not quietly spread.
@@ -118,11 +127,7 @@ layout, components, theme, hacks;</code></pre>
             pretending to be temporary.
         </p>
 
-        <pre><code>@layer hacks {
-    .checkout-banner {
-        margin-top: -3px;
-    }
-}</code></pre>
+        <CodeExample code={hacksExample} language="css" />
 
         <p>
             Keep hacks visible. Hidden hacks become architecture by accident.
