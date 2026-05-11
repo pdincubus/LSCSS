@@ -15,11 +15,66 @@
     padding-block: var(--space-xs);
 }
 
+.site-header .mast {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-l);
+    inline-size: 100%;
+    min-inline-size: 0;
+}
+
+.site-header .mast > .bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    min-inline-size: 0;
+    flex: 0 1 auto;
+}
+
 .site-title {
     color: var(--colour-text-on-dark);
     text-decoration: none;
     font-weight: 600;
     letter-spacing: -0.01em;
+}
+
+.menu-toggle {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: var(--space-xs);
+    border: var(--border-thin) solid hsl(0 0% 100% / 0.35);
+    border-radius: var(--radius-s);
+    background: hsl(0 0% 100% / 0.08);
+    color: var(--colour-text-on-dark);
+    cursor: pointer;
+    line-height: 0;
+}
+
+.menu-toggle:focus-visible {
+    outline: var(--outline-width) solid var(--colour-focus);
+    outline-offset: var(--outline-offset);
+}
+
+.menu-toggle > .bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    inline-size: 1.25rem;
+    block-size: 0.875rem;
+}
+
+.menu-toggle > .bars span {
+    display: block;
+    block-size: 2px;
+    border-radius: 1px;
+    background: currentColor;
 }
 
 .site-nav {
@@ -84,6 +139,22 @@
 /* Flyouts only when there is a fine pointer (mouse / trackpad). Touch tablets at
    1024px+ still report coarse pointer — they get the stacked block below. */
 @media (width >= 64rem) and (pointer: fine) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .site-header .mast {
+        flex-wrap: nowrap;
+    }
+
+    .site-header .mast > .bar {
+        flex: 0 1 auto;
+    }
+
+    .site-nav {
+        flex: 0 1 auto;
+    }
+
     .nav-list > li > ul {
         display: none;
         position: absolute;
@@ -129,8 +200,23 @@
     }
 
     .site-header > .page-shell {
-        align-items: flex-start;
+        align-items: stretch;
         flex-direction: column;
+    }
+
+    .site-header .mast {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .site-header .mast > .bar {
+        flex: 0 0 auto;
+        inline-size: 100%;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
     }
 
     .site-nav,
@@ -138,9 +224,18 @@
         inline-size: 100%;
     }
 
+    .site-header:not(.is_nav_open) .site-nav .nav-list {
+        display: none;
+    }
+
+    .site-header.is_nav_open .site-nav .nav-list {
+        display: flex;
+    }
+
     .nav-list {
         align-items: flex-start;
         flex-direction: column;
+        margin-block-start: var(--space-s);
     }
 
     .nav-list > li,

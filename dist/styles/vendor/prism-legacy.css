@@ -1,2 +1,2 @@
-/* Deprecated: Prism is bundled via site.css `layer(prism)`. Kept so old links do not 404. */
-@import url('./prism-okaidia.css') layer(prism);
+/* Deprecated: Prism is bundled via site.css `layer(legacy)`. Kept so old links do not 404. */
+@import url('./prism-okaidia.css') layer(legacy);

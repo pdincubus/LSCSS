@@ -21,9 +21,23 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '0.5',
+        label: '0.5',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Site implementation aligned with LSCSS naming: temporary UI state uses `.is_*` with underscores; stable layout variants use BEM-style `--` modifiers on the owning block.',
+        releasedAt: '2026-06-14',
+        changed: [
+            'Primary header mobile menu uses `.is_nav_open` on `.site-header` (state from interaction), with matching script and `site-header` styles.',
+            'Documentation pagination uses a short `doc-pager` block with contextual children (`.link`, `.body`, `.name`) and modifiers `link--previous` / `link--next`, not `.is_*` classes, matching /apply/modifiers-and-state/.',
+            'Site chrome moves from BEM `__` chains to LSCSS-style roots and short children: e.g. `hub-card` > `.link` / `.body`, `site-footer` > `.inner` / `.topics`, docs sidebar `disclosure` > `.toc` > `.list`, versions `release` > `.row` / `.changes`, and `site-search` for Pagefind.'
+        ]
+    },
+    {
         version: '0.4',
         label: '0.4',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Discovery and technical SEO pass: sitemap and robots, canonical and social meta, richer RSS, structured data for FAQ and breadcrumbs, default share artwork, and cleaner legacy redirects aligned with trailing-slash URLs.',

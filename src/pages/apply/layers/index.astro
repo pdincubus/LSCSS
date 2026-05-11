@@ -8,9 +8,10 @@ layout, components, theme, hacks;`;
 const importExample = `@import './vendor/slider.css' layer(legacy);
 @import './settings/variables.css' layer(settings);
 @import './base/reset.css' layer(base);
+@import './layout/page-shell.css' layer(layout);
 @import './components/product-card.css' layer(components);
 @import './theme/brand.css' layer(theme);
-@import './apply/hacks/temporary-fixes.css' layer(hacks);`;
+@import './hacks/temporary-fixes.css' layer(hacks);`;
 ---
 
 <DocsLayout
@@ -90,9 +91,11 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
         </h2>
 
         <p>
-            Legacy CSS and third-party styles should be imported first at the
-            lowest priority. This makes your structured layers immediately more
-            important without heavier selectors or override battles.
+            Legacy CSS and third-party styles belong in the <code>legacy</code> layer:
+            it is declared first in the <code>@layer</code> list so it stays lowest in the
+            cascade. That lets structured layers win without heavier selectors. On this
+            site, the vendored Prism syntax theme is imported with <code>layer(legacy)</code>
+            for the same reason.
         </p>
 
         <p>

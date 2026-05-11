@@ -18,16 +18,14 @@ const folderStructure = `css/
         vh.css
         a11y-link.css
 
-    atoms/
+    layout/
+        site-head.css
+
+    components/
         logo.css
         button.css
-
-    molecules/
         main-nav.css
         card.css
-
-    organisms/
-        site-head.css
 
     theme/
         brand.css
@@ -39,8 +37,11 @@ const folderStructure = `css/
     hacks/
         temporary-fixes.css`;
 
-const rootCssExample = `@layer settings, base, utilities,
-atoms, molecules, organisms, theme, legacy, hacks;
+const rootCssExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;
+
+@import 'legacy/vendor' layer(legacy);
+@import 'legacy/old-site' layer(legacy);
 
 @import 'settings/variables' layer(settings);
 @import 'settings/media' layer(settings);
@@ -50,13 +51,12 @@ atoms, molecules, organisms, theme, legacy, hacks;
 
 @import 'helpers/vh' layer(utilities);
 
-@import 'atoms/logo' layer(atoms);
-@import 'atoms/button' layer(atoms);
+@import 'layout/site-head' layer(layout);
 
-@import 'molecules/main-nav' layer(molecules);
-@import 'molecules/card' layer(molecules);
-
-@import 'organisms/site-head' layer(organisms);`;
+@import 'components/logo' layer(components);
+@import 'components/button' layer(components);
+@import 'components/main-nav' layer(components);
+@import 'components/card' layer(components);`;
 
 const tokenExample = `:root {
     --ff: 'Funnel Sans', system-ui;
@@ -119,8 +119,8 @@ const fontExample = `@font-face {
         <CodeExample code={folderStructure} language="text" />
 
         <p>
-            Folder names may vary. Some teams prefer components. Some use
-            atoms, molecules, and organisms. The important rule is ownership,
+            Folder names may vary. Some teams group files under
+            <code>components/</code> with subfolders. The important rule is ownership,
             not folder worship.
         </p>
     </section>
@@ -180,7 +180,7 @@ const fontExample = `@font-face {
         <ul>
             <li>One component, one partial.</li>
             <li>No IDs for styling.</li>
-            <li>No important declarations unless there is a real emergency.</li>
+            <li>No <code>!important</code> unless there is a real emergency.</li>
             <li>Base styles stay in the base layer.</li>
             <li>Utilities stay rare and purposeful.</li>
             <li>Theme changes presentation, not structure.</li>

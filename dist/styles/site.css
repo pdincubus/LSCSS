@@ -1,13 +1,13 @@
-@layer legacy, settings, base, prism, utilities, layout, components, theme, hacks;
+@layer legacy, settings, base, utilities, layout, components, theme, hacks;
+
+/* Third-party Prism Okaidia theme; vendor CSS lives in `legacy`. */
+@import './vendor/prism-okaidia.css' layer(legacy);
 
 @import './settings/tokens.css' layer(settings);
 
 @import './base/reset.css' layer(base);
 @import './base/typography.css' layer(base);
 @import './base/code.css' layer(base);
-
-/* Prism Okaidia (ocodia); must sit after `base` so token colours beat base `code` / `pre code` rules. */
-@import './vendor/prism-okaidia.css' layer(prism);
 
 @import './layout/page-shell.css' layer(layout);
 

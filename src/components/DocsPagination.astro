@@ -12,34 +12,34 @@ const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
 
 {
     (previous || next) && (
-        <nav class="docs-pagination" aria-label="Documentation pagination">
+        <nav class="doc-pager" aria-label="Documentation pagination">
             {
                 previous ? (
-                    <a class="docs-pagination-link is-previous" href={previous.href}>
-                        <span class="docs-pagination-arrow" aria-hidden="true">←</span>
-                        <span class="docs-pagination-body">
-                            <span class="docs-pagination-label">Previous</span>
-                            <span class="docs-pagination-title">{previous.label}</span>
-                            <span class="docs-pagination-section">{previous.section}</span>
+                    <a class="link link--previous" href={previous.href}>
+                        <span class="arrow" aria-hidden="true">←</span>
+                        <span class="body">
+                            <span class="label">Previous</span>
+                            <span class="name">{previous.label}</span>
+                            <span class="context">{previous.section}</span>
                         </span>
                     </a>
                 ) : (
-                    <span class="docs-pagination-spacer" aria-hidden="true"></span>
+                    <span class="spacer" aria-hidden="true"></span>
                 )
             }
 
             {
                 next ? (
-                    <a class="docs-pagination-link is-next" href={next.href}>
-                        <span class="docs-pagination-body">
-                            <span class="docs-pagination-label">Next</span>
-                            <span class="docs-pagination-title">{next.label}</span>
-                            <span class="docs-pagination-section">{next.section}</span>
+                    <a class="link link--next" href={next.href}>
+                        <span class="body">
+                            <span class="label">Next</span>
+                            <span class="name">{next.label}</span>
+                            <span class="context">{next.section}</span>
                         </span>
-                        <span class="docs-pagination-arrow" aria-hidden="true">→</span>
+                        <span class="arrow" aria-hidden="true">→</span>
                     </a>
                 ) : (
-                    <span class="docs-pagination-spacer" aria-hidden="true"></span>
+                    <span class="spacer" aria-hidden="true"></span>
                 )
             }
         </nav>

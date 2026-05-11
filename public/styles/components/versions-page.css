@@ -17,7 +17,7 @@
     max-inline-size: none;
 }
 
-.version-release {
+.release {
     margin: 0;
     padding: var(--space-l);
     border: var(--border-thin) solid var(--colour-border);
@@ -26,7 +26,7 @@
     box-shadow: 0 1px 2px hsl(0 0% 0% / 0.05);
 }
 
-.version-release--current {
+.release--current {
     border-color: var(--colour-accent);
     background: linear-gradient(
         160deg,
@@ -39,7 +39,7 @@
         0 0 0 1px hsl(222 53% 35% / 0.08);
 }
 
-.version-release__header {
+.release > .row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -47,7 +47,7 @@
     margin-block-end: var(--space-s);
 }
 
-.version-release__title {
+.release > .row > .title {
     margin: 0;
     font-size: var(--font-size-l);
     font-weight: 700;
@@ -56,7 +56,7 @@
     color: var(--colour-text);
 }
 
-.version-release__badge {
+.release > .row > .badge {
     display: inline-block;
     padding: 0.2em 0.65em;
     border-radius: var(--radius-pill);
@@ -70,37 +70,37 @@
     color: var(--colour-text-muted);
 }
 
-.version-release__badge--current {
+.release > .row > .badge--current {
     border-color: hsl(222 53% 35% / 0.35);
     background: var(--colour-accent-soft);
     color: var(--colour-accent-dark);
 }
 
-.version-release__badge--archived {
+.release > .row > .badge--archived {
     border-color: var(--colour-border-soft);
     background: var(--colour-low-contrast-surface);
     color: var(--colour-text-soft);
 }
 
-.version-release__badge--draft {
+.release > .row > .badge--draft {
     border-color: hsl(27 100% 48% / 0.35);
     background: hsl(27 100% 48% / 0.12);
     color: var(--colour-status-warning);
 }
 
-.version-release__date {
+.release > .row > .date {
     margin-inline-start: auto;
     font-size: var(--font-size-s);
     font-variant-numeric: tabular-nums;
     color: var(--colour-text-muted);
 }
 
-.version-release__date time {
+.release > .row > .date time {
     font-weight: 500;
     color: var(--colour-text-soft);
 }
 
-.version-release__desc {
+.release > .blurb {
     margin: 0;
     max-inline-size: 62ch;
     font-size: var(--font-size-m);
@@ -108,7 +108,7 @@
     color: var(--colour-text-soft);
 }
 
-.version-release__changelog {
+.release > .changes {
     margin-block-start: var(--space-l);
     padding-block: var(--space-l) var(--space-s);
     padding-inline: var(--space-s) 0;
@@ -116,17 +116,17 @@
 }
 
 /* First changelog after the summary: extra air above the divider. */
-.version-release__desc + .version-release__changelog {
+.release > .blurb + .changes {
     margin-block-start: var(--space-xl);
 }
 
 /* Second block (“Removed…”) after “What changed”: clear separation. */
-.version-release__changelog + .version-release__changelog {
+.release > .changes + .changes {
     margin-block-start: var(--space-xl);
     padding-block-start: var(--space-l);
 }
 
-.version-release__changelog-title {
+.release > .changes > .heading {
     margin: 0 0 var(--space-s);
     font-size: var(--font-size-s);
     font-weight: 600;
@@ -135,11 +135,11 @@
     color: var(--colour-text-muted);
 }
 
-.version-release__changelog--removed .version-release__changelog-title {
+.release > .changes--removed > .heading {
     color: var(--colour-text-soft);
 }
 
-.version-release__changelog-list {
+.release > .changes > .list {
     margin: 0;
     padding-inline-start: 1.35rem;
     display: grid;
@@ -149,20 +149,20 @@
     color: var(--colour-text-soft);
 }
 
-.version-release__changelog-list > li {
+.release > .changes > .list > li {
     max-inline-size: none;
     max-width: min(70ch, 100%);
     padding-inline-start: 0.2em;
 }
 
-.version-release__changelog--removed .version-release__changelog-list {
+.release > .changes--removed > .list {
     border-inline-start: var(--border-thin) solid hsl(343 100% 45.5% / 0.25);
     padding-inline-start: calc(var(--space-m) + var(--space-xs));
     margin-inline-start: 0.15rem;
 }
 
 @media (max-width: 36rem) {
-    .version-release__date {
+    .release > .row > .date {
         margin-inline-start: 0;
         flex-basis: 100%;
     }

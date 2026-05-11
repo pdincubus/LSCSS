@@ -62,42 +62,39 @@ function statusLabel(status: 'current' | 'archived' | 'draft') {
                     versions.map((version) => (
                         <li
                             class:list={[
-                                'version-release',
-                                { 'version-release--current': version.status === 'current' }
+                                'release',
+                                { 'release--current': version.status === 'current' }
                             ]}
                         >
-                            <div class="version-release__header">
-                                <h3 class="version-release__title">
+                            <div class="row">
+                                <h3 class="title">
                                     LSCSS {version.label}
                                 </h3>
 
                                 <span
-                                    class:list={[
-                                        'version-release__badge',
-                                        `version-release__badge--${version.status}`
-                                    ]}
+                                    class:list={['badge', `badge--${version.status}`]}
                                 >
                                     {statusLabel(version.status)}
                                 </span>
 
-                                <div class="version-release__date">
+                                <div class="date">
                                     <time datetime={version.releasedAt}>
                                         {formatReleaseDate(version.releasedAt)}
                                     </time>
                                 </div>
                             </div>
 
-                            <p class="version-release__desc">
+                            <p class="blurb">
                                 {version.description}
                             </p>
 
                             {
                                 version.changed && version.changed.length > 0 && (
-                                    <div class="version-release__changelog">
-                                        <h4 class="version-release__changelog-title">
+                                    <div class="changes">
+                                        <h4 class="heading">
                                             What changed
                                         </h4>
-                                        <ul class="version-release__changelog-list">
+                                        <ul class="list">
                                             {version.changed.map((line) => (
                                                 <li>{line}</li>
                                             ))}
@@ -108,11 +105,11 @@ function statusLabel(status: 'current' | 'archived' | 'draft') {
 
                             {
                                 version.removed && version.removed.length > 0 && (
-                                    <div class="version-release__changelog version-release__changelog--removed">
-                                        <h4 class="version-release__changelog-title">
+                                    <div class="changes changes--removed">
+                                        <h4 class="heading">
                                             Removed or retired
                                         </h4>
-                                        <ul class="version-release__changelog-list">
+                                        <ul class="list">
                                             {version.removed.map((line) => (
                                                 <li>{line}</li>
                                             ))}

@@ -288,8 +288,8 @@ The structural breakpoints that matter for agents: 1440px (content lock), 1068px
 
 ## LSCSS Implementation Notes
 
-- Runtime stylesheet entrypoint is `public/styles/site.css`, preserving the LSCSS layer order (`settings -> base -> layout -> components`) and importing every project CSS module under `public/styles/components/`.
+- Runtime stylesheet entrypoint is `public/styles/site.css`, preserving the LSCSS layer order (`legacy` → `settings` → `base` → `utilities` → `layout` → `components` → `theme` → `hacks`) and importing project CSS from `public/styles/layout/`, `public/styles/components/`, and related paths.
 - Design-token implementation lives in `public/styles/settings/tokens.css`:
   - Typography, spacing, radius, motion, and breakpoint-friendly container tokens align to this spec.
   - Semantic color tokens are mapped to the Crayons and Code palette variables (`--c-*`) rather than inline hex values.
-- Search styles are canonical in `public/styles/components/search-box.css`; legacy duplicate `src/styles/components/search.css` was removed during consolidation.
+- Search styles are canonical in `public/styles/components/search-box.css`; an older duplicate search stylesheet was removed during consolidation.

@@ -1,5 +1,5 @@
 /* Compact prev/next controls (not large content cards). */
-.docs-pagination {
+.doc-pager {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
@@ -10,14 +10,14 @@
     border-block-start: var(--border-thin) solid var(--colour-border);
 }
 
-.docs-pagination-spacer {
+.doc-pager > .spacer {
     flex: 1 1 0;
     min-inline-size: 0;
     max-inline-size: 12rem;
     pointer-events: none;
 }
 
-.docs-pagination-link {
+.doc-pager .link {
     display: inline-flex;
     align-items: flex-start;
     gap: var(--space-xs);
@@ -33,18 +33,18 @@
         background-color var(--duration-fast) ease;
 }
 
-.docs-pagination-link:hover,
-.docs-pagination-link:focus-visible {
+.doc-pager .link:hover,
+.doc-pager .link:focus-visible {
     border-color: var(--colour-accent);
     background: var(--colour-accent-soft);
 }
 
-.docs-pagination-link:focus-visible {
+.doc-pager .link:focus-visible {
     outline: var(--outline-width) solid var(--colour-focus);
     outline-offset: var(--outline-offset);
 }
 
-.docs-pagination-arrow {
+.doc-pager .arrow {
     flex: 0 0 auto;
     margin-block-start: 0.125rem;
     font-size: var(--font-size-m);
@@ -53,7 +53,7 @@
     color: var(--colour-text-soft);
 }
 
-.docs-pagination-body {
+.doc-pager .body {
     display: flex;
     min-inline-size: 0;
     flex: 1 1 auto;
@@ -61,12 +61,12 @@
     gap: 0.125rem;
 }
 
-.docs-pagination-link.is-next .docs-pagination-body {
+.doc-pager .link--next .body {
     align-items: flex-end;
     text-align: end;
 }
 
-.docs-pagination-label {
+.doc-pager .label {
     font-size: var(--font-size-s);
     font-weight: 600;
     letter-spacing: var(--letter-spacing-label);
@@ -75,7 +75,7 @@
     color: var(--colour-text-muted);
 }
 
-.docs-pagination-title {
+.doc-pager .name {
     overflow: hidden;
     max-inline-size: 100%;
     font-size: var(--font-size-meta);
@@ -87,12 +87,12 @@
     white-space: nowrap;
 }
 
-.docs-pagination-link:hover .docs-pagination-title,
-.docs-pagination-link:focus-visible .docs-pagination-title {
+.doc-pager .link:hover .name,
+.doc-pager .link:focus-visible .name {
     color: var(--colour-accent-dark);
 }
 
-.docs-pagination-section {
+.doc-pager .context {
     font-size: var(--font-size-s);
     font-weight: 400;
     line-height: 1.25;
@@ -102,25 +102,25 @@
 }
 
 @media (width < 40rem) {
-    .docs-pagination {
+    .doc-pager {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .docs-pagination-spacer {
+    .doc-pager > .spacer {
         display: none;
     }
 
-    .docs-pagination-link {
+    .doc-pager .link {
         max-inline-size: none;
         justify-content: flex-start;
     }
 
-    .docs-pagination-link.is-next {
+    .doc-pager .link--next {
         justify-content: space-between;
     }
 
-    .docs-pagination-link.is-next .docs-pagination-body {
+    .doc-pager .link--next .body {
         align-items: flex-start;
         text-align: start;
     }

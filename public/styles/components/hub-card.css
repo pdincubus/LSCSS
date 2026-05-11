@@ -1,5 +1,5 @@
-/* Hub index tiles: whole card is one link when .hub-card__link is present. */
-.hub-card-grid {
+/* Hub index tiles: whole card is one link when .hub-card > .link is present. */
+.hub-grid {
     display: grid;
     gap: var(--space-m);
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
@@ -14,7 +14,7 @@
 }
 
 /* Linked card: chrome and padding live on the anchor */
-.hub-card__link {
+.hub-card > .link {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -31,12 +31,12 @@
         box-shadow var(--duration-fast) ease;
 }
 
-.hub-card__link:hover {
+.hub-card > .link:hover {
     border-color: var(--colour-accent);
     box-shadow: 0 4px 14px hsl(222 53% 35% / 0.1);
 }
 
-.hub-card__link:focus-visible {
+.hub-card > .link:focus-visible {
     outline: var(--outline-width) solid var(--colour-focus);
     outline-offset: var(--outline-offset);
     border-color: var(--colour-focus);
@@ -61,7 +61,7 @@
     box-shadow: 0 4px 14px hsl(222 53% 35% / 0.1);
 }
 
-.hub-card__stack {
+.hub-card > .stack {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -69,7 +69,7 @@
     min-block-size: 0;
 }
 
-.hub-card__title {
+.hub-card > .title {
     margin: 0;
     font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
     line-height: 1.25;
@@ -77,11 +77,11 @@
     color: var(--colour-text);
 }
 
-.hub-card__link:hover .hub-card__title {
+.hub-card > .link:hover .title {
     color: var(--colour-accent);
 }
 
-.hub-card__body {
+.hub-card > .body {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -89,7 +89,7 @@
     min-block-size: 0;
 }
 
-.hub-card__body > p {
+.hub-card > .body > p {
     margin: 0;
     max-width: none;
     flex-grow: 1;
@@ -98,12 +98,12 @@
     line-height: 1.45;
 }
 
-.hub-card__body p a {
+.hub-card > .body p a {
     font-weight: 600;
 }
 
 /* Optional call-to-action line at the foot of a linked card (replaces a second link) */
-.hub-card__cta {
+.hub-card .cta {
     margin-block-start: auto;
     padding-block-start: var(--space-2xs);
     font-size: var(--font-size-meta);
@@ -112,6 +112,6 @@
     color: var(--colour-accent);
 }
 
-.hub-card__link:hover .hub-card__cta {
+.hub-card > .link:hover .cta {
     color: var(--colour-accent-dark);
 }

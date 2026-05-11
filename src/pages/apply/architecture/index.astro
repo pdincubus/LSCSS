@@ -19,6 +19,7 @@ layout, components, theme, hacks;
 
 @import './legacy/vendor.css' layer(legacy);
 @import './settings/variables.css' layer(settings);
+@import './layout/page-shell.css' layer(layout);
 @import './components/product-card.css' layer(components);
 @import './theme/brand.css' layer(theme);`;
 
@@ -95,6 +96,13 @@ const mediaQueryExample = `.modal {
             The main stylesheet should define layer order first, then import
             files into the correct place. If the root file becomes a working
             area instead of an import map, architecture starts leaking.
+        </p>
+
+        <p>
+            On this site, <code>.page-shell</code> sets width and horizontal centering for
+            any shell (including the site header). Section-sized vertical padding is
+            scoped to <code>main.page-shell</code> so the header can reuse the same class
+            without inheriting main-column rhythm.
         </p>
     </section>
 

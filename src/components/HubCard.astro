@@ -15,16 +15,16 @@ const isLink = Boolean(href);
 <article class:list={['hub-card', { 'hub-card--static': !isLink }]}>
     {
         isLink ? (
-            <a class="hub-card__link" href={href}>
-                <h3 class="hub-card__title">{title}</h3>
-                <div class="hub-card__body">
+            <a class="link" href={href}>
+                <h3 class="title">{title}</h3>
+                <div class="body">
                     <slot />
                 </div>
             </a>
         ) : (
-            <div class="hub-card__stack">
-                <h3 class="hub-card__title">{title}</h3>
-                <div class="hub-card__body">
+            <div class="stack">
+                <h3 class="title">{title}</h3>
+                <div class="body">
                     <slot />
                 </div>
             </div>

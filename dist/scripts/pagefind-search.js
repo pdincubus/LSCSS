@@ -21,15 +21,15 @@ function sameOriginHref(raw) {
 function showUnavailable(results, input) {
     results.innerHTML = `
         <p class="search-unavailable" role="status">Search index is not available.</p>
-        <p class="search-unavailable-hint">Run <code>npm run build</code> once so Pagefind output is copied to <code>public/pagefind</code>, then use <code>npm run dev</code> or <code>npm run preview</code>.</p>
+        <p class="search-help">Run <code>npm run build</code> once so Pagefind output is copied to <code>public/pagefind</code>, then use <code>npm run dev</code> or <code>npm run preview</code>.</p>
     `;
     input.placeholder = 'Search unavailable…';
     input.disabled = true;
 }
 
 async function initSearch() {
-    const input = document.querySelector('#docs-search-input');
-    const results = document.querySelector('#search-results');
+    const input = document.querySelector('#site-search-query');
+    const results = document.querySelector('#site-search-hits');
 
     if (!input || !results) {
         return;
@@ -70,7 +70,7 @@ async function initSearch() {
                     const title = escapeHtml(item.meta?.title ?? item.url);
                     const excerpt = escapeHtml(item.excerpt ?? '');
                     return `
-            <article class="search-result">
+            <article class="hit">
                 <a href="${escapeHtml(href)}">
                     <strong>${title}</strong>
                 </a>

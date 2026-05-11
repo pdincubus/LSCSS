@@ -1,5 +1,12 @@
 .page-shell {
     width: min(calc(100% - var(--space-xl)), var(--container));
     margin-inline: auto;
+}
+
+/*
+ * Main column vertical rhythm only. The site header reuses `.page-shell` for
+ * width alignment; it must not pick up section padding from the same class.
+ */
+main.page-shell {
     padding-block: var(--space-section);
 }

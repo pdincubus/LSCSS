@@ -13,48 +13,48 @@
     align-self: start;
 }
 
-.docs-nav-disclosure {
+.docs-sidebar > .disclosure {
     border: var(--border-thin) solid var(--colour-border);
     border-radius: var(--radius-m);
     background: var(--colour-surface);
 }
 
-.docs-nav-disclosure > summary {
+.docs-sidebar > .disclosure > summary {
     cursor: pointer;
     padding: var(--space-m);
     color: var(--colour-text);
     font-weight: 700;
 }
 
-.docs-nav-disclosure > summary:focus-visible {
+.docs-sidebar > .disclosure > summary:focus-visible {
     outline: var(--outline-width) solid var(--colour-focus);
     outline-offset: var(--outline-offset);
 }
 
-.docs-nav {
+.docs-sidebar .toc {
     display: grid;
     gap: var(--space-l);
     min-inline-size: 0;
     padding: 0 var(--space-m) var(--space-m);
 }
 
-.docs-nav-disclosure:not([open]) > .docs-nav {
+.docs-sidebar > .disclosure:not([open]) > .toc {
     display: none;
 }
 
-.docs-nav-section {
+.docs-sidebar .group {
     display: grid;
     gap: var(--space-xs);
     min-inline-size: 0;
 }
 
-.docs-nav-heading {
+.docs-sidebar .heading {
     margin: 0;
     color: var(--colour-text);
     font-size: var(--font-size-meta);
 }
 
-.docs-nav-list {
+.docs-sidebar .list {
     display: grid;
     gap: var(--space-2xs);
     margin: 0;
@@ -62,7 +62,7 @@
     list-style: none;
 }
 
-.docs-nav-list a {
+.docs-sidebar .list a {
     display: block;
     overflow-wrap: anywhere;
     padding: var(--space-2xs) var(--space-xs);
@@ -71,25 +71,25 @@
     text-decoration: none;
 }
 
-.docs-nav-list a:hover,
-.docs-nav-list a:focus-visible {
+.docs-sidebar .list a:hover,
+.docs-sidebar .list a:focus-visible {
     color: var(--colour-text);
     background: var(--colour-interactive-subtle);
 }
 
-.docs-nav-list a[aria-current='page'] {
+.docs-sidebar .list a[aria-current='page'] {
     color: var(--colour-text);
     background: var(--colour-current-subtle);
     font-weight: 600;
 }
 
-.docs-nav-list--nested {
+.docs-sidebar .list--nested {
     margin-block-start: var(--space-2xs);
     padding-inline-start: var(--space-s);
     border-inline-start: var(--border-thin) solid var(--colour-border);
 }
 
-.docs-nav-list--nested a {
+.docs-sidebar .list--nested a {
     font-size: var(--font-size-s);
 }
 
@@ -105,16 +105,16 @@
         overflow: auto;
     }
 
-    .docs-nav-disclosure {
+    .docs-sidebar > .disclosure {
         border: 0;
         background: var(--colour-transparent);
     }
 
-    .docs-nav-disclosure > summary {
+    .docs-sidebar > .disclosure > summary {
         display: none;
     }
 
-    .docs-nav-disclosure > .docs-nav {
+    .docs-sidebar > .disclosure > .toc {
         display: grid;
     }
 }

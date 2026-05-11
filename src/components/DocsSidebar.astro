@@ -21,18 +21,18 @@ function isActive(href: string): boolean {
 ---
 
 <aside class="docs-sidebar">
-    <details class="docs-nav-disclosure" data-docs-nav-disclosure>
+    <details class="disclosure" data-doc-toc>
         <summary>
             {currentSection} navigation
         </summary>
 
-        <nav class="docs-nav" aria-label={`${currentSection} navigation`}>
-            <section class="docs-nav-section">
-                <h2 class="docs-nav-heading">
+        <nav class="toc" aria-label={`${currentSection} navigation`}>
+            <section class="group">
+                <h2 class="heading">
                     {currentSection}
                 </h2>
 
-                <ul class="docs-nav-list">
+                <ul class="list">
                     {
                         topLevel.map((link) => {
                             const children = childrenOf(link.href);
@@ -46,7 +46,7 @@ function isActive(href: string): boolean {
                                         {link.label}
                                     </a>
                                     {children.length > 0 && (
-                                        <ul class="docs-nav-list docs-nav-list--nested">
+                                        <ul class="list list--nested">
                                             {children.map((child) => (
                                                 <li>
                                                     <a
@@ -72,7 +72,7 @@ function isActive(href: string): boolean {
 </aside>
 
 <script>
-    const details = document.querySelector('[data-docs-nav-disclosure]');
+    const details = document.querySelector('[data-doc-toc]');
 
     if (details instanceof HTMLDetailsElement) {
         const desktopQuery = window.matchMedia('(min-width: 64rem)');

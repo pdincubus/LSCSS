@@ -3,7 +3,7 @@
     gap: var(--space-s);
 }
 
-.docs-search {
+.site-search {
     margin-block: var(--space-xl);
 }
 
@@ -16,7 +16,7 @@
     font: inherit;
 }
 
-.docs-search-input {
+.site-search > .query {
     inline-size: 100%;
     max-inline-size: var(--search-max-inline-size);
     min-block-size: 2.75rem;
@@ -29,7 +29,7 @@
 }
 
 .search-input:focus-visible,
-.docs-search-input:focus-visible {
+.site-search > .query:focus-visible {
     outline: var(--outline-width) solid var(--colour-focus);
     outline-offset: var(--outline-offset);
     border-color: var(--colour-focus);
@@ -43,13 +43,13 @@
     list-style: none;
 }
 
-.docs-search-results {
+.site-search > .hits {
     margin-block-start: var(--space-l);
     display: grid;
     gap: var(--space-m);
 }
 
-.docs-search-results .search-result {
+.site-search > .hits .hit {
     display: grid;
     gap: var(--space-2xs);
     padding: var(--space-m);
@@ -58,14 +58,14 @@
     background: var(--colour-surface);
 }
 
-.docs-search-results .search-result a {
+.site-search > .hits .hit a {
     padding: 0;
     border: none;
     border-radius: 0;
     background: transparent;
 }
 
-.docs-search-results .search-result p {
+.site-search > .hits .hit p {
     margin: 0;
     font-size: var(--font-size-s);
     color: var(--colour-text-muted);
@@ -78,17 +78,17 @@
     color: var(--colour-text);
 }
 
-.search-unavailable-hint {
+.search-help {
     margin: 0;
     font-size: var(--font-size-s);
     color: var(--colour-text-muted);
 }
 
-.search-unavailable-hint code {
+.search-help code {
     font-size: 0.95em;
 }
 
-.docs-search-results a {
+.site-search > .hits a {
     display: block;
     padding: var(--space-m);
     border: var(--border-thin) solid var(--colour-border);
@@ -97,8 +97,8 @@
     text-decoration: none;
 }
 
-.docs-search-results a:hover,
-.docs-search-results a:focus-visible {
+.site-search > .hits a:hover,
+.site-search > .hits a:focus-visible {
     border-color: var(--colour-accent);
 }
 
@@ -165,7 +165,7 @@
         background-color var(--duration-fast) ease;
 }
 
-.related-links__section {
+.related-links a .meta {
     font-size: var(--font-size-s);
     font-weight: 400;
     letter-spacing: var(--letter-spacing-label);
@@ -174,7 +174,7 @@
     color: var(--colour-text-muted);
 }
 
-.related-links__label {
+.related-links a .headline {
     font-size: var(--font-size-m);
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -187,7 +187,7 @@
     background: var(--colour-accent-soft);
 }
 
-.related-links a:hover .related-links__label {
+.related-links a:hover .headline {
     color: var(--colour-accent-dark);
 }
 

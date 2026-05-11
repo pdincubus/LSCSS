@@ -4,24 +4,24 @@
     background: var(--colour-background);
 }
 
-.site-footer__inner {
+.site-footer > .inner {
     display: grid;
     gap: var(--space-l);
     padding-block: 4rem;
 }
 
-.site-footer__title {
+.site-footer > .inner > .intro .title {
     margin: 0 0 var(--space-xs);
     color: var(--colour-text);
     font-weight: 700;
 }
 
-.site-footer__meta {
+.site-footer > .inner > .intro .meta {
     color: var(--colour-text-muted);
     font-size: 0.75rem;
 }
 
-.site-footer__bottom {
+.site-footer > .inner > .bottom {
     grid-column: 1 / -1;
     display: flex;
     flex-wrap: wrap;
@@ -32,7 +32,7 @@
     border-block-start: var(--border-thin) solid var(--colour-border);
 }
 
-.site-footer__legal {
+.site-footer > .inner > .bottom > .legal {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -40,13 +40,13 @@
     min-inline-size: min(100%, 22rem);
 }
 
-.site-footer__copyright {
+.site-footer > .inner > .bottom .copyright {
     margin: 0;
     color: var(--colour-text-muted);
     font-size: 0.75rem;
 }
 
-.site-footer__legal-list {
+.site-footer > .inner .legal-list {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-s) var(--space-l);
@@ -55,23 +55,23 @@
     list-style: none;
 }
 
-.site-footer__legal-list a {
+.site-footer > .inner .legal-list a {
     font-size: 0.75rem;
 }
 
-.site-footer__credits {
+.site-footer > .inner > .bottom .credits {
     margin: 0;
     color: var(--colour-text-muted);
     font-size: 0.75rem;
 }
 
-.site-footer__nav {
+.site-footer > .inner > .topics {
     display: grid;
     gap: var(--space-s);
 }
 
 .site-footer a,
-.site-footer__nav a {
+.site-footer > .inner > .topics a {
     color: var(--colour-text-soft);
     text-decoration: none;
     line-height: 2.41;
@@ -79,13 +79,13 @@
 
 .site-footer a:hover,
 .site-footer a:focus-visible,
-.site-footer__nav a:hover,
-.site-footer__nav a:focus-visible {
+.site-footer > .inner > .topics a:hover,
+.site-footer > .inner > .topics a:focus-visible {
     color: var(--colour-text);
 }
 
 @media (width >= 48rem) {
-    .site-footer__inner {
+    .site-footer > .inner {
         grid-template-columns: 2fr 1fr;
         align-items: start;
     }

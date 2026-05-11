@@ -10,28 +10,109 @@ const isInSection = (section: SiteNavSection) => {
 };
 ---
 
-<nav class="site-nav" aria-label="Primary">
-    <ul class="nav-list">
-        {
-            siteNavSections.map((section) => (
-                <li class:list={[{ is_current: isInSection(section) }]}>
-                    <a href={section.href} aria-current={isCurrent(section.href) ? 'page' : undefined}>
-                        {section.label}
-                    </a>
+<div class="mast">
+    <div class="bar">
+        <slot name="brand" />
 
-                    {section.links.length > 0 && (
-                        <ul>
-                            {section.links.map((link) => (
-                                <li class:list={[{ is_nested: link.indent === true }]}>
-                                    <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </li>
-            ))
+        <button
+            type="button"
+            class="menu-toggle"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="site-nav-primary"
+        >
+            <span class="bars" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="visually-hidden">Menu</span>
+        </button>
+    </div>
+
+    <nav class="site-nav" id="site-nav-primary" aria-label="Primary">
+        <ul class="nav-list">
+            {
+                siteNavSections.map((section) => (
+                    <li class:list={[{ is_current: isInSection(section) }]}>
+                        <a href={section.href} aria-current={isCurrent(section.href) ? 'page' : undefined}>
+                            {section.label}
+                        </a>
+
+                        {section.links.length > 0 && (
+                            <ul>
+                                {section.links.map((link) => (
+                                    <li class:list={[{ is_nested: link.indent === true }]}>
+                                        <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</div>
+
+<script is:inline>
+    (function () {
+        const mobileNavQuery = window.matchMedia(
+            '(width < 64rem), ((width >= 64rem) and (pointer: coarse))'
+        );
+        const header = document.querySelector('.site-header');
+        const toggle = document.querySelector('[data-menu-toggle]');
+        const nav = document.getElementById('site-nav-primary');
+
+        if (!header || !(toggle instanceof HTMLButtonElement) || !nav) {
+            return;
         }
-    </ul>
-</nav>
+
+        function isMobileNav() {
+            return mobileNavQuery.matches;
+        }
+
+        function setOpen(open) {
+            header.classList.toggle('is_nav_open', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
+        function syncLayout() {
+            if (isMobileNav()) {
+                toggle.hidden = false;
+            } else {
+                toggle.hidden = true;
+                setOpen(false);
+            }
+        }
+
+        toggle.addEventListener('click', function () {
+            if (!isMobileNav()) {
+                return;
+            }
+            setOpen(!header.classList.contains('is_nav_open'));
+        });
+
+        nav.addEventListener('click', function (event) {
+            if (!isMobileNav() || !header.classList.contains('is_nav_open')) {
+                return;
+            }
+            const target = event.target;
+            if (target instanceof HTMLAnchorElement) {
+                setOpen(false);
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && header.classList.contains('is_nav_open')) {
+                setOpen(false);
+                toggle.focus();
+            }
+        });
+
+        mobileNavQuery.addEventListener('change', syncLayout);
+        syncLayout();
+    })();
+</script>
