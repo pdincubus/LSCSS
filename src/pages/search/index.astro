@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SearchBox from '../../components/SearchBox.astro';
+import HubCard from '../../components/HubCard.astro';
+---
+
+<BaseLayout
+    title="Search LSCSS"
+    description="Search the LSCSS documentation by problem, topic, comparison, or implementation decision."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Search</p>
+
+            <h1>
+                Find the CSS decision you need
+            </h1>
+
+            <p class="intro">
+                Search by problem, pattern, or architectural decision. Useful
+                searches include specificity, utilities, state, modifiers,
+                legacy CSS, @scope, Tailwind, tokens, and hacks.
+            </p>
+        </section>
+
+        <nav class="section-nav" aria-label="Search sections">
+            <a href="#search-box">Search</a>
+            <a href="#start">Start here</a>
+            <a href="#problems">Common problems</a>
+            <a href="#routes">Quick routes</a>
+        </nav>
+
+        <section class="content-block">
+            <h2 id="search-box">
+                Search the docs
+            </h2>
+
+            <p>
+                Search for the question you have, not only the page title.
+                Try terms like <code>specificity</code>, <code>state</code>,
+                <code>utility</code>, <code>legacy</code>, <code>scope</code>,
+                or <code>tokens</code>.
+            </p>
+
+            <SearchBox />
+        </section>
+
+        <section class="content-block">
+            <h2 id="start">
+                Good starting points
+            </h2>
+
+            <div class="hub-card-grid">
+                <HubCard href="/learn/what-is-lscss/" title="What is LSCSS?">
+                <p>Start here if you need the short explanation before choosing a route.</p>
+            </HubCard>
+
+                <HubCard href="/learn/principles/" title="Principles">
+                <p>Read the non-negotiables behind ownership, layers, tokens, utilities, and hacks.</p>
+            </HubCard>
+
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
+                <p>Use these when you need to decide where CSS belongs right now.</p>
+            </HubCard>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2 id="problems">
+                Common problems
+            </h2>
+
+            <div class="hub-card-grid">
+                <HubCard href="/apply/decision-trees/" title="Why is this selector winning?">
+                <p>Check layers, ownership, and selector intent before increasing specificity.</p>
+            </HubCard>
+
+                <HubCard href="/apply/decision-trees/" title="Utility or component?">
+                <p>Use practical rules when repeated utility stacks start looking suspicious.</p>
+            </HubCard>
+
+                <HubCard href="/apply/modifiers-and-state/" title="Modifier or state?">
+                <p>Separate permanent variants from temporary UI behaviour.</p>
+            </HubCard>
+
+                <HubCard href="/apply/migration/" title="How do I improve legacy CSS?">
+                <p>Contain old styles and improve active work without rewriting everything.</p>
+            </HubCard>
+
+                <HubCard href="/learn/anti-pattern-gallery/" title="What does bad CSS look like?">
+                <p>Recognise specificity ladders, random values, utility overload, and permanent hacks.</p>
+            </HubCard>
+
+                <HubCard href="/apply/audit-checklist/" title="How do I audit a codebase?">
+                <p>Review ownership, tokens, components, state, legacy, hacks, and delivery risk.</p>
+            </HubCard>
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2 id="routes">
+                Quick routes
+            </h2>
+
+            <div class="hub-card-grid">
+                <HubCard href="/apply/examples/" title="Show me examples">
+                <p>Before and after code for selectors, utilities, state, legacy, and hacks.</p>
+            </HubCard>
+
+                <HubCard href="/learn/comparisons/" title="Compare approaches">
+                <p>Compare LSCSS with BEM, Tailwind, CSS Modules, utility-first CSS, and @scope.</p>
+            </HubCard>
+
+                <HubCard href="/teams/adoption/" title="Introduce this to a team">
+                <p>Start adoption without disruptive rewrites or documentation overhead.</p>
+            </HubCard>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

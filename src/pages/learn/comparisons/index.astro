@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const comparisons = [
     {
@@ -60,8 +61,8 @@ const comparisons = [
         <a href="#starting-point">Where to start</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="first">
             Ask this first
         </h2>
 
@@ -79,8 +80,8 @@ const comparisons = [
         </ul>
     </section>
 
-    <section id="comparison-guides" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="comparison-guides">
             Comparison guides
         </h2>
 
@@ -93,22 +94,18 @@ const comparisons = [
         <div class="hub-card-grid">
             {
                 comparisons.map((item) => (
-                    <article class="hub-card">
-                        <h3>
-                            <a href={item.href}>{item.title}</a>
-                        </h3>
-
+                    <HubCard href={item.href} title={item.title}>
                         <p>
                             {item.description}
                         </p>
-                    </article>
+                    </HubCard>
                 ))
             }
         </div>
     </section>
 
-    <section id="quick-reference" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="quick-reference">
             Quick reference
         </h2>
 
@@ -160,8 +157,8 @@ const comparisons = [
         </p>
     </section>
 
-    <section id="how-to-use" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="how-to-use">
             How to use these comparisons
         </h2>
 
@@ -177,26 +174,23 @@ const comparisons = [
         </p>
     </section>
 
-    <section id="starting-point" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="starting-point">
             Where to start
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/methodology/">Core methodology</a></h3>
+            <HubCard href="/apply/methodology/" title="Core methodology">
                 <p>Learn the full system before comparing naming styles and tooling choices.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical rules when a CSS choice stops being obvious.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/examples/">Examples</a></h3>
+            <HubCard href="/apply/examples/" title="Examples">
                 <p>Review practical before/after architecture patterns in real CSS scenarios.</p>
-            </article>
+            </HubCard>
         </div>
         <h3>Start by role</h3>
         <ul>

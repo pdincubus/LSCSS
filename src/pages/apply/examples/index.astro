@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const deepBad = `.page .content .card .header .title {
     margin-bottom: 1rem;
@@ -59,8 +60,8 @@ const hacksExample = `@layer hacks {
         <a href="#hacks">Temporary fixes</a>
     </nav>
 
-    <section id="selectors" class="content-block">
-        <h2>Deep selectors to shallow ownership</h2>
+    <section class="content-block">
+        <h2 id="selectors">Deep selectors to shallow ownership</h2>
 
         <h3>Before</h3>
         <CodeExample code={deepBad} language="css" variant="before" />
@@ -74,8 +75,8 @@ const hacksExample = `@layer hacks {
         </p>
     </section>
 
-    <section id="utilities" class="content-block">
-        <h2>Utility overload to semantic components</h2>
+    <section class="content-block">
+        <h2 id="utilities">Utility overload to semantic components</h2>
 
         <h3>Before</h3>
         <CodeExample code={utilityBad} language="html" variant="before" />
@@ -89,8 +90,8 @@ const hacksExample = `@layer hacks {
         </p>
     </section>
 
-    <section id="state" class="content-block">
-        <h2>State disguised as modifiers</h2>
+    <section class="content-block">
+        <h2 id="state">State disguised as modifiers</h2>
 
         <h3>Before</h3>
         <CodeExample code={stateBad} language="css" variant="before" />
@@ -104,8 +105,8 @@ const hacksExample = `@layer hacks {
         </p>
     </section>
 
-    <section id="legacy" class="content-block">
-        <h2>Legacy migration example</h2>
+    <section class="content-block">
+        <h2 id="legacy">Legacy migration example</h2>
 
         <p>
             Do not move old CSS into new components and call it progress.
@@ -119,8 +120,8 @@ const hacksExample = `@layer hacks {
         </p>
     </section>
 
-    <section id="hacks" class="content-block">
-        <h2>Temporary fixes becoming permanent residents</h2>
+    <section class="content-block">
+        <h2 id="hacks">Temporary fixes becoming permanent residents</h2>
 
         <p>
             If a hack will still exist in six months, it is probably a real fix
@@ -138,20 +139,17 @@ const hacksExample = `@layer hacks {
         <h2>Next useful pages</h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+            <HubCard href="/learn/anti-pattern-gallery/" title="Anti-pattern gallery">
                 <p>Recognise the bad patterns before they become normal.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical rules when deciding how to improve code.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/audit-checklist/">Audit checklist</a></h3>
+            <HubCard href="/apply/audit-checklist/" title="Audit checklist">
                 <p>Review existing codebases using the same standards shown here.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

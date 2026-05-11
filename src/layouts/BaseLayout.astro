@@ -6,27 +6,53 @@ export interface Props {
     title?: string;
     description?: string;
     schemaType?: 'Article' | 'TechArticle' | 'WebPage';
+    /**
+     * Open Graph / Twitter image. Root-relative or absolute URL.
+     * Pass empty string to omit image tags (otherwise `/images/og-default.svg` is used).
+     */
+    ogImage?: string;
+    /** When true, ask crawlers not to index this page. */
+    noindex?: boolean;
 }
 
 const {
     title = 'LSCSS',
     description = 'Layered Semantic CSS',
-    schemaType = 'WebPage'
+    schemaType = 'WebPage',
+    ogImage,
+    noindex = false
 } = Astro.props;
 
-const siteUrl = Astro.site?.href ?? Astro.url.origin;
-const pageUrl = Astro.url.href;
+const siteUrl = Astro.site?.href ?? `${Astro.url.origin}/`;
+const siteOrigin = new URL(siteUrl).origin;
+
+const pathname = Astro.url.pathname;
+const canonicalPath = pathname === '/' ? '/' : pathname.endsWith('/') ? pathname : `${pathname}/`;
+const canonicalURL = new URL(canonicalPath, siteOrigin).href;
+
+const documentTitle = /lscss/i.test(title) ? title : `${title} · LSCSS`;
+
+const defaultOgPath = '/images/og-default.svg';
+const ogSource = ogImage === '' ? undefined : (ogImage ?? defaultOgPath);
+const ogImageUrl = ogSource
+    ? ogSource.startsWith('http')
+        ? ogSource
+        : new URL(ogSource.replace(/^\//, ''), siteOrigin).href
+    : undefined;
+
+const pageUrl = canonicalURL;
+const ogType = schemaType === 'WebPage' ? 'website' : 'article';
 const structuredData = {
     '@context': 'https://schema.org',
     '@type': schemaType,
-    name: title,
-    headline: title,
+    name: documentTitle,
+    headline: documentTitle,
     description,
     url: pageUrl,
     isPartOf: {
         '@type': 'WebSite',
         name: 'LSCSS',
-        url: siteUrl
+        url: siteOrigin.endsWith('/') ? siteOrigin : `${siteOrigin}/`
     },
     author: {
         '@type': 'Person',
@@ -41,10 +67,25 @@ const structuredData = {
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{title}</title>
+        <title>{documentTitle}</title>
         <meta name="description" content={description} />
+        {noindex && <meta name="robots" content="noindex, nofollow" />}
+        <link rel="canonical" href={canonicalURL} />
+        <link rel="alternate" type="application/rss+xml" title="LSCSS articles" href="/rss.xml" />
+        <meta property="og:type" content={ogType} />
+        <meta property="og:site_name" content="LSCSS" />
+        <meta property="og:title" content={documentTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:locale" content="en_GB" />
+        {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+        <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+        <meta name="twitter:title" content={documentTitle} />
+        <meta name="twitter:description" content={description} />
+        {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
         <link rel="stylesheet" href="/styles/site.css" />
         <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+        <slot name="head" />
     </head>
 
     <body>
@@ -61,5 +102,9 @@ const structuredData = {
         <slot />
 
         <SiteFooter />
+
+        <script>
+            import '../scripts/prism-boot';
+        </script>
     </body>
 </html>

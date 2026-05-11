@@ -1,20 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
-
-const openingExample = `Ask first:
-Why does CSS feel harder than it should?
-
-Usually not because CSS is difficult.
-Usually because ownership is unclear.`;
-
-const fifteenMinuteFlow = `15 minute teaching flow
-→ The real problem
-→ The non-negotiables
-→ Decision rules
-→ Common anti-patterns
-→ Adoption without rewrites
-→ What good looks like`;
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -41,17 +27,21 @@ const fifteenMinuteFlow = `15 minute teaching flow
         <a href="#close">Close strong</a>
     </nav>
 
-    <section id="opening" class="content-block">
-        <h2>Open with the real question</h2>
-        <CodeExample code={openingExample} language="text" />
+    <section class="content-block">
+        <h2 id="opening">Open with the real question</h2>
+        <p>
+            <strong>Ask first:</strong> Why does CSS feel harder than it should?
+        </p>
+        <p>Usually not because CSS is difficult.</p>
+        <p>Usually because ownership is unclear.</p>
         <p>
             Start with delivery pain, not naming theory. People adopt systems
             when they recognise the problem first.
         </p>
     </section>
 
-    <section id="problem" class="content-block">
-        <h2>The real problem</h2>
+    <section class="content-block">
+        <h2 id="problem">The real problem</h2>
         <ul>
             <li>Overrides feel unpredictable</li>
             <li>Developers disagree where CSS should live</li>
@@ -65,8 +55,8 @@ const fifteenMinuteFlow = `15 minute teaching flow
         </p>
     </section>
 
-    <section id="principles" class="content-block">
-        <h2>The non-negotiables</h2>
+    <section class="content-block">
+        <h2 id="principles">The non-negotiables</h2>
         <ul>
             <li>Ownership before selectors</li>
             <li>Layers before specificity</li>
@@ -78,8 +68,8 @@ const fifteenMinuteFlow = `15 minute teaching flow
         </ul>
     </section>
 
-    <section id="patterns" class="content-block">
-        <h2>Show common anti-patterns</h2>
+    <section class="content-block">
+        <h2 id="patterns">Show common anti-patterns</h2>
         <ul>
             <li>Deep selectors hiding ownership problems</li>
             <li>Important declarations replacing architecture</li>
@@ -93,17 +83,27 @@ const fifteenMinuteFlow = `15 minute teaching flow
         </p>
     </section>
 
-    <section id="adoption" class="content-block">
-        <h2>Adoption without rewrites</h2>
-        <CodeExample code={fifteenMinuteFlow} language="text" />
+    <section class="content-block">
+        <h2 id="adoption">Adoption without rewrites</h2>
+        <p>
+            A sensible 15 minute teaching flow might cover:
+        </p>
+        <ul>
+            <li>The real problem</li>
+            <li>The non-negotiables</li>
+            <li>Decision rules</li>
+            <li>Common anti-patterns</li>
+            <li>Adoption without rewrites</li>
+            <li>What good looks like</li>
+        </ul>
         <p>
             Start with layers. Protect new work first. Improve active
             components. Avoid large rewrite plans without clear delivery value.
         </p>
     </section>
 
-    <section id="close" class="content-block">
-        <h2>Close with this</h2>
+    <section class="content-block">
+        <h2 id="close">Close with this</h2>
         <p>
             Good CSS is not impressive because it is clever. It is impressive
             because nobody is afraid to change it.
@@ -117,18 +117,15 @@ const fifteenMinuteFlow = `15 minute teaching flow
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/learn/principles/">Principles</a></h3>
+            <HubCard href="/learn/principles/" title="Principles">
                 <p>Use the short version when teaching, and the full version when challenged.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/examples/">Examples</a></h3>
+            </HubCard>
+            <HubCard href="/apply/examples/" title="Examples">
                 <p>Support the teaching deck with practical before and after proof.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/teams/adoption/">Adoption</a></h3>
+            </HubCard>
+            <HubCard href="/teams/adoption/" title="Adoption">
                 <p>Turn team agreement into actual implementation without chaos.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

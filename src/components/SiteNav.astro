@@ -1,19 +1,11 @@
 ---
-import { siteNavSections, type SiteNavSection } from '../data/nav';
+import { siteNavSections, type SiteNavSection, isSitePathCurrent } from '../data/nav';
 
 const currentPath = Astro.url.pathname;
 
-const normalisePath = (path: string) => {
-    if (path === '/') {
-        return path;
-    }
-
-    return path.endsWith('/') ? path : `${path}/`;
-};
-
-const isCurrent = (href: string) => normalisePath(currentPath) === normalisePath(href);
+const isCurrent = (href: string) => isSitePathCurrent(currentPath, href);
 const isInSection = (section: SiteNavSection) => {
-    const paths = [section.href, ...section.links.map((link: { href: string }) => link.href)];
+    const paths = [section.href, ...section.links.map((link) => link.href)];
     return paths.some((path) => isCurrent(path));
 };
 ---
@@ -30,7 +22,7 @@ const isInSection = (section: SiteNavSection) => {
                     {section.links.length > 0 && (
                         <ul>
                             {section.links.map((link) => (
-                                <li>
+                                <li class:list={[{ is_nested: link.indent === true }]}>
                                     <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
                                         {link.label}
                                     </a>

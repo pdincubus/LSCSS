@@ -1,11 +1,100 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
+
+const faqPageLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'Are utility classes always bad?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'No. They are a problem when they quietly become your architecture. Utilities work well for accessibility helpers and universal patterns such as .vh and .a11y-link. If the same utility group keeps appearing together, promote it to a named component.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'Is Tailwind bad?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'No. Tailwind helps fast delivery, consistency, and strict utility workflows. The trade-off is long-term maintainability: utility-first often ships faster early; LSCSS is often easier to maintain over time. Choose based on project constraints and team goals.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'Is this methodology based on formal metrics?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Not yet. LSCSS is a lived methodology shaped by real project work. Recommendations come from repeated implementation patterns, code reviews, and maintenance outcomes rather than a formal benchmark dataset.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'Does LSCSS replace BEM?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'It keeps useful parts of BEM, especially explicit modifiers, but reduces naming ceremony. Short scoped child selectors, layers, and state classes reduce long block__element--modifier chains. BEM helps naming; LSCSS addresses wider architecture first.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'Does this work with React, Astro, Vue, or other frameworks?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Yes. LSCSS is CSS architecture, not a framework choice. It applies wherever you write CSS—Astro, React, Vue, Svelte, Eleventy, server-rendered pages, or refactors. The JavaScript stack is largely separate.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'What about CSS Modules?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'CSS Modules solve local class collisions, not full project architecture. Scoped names prevent collisions but do not decide override order, theme ownership, migration strategy, or hack management. CSS Modules are tooling; LSCSS is methodology.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'Does @scope replace LSCSS?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'No. @scope improves selector boundaries and reduces naming ceremony. It does not replace layers, modifiers, state rules, theme ownership, tokens, or hack management. @scope is a feature; LSCSS is the wider methodology.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'Should I avoid !important completely?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Mostly, yes—it usually means layer order or ownership is already broken. Rare exceptions exist for accessibility helpers or unavoidable third-party behaviour; if your first instinct is !important, check the architecture first.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'What about old projects and legacy CSS?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Do not rewrite everything for sport. Add layers, isolate old CSS in a legacy layer, and improve active components as you touch them. Migration should be controlled, not disruptive.'
+            }
+        },
+        {
+            '@type': 'Question',
+            name: 'How big should a CSS file be?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'No fixed number defines maintainability. If a file is hard to understand quickly, review it. Around 300 to 400 lines is often where hidden sub-components, repeated patterns, or old hacks need attention.'
+            }
+        }
+    ]
+};
 ---
 
 <DocsLayout
     title="LSCSS FAQ"
     description="Frequently asked questions about Layered Semantic CSS."
 >
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqPageLd)} />
     <section class="site-hero">
         <p class="eyebrow">FAQ</p>
         <h1>Frequently asked questions</h1>
@@ -18,6 +107,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     <nav class="section-nav" aria-label="FAQ sections">
         <a href="#utilities">Utilities</a>
         <a href="#tailwind">Tailwind</a>
+        <a href="#metrics">Formal metrics</a>
         <a href="#bem">BEM</a>
         <a href="#frameworks">Frameworks</a>
         <a href="#modules">CSS Modules</a>
@@ -27,8 +117,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         <a href="#files">File size</a>
     </nav>
 
-    <section id="utilities" class="content-block">
-        <h2>Are utility classes always bad?</h2>
+    <section class="content-block">
+        <h2 id="utilities">Are utility classes always bad?</h2>
 
         <p>
             No. They are bad when they quietly become your architecture.
@@ -43,8 +133,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="tailwind" class="content-block">
-        <h2>Is Tailwind bad?</h2>
+    <section class="content-block">
+        <h2 id="tailwind">Is Tailwind bad?</h2>
 
         <p>
             No. Tailwind is good at fast delivery, consistency, and strict
@@ -62,7 +152,7 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     </section>
 
     <section class="content-block">
-        <h2>Is this methodology based on formal metrics?</h2>
+        <h2 id="metrics">Is this methodology based on formal metrics?</h2>
 
         <p>
             Not yet. LSCSS is a lived methodology shaped by real project work
@@ -76,8 +166,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="bem" class="content-block">
-        <h2>Does LSCSS replace BEM?</h2>
+    <section class="content-block">
+        <h2 id="bem">Does LSCSS replace BEM?</h2>
 
         <p>
             It keeps the useful parts of BEM, especially explicit modifiers,
@@ -91,18 +181,21 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="frameworks" class="content-block">
-        <h2>Does this work with React, Astro, Vue, or other frameworks?</h2>
+    <section class="content-block">
+        <h2 id="frameworks">Does this work with React, Astro, Vue, or other frameworks?</h2>
 
         <p>
-            Yes. LSCSS is CSS architecture, not a framework choice. It works
-            with Astro, React, Vue, Svelte, Eleventy, server-rendered sites,
-            and large legacy systems, including jQuery-based projects.
+            Yes. LSCSS is CSS architecture, not a framework choice. It applies
+            wherever you write CSS—whether that is with Astro, React, Vue,
+            Svelte, Eleventy, server-rendered pages, or older sites you are
+            refactoring. Your JavaScript stack is largely separate; LSCSS cares
+            about how styles are structured, not how behaviour is attached to
+            the DOM.
         </p>
     </section>
 
-    <section id="modules" class="content-block">
-        <h2>What about CSS Modules?</h2>
+    <section class="content-block">
+        <h2 id="modules">What about CSS Modules?</h2>
 
         <p>
             CSS Modules solve local class collisions. They do not solve full
@@ -119,8 +212,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="scope" class="content-block">
-        <h2>Does @scope replace LSCSS?</h2>
+    <section class="content-block">
+        <h2 id="scope">Does @scope replace LSCSS?</h2>
 
         <p>
             No. <code>@scope</code> improves selector boundaries and reduces
@@ -133,8 +226,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="important" class="content-block">
-        <h2>Should I avoid !important completely?</h2>
+    <section class="content-block">
+        <h2 id="important">Should I avoid !important completely?</h2>
 
         <p>
             Mostly, yes. It is usually a sign that layer order or ownership is
@@ -148,8 +241,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="legacy" class="content-block">
-        <h2>What about old projects and legacy CSS?</h2>
+    <section class="content-block">
+        <h2 id="legacy">What about old projects and legacy CSS?</h2>
 
         <p>
             Do not rewrite everything for sport. Start by adding layers,
@@ -158,8 +251,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="files" class="content-block">
-        <h2>How big should a CSS file be?</h2>
+    <section class="content-block">
+        <h2 id="files">How big should a CSS file be?</h2>
 
         <p>
             No fixed number solves maintainability. The real rule is simple:
@@ -176,20 +269,17 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         <h2>Next useful pages</h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical rules when the answer depends on the situation.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/learn/comparisons/">Comparisons</a></h3>
+            <HubCard href="/learn/comparisons/" title="Comparisons">
                 <p>See how LSCSS compares with BEM, Tailwind, CSS Modules, and utility-first systems.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/migration/">Migration</a></h3>
+            <HubCard href="/apply/migration/" title="Migration">
                 <p>Learn how to improve old systems without a full rewrite.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

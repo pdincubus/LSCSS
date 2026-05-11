@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="Accessibility statement"
+    description="How we approach accessibility on the LSCSS documentation site, what we test, known limits, and how to report problems."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Accessibility</p>
+
+            <h1>Accessibility statement</h1>
+
+            <p class="intro">
+                This documentation site is built for everyone who ships CSS:
+                keyboard users, screen reader users, people who zoom or override
+                colours, and teams who care about inclusive defaults. We aim for
+                <strong>WCAG 2.2 Level AA</strong> for the site chrome and
+                reading experience, while being honest about where technical
+                content (code samples, demos) is harder to make fully
+                equivalent.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>What we commit to</h2>
+            <ul>
+                <li>
+                    <strong>Structure.</strong>
+                    Semantic HTML, landmarks, and headings that reflect the page outline
+                    so navigation and reading order stay predictable.
+                </li>
+                <li>
+                    <strong>Keyboard and focus.</strong>
+                    Interactive controls are reachable in a sensible tab order, with
+                    visible focus styles that meet contrast expectations.
+                </li>
+                <li>
+                    <strong>Readable text and UI.</strong>
+                    Body copy and primary interface colours are chosen for comfortable
+                    reading in light and dark presentation where the site offers both.
+                </li>
+                <li>
+                    <strong>Orientation.</strong>
+                    Unique page titles and meta descriptions so each route is identifiable
+                    in tabs, history, and search results.
+                </li>
+                <li>
+                    <strong>Ongoing improvement.</strong>
+                    Accessibility is treated as a backlog of real issues, not a one-off
+                    audit badge. Reports from readers carry weight.
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>Where the experience can still fall short</h2>
+            <p>
+                Long nested navigation on small screens requires scrolling; that is
+                intentional for touch discoverability but can be tiring. Code blocks
+                use syntax highlighting that may not expose token semantics consistently
+                across assistive technologies. Some interactive reference material may
+                assume a pointing device for parts of the UI even when the rest of the
+                page is keyboard-accessible. If something blocks you from reading or
+                using a page, tell us—we treat that as a defect.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Methodology vs this site</h2>
+            <p>
+                LSCSS itself is a way to organise CSS in production codebases. How you
+                apply accessibility in <em>your</em> product is broader than this
+                brochure site. For accessibility in the context of CSS architecture,
+                see the guide on
+                <a href="/writing/guides/accessibility-and-css/">Accessibility and CSS</a>
+                and the summary on
+                <a href="/apply/accessibility/">Accessibility (apply)</a>.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Report a problem</h2>
+            <p>
+                Email or contact via
+                <a href="https://crayonsandco.de/">Crayons and Code</a>
+                with the page URL, what you were trying to do, your browser and
+                version, and any assistive technology (including version if you know
+                it). Screenshots or short screen recordings help. We cannot promise an
+                instant fix, but we will acknowledge genuine barriers and track them
+                like any other bug.
+            </p>
+        </section>
+    </main>
+</BaseLayout>

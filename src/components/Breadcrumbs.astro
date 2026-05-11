@@ -9,28 +9,71 @@ const sectionOverview = currentPage
     : null;
 
 const showSection = currentPage && sectionOverview && sectionOverview.href !== currentPage.href;
+
+const siteOrigin = new URL(Astro.site?.href ?? Astro.url.origin).origin;
+
+function absHref(href: string): string {
+    const path = href.startsWith('/') ? href : `/${href}`;
+
+    return new URL(path, `${siteOrigin}/`).href;
+}
+
+const breadcrumbLd =
+    currentPage &&
+    ({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: absHref('/')
+            },
+            ...(showSection && sectionOverview
+                ? [
+                      {
+                          '@type': 'ListItem',
+                          position: 2,
+                          name: currentPage.section,
+                          item: absHref(sectionOverview.href)
+                      }
+                  ]
+                : []),
+            {
+                '@type': 'ListItem',
+                position: showSection && sectionOverview ? 3 : 2,
+                name: currentPage.label,
+                item: absHref(currentPage.href)
+            }
+        ]
+    });
 ---
 
 {
     currentPage && (
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <ol>
-                <li>
-                    <a href="/">Home</a>
-                </li>
+        <>
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <ol>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
 
-                {
-                    showSection && (
-                        <li>
-                            <a href={sectionOverview.href}>{currentPage.section}</a>
-                        </li>
-                    )
-                }
+                    {
+                        showSection && (
+                            <li>
+                                <a href={sectionOverview.href}>{currentPage.section}</a>
+                            </li>
+                        )
+                    }
 
-                <li aria-current="page">
-                    {currentPage.label}
-                </li>
-            </ol>
-        </nav>
+                    <li aria-current="page">
+                        {currentPage.label}
+                    </li>
+                </ol>
+            </nav>
+
+            <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+        </>
     )
 }

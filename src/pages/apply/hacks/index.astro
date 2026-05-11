@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const hacksExample = `@layer hacks {
     .legacy-slider {
@@ -54,8 +55,8 @@ Is this only visual presentation?
         <a href="#working-rules">Working rules</a>
     </nav>
 
-    <section id="rules" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="rules">
             Quick decision rules
         </h2>
 
@@ -67,8 +68,8 @@ Is this only visual presentation?
         </p>
     </section>
 
-    <section id="purpose" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="purpose">
             Why the hacks layer exists
         </h2>
 
@@ -85,8 +86,8 @@ Is this only visual presentation?
         </p>
     </section>
 
-    <section id="good-hacks" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="good-hacks">
             Visible hacks
         </h2>
 
@@ -99,8 +100,8 @@ Is this only visual presentation?
         </p>
     </section>
 
-    <section id="avoid" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="avoid">
             Hidden hacks and permanent emergencies
         </h2>
 
@@ -120,8 +121,8 @@ Is this only visual presentation?
         </ul>
     </section>
 
-    <section id="working-rules" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="working-rules">
             Working rules
         </h2>
 
@@ -140,20 +141,17 @@ Is this only visual presentation?
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/migration/">Migration</a></h3>
+            <HubCard href="/apply/migration/" title="Migration">
                 <p>See how legacy systems create temporary fixes and how to reduce them safely.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Decide whether a problem needs a hack, a refactor, or a better layer.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/theme-layer/">Theme layer</a></h3>
+            <HubCard href="/apply/theme-layer/" title="Theme layer">
                 <p>Avoid hiding temporary urgent fixes inside visual presentation rules.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

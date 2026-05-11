@@ -1,21 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
-
-const firstQuestionExample = `Ask first:
-Are you improving the system,
-or only solving today's ticket?
-
-Good contributions reduce future work.
-Poorly scoped ones increase future maintenance.`;
-
-const doneExample = `Definition of done
-→ Correct layer chosen
-→ Tokens used instead of random values
-→ State and modifiers are clear
-→ No accidental utility architecture
-→ Hacks are documented and temporary
-→ Overrides stay predictable`;
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -42,17 +27,24 @@ const doneExample = `Definition of done
         <a href="#examples">Good examples</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>Ask this first</h2>
-        <CodeExample code={firstQuestionExample} language="text" />
+    <section class="content-block">
+        <h2 id="first">Ask this first</h2>
+        <p>
+            <strong>Ask first:</strong> Are you improving the system,
+            or only solving today&apos;s ticket?
+        </p>
+        <p>
+            Good contributions reduce future work.
+            Poorly scoped ones increase future maintenance.
+        </p>
         <p>
             Shipping quickly matters. Shipping confusion faster does not.
             Contributions should leave the system easier to work with.
         </p>
     </section>
 
-    <section id="rules" class="content-block">
-        <h2>Core contribution rules</h2>
+    <section class="content-block">
+        <h2 id="rules">Core contribution rules</h2>
         <ul>
             <li>Choose ownership before writing selectors.</li>
             <li>Prefer layers over specificity escalation.</li>
@@ -63,8 +55,8 @@ const doneExample = `Definition of done
         </ul>
     </section>
 
-    <section id="reviews" class="content-block">
-        <h2>Pull request review questions</h2>
+    <section class="content-block">
+        <h2 id="reviews">Pull request review questions</h2>
         <ul>
             <li>Does this belong in base, theme, layout, or component?</li>
             <li>Is this state or a reusable modifier?</li>
@@ -78,16 +70,26 @@ const doneExample = `Definition of done
         </p>
     </section>
 
-    <section id="done" class="content-block">
-        <h2>Definition of done</h2>
-        <CodeExample code={doneExample} language="text" />
+    <section class="content-block">
+        <h2 id="done">Definition of done</h2>
+        <p>
+            A change counts as done when all of the following are true:
+        </p>
+        <ul>
+            <li>Correct layer chosen</li>
+            <li>Tokens used instead of random values</li>
+            <li>State and modifiers are clear</li>
+            <li>No accidental utility architecture</li>
+            <li>Hacks are documented and temporary</li>
+            <li>Overrides stay predictable</li>
+        </ul>
         <p>
             Done means maintainable, not merely passing visual inspection today.
         </p>
     </section>
 
-    <section id="reject" class="content-block">
-        <h2>Things rejected immediately</h2>
+    <section class="content-block">
+        <h2 id="reject">Things rejected immediately</h2>
         <ul>
             <li>New <code>!important</code> without strong justification</li>
             <li>Deep selectors solving ownership problems</li>
@@ -102,8 +104,8 @@ const doneExample = `Definition of done
         </p>
     </section>
 
-    <section id="examples" class="content-block">
-        <h2>What good looks like</h2>
+    <section class="content-block">
+        <h2 id="examples">What good looks like</h2>
         <p>
             A good contribution often looks boring.
         </p>
@@ -124,18 +126,15 @@ const doneExample = `Definition of done
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical choices before the pull request exists.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/teams/governance/">Governance</a></h3>
+            </HubCard>
+            <HubCard href="/teams/governance/" title="Governance">
                 <p>Protect the system after contributions are merged.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/audit-checklist/">Audit checklist</a></h3>
+            </HubCard>
+            <HubCard href="/apply/audit-checklist/" title="Audit checklist">
                 <p>Review whether contribution standards are still being followed.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

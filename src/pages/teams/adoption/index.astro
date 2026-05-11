@@ -1,25 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
-
-const firstQuestionExample = `Ask first:
-Are you changing the system,
-or trying to win an argument?
-
-If people do not understand the problem,
-they will not protect the solution.`;
-
-const rolloutExample = `Week 1
-→ Define layers and starter rules
-
-Week 2
-→ Stop new CSS from creating old problems
-
-Week 3
-→ Improve active components only
-
-Week 4+
-→ Reduce legacy safely over time`;
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -49,17 +30,24 @@ Week 4+
         <a href="#mistakes">Common mistakes</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>Ask this first</h2>
-        <CodeExample code={firstQuestionExample} language="text" />
+    <section class="content-block">
+        <h2 id="first">Ask this first</h2>
+        <p>
+            <strong>Ask first:</strong> Are you changing the system,
+            or trying to win an argument?
+        </p>
+        <p>
+            If people do not understand the problem,
+            they will not protect the solution.
+        </p>
         <p>
             Most resistance is not about CSS. It is about trust, delivery risk,
             and people assuming change means rewriting everything on a Friday.
         </p>
     </section>
 
-    <section id="principles" class="content-block">
-        <h2>Adoption principles</h2>
+    <section class="content-block">
+        <h2 id="principles">Adoption principles</h2>
         <ul>
             <li>Do not begin with a rewrite pitch.</li>
             <li>Fix active work first, not low-impact historical code.</li>
@@ -85,9 +73,15 @@ Week 4+
         </p>
     </section>
 
-    <section id="rollout" class="content-block">
-        <h2>Recommended rollout</h2>
-        <CodeExample code={rolloutExample} language="text" />
+    <section class="content-block">
+        <h2 id="rollout">Recommended rollout</h2>
+        <p>A sensible default sequence looks like this:</p>
+        <ol>
+            <li><strong>Week 1.</strong> Define layers and starter rules.</li>
+            <li><strong>Week 2.</strong> Stop new CSS from creating old problems.</li>
+            <li><strong>Week 3.</strong> Improve active components only.</li>
+            <li><strong>Week 4 onwards.</strong> Reduce legacy safely over time.</li>
+        </ol>
         <p>
             Introduce layers first. This creates immediate override control and
             stops specificity wars breeding while the rest of the system catches up.
@@ -100,8 +94,8 @@ Week 4+
         </ul>
     </section>
 
-    <section id="reviews" class="content-block">
-        <h2>Use code reviews as architecture training</h2>
+    <section class="content-block">
+        <h2 id="reviews">Use code reviews as architecture training</h2>
         <ul>
             <li>Does this belong in base, theme, or component?</li>
             <li>Is this state or a modifier?</li>
@@ -114,8 +108,8 @@ Week 4+
         </p>
     </section>
 
-    <section id="mistakes" class="content-block">
-        <h2>Common adoption mistakes</h2>
+    <section class="content-block">
+        <h2 id="mistakes">Common adoption mistakes</h2>
         <ul>
             <li>Trying to rename everything before fixing architecture.</li>
             <li>Letting legacy CSS quietly move into component files.</li>
@@ -131,18 +125,15 @@ Week 4+
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/starter-template/">Starter template</a></h3>
+            <HubCard href="/apply/starter-template/" title="Starter template">
                 <p>Give teams a real structure instead of abstract rules.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            </HubCard>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Turn architecture principles into repeatable daily choices.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/migration/">Migration</a></h3>
+            </HubCard>
+            <HubCard href="/apply/migration/" title="Migration">
                 <p>Improve legacy systems safely without large, high-risk rewrites.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

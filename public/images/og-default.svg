@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="ogTitle">
+    <title id="ogTitle">LSCSS  Layered Semantic CSS</title>
+    <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a2332"/>
+            <stop offset="100%" stop-color="#0f1419"/>
+        </linearGradient>
+    </defs>
+    <rect width="1200" height="630" fill="url(#bg)"/>
+    <text x="80" y="280" fill="#e8eef8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="72" font-weight="700">
+        LSCSS
+    </text>
+    <text x="80" y="360" fill="#9aa8bc" font-family="ui-sans-serif, system-ui, sans-serif" font-size="32" font-weight="500">
+        Layered Semantic CSS
+    </text>
+    <text x="80" y="420" fill="#6b7a90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22">
+        Calm CSS architecture for real teams
+    </text>
+</svg>

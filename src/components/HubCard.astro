@@ -1,0 +1,33 @@
+---
+/**
+ * Hub tile: optional `href` wraps the whole card in one link (headings + body).
+ * Omit `href` for static cards (e.g. role blurbs with inline links in the body).
+ */
+interface Props {
+    href?: string;
+    title: string;
+}
+
+const { href, title } = Astro.props;
+const isLink = Boolean(href);
+---
+
+<article class:list={['hub-card', { 'hub-card--static': !isLink }]}>
+    {
+        isLink ? (
+            <a class="hub-card__link" href={href}>
+                <h3 class="hub-card__title">{title}</h3>
+                <div class="hub-card__body">
+                    <slot />
+                </div>
+            </a>
+        ) : (
+            <div class="hub-card__stack">
+                <h3 class="hub-card__title">{title}</h3>
+                <div class="hub-card__body">
+                    <slot />
+                </div>
+            </div>
+        )
+    }
+</article>

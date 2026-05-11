@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const scopeExample = `@scope (.product-card) {
     .title {
@@ -15,7 +16,8 @@ const scopeExample = `@scope (.product-card) {
 
 <DocsLayout
     title="CSS @scope and LSCSS"
-    description="How CSS @scope fits into Layered Semantic CSS."
+    description="How CSS @scope fits into Layered Semantic CSS: boundaries, layers, naming, and when scope is enough on its own."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Article</p>
@@ -25,38 +27,148 @@ const scopeExample = `@scope (.product-card) {
         </h1>
 
         <p class="intro">
-            CSS @scope strengthens the goals of Layered Semantic CSS by giving
-            component styles a clear boundary.
+            <code>@scope</code> gives you a native way to draw a selector boundary
+            around a subtree. LSCSS is still about who owns what in the cascade,
+            how tokens flow into components, and how teams agree on change.
+            The two ideas stack; one does not retire the other.
         </p>
     </section>
 
+    <nav class="section-nav" aria-label="Article sections">
+        <a href="#what-changes">What changes</a>
+        <a href="#what-stays">What stays</a>
+        <a href="#patterns">Practical patterns</a>
+        <a href="#pitfalls">Pitfalls</a>
+        <a href="#next">Read next</a>
+    </nav>
+
     <section class="content-block">
-        <h2>
-            What @scope solves
+        <h2 id="what-changes">
+            What @scope changes for day-to-day CSS
         </h2>
 
+        <p>
+            Before <code>@scope</code>, teams often chained parents or repeated
+            long compound selectors so component styles did not leak outwards or
+            get stomped by globals. That worked, but it trained everyone to read
+            CSS backwards from the DOM root.
+        </p>
+
+        <p>
+            A scope root makes the intent obvious: these rules apply <em>inside
+            this subtree</em>. Short child selectors become safer, and you can
+            often drop defensive prefixing on every line.
+        </p>
+
         <ul>
-            <li>localised styling</li>
-            <li>safer component boundaries</li>
-            <li>reduced selector depth</li>
-            <li>fewer accidental overrides</li>
-            <li>easier migration from legacy CSS</li>
+            <li>Localised styling with a clear boundary instead of long selectors.</li>
+            <li>Fewer accidental overrides from unrelated parts of the page.</li>
+            <li>A gentler path away from deep nesting when migrating legacy CSS.</li>
         </ul>
     </section>
 
     <section class="content-block">
-        <CodeExample code={scopeExample} language="css" />
-    </section>
-
-    <section class="content-block">
-        <h2>
-            LSCSS position
+        <h2 id="what-stays">
+            What LSCSS still expects from you
         </h2>
 
         <p>
-            @scope can replace some shallow parent selectors, but it does not
-            replace semantic naming, layers, modifiers, state classes, or
-            architecture.
+            Scope does not tell you which layer a file belongs in, whether a
+            class is a modifier or temporary state, or how theme tokens replace
+            one-off colours. It does not replace <code>@layer</code> ordering,
+            semantic component names, or a documented hacks lane for urgent fixes.
         </p>
+
+        <p>
+            In LSCSS terms: <code>@scope</code> is a sharp tool inside the
+            <strong>components</strong> (and sometimes <strong>layout</strong>)
+            conversation. It does not replace the methodology conversation.
+        </p>
+
+        <ul>
+            <li>Ownership and file placement still matter.</li>
+            <li>Tokens still beat magic numbers.</li>
+            <li>Modifiers vs <code>.is_*</code> state still need discipline.</li>
+            <li>Legacy and third-party CSS still belong in a deliberate layer.</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2 id="patterns">
+            A pattern that tends to work
+        </h2>
+
+        <p>
+            A pragmatic combination is: explicit <code>@layer</code> order at
+            the top of your build, semantic component classes in markup, and
+            <code>@scope</code> where a component subtree benefits from a hard
+            boundary—especially when children use short selectors such as
+            <code>.title</code> or <code>.meta</code> that would otherwise collide.
+        </p>
+
+        <CodeExample code={scopeExample} language="css" />
+
+        <p>
+            Keep the scope root tied to something stable in the DOM (often the
+            same element that carries your component class). If the root moves or
+            multiplies without you noticing, the boundary moves with it—so
+            structure in HTML and scope in CSS should agree.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="pitfalls">
+            Where teams still get hurt
+        </h2>
+
+        <ul>
+            <li>
+                Treating scope as a substitute for layers, then fighting
+                specificity again when globals, utilities, or themes need to
+                reach inside.
+            </li>
+            <li>
+                Scoping so widely that the block becomes a mini stylesheet—same
+                maintenance cost as before, only with different syntax.
+            </li>
+            <li>
+                Forgetting that some platform features (for example top-layer
+                modals) live outside normal stacking contexts; scope does not
+                replace those platform rules.
+            </li>
+        </ul>
+
+        <p>
+            If the scoped block is hard to explain in a code review, it is
+            probably doing too much. Split ownership or lift shared pieces into a
+            named component instead.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="next">
+            Read next
+        </h2>
+
+        <p>
+            For a side-by-side framing of <code>@scope</code> against LSCSS
+            naming and layers—not only “what is scope” but “when is scope
+            enough”—use the comparison guide. For platform mechanics, continue
+            through the modern CSS reference pages.
+        </p>
+
+        <div class="hub-card-grid">
+            <HubCard href="/learn/comparisons/scope-vs-lscss/" title="@scope and LSCSS (comparison)">
+                <p>Differences, overlap, and practical when-to-use guidance.</p>
+            </HubCard>
+
+            <HubCard href="/modern-css/" title="Modern CSS overview">
+                <p>Selectors, nesting, container queries, and related platform tools.</p>
+            </HubCard>
+
+            <HubCard href="/apply/layers/" title="Layers">
+                <p>Keep cascade order intentional before scope becomes a bandage.</p>
+            </HubCard>
+        </div>
     </section>
 </DocsLayout>

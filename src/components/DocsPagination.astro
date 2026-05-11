@@ -16,21 +16,31 @@ const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
             {
                 previous ? (
                     <a class="docs-pagination-link is-previous" href={previous.href}>
-                        <span class="docs-pagination-label">Previous</span>
-                        <strong>{previous.label}</strong>
-                        <span class="docs-pagination-section">{previous.section}</span>
+                        <span class="docs-pagination-arrow" aria-hidden="true">←</span>
+                        <span class="docs-pagination-body">
+                            <span class="docs-pagination-label">Previous</span>
+                            <span class="docs-pagination-title">{previous.label}</span>
+                            <span class="docs-pagination-section">{previous.section}</span>
+                        </span>
                     </a>
-                ) : <span aria-hidden="true"></span>
+                ) : (
+                    <span class="docs-pagination-spacer" aria-hidden="true"></span>
+                )
             }
 
             {
                 next ? (
                     <a class="docs-pagination-link is-next" href={next.href}>
-                        <span class="docs-pagination-label">Next</span>
-                        <strong>{next.label}</strong>
-                        <span class="docs-pagination-section">{next.section}</span>
+                        <span class="docs-pagination-body">
+                            <span class="docs-pagination-label">Next</span>
+                            <span class="docs-pagination-title">{next.label}</span>
+                            <span class="docs-pagination-section">{next.section}</span>
+                        </span>
+                        <span class="docs-pagination-arrow" aria-hidden="true">→</span>
                     </a>
-                ) : <span aria-hidden="true"></span>
+                ) : (
+                    <span class="docs-pagination-spacer" aria-hidden="true"></span>
+                )
             }
         </nav>
     )

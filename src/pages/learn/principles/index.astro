@@ -1,13 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
-
-const firstQuestionExample = `Ask first:
-Does this make the system calmer,
-or only make this ticket disappear?
-
-Good CSS reduces future decisions.
-Bad CSS creates new ones.`;
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -36,17 +29,21 @@ Bad CSS creates new ones.`;
         <a href="#calm">Calm CSS</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>Ask this first</h2>
-        <CodeExample code={firstQuestionExample} language="text" />
+    <section class="content-block">
+        <h2 id="first">Ask this first</h2>
+        <p>
+            <strong>Ask first:</strong> Does this make the system calmer,
+            or only make this ticket disappear?
+        </p>
+        <p>Good CSS reduces future decisions. Bad CSS creates new ones.</p>
         <p>
             Most architectural damage starts when short-term speed defeats
             long-term ownership. The first question should always be where this belongs.
         </p>
     </section>
 
-    <section id="ownership" class="content-block">
-        <h2>Ownership before selectors</h2>
+    <section class="content-block">
+        <h2 id="ownership">Ownership before selectors</h2>
         <p>
             Decide whether something belongs in base, layout, component,
             theme, utility, or hacks before writing selectors. Wrong ownership
@@ -54,8 +51,8 @@ Bad CSS creates new ones.`;
         </p>
     </section>
 
-    <section id="layers" class="content-block">
-        <h2>Layers before specificity</h2>
+    <section class="content-block">
+        <h2 id="layers">Layers before specificity</h2>
         <p>
             If styles are fighting, check layer order first. Do not reach for
             deeper selectors, IDs, or important declarations before checking
@@ -63,8 +60,8 @@ Bad CSS creates new ones.`;
         </p>
     </section>
 
-    <section id="selectors" class="content-block">
-        <h2>Prefer shallow selectors</h2>
+    <section class="content-block">
+        <h2 id="selectors">Prefer shallow selectors</h2>
         <p>
             Components should use short, scoped selectors with obvious
             ownership. Deep selectors couple styling to markup structure and
@@ -72,8 +69,8 @@ Bad CSS creates new ones.`;
         </p>
     </section>
 
-    <section id="utilities" class="content-block">
-        <h2>Utilities are exceptions, not architecture</h2>
+    <section class="content-block">
+        <h2 id="utilities">Utilities are exceptions, not architecture</h2>
         <p>
             Utilities are useful for accessibility helpers and truly universal
             patterns. If utility combinations keep repeating, they are probably
@@ -81,8 +78,8 @@ Bad CSS creates new ones.`;
         </p>
     </section>
 
-    <section id="hacks" class="content-block">
-        <h2>Hacks are temporary by definition</h2>
+    <section class="content-block">
+        <h2 id="hacks">Hacks are temporary by definition</h2>
         <p>
             The hacks layer exists for urgent delivery needs, not permanent
             residency. If a fix will still exist in six months, it is probably
@@ -90,8 +87,8 @@ Bad CSS creates new ones.`;
         </p>
     </section>
 
-    <section id="tokens" class="content-block">
-        <h2>Tokens before values</h2>
+    <section class="content-block">
+        <h2 id="tokens">Tokens before values</h2>
         <p>
             Spacing, colour, typography, and radius should come from tokens,
             not deadline-driven invention. Random values create design inconsistency,
@@ -99,8 +96,8 @@ Bad CSS creates new ones.`;
         </p>
     </section>
 
-    <section id="calm" class="content-block">
-        <h2>Calm CSS beats clever CSS</h2>
+    <section class="content-block">
+        <h2 id="calm">Calm CSS beats clever CSS</h2>
         <p>
             Good CSS should feel boring. Predictable selectors, clear naming,
             obvious ownership, and fewer surprises matter more than cleverness.
@@ -111,18 +108,15 @@ Bad CSS creates new ones.`;
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Turn principles into repeatable day-to-day decisions.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/teams/contributing/">Contribution standards</a></h3>
+            </HubCard>
+            <HubCard href="/teams/contributing/" title="Contribution standards">
                 <p>Use these principles during pull requests and code reviews.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+            </HubCard>
+            <HubCard href="/learn/anti-pattern-gallery/" title="Anti-pattern gallery">
                 <p>See what happens when the principles get ignored.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

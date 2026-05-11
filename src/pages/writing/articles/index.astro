@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -26,31 +27,19 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3>
-                    <a href="/writing/articles/methodology-evolution/">
-                        CSS methodology evolution
-                    </a>
-                </h3>
-
+            <HubCard href="/writing/articles/methodology-evolution/" title="CSS methodology evolution">
                 <p>
                     Understand why older methodologies emerged, what problems
                     they solved, and where modern CSS changes the trade-offs.
                 </p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3>
-                    <a href="/writing/articles/css-scope-and-lscss/">
-                        CSS @scope and LSCSS
-                    </a>
-                </h3>
-
+            <HubCard href="/writing/articles/css-scope-and-lscss/" title="CSS @scope and LSCSS">
                 <p>
                     Explore how @scope fits into Layered Semantic CSS and how it
                     can reduce selector noise without replacing architecture.
                 </p>
-            </article>
+            </HubCard>
         </div>
     </section>
 
@@ -60,50 +49,29 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3>
-                    Methodology thinking
-                </h3>
-
+            <HubCard href="/learn/comparisons/" title="Methodology thinking">
                 <p>
                     Start with methodology evolution, then compare LSCSS against
                     BEM, CUBE, and scoped CSS in the comparison guides.
                 </p>
+                <span class="hub-card__cta">View comparisons</span>
+            </HubCard>
 
-                <a href="/learn/comparisons/">
-                    View comparisons
-                </a>
-            </article>
-
-            <article class="hub-card">
-                <h3>
-                    Platform features
-                </h3>
-
+            <HubCard href="/modern-css/" title="Platform features">
                 <p>
                     Read the @scope article, then work through the modern CSS
                     guides for selectors, nesting, and container queries.
                 </p>
+                <span class="hub-card__cta">View modern CSS guides</span>
+            </HubCard>
 
-                <a href="/reference/modern-css/">
-                    View modern CSS guides
-                </a>
-            </article>
-
-            <article class="hub-card">
-                <h3>
-                    Practical adoption
-                </h3>
-
+            <HubCard href="/apply/migration/" title="Practical adoption">
                 <p>
                     Pair the articles with migration guidance, examples, and the
                     starter template when applying LSCSS to real projects.
                 </p>
-
-                <a href="/apply/migration/">
-                    View migration guidance
-                </a>
-            </article>
+                <span class="hub-card__cta">View migration guidance</span>
+            </HubCard>
         </div>
     </section>
 

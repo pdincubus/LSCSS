@@ -1,22 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
-const firstQuestionExample = `Ask first:
-Are you auditing code,
-or auditing the decisions that created it?
-
-Selectors are symptoms.
-Ownership is usually the diagnosis.`;
-
-const quickAuditExample = `Quick checks
-→ Are layers defined?
-→ Is legacy isolated?
-→ Are utilities controlled?
-→ Are tokens enforced?
-→ Is theme separate from components?
-→ Are hacks temporary?
-→ Are overrides predictable?`;
 ---
 
 <DocsLayout
@@ -44,19 +29,33 @@ const quickAuditExample = `Quick checks
         <a href="#signals">Warning signs</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>Ask this first</h2>
-        <CodeExample code={firstQuestionExample} language="text" />
+    <section class="content-block">
+        <h2 id="first">Ask this first</h2>
+        <p>
+            <strong>Ask first:</strong> Are you auditing code, or auditing the decisions that created it?
+        </p>
+        <p>
+            Selectors are symptoms. Ownership is usually the diagnosis.
+        </p>
         <p>
             A messy selector is often a symptom. The real issue is usually
             unclear ownership, weak defaults, or accidental architecture.
         </p>
     </section>
 
-    <section id="structure" class="content-block">
-        <h2>Structure and layers</h2>
+    <section class="content-block">
+        <h2 id="structure">Structure and layers</h2>
 
-        <CodeExample code={quickAuditExample} language="text" />
+        <p><strong>Quick checks</strong></p>
+        <ul>
+            <li>Are layers defined?</li>
+            <li>Is legacy isolated?</li>
+            <li>Are utilities controlled?</li>
+            <li>Are tokens enforced?</li>
+            <li>Is theme separate from components?</li>
+            <li>Are hacks temporary?</li>
+            <li>Are overrides predictable?</li>
+        </ul>
 
         <ul>
             <li>Are cascade layers defined clearly?</li>
@@ -67,8 +66,8 @@ const quickAuditExample = `Quick checks
         </ul>
     </section>
 
-    <section id="tokens" class="content-block">
-        <h2>Tokens and consistency</h2>
+    <section class="content-block">
+        <h2 id="tokens">Tokens and consistency</h2>
 
         <ul>
             <li>Are colours, spacing, typography, and radius tokenised?</li>
@@ -83,8 +82,8 @@ const quickAuditExample = `Quick checks
         </p>
     </section>
 
-    <section id="components" class="content-block">
-        <h2>Components and ownership</h2>
+    <section class="content-block">
+        <h2 id="components">Components and ownership</h2>
 
         <ul>
             <li>Are selectors shallow and scoped?</li>
@@ -99,8 +98,8 @@ const quickAuditExample = `Quick checks
         </p>
     </section>
 
-    <section id="state" class="content-block">
-        <h2>State, modifiers, and behaviour</h2>
+    <section class="content-block">
+        <h2 id="state">State, modifiers, and behaviour</h2>
 
         <ul>
             <li>Are modifiers used for permanent reusable variants?</li>
@@ -110,8 +109,8 @@ const quickAuditExample = `Quick checks
         </ul>
     </section>
 
-    <section id="legacy" class="content-block">
-        <h2>Legacy CSS and hacks</h2>
+    <section class="content-block">
+        <h2 id="legacy">Legacy CSS and hacks</h2>
 
         <ul>
             <li>Is there a real hacks layer?</li>
@@ -126,8 +125,8 @@ const quickAuditExample = `Quick checks
         </p>
     </section>
 
-    <section id="signals" class="content-block">
-        <h2>Fast warning signs</h2>
+    <section class="content-block">
+        <h2 id="signals">Fast warning signs</h2>
 
         <ul>
             <li>Everyone solves overrides with more specificity.</li>
@@ -146,20 +145,17 @@ const quickAuditExample = `Quick checks
         <h2>Next useful pages</h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical rules when the audit reveals repeated mistakes.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/migration/">Migration</a></h3>
+            <HubCard href="/apply/migration/" title="Migration">
                 <p>Turn audit findings into safe improvements instead of rewrite fantasies.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/teams/governance/">Governance</a></h3>
+            <HubCard href="/teams/governance/" title="Governance">
                 <p>Stop the same problems returning six months after the audit.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

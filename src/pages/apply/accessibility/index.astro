@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
     * {
@@ -51,18 +52,15 @@ const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/writing/guides/accessibility-and-css/">Accessibility and CSS guide</a></h3>
+            <HubCard href="/writing/guides/accessibility-and-css/" title="Accessibility and CSS guide">
                 <p>Read the complete accessibility architecture guidance and examples.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/writing/guides/accessibility-and-css/">Accessibility and CSS guide</a></h3>
+            </HubCard>
+            <HubCard href="/writing/guides/accessibility-and-css/" title="Accessibility and CSS guide">
                 <p>Use complete guidance for focus, motion, and interaction patterns.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/modifiers-and-state/">Modifiers and state</a></h3>
+            </HubCard>
+            <HubCard href="/apply/modifiers-and-state/" title="Modifiers and state">
                 <p>Use explicit state patterns for accessible interaction behavior.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

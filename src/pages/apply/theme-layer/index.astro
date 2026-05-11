@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const tokenThemeExample = `:root {
     --colour-accent: #6f3cff;
@@ -71,8 +72,8 @@ Is this temporary or urgent?
         <a href="#avoid">Avoid</a>
     </nav>
 
-    <section id="rules" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="rules">
             Quick decision rules
         </h2>
 
@@ -84,8 +85,8 @@ Is this temporary or urgent?
         </p>
     </section>
 
-    <section id="purpose" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="purpose">
             What belongs in the theme layer
         </h2>
 
@@ -102,8 +103,8 @@ Is this temporary or urgent?
         </p>
     </section>
 
-    <section id="tokens" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="tokens">
             Tokens first
         </h2>
 
@@ -116,8 +117,8 @@ Is this temporary or urgent?
         <CodeExample code={tokenThemeExample} />
     </section>
 
-    <section id="good-overrides" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="good-overrides">
             Safe visual overrides
         </h2>
 
@@ -135,8 +136,8 @@ Is this temporary or urgent?
         </p>
     </section>
 
-    <section id="avoid" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="avoid">
             Avoid random one-off styling
         </h2>
 
@@ -163,20 +164,17 @@ Is this temporary or urgent?
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/architecture/">Architecture</a></h3>
+            <HubCard href="/apply/architecture/" title="Architecture">
                 <p>Understand where structure ends and presentation should begin.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/hacks/">Hacks</a></h3>
+            <HubCard href="/apply/hacks/" title="Hacks">
                 <p>Learn where urgent temporary fixes belong when they are not theme work.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/learn/comparisons/">Comparisons</a></h3>
+            <HubCard href="/learn/comparisons/" title="Comparisons">
                 <p>See how theme discipline differs from utility-first and other approaches.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

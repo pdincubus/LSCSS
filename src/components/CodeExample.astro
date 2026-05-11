@@ -19,6 +19,7 @@ const variantLabels = {
 
 const label = variantLabels[variant];
 const languageClass = `language-${language}`;
+/* `code` must stay plain text: Prism reads textContent and injects .token spans at runtime. */
 ---
 
 <figure
@@ -39,6 +40,3 @@ const languageClass = `language-${language}`;
 
     <p class="copy-code-status" data-copy-status aria-live="polite"></p>
 </figure>
-
-<script type="module" src="/scripts/code-example.js"></script>
-<script type="module" src="/scripts/prism-init.js"></script>

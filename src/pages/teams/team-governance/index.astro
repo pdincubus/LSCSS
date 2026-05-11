@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -46,18 +47,15 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/teams/governance/">Governance guide</a></h3>
+            <HubCard href="/teams/governance/" title="Governance guide">
                 <p>Use full governance principles, health checks, and failure signals.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/teams/contributing/">Contribution standards</a></h3>
+            </HubCard>
+            <HubCard href="/teams/contributing/" title="Contribution standards">
                 <p>Translate governance into pull request and review behavior.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/teams/adoption/">Adoption</a></h3>
+            </HubCard>
+            <HubCard href="/teams/adoption/" title="Adoption">
                 <p>Start team rollout in a way governance can sustain.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

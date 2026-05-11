@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import HubCard from '../../../../components/HubCard.astro';
 
 const title = 'CSS Modules vs LSCSS';
 const description = 'Compare CSS Modules and Layered Semantic CSS for scoping, maintainability, framework workflows, and long-term front-end architecture.';
@@ -17,16 +18,6 @@ const lscssExample = `<article class="product-card">
 
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
-
-const firstQuestionExample = `Ask first:
-Do you need local component scoping,
-or full project architecture?
-
-Preventing class collisions
-→ CSS Modules helps quickly
-
-Predictable ownership across the whole system
-→ LSCSS solves more`;
 ---
 
 <DocsLayout
@@ -60,12 +51,18 @@ Predictable ownership across the whole system
             <a href="#when-to-use">When to use</a>
         </nav>
 
-        <section id="first" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="first">
                 Ask this first
             </h2>
 
-            <CodeExample code={firstQuestionExample} language="text" />
+            <p>
+                <strong>Ask first:</strong> Do you need local component scoping, or full project architecture?
+            </p>
+            <ul>
+                <li>Preventing class collisions — CSS Modules helps quickly.</li>
+                <li>Predictable ownership across the whole system — LSCSS solves more.</li>
+            </ul>
 
             <p>
                 Many teams assume framework scoping solves CSS completely. It
@@ -74,8 +71,8 @@ Predictable ownership across the whole system
             </p>
         </section>
 
-        <section id="differences" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="differences">
                 Main differences
             </h2>
 
@@ -91,8 +88,8 @@ Predictable ownership across the whole system
             </ul>
         </section>
 
-        <section id="scoping" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="scoping">
                 Scoping comparison
             </h2>
 
@@ -115,8 +112,8 @@ Predictable ownership across the whole system
             </p>
         </section>
 
-        <section id="architecture" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="architecture">
                 Architecture beyond scoping
             </h2>
 
@@ -133,8 +130,8 @@ Predictable ownership across the whole system
             </p>
         </section>
 
-        <section id="when-to-use" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="when-to-use">
                 Where CSS Modules work well
             </h2>
 
@@ -167,20 +164,17 @@ Predictable ownership across the whole system
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/apply/methodology/">Core methodology</a></h3>
-                    <p>See how LSCSS works as a full architecture system beyond local component scope.</p>
-                </article>
+                <HubCard href="/apply/methodology/" title="Core methodology">
+                <p>See how LSCSS works as a full architecture system beyond local component scope.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/layers/">Layers</a></h3>
-                    <p>Understand why precedence and override order still matter inside framework apps.</p>
-                </article>
+                <HubCard href="/apply/layers/" title="Layers">
+                <p>Understand why precedence and override order still matter inside framework apps.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/migration/">Migration</a></h3>
-                    <p>See how legacy CSS and framework systems still need predictable structure.</p>
-                </article>
+                <HubCard href="/apply/migration/" title="Migration">
+                <p>See how legacy CSS and framework systems still need predictable structure.</p>
+            </HubCard>
             </div>
         </section>
 

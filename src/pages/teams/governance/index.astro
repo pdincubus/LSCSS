@@ -1,20 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
-
-const firstQuestionExample = `Ask first:
-Is this rule protecting delivery,
-or protecting someone's favourite opinion?
-
-Good governance removes friction.
-Bad governance manufactures it.`;
-
-const healthCheckExample = `Monthly checks
-→ Are hacks being removed?
-→ Are utilities multiplying?
-→ Are files getting too large?
-→ Is legacy leaking into components?
-→ Are overrides predictable?`;
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -41,17 +27,21 @@ const healthCheckExample = `Monthly checks
         <a href="#failure">Failure signs</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>Ask this first</h2>
-        <CodeExample code={firstQuestionExample} language="text" />
+    <section class="content-block">
+        <h2 id="first">Ask this first</h2>
+        <p>
+            <strong>Ask first:</strong> Is this rule protecting delivery,
+            or protecting someone&apos;s favourite opinion?
+        </p>
+        <p>Good governance removes friction. Bad governance manufactures it.</p>
         <p>
             Governance should reduce delivery pain. If it only creates process,
             people will work around it and call it pragmatism.
         </p>
     </section>
 
-    <section id="principles" class="content-block">
-        <h2>Governance principles</h2>
+    <section class="content-block">
+        <h2 id="principles">Governance principles</h2>
         <ul>
             <li>Protect clarity, not ceremony.</li>
             <li>Prefer defaults over policing.</li>
@@ -64,8 +54,8 @@ const healthCheckExample = `Monthly checks
         </p>
     </section>
 
-    <section id="reviews" class="content-block">
-        <h2>Review habits that matter</h2>
+    <section class="content-block">
+        <h2 id="reviews">Review habits that matter</h2>
         <ul>
             <li>Ask why specificity increased.</li>
             <li>Challenge new utilities before they become architecture.</li>
@@ -78,17 +68,24 @@ const healthCheckExample = `Monthly checks
         </p>
     </section>
 
-    <section id="health" class="content-block">
-        <h2>Run simple health checks</h2>
-        <CodeExample code={healthCheckExample} language="text" />
+    <section class="content-block">
+        <h2 id="health">Run simple health checks</h2>
+        <p>On a regular cadence (for example monthly), ask:</p>
+        <ul>
+            <li>Are hacks being removed?</li>
+            <li>Are utilities multiplying?</li>
+            <li>Are files getting too large?</li>
+            <li>Is legacy leaking into components?</li>
+            <li>Are overrides predictable?</li>
+        </ul>
         <p>
             You do not need complex reporting. You need regular visibility.
             Quiet drift is the real problem.
         </p>
     </section>
 
-    <section id="ownership" class="content-block">
-        <h2>Ownership beats documentation</h2>
+    <section class="content-block">
+        <h2 id="ownership">Ownership beats documentation</h2>
         <p>
             Someone should own front-end architecture decisions, even if the
             team contributes together. Shared ownership without responsibility
@@ -101,8 +98,8 @@ const healthCheckExample = `Monthly checks
         </p>
     </section>
 
-    <section id="failure" class="content-block">
-        <h2>Early signs the system is failing</h2>
+    <section class="content-block">
+        <h2 id="failure">Early signs the system is failing</h2>
         <ul>
             <li>New developers ask where CSS should live and nobody agrees.</li>
             <li>Utilities appear faster than components.</li>
@@ -120,18 +117,15 @@ const healthCheckExample = `Monthly checks
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/teams/adoption/">Adoption</a></h3>
+            <HubCard href="/teams/adoption/" title="Adoption">
                 <p>Start the system well before trying to protect it.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            </HubCard>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use repeatable choices instead of architectural guesswork.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+            </HubCard>
+            <HubCard href="/learn/anti-pattern-gallery/" title="Anti-pattern gallery">
                 <p>Recognize warning signs before they become recurring team issues.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

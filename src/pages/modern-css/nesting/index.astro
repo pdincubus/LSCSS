@@ -1,0 +1,54 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const goodNestingExample = `.product-card {
+    > .title {
+        margin: 0;
+    }
+}`;
+
+const dangerousNestingExample = `.page {
+    .wrapper {
+        .container {
+            .card {
+                .title {}
+            }
+        }
+    }
+}`;
+---
+
+<DocsLayout
+    title="CSS Nesting"
+    description="Using CSS nesting responsibly in modern architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modern CSS</p>
+
+        <h1>
+            CSS nesting
+        </h1>
+
+        <p class="intro">
+            Nesting improves readability when used carefully. Excessive nesting
+            recreates historical CSS problems.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Good nesting
+        </h2>
+
+        <CodeExample code={goodNestingExample} />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Dangerous nesting
+        </h2>
+
+        <CodeExample code={dangerousNestingExample} />
+    </section>
+</DocsLayout>

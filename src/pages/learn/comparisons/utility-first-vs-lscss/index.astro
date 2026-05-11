@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import HubCard from '../../../../components/HubCard.astro';
 
 const title = 'Utility-first vs LSCSS';
 const description = 'Compare utility-first CSS approaches and Layered Semantic CSS for maintainability, reuse, readability, and long-term front-end architecture.';
@@ -18,16 +19,6 @@ const semanticExample = `<section class="feature-panel">
 const allowedUtilities = `.vh
 .a11y-link
 .a11y-link--focusable`;
-
-const firstQuestionExample = `Ask first:
-Do you need speed today,
-or maintainability next year?
-
-Fast composition and rapid delivery
-→ Utility-first is often easier to adopt early
-
-Readable ownership and calmer systems
-→ LSCSS is often easier to maintain later`;
 ---
 
 <DocsLayout
@@ -62,12 +53,18 @@ Readable ownership and calmer systems
             <a href="#when-to-use">When to use</a>
         </nav>
 
-        <section id="first" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="first">
                 Ask this first
             </h2>
 
-            <CodeExample code={firstQuestionExample} language="text" />
+            <p>
+                <strong>Ask first:</strong> Do you need speed today, or maintainability next year?
+            </p>
+            <ul>
+                <li>Fast composition and rapid delivery — utility-first is often easier to adopt early.</li>
+                <li>Readable ownership and calmer systems — LSCSS is often easier to maintain later.</li>
+            </ul>
 
             <p>
                 Most teams are choosing between different kinds of maintenance.
@@ -76,8 +73,8 @@ Readable ownership and calmer systems
             </p>
         </section>
 
-        <section id="differences" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="differences">
                 Main differences
             </h2>
 
@@ -93,8 +90,8 @@ Readable ownership and calmer systems
             </ul>
         </section>
 
-        <section id="markup" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="markup">
                 Markup comparison
             </h2>
 
@@ -118,8 +115,8 @@ Readable ownership and calmer systems
             </p>
         </section>
 
-        <section id="utilities" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="utilities">
                 Utility philosophy
             </h2>
 
@@ -137,8 +134,8 @@ Readable ownership and calmer systems
             </p>
         </section>
 
-        <section id="when-to-use" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="when-to-use">
                 Where utility-first works well
             </h2>
 
@@ -172,20 +169,17 @@ Readable ownership and calmer systems
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/apply/methodology/">Core methodology</a></h3>
-                    <p>See how LSCSS works as a full system beyond utility composition.</p>
-                </article>
+                <HubCard href="/apply/methodology/" title="Core methodology">
+                <p>See how LSCSS works as a full system beyond utility composition.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/utilities/">Utilities</a></h3>
-                    <p>Understand where utilities help and where they quietly replace architecture.</p>
-                </article>
+                <HubCard href="/apply/utilities/" title="Utilities">
+                <p>Understand where utilities help and where they quietly replace architecture.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
-                    <p>Use practical rules when deciding whether something should stay a utility or become a component.</p>
-                </article>
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
+                <p>Use practical rules when deciding whether something should stay a utility or become a component.</p>
+            </HubCard>
             </div>
         </section>
 

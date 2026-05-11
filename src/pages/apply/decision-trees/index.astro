@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const utilityOrComponent = `Does this solve a universal accessibility problem?
 
@@ -102,13 +103,6 @@ No ↓
 
 Use semantic ownership and shallow selectors`;
 
-const firstQuestionExample = `Stop adding specificity first.
-
-Ask:
-Am I changing behaviour, presentation,
-structure, or temporary state?
-
-That answer decides the destination before writing CSS.`;
 ---
 
 <DocsLayout
@@ -135,60 +129,63 @@ That answer decides the destination before writing CSS.`;
         <a href="#scope">Scope, BEM, or neither</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>Ask this first</h2>
-        <CodeExample code={firstQuestionExample} language="text" />
+    <section class="content-block">
+        <h2 id="first">Ask this first</h2>
+        <p>
+            Stop adding specificity first.
+        </p>
+        <p>
+            <strong>Ask:</strong> Am I changing behaviour, presentation, structure, or temporary state?
+            That answer decides the destination before writing CSS.
+        </p>
         <p>
             Most bad CSS starts with the wrong destination, not the wrong selector.
             Decide ownership first.
         </p>
     </section>
 
-    <section id="utility" class="content-block">
-        <h2>Utility or component?</h2>
+    <section class="content-block">
+        <h2 id="utility">Utility or component?</h2>
         <CodeExample code={utilityOrComponent} language="text" />
     </section>
 
-    <section id="state" class="content-block">
-        <h2>Modifier or state?</h2>
+    <section class="content-block">
+        <h2 id="state">Modifier or state?</h2>
         <CodeExample code={modifierOrState} language="text" />
     </section>
 
-    <section id="ownership" class="content-block">
-        <h2>Base vs theme vs component</h2>
+    <section class="content-block">
+        <h2 id="ownership">Base vs theme vs component</h2>
         <CodeExample code={baseThemeComponent} language="text" />
     </section>
 
-    <section id="hacks" class="content-block">
-        <h2>Hack or real fix?</h2>
+    <section class="content-block">
+        <h2 id="hacks">Hack or real fix?</h2>
         <CodeExample code={hackOrFix} language="text" />
     </section>
 
-    <section id="layout" class="content-block">
-        <h2>Layout problem or component problem?</h2>
+    <section class="content-block">
+        <h2 id="layout">Layout problem or component problem?</h2>
         <CodeExample code={layoutOrComponent} language="text" />
     </section>
 
-    <section id="scope" class="content-block">
-        <h2>@scope, BEM, or neither?</h2>
+    <section class="content-block">
+        <h2 id="scope">@scope, BEM, or neither?</h2>
         <CodeExample code={scopeBemNeither} language="text" />
     </section>
 
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/layers/">Layers</a></h3>
+            <HubCard href="/apply/layers/" title="Layers">
                 <p>Control precedence before increasing specificity.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/starter-template/">Starter template</a></h3>
+            </HubCard>
+            <HubCard href="/apply/starter-template/" title="Starter template">
                 <p>See where these decisions live inside a real project structure.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+            </HubCard>
+            <HubCard href="/learn/anti-pattern-gallery/" title="Anti-pattern gallery">
                 <p>Recognise the mistakes these decision trees are trying to prevent.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

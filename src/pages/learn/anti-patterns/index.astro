@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -53,18 +54,15 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+            <HubCard href="/learn/anti-pattern-gallery/" title="Anti-pattern gallery">
                 <p>See practical before/after examples for common architecture failures.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            </HubCard>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use repeatable rules to prevent anti-patterns during implementation.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/audit-checklist/">Audit checklist</a></h3>
+            </HubCard>
+            <HubCard href="/apply/audit-checklist/" title="Audit checklist">
                 <p>Review whether known anti-patterns are present in your codebase.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

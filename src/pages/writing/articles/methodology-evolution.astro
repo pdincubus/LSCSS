@@ -1,10 +1,12 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
     title="CSS Methodology Evolution"
-    description="How modern CSS changes architectural methodology decisions."
+    description="How CSS methodologies responded to platform limits—and how cascade layers, scoping, container queries, and modern selectors change the trade-offs today."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Article</p>
@@ -14,26 +16,140 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </h1>
 
         <p class="intro">
-            Modern CSS platform features reduce the need for many historical
-            architectural workarounds.
+            Most methodologies were honest answers to real constraints: global
+            cascade, unknown specificity, slow iteration, and teams shipping in
+            parallel. As the platform adds better primitives, some problems get
+            cheaper—but people, ownership, and delivery risk do not disappear.
         </p>
     </section>
 
-    <section class="content-block">
-        <ul>
-            <li>cascade layers</li>
-            <li>scope</li>
-            <li>container queries</li>
-            <li>nesting</li>
-            <li>logical properties</li>
-            <li>modern selectors</li>
-        </ul>
-    </section>
+    <nav class="section-nav" aria-label="Article sections">
+        <a href="#why-methods">Why methods existed</a>
+        <a href="#what-shifted">What shifted</a>
+        <a href="#what-lingers">What lingers</a>
+        <a href="#lscss">How LSCSS fits</a>
+        <a href="#next">Read next</a>
+    </nav>
 
     <section class="content-block">
+        <h2 id="why-methods">
+            Why methodologies had to exist
+        </h2>
+
         <p>
-            LSCSS focuses on adapting architecture to modern platform
-            capabilities instead of compensating for missing features.
+            When the cascade was the only coordination mechanism, conventions
+            were how teams avoided stepping on each other. Naming schemes,
+            depth limits, and “only touch your sandbox” rules were coping
+            strategies for a platform that could not yet express boundaries
+            cleanly in CSS itself.
         </p>
+
+        <p>
+            Preprocessors helped with reuse and organisation, but they did not
+            fix precedence. Utility-heavy workflows helped with consistency and
+            speed, but without discipline they quietly became architecture. Every
+            wave solved something—and left new failure modes behind.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="what-shifted">
+            What modern CSS actually changes
+        </h2>
+
+        <p>
+            Several platform features reduce the need for <em>purely syntactic</em>
+            workarounds. They do not automatically install governance.
+        </p>
+
+        <ul>
+            <li>
+                <strong>Cascade layers</strong> make override order an explicit
+                design decision instead of a specificity arms race.
+            </li>
+            <li>
+                <strong><code>@scope</code></strong> gives a native boundary for
+                component-shaped subtrees when selectors were doing that job alone.
+            </li>
+            <li>
+                <strong>Container queries</strong> move responsive logic closer to
+                components instead of only mirroring the viewport.
+            </li>
+            <li>
+                <strong>Nesting, <code>:is()</code>, <code>:where()</code>, logical properties</strong>
+                reduce repetition and direction assumptions—when used with restraint.
+            </li>
+        </ul>
+
+        <p>
+            The shift is not “architecture is solved.” It is “some classes of
+            pain are cheaper to avoid if you adopt the platform deliberately.”
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="what-lingers">
+            What still hurts without methodology
+        </h2>
+
+        <ul>
+            <li>Unclear ownership: who is allowed to change this stylesheet?</li>
+            <li>Implicit rules: everyone “knows” how things work until a new hire arrives.</li>
+            <li>Utilities or hacks that spread because the component layer was skipped.</li>
+            <li>Theme and brand decisions leaking into every selector.</li>
+            <li>Legacy CSS that nobody schedules time to retire.</li>
+        </ul>
+
+        <p>
+            Modern features change <em>how</em> you express solutions. They rarely
+            change <em>whether</em> you need agreements about risk, review, and
+            rollback.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="lscss">
+            How LSCSS uses the new platform without pretending it is magic
+        </h2>
+
+        <p>
+            LSCSS keeps the parts methodologies were always good at—ownership,
+            naming intent, explicit layers, rare utilities, visible hacks—and
+            welcomes native tools where they reduce noise. The goal is the same
+            as it ever was: CSS that teams can change without fear.
+        </p>
+
+        <p>
+            If your team adopts layers but skips naming discipline, you will get
+            neat override order with confusing semantics. If you adopt
+            <code>@scope</code> but skip tokens, you will get tidy boundaries with
+            inconsistent surfaces. Methodology is still how you connect features
+            to delivery habits.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="next">
+            Read next
+        </h2>
+
+        <p>
+            Compare LSCSS with approaches you already know, then walk the modern
+            CSS reference when you are choosing concrete techniques.
+        </p>
+
+        <div class="hub-card-grid">
+            <HubCard href="/learn/comparisons/" title="Comparisons overview">
+                <p>BEM, Tailwind, CSS Modules, utility-first, and @scope vs LSCSS.</p>
+            </HubCard>
+
+            <HubCard href="/learn/principles/" title="Principles">
+                <p>The non-negotiables that stay relevant as the platform evolves.</p>
+            </HubCard>
+
+            <HubCard href="/apply/migration/" title="Migration">
+                <p>Bring legacy CSS under control without betting the roadmap on a rewrite.</p>
+            </HubCard>
+        </div>
     </section>
 </DocsLayout>

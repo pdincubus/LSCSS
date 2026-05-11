@@ -1,0 +1,29 @@
+.decision-tree {
+    display: grid;
+    gap: var(--space-l);
+}
+
+@media (min-width: 50rem) {
+    .decision-tree {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.decision-card {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    border: var(--border-thin) solid var(--colour-border);
+    border-radius: var(--radius-m);
+    background: var(--colour-surface);
+}
+
+.decision-card > h3 {
+    margin: 0;
+}
+
+.decision-list {
+    display: grid;
+    gap: var(--space-m);
+    padding-inline-start: var(--space-l);
+}

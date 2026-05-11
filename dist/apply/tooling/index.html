@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en-GB"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LSCSS Tooling</title><meta name="description" content="Recommended tooling for Layered Semantic CSS, including PostCSS, custom media queries, browserslist, Stylelint, and build-step support."><link rel="canonical" href="https://lscss.dev/apply/tooling/"><link rel="alternate" type="application/rss+xml" title="LSCSS articles" href="/rss.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="LSCSS"><meta property="og:title" content="LSCSS Tooling"><meta property="og:description" content="Recommended tooling for Layered Semantic CSS, including PostCSS, custom media queries, browserslist, Stylelint, and build-step support."><meta property="og:url" content="https://lscss.dev/apply/tooling/"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://lscss.dev/images/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="LSCSS Tooling"><meta name="twitter:description" content="Recommended tooling for Layered Semantic CSS, including PostCSS, custom media queries, browserslist, Stylelint, and build-step support."><meta name="twitter:image" content="https://lscss.dev/images/og-default.svg"><link rel="stylesheet" href="/styles/site.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","name":"LSCSS Tooling","headline":"LSCSS Tooling","description":"Recommended tooling for Layered Semantic CSS, including PostCSS, custom media queries, browserslist, Stylelint, and build-step support.","url":"https://lscss.dev/apply/tooling/","isPartOf":{"@type":"WebSite","name":"LSCSS","url":"https://lscss.dev/"},"author":{"@type":"Person","name":"Phil Donkin"},"inLanguage":"en-GB"}</script></head> <body> <header class="site-header"> <div class="page-shell"> <a class="site-title" href="/">
+LSCSS
+</a> <nav class="site-nav" aria-label="Primary"> <ul class="nav-list"> <li> <a href="/learn/what-is-lscss/"> Learn </a> <ul> <li> <a href="/learn/what-is-lscss/"> What is LSCSS? </a> </li><li> <a href="/learn/principles/"> Principles </a> </li><li> <a href="/learn/glossary/"> Glossary </a> </li><li> <a href="/learn/faq/"> FAQ </a> </li><li> <a href="/learn/comparisons/"> Comparisons overview </a> </li><li class="is_nested"> <a href="/learn/comparisons/bem-vs-lscss/"> BEM vs LSCSS </a> </li><li class="is_nested"> <a href="/learn/comparisons/tailwind-vs-lscss/"> Tailwind vs LSCSS </a> </li><li class="is_nested"> <a href="/learn/comparisons/utility-first-vs-lscss/"> Utility-first vs LSCSS </a> </li><li class="is_nested"> <a href="/learn/comparisons/css-modules-vs-lscss/"> CSS Modules vs LSCSS </a> </li><li class="is_nested"> <a href="/learn/comparisons/scope-vs-lscss/"> @scope and LSCSS </a> </li><li> <a href="/learn/anti-pattern-gallery/"> Anti-pattern gallery </a> </li><li> <a href="/learn/anti-patterns/"> Anti-patterns </a> </li> </ul> </li><li class="is_current"> <a href="/apply/methodology/"> Apply </a> <ul> <li> <a href="/apply/methodology/"> Core methodology overview </a> </li><li class="is_nested"> <a href="/apply/layers/"> Layers </a> </li><li class="is_nested"> <a href="/apply/base-styles/"> Base styles </a> </li><li class="is_nested"> <a href="/apply/naming/"> Naming </a> </li><li class="is_nested"> <a href="/apply/modifiers-and-state/"> Modifiers and state </a> </li><li class="is_nested"> <a href="/apply/architecture/"> Architecture </a> </li><li class="is_nested"> <a href="/apply/utilities/"> Utilities </a> </li><li class="is_nested"> <a href="/apply/theme-layer/"> Theme layer </a> </li><li class="is_nested"> <a href="/apply/hacks/"> Hacks </a> </li><li> <a href="/apply/decision-trees/"> Decision trees </a> </li><li> <a href="/apply/examples/"> Examples </a> </li><li> <a href="/apply/tooling/" aria-current="page"> Tooling </a> </li><li> <a href="/apply/live-examples/"> Live examples </a> </li><li> <a href="/apply/starter-template/"> Starter template </a> </li><li> <a href="/apply/migration/"> Migration </a> </li> </ul> </li><li> <a href="/teams/adoption/"> Teams </a> <ul> <li> <a href="/teams/adoption/"> Adoption </a> </li><li> <a href="/teams/teaching-deck/"> Teaching deck </a> </li><li> <a href="/teams/governance/"> Governance </a> </li><li> <a href="/teams/team-governance/"> Team governance </a> </li><li> <a href="/teams/contributing/"> Contribution standards </a> </li><li> <a href="/apply/audit-checklist/"> Audit checklist </a> </li> </ul> </li><li> <a href="/writing/guides/"> Writing </a> <ul> <li> <a href="/writing/guides/"> Guides overview </a> </li><li class="is_nested"> <a href="/writing/guides/accessibility-and-css/"> Accessibility and CSS </a> </li><li class="is_nested"> <a href="/writing/guides/performance-and-css/"> Performance and CSS </a> </li><li class="is_nested"> <a href="/writing/guides/browser-support-strategy/"> Browser Support Strategy </a> </li><li class="is_nested"> <a href="/writing/guides/migrating-legacy-css/"> Migrating Legacy CSS </a> </li><li> <a href="/writing/articles/"> Articles overview </a> </li><li class="is_nested"> <a href="/writing/articles/css-scope-and-lscss/"> @scope and LSCSS </a> </li><li class="is_nested"> <a href="/writing/articles/methodology-evolution/"> Methodology Evolution </a> </li> </ul> </li><li> <a href="/modern-css/"> Modern CSS </a> <ul> <li> <a href="/modern-css/"> Overview </a> </li><li class="is_nested"> <a href="/modern-css/where/"> :where() </a> </li><li class="is_nested"> <a href="/modern-css/is/"> :is() </a> </li><li class="is_nested"> <a href="/modern-css/has/"> :has() </a> </li><li class="is_nested"> <a href="/modern-css/not/"> :not() </a> </li><li class="is_nested"> <a href="/modern-css/nesting/"> Nesting </a> </li><li class="is_nested"> <a href="/modern-css/container-queries/"> Container queries </a> </li><li class="is_nested"> <a href="/modern-css/logical-properties/"> Logical properties </a> </li><li class="is_nested"> <a href="/modern-css/view-transitions/"> View transitions </a> </li> </ul> </li><li> <a href="/search/"> Search </a>  </li> </ul> </nav> </div> </header>   <main class="page-shell docs-layout"> <aside class="docs-sidebar"> <details class="docs-nav-disclosure" data-docs-nav-disclosure> <summary> Apply navigation
+</summary> <nav class="docs-nav" aria-label="Apply navigation"> <section class="docs-nav-section"> <h2 class="docs-nav-heading"> Apply </h2> <ul class="docs-nav-list"> <li> <a href="/apply/methodology/"> Core methodology overview </a> <ul class="docs-nav-list docs-nav-list--nested"> <li> <a href="/apply/layers/"> Layers </a> </li><li> <a href="/apply/base-styles/"> Base styles </a> </li><li> <a href="/apply/naming/"> Naming </a> </li><li> <a href="/apply/modifiers-and-state/"> Modifiers and state </a> </li><li> <a href="/apply/architecture/"> Architecture </a> </li><li> <a href="/apply/utilities/"> Utilities </a> </li><li> <a href="/apply/theme-layer/"> Theme layer </a> </li><li> <a href="/apply/hacks/"> Hacks </a> </li> </ul> </li><li> <a href="/apply/decision-trees/"> Decision trees </a>  </li><li> <a href="/apply/examples/"> Examples </a>  </li><li> <a href="/apply/starter-template/"> Starter template </a>  </li><li> <a href="/apply/tooling/" aria-current="page"> Tooling </a>  </li><li> <a href="/apply/migration/"> Migration </a>  </li><li> <a href="/apply/diagrams/"> Diagrams </a>  </li><li> <a href="/apply/live-examples/"> Live examples </a>  </li><li> <a href="/apply/accessibility/"> Accessibility </a>  </li><li> <a href="/apply/design-tokens/"> Design tokens </a>  </li><li> <a href="/apply/performance/"> Performance </a>  </li><li> <a href="/apply/browser-support/"> Browser support </a>  </li> </ul> </section> </nav> </details> </aside> <script type="module">const n=document.querySelector("[data-docs-nav-disclosure]");if(n instanceof HTMLDetailsElement){const e=window.matchMedia("(min-width: 64rem)"),t=()=>{n.open=e.matches};t(),e.addEventListener("change",t)}</script> <div class="docs-content"> <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/apply/methodology/">Apply</a></li><li aria-current="page">Tooling</li></ol></nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://lscss.dev/"},{"@type":"ListItem","position":2,"name":"Apply","item":"https://lscss.dev/apply/methodology/"},{"@type":"ListItem","position":3,"name":"Tooling","item":"https://lscss.dev/apply/tooling/"}]}</script>  <section class="site-hero"> <p class="eyebrow">Tooling</p> <h1>
+Recommended tooling
+</h1> <p class="intro">
+LSCSS relies on browser features first and tooling second. Tooling
+            should make the CSS easier to maintain, not hide poor architecture
+            behind more processing.
+</p> </section> <nav class="section-nav" aria-label="Tooling sections"> <a href="#recommended-tools">Tools</a> <a href="#custom-media">Custom media</a> <a href="#browserslist">Browserslist</a> <a href="#linting">Linting</a> <a href="#layers">Layers</a> </nav> <section class="content-block"> <h2 id="recommended-tools">
+Recommended tools
+</h2> <ul> <li>PostCSS</li> <li>Lightning CSS</li> <li>Stylelint</li> <li>Browserslist</li> <li>Prettier</li> <li>Astro, Eleventy, or another static-first build system</li> </ul> <h3>Choose a baseline first</h3> <ul> <li>Minimum baseline: native CSS layers, Stylelint, and consistent formatting.</li> <li>Expanded baseline: add PostCSS or Lightning CSS when you need transforms or broader compatibility.</li> <li>Team baseline: keep one shared pipeline across projects to avoid divergent CSS behavior.</li> </ul> </section> <section class="content-block"> <h2 id="custom-media">
+Custom media queries
+</h2> <p>
+Named breakpoints make media queries easier to read and easier to
+            change. Breakpoints should describe layout needs, not specific
+            devices. Component CSS should say what breakpoint it targets, not
+            ask every developer to remember what a number means.
+</p> <figure class="code-example code-example--neutral" data-code-example data-language="css" data-variant="neutral"> <figcaption> <span>CSS code example</span> <button class="copy-code-button" type="button" data-copy-code>
+Copy
+</button> </figcaption> <pre class="language-css"><code class="language-css">@custom-media --mobile (width &lt; 768px);
+@custom-media --from-tablet (width &gt;= 768px);
+@custom-media --tablet (768px &lt;= width &lt; 1280px);
+@custom-media --until-desktop (width &lt; 1280px);
+@custom-media --desktop (width &gt;= 1280px);
+@custom-media --large-desktop (width &gt;= 1680px);
+@custom-media --reduced-motion (prefers-reduced-motion: reduce);</code></pre> <p class="copy-code-status" data-copy-status aria-live="polite"></p> </figure> <p>
+Directional helpers such as <code>--from-tablet</code> and
+<code>--until-desktop</code> are often more useful than rigid device
+            labels. Accessibility queries such as
+<code>--reduced-motion</code> should be treated as first-class
+            breakpoints too.
+</p> <p>
+This pattern needs a build step such as PostCSS or similar tooling,
+            unless your browser support target already handles the feature you
+            are using directly.
+</p> <p>
+Compatibility caveat: avoid writing custom media rules if your runtime
+            path skips the build step that expands them.
+</p> <figure class="code-example code-example--neutral" data-code-example data-language="css" data-variant="neutral"> <figcaption> <span>CSS code example</span> <button class="copy-code-button" type="button" data-copy-code>
+Copy
+</button> </figcaption> <pre class="language-css"><code class="language-css">.product-card {
+    /* Shared styles */
+
+    @media (--desktop) {
+        /* Desktop-only changes */
+    }
+
+    @media (--reduced-motion) {
+        transition: none;
+    }
+}</code></pre> <p class="copy-code-status" data-copy-status aria-live="polite"></p> </figure> <p>
+Avoid scattering raw breakpoint numbers through component files.
+</p> <figure class="code-example code-example--neutral" data-code-example data-language="css" data-variant="neutral"> <figcaption> <span>CSS code example</span> <button class="copy-code-button" type="button" data-copy-code>
+Copy
+</button> </figcaption> <pre class="language-css"><code class="language-css">.product-card {
+    @media (min-width: 1024px) {
+        /* What does 1024px mean here? */
+    }
+}</code></pre> <p class="copy-code-status" data-copy-status aria-live="polite"></p> </figure> </section> <section class="content-block"> <h2 id="browserslist">
+Browserslist and feature support
+</h2> <p>
+Tooling should follow a written browser support strategy. Use
+            browserslist where your tools support it, and prefer feature-based
+            support decisions over guessing browser versions by habit.
+</p> <p>
+Browser support choices should be documented, reviewed, and based on
+            the project. They should not live as unwritten assumptions in old build config.
+</p> <p>
+Compatibility caveat: if one package or app in a monorepo has a
+            different browserslist target, verify that shared CSS outputs stay
+            aligned across those builds.
+</p> </section> <section class="content-block"> <h2 id="linting">
+Linting and formatting
+</h2> <p>
+Stylelint and formatting tools should support the methodology. They
+            should catch avoidable mistakes, not force a naming system the
+            project does not use.
+</p> <ul> <li>Disallow styling with IDs.</li> <li>Discourage unnecessary <code>!important</code>.</li> <li>Flag unknown custom properties where possible.</li> <li>Keep formatting consistent across partials.</li> <li>Allow the project’s chosen naming style.</li> </ul> </section> <section class="content-block"> <h2 id="layers">
+Layer support
+</h2> <p>
+The build should preserve cascade layers and process imports in a
+            way that keeps layer order predictable.
+</p> <figure class="code-example code-example--neutral" data-code-example data-language="css" data-variant="neutral"> <figcaption> <span>CSS code example</span> <button class="copy-code-button" type="button" data-copy-code>
+Copy
+</button> </figcaption> <pre class="language-css"><code class="language-css">@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;</code></pre> <p class="copy-code-status" data-copy-status aria-live="polite"></p> </figure> <p>
+Read the <a href="/apply/architecture/#media-queries">media query organisation</a>
+guidance alongside this page. Tooling only helps when the CSS rules
+            are clear first.
+</p> <p>
+Compatibility caveat: imported CSS from third-party libraries may not
+            declare layers. Wrap or isolate that CSS so it does not bypass your
+            intended layer order.
+</p> </section>  <aside class="related-links" aria-labelledby="related-links-heading"><h2 id="related-links-heading">
+Related pages
+</h2><ul><li><a href="/apply/methodology/"><span class="related-links__section"><span class="visually-hidden">Section: </span>Apply</span><span class="related-links__label">Core methodology overview</span></a></li><li><a href="/apply/layers/"><span class="related-links__section"><span class="visually-hidden">Section: </span>Apply</span><span class="related-links__label">Layers</span></a></li><li><a href="/apply/base-styles/"><span class="related-links__section"><span class="visually-hidden">Section: </span>Apply</span><span class="related-links__label">Base styles</span></a></li><li><a href="/apply/naming/"><span class="related-links__section"><span class="visually-hidden">Section: </span>Apply</span><span class="related-links__label">Naming</span></a></li></ul></aside> <nav class="docs-pagination" aria-label="Documentation pagination"><a class="docs-pagination-link is-previous" href="/apply/starter-template/"><span class="docs-pagination-arrow" aria-hidden="true">←</span><span class="docs-pagination-body"><span class="docs-pagination-label">Previous</span><span class="docs-pagination-title">Starter template</span><span class="docs-pagination-section">Apply</span></span></a><a class="docs-pagination-link is-next" href="/apply/migration/"><span class="docs-pagination-body"><span class="docs-pagination-label">Next</span><span class="docs-pagination-title">Migration</span><span class="docs-pagination-section">Apply</span></span><span class="docs-pagination-arrow" aria-hidden="true">→</span></a></nav> </div> </main>  <footer class="site-footer"> <div class="page-shell site-footer__inner"> <div class="site-footer__intro"> <p class="site-footer__title">
+LSCSS
+</p> <p>
+Layered Semantic CSS. A practical methodology for calm,
+                maintainable front-end architecture.
+</p> <p class="site-footer__meta">
+Evolves with real delivery. Change what does not fit your codebase.
+</p> </div> <nav class="site-footer__nav" aria-label="Documentation"> <a href="/learn/what-is-lscss/"> Learn </a><a href="/apply/methodology/"> Apply </a><a href="/teams/adoption/"> Teams </a><a href="/writing/guides/"> Writing </a><a href="/modern-css/"> Modern CSS </a><a href="/search/"> Search </a> </nav> <div class="site-footer__bottom"> <nav class="site-footer__legal" aria-label="Site information"> <p class="site-footer__copyright">
+© 2026 LSCSS
+</p> <ul class="site-footer__legal-list"> <li> <a href="/accessibility/">Accessibility statement</a> </li> <li> <a href="/ai/">AI and this site</a> </li> <li> <a href="/versions/">Versions</a> </li> <li> <a href="/rss.xml">RSS feed</a> </li> <li> <a href="/sitemap-index.xml">Sitemap</a> </li> </ul> </nav> <p class="site-footer__credits">
+Built by <a href="https://crayonsandco.de/">Crayons and Code</a>.
+</p> </div> </div> </footer> <script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BKLu74vh.js"></script> </body> </html>

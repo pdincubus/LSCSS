@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import HubCard from '../../../../components/HubCard.astro';
 
 const title = 'Tailwind vs LSCSS';
 const description = 'Compare Tailwind CSS and Layered Semantic CSS for maintainability, speed, naming, reuse, design systems, and long-term front-end architecture.';
@@ -18,16 +19,6 @@ const lscssExample = `<article class="product-card">
 const utilityExample = `.vh
 .a11y-link
 .a11y-link--focusable`;
-
-const firstQuestionExample = `Ask first:
-Do you need speed today,
-or maintainability six months later?
-
-Fast delivery and strict utility workflows
-→ Tailwind is often easier to adopt early
-
-Long-lived systems and readable ownership
-→ LSCSS is often easier to maintain later`;
 ---
 
 <DocsLayout
@@ -61,12 +52,18 @@ Long-lived systems and readable ownership
             <a href="#when-to-use">When to use</a>
         </nav>
 
-        <section id="first" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="first">
                 Ask this first
             </h2>
 
-            <CodeExample code={firstQuestionExample} language="text" />
+            <p>
+                <strong>Ask first:</strong> Do you need speed today, or maintainability six months later?
+            </p>
+            <ul>
+                <li>Fast delivery and strict utility workflows — Tailwind is often easier to adopt early.</li>
+                <li>Long-lived systems and readable ownership — LSCSS is often easier to maintain later.</li>
+            </ul>
 
             <p>
                 Most teams are not choosing between good and bad. They are
@@ -74,8 +71,8 @@ Long-lived systems and readable ownership
             </p>
         </section>
 
-        <section id="differences" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="differences">
                 Main differences
             </h2>
 
@@ -91,8 +88,8 @@ Long-lived systems and readable ownership
             </ul>
         </section>
 
-        <section id="markup" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="markup">
                 Markup comparison
             </h2>
 
@@ -120,8 +117,8 @@ Long-lived systems and readable ownership
             </p>
         </section>
 
-        <section id="utilities" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="utilities">
                 Utility philosophy
             </h2>
 
@@ -139,8 +136,8 @@ Long-lived systems and readable ownership
             </p>
         </section>
 
-        <section id="when-to-use" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="when-to-use">
                 Where Tailwind works well
             </h2>
 
@@ -174,20 +171,17 @@ Long-lived systems and readable ownership
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/apply/methodology/">Core methodology</a></h3>
-                    <p>See how LSCSS works as a full system, not only a naming preference.</p>
-                </article>
+                <HubCard href="/apply/methodology/" title="Core methodology">
+                <p>See how LSCSS works as a full system, not only a naming preference.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/starter-template/">Starter template</a></h3>
-                    <p>See what a semantic layered project looks like without utility-first markup.</p>
-                </article>
+                <HubCard href="/apply/starter-template/" title="Starter template">
+                <p>See what a semantic layered project looks like without utility-first markup.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
-                    <p>Use practical rules when deciding whether something should be a utility or a component.</p>
-                </article>
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
+                <p>Use practical rules when deciding whether something should be a utility or a component.</p>
+            </HubCard>
             </div>
         </section>
 

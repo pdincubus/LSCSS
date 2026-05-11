@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+        <title>LSCSS</title>
+        <description>Articles and documentation for Layered Semantic CSS.</description>
+        <link>https://lscss.dev/</link>
+        <language>en-gb</language>
+
+        <item>
+            <title>CSS @scope and LSCSS</title>
+            <link>https://lscss.dev/writing/articles/css-scope-and-lscss/</link>
+            <guid isPermaLink="true">https://lscss.dev/writing/articles/css-scope-and-lscss/</guid>
+            <pubDate>Wed, 15 Apr 2026 12:00:00 GMT</pubDate>
+            <description>How CSS @scope fits into Layered Semantic CSS: boundaries, layers, naming, and when scope is enough on its own.</description>
+        </item>
+
+        <item>
+            <title>CSS methodology evolution</title>
+            <link>https://lscss.dev/writing/articles/methodology-evolution/</link>
+            <guid isPermaLink="true">https://lscss.dev/writing/articles/methodology-evolution/</guid>
+            <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
+            <description>How CSS methodologies responded to platform limits—and how cascade layers, scoping, container queries, and modern selectors change the trade-offs today.</description>
+        </item>
+    </channel>
+</rss>

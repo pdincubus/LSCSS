@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const title = 'Guides';
 const description = 'Practical guides for accessibility, performance, browser support, and migrating legacy CSS using layered semantic CSS principles.';
@@ -58,23 +59,19 @@ const guides = [
             <a href="/writing/guides/migrating-legacy-css/">Legacy CSS</a>
         </nav>
 
-        <section id="guide-list" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="guide-list">
                 Guides
             </h2>
 
             <div class="hub-card-grid">
                 {
                     guides.map((guide) => (
-                        <article class="hub-card">
-                            <h3>
-                                <a href={guide.href}>{guide.title}</a>
-                            </h3>
-
+                        <HubCard href={guide.href} title={guide.title}>
                             <p>
                                 {guide.description}
                             </p>
-                        </article>
+                        </HubCard>
                     ))
                 }
             </div>
@@ -83,27 +80,24 @@ const guides = [
         <section class="content-block">
             <h2>Start by role</h2>
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3>Tech lead</h3>
+                <HubCard title="Tech lead">
                     <p>
                         Start with <a href="/writing/guides/browser-support-strategy/">Browser Support Strategy</a>,
                         then align on performance and migration guardrails.
                     </p>
-                </article>
-                <article class="hub-card">
-                    <h3>Product engineer</h3>
+                </HubCard>
+                <HubCard title="Product engineer">
                     <p>
                         Start with <a href="/writing/guides/accessibility-and-css/">Accessibility and CSS</a>,
                         then use performance guidance to keep components efficient.
                     </p>
-                </article>
-                <article class="hub-card">
-                    <h3>Legacy owner</h3>
+                </HubCard>
+                <HubCard title="Legacy owner">
                     <p>
                         Start with <a href="/writing/guides/migrating-legacy-css/">Migrating Legacy CSS</a>,
                         then formalize support constraints with the browser strategy guide.
                     </p>
-                </article>
+                </HubCard>
             </div>
         </section>
     </article>

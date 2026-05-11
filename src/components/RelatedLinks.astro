@@ -23,8 +23,11 @@ const related = currentPage
                     related.map((item) => (
                         <li>
                             <a href={item.href}>
-                                <span>{item.label}</span>
-                                <small>{item.section}</small>
+                                <span class="related-links__section">
+                                    <span class="visually-hidden">Section: </span>
+                                    {item.section}
+                                </span>
+                                <span class="related-links__label">{item.label}</span>
                             </a>
                         </li>
                     ))

@@ -1,0 +1,44 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const logicalPropertiesExample = `.card {
+    padding-inline: 1rem;
+    margin-block: 2rem;
+}`;
+---
+
+<DocsLayout
+    title="Logical Properties"
+    description="Logical properties and scalable international-ready CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modern CSS</p>
+
+        <h1>
+            Logical properties
+        </h1>
+
+        <p class="intro">
+            Logical properties improve maintainability, internationalisation,
+            and layout consistency.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <CodeExample code={logicalPropertiesExample} />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Architecture impact
+        </h2>
+
+        <ul>
+            <li>improves RTL support</li>
+            <li>reduces directional assumptions</li>
+            <li>supports internationalisation</li>
+            <li>improves consistency</li>
+        </ul>
+    </section>
+</DocsLayout>

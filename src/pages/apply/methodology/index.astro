@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const title = 'Core Methodology';
 const description = 'The core Layered Semantic CSS methodology: layers, naming, architecture, utilities, theme rules, hacks, tooling, breakpoint organisation, and long-term maintainability.';
@@ -74,8 +75,8 @@ const sections = [
         <a href="/apply/decision-trees/">Decision trees</a>
     </nav>
 
-    <section id="first" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="first">
             Ask this first
         </h2>
 
@@ -97,8 +98,8 @@ const sections = [
         </p>
     </section>
 
-    <section id="sections" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="sections">
             Methodology sections
         </h2>
 
@@ -110,22 +111,18 @@ const sections = [
         <div class="hub-card-grid">
             {
                 sections.map((section) => (
-                    <article class="hub-card">
-                        <h3>
-                            <a href={section.href}>{section.title}</a>
-                        </h3>
-
+                    <HubCard href={section.href} title={section.title}>
                         <p>
                             {section.description}
                         </p>
-                    </article>
+                    </HubCard>
                 ))
             }
         </div>
     </section>
 
-    <section id="protects" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="protects">
             What this protects
         </h2>
 
@@ -146,26 +143,23 @@ const sections = [
         </p>
     </section>
 
-    <section id="entry-points" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="entry-points">
             Where to start
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/layers/">Start with layers</a></h3>
+            <HubCard href="/apply/layers/" title="Start with layers">
                 <p>Control precedence first. Most CSS problems begin when override order is accidental.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Use decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Use decision trees">
                 <p>When a CSS choice stops being obvious, use rules instead of instinct.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/starter-template/">Use the starter structure</a></h3>
+            <HubCard href="/apply/starter-template/" title="Use the starter structure">
                 <p>Begin with predictable architecture before `site.css` becomes hard to reason about.</p>
-            </article>
+            </HubCard>
         </div>
 
         <p>

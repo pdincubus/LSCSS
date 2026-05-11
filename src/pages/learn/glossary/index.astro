@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -29,8 +30,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         <a href="#calm">Calm CSS</a>
     </nav>
 
-    <section id="ownership" class="content-block">
-        <h2>Ownership</h2>
+    <section class="content-block">
+        <h2 id="ownership">Ownership</h2>
         <p>
             The answer to where CSS belongs. Before writing selectors, decide
             whether something belongs in base, layout, component, theme,
@@ -38,8 +39,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="component" class="content-block">
-        <h2>Component</h2>
+    <section class="content-block">
+        <h2 id="component">Component</h2>
         <p>
             A reusable UI pattern with clear responsibility. Components should
             have semantic names, shallow selectors, and obvious boundaries.
@@ -47,8 +48,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="modifier" class="content-block">
-        <h2>Modifier</h2>
+    <section class="content-block">
+        <h2 id="modifier">Modifier</h2>
         <p>
             A permanent reusable variation of a component. Example: a featured
             card or large button. Modifiers describe stable variants, not
@@ -56,8 +57,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="state" class="content-block">
-        <h2>State</h2>
+    <section class="content-block">
+        <h2 id="state">State</h2>
         <p>
             Temporary or conditional UI behaviour. Loading, expanded, active,
             or disabled states should use clear <code>.is_*</code> or
@@ -66,8 +67,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="theme" class="content-block">
-        <h2>Theme</h2>
+    <section class="content-block">
+        <h2 id="theme">Theme</h2>
         <p>
             Presentation changes without structural responsibility. Theme
             changes colour, visual treatment, and appearance. It should not
@@ -75,8 +76,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="utility" class="content-block">
-        <h2>Utility</h2>
+    <section class="content-block">
+        <h2 id="utility">Utility</h2>
         <p>
             A small universal helper, usually for accessibility or genuinely
             shared behaviour. Utilities are exceptions, not architecture. If
@@ -84,8 +85,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="hacks" class="content-block">
-        <h2>Hacks</h2>
+    <section class="content-block">
+        <h2 id="hacks">Hacks</h2>
         <p>
             Temporary fixes for urgent delivery needs. The hacks layer exists so
             these fixes stay visible. If a hack survives six months, it is
@@ -93,8 +94,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="legacy" class="content-block">
-        <h2>Legacy</h2>
+    <section class="content-block">
+        <h2 id="legacy">Legacy</h2>
         <p>
             Older CSS carried forward because rewriting everything would be
             theatre, not engineering. Legacy belongs in a controlled low layer,
@@ -102,8 +103,8 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
         </p>
     </section>
 
-    <section id="calm" class="content-block">
-        <h2>Calm CSS</h2>
+    <section class="content-block">
+        <h2 id="calm">Calm CSS</h2>
         <p>
             Predictable, boring, understandable CSS. Clear ownership, shallow
             selectors, token consistency, and fewer surprises. Calm CSS beats
@@ -114,18 +115,15 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
     <section class="content-block">
         <h2>Next useful pages</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/learn/principles/">Principles</a></h3>
+            <HubCard href="/learn/principles/" title="Principles">
                 <p>See the rules these definitions are protecting.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            </HubCard>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use these terms in practical day-to-day decisions.</p>
-            </article>
-            <article class="hub-card">
-                <h3><a href="/teams/contributing/">Contribution standards</a></h3>
+            </HubCard>
+            <HubCard href="/teams/contributing/" title="Contribution standards">
                 <p>Apply shared language consistently during reviews and pull requests.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { versions } from '../../data/versions';
+
+function formatReleaseDate(iso: string) {
+    const d = new Date(`${iso}T12:00:00Z`);
+
+    return d.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+}
+
+function statusLabel(status: 'current' | 'archived' | 'draft') {
+    switch (status) {
+        case 'current':
+            return 'Current';
+        case 'archived':
+            return 'Archived';
+        case 'draft':
+            return 'Draft';
+        default:
+            return status;
+    }
+}
+---
+
+<BaseLayout
+    title="LSCSS versions"
+    description="What shipped in each site release: summaries, what changed, and what we stopped publishing."
+>
+    <main class="page-shell versions-page">
+        <section class="site-hero">
+            <p class="eyebrow">Versions</p>
+
+            <h1>
+                Release history
+            </h1>
+
+            <p class="intro">
+                These numbers track <strong>this documentation site</strong>, not a separate
+                library on npm. Newest release first. Each card has a short summary; when a
+                release moves or drops how we present LSCSS, the lists under
+                <strong>What changed</strong> and <strong>Removed or retired</strong> spell
+                that out so you can see what moved where.
+            </p>
+        </section>
+
+        <nav class="section-nav" aria-label="On this page">
+            <a href="#releases">Releases</a>
+            <a href="#about-versioning">About versioning</a>
+        </nav>
+
+        <section class="content-block" id="releases" aria-labelledby="releases-heading">
+            <h2 id="releases-heading">
+                Releases
+            </h2>
+
+            <ol class="versions-stack">
+                {
+                    versions.map((version) => (
+                        <li
+                            class:list={[
+                                'version-release',
+                                { 'version-release--current': version.status === 'current' }
+                            ]}
+                        >
+                            <div class="version-release__header">
+                                <h3 class="version-release__title">
+                                    LSCSS {version.label}
+                                </h3>
+
+                                <span
+                                    class:list={[
+                                        'version-release__badge',
+                                        `version-release__badge--${version.status}`
+                                    ]}
+                                >
+                                    {statusLabel(version.status)}
+                                </span>
+
+                                <div class="version-release__date">
+                                    <time datetime={version.releasedAt}>
+                                        {formatReleaseDate(version.releasedAt)}
+                                    </time>
+                                </div>
+                            </div>
+
+                            <p class="version-release__desc">
+                                {version.description}
+                            </p>
+
+                            {
+                                version.changed && version.changed.length > 0 && (
+                                    <div class="version-release__changelog">
+                                        <h4 class="version-release__changelog-title">
+                                            What changed
+                                        </h4>
+                                        <ul class="version-release__changelog-list">
+                                            {version.changed.map((line) => (
+                                                <li>{line}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )
+                            }
+
+                            {
+                                version.removed && version.removed.length > 0 && (
+                                    <div class="version-release__changelog version-release__changelog--removed">
+                                        <h4 class="version-release__changelog-title">
+                                            Removed or retired
+                                        </h4>
+                                        <ul class="version-release__changelog-list">
+                                            {version.removed.map((line) => (
+                                                <li>{line}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )
+                            }
+                        </li>
+                    ))
+                }
+            </ol>
+        </section>
+
+        <section class="content-block" id="about-versioning">
+            <h2>
+                About versioning
+            </h2>
+
+            <p>
+                The workspace <code>package.json</code> version is kept in step with the
+                site for convenience. Methodology detail can move between releases; the
+                live pages are always the source of truth for intent.
+            </p>
+
+            <p>
+                When a release changes or retires methodology, navigation, or teaching
+                surface in a way readers would notice, add short bullets to the
+                <code>changed</code> and <code>removed</code> arrays for that version in
+                <code>src/data/versions.ts</code>. Facts over adjectives; point to the
+                replacement URL in the bullet when there is one.
+            </p>
+        </section>
+    </main>
+</BaseLayout>

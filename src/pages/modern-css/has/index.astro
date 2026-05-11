@@ -1,0 +1,51 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const errorExample = `.card:has(.error-message) {
+    border-color: red;
+}`;
+
+const focusExample = `.form-group:has(:focus-visible) {
+    outline: 2px solid currentColor;
+}`;
+---
+
+<DocsLayout
+    title=":has()"
+    description="Using :has() in modern CSS architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modern CSS</p>
+
+        <h1>
+            :has()
+        </h1>
+
+        <p class="intro">
+            :has() allows parent and relational styling without extra classes
+            or JavaScript hooks.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <CodeExample code={errorExample} />
+    </section>
+
+    <section class="content-block">
+        <CodeExample code={focusExample} />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Architecture impact
+        </h2>
+
+        <ul>
+            <li>reduces JavaScript state hooks</li>
+            <li>improves relational styling</li>
+            <li>supports progressive enhancement</li>
+            <li>reduces component coupling</li>
+        </ul>
+    </section>
+</DocsLayout>

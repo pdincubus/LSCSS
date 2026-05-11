@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const exampleCardCss = `.example-card {
     display: grid;
@@ -58,8 +59,8 @@ const betterExample = `@layer components, theme;
         <a href="#next">Next examples</a>
     </nav>
 
-    <section id="product-card" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="product-card">
             Product card example
         </h2>
 
@@ -92,8 +93,8 @@ const betterExample = `@layer components, theme;
         <CodeExample code={exampleCardCss} />
     </section>
 
-    <section id="state" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="state">
             State example
         </h2>
 
@@ -105,8 +106,8 @@ const betterExample = `@layer components, theme;
         <CodeExample code={stateExample} />
     </section>
 
-    <section id="compare" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="compare">
             Bad versus better
         </h2>
 
@@ -133,26 +134,23 @@ const betterExample = `@layer components, theme;
         </p>
     </section>
 
-    <section id="next" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="next">
             Useful next examples
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/examples/">Practical examples</a></h3>
+            <HubCard href="/apply/examples/" title="Practical examples">
                 <p>Compare code structure and learn what good patterns look like.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical rules to diagnose architecture issues before implementing fixes.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+            <HubCard href="/learn/anti-pattern-gallery/" title="Anti-pattern gallery">
                 <p>Recognize common CSS anti-patterns before they become team habits.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

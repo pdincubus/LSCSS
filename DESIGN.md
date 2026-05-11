@@ -285,3 +285,11 @@ The structural breakpoints that matter for agents: 1440px (content lock), 1068px
 - Dark-mode counterparts for store and accessories utility cards were not surfaced on the analyzed pages; the system documented is the daytime/light-dominant variant Apple ships by default.
 - Atmospheric photography (environment page mountain vista) is a content asset, not a design token; the documented `{component.environment-quote-card}` describes the structural surface only.
 - The exact backdrop-filter blur radius on `{component.sub-nav-frosted}` and `{component.floating-sticky-bar}` is platform-dependent; production CSS uses `saturate(180%) blur(20px)` as a typical baseline but the value isn't formalized as a token.
+
+## LSCSS Implementation Notes
+
+- Runtime stylesheet entrypoint is `public/styles/site.css`, preserving the LSCSS layer order (`settings -> base -> layout -> components`) and importing every project CSS module under `public/styles/components/`.
+- Design-token implementation lives in `public/styles/settings/tokens.css`:
+  - Typography, spacing, radius, motion, and breakpoint-friendly container tokens align to this spec.
+  - Semantic color tokens are mapped to the Crayons and Code palette variables (`--c-*`) rather than inline hex values.
+- Search styles are canonical in `public/styles/components/search-box.css`; legacy duplicate `src/styles/components/search.css` was removed during consolidation.

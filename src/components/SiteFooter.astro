@@ -1,6 +1,16 @@
+---
+import { siteNavSections, isSitePathCurrent } from '../data/nav';
+
+const currentPath = Astro.url.pathname;
+
+const isCurrent = (href: string) => isSitePathCurrent(currentPath, href);
+
+const year = new Date().getFullYear();
+---
+
 <footer class="site-footer">
     <div class="page-shell site-footer__inner">
-        <div>
+        <div class="site-footer__intro">
             <p class="site-footer__title">
                 LSCSS
             </p>
@@ -11,20 +21,49 @@
             </p>
 
             <p class="site-footer__meta">
-                A living methodology, not a holy text.
+                Evolves with real delivery. Change what does not fit your codebase.
             </p>
         </div>
 
-        <nav class="site-footer__nav" aria-label="Footer">
-            <a href="/learn/what-is-lscss/">Start here</a>
-            <a href="/learn/principles/">Principles</a>
-            <a href="/apply/decision-trees/">Decision trees</a>
-            <a href="/apply/examples/">Examples</a>
-            <a href="/start/search/">Search</a>
+        <nav class="site-footer__nav" aria-label="Documentation">
+            {
+                siteNavSections.map((section) => (
+                    <a
+                        href={section.href}
+                        aria-current={isCurrent(section.href) ? 'page' : undefined}
+                    >
+                        {section.label}
+                    </a>
+                ))
+            }
         </nav>
 
-        <div class="site-footer__credits">
-            <p>
+        <div class="site-footer__bottom">
+            <nav class="site-footer__legal" aria-label="Site information">
+                <p class="site-footer__copyright">
+                    © {year} LSCSS
+                </p>
+
+                <ul class="site-footer__legal-list">
+                    <li>
+                        <a href="/accessibility/">Accessibility statement</a>
+                    </li>
+                    <li>
+                        <a href="/ai/">AI and this site</a>
+                    </li>
+                    <li>
+                        <a href="/versions/">Versions</a>
+                    </li>
+                    <li>
+                        <a href="/rss.xml">RSS feed</a>
+                    </li>
+                    <li>
+                        <a href="/sitemap-index.xml">Sitemap</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <p class="site-footer__credits">
                 Built by <a href="https://crayonsandco.de/">Crayons and Code</a>.
             </p>
         </div>

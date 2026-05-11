@@ -1,0 +1,107 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import HubCard from '../../components/HubCard.astro';
+---
+
+<DocsLayout
+    title="Modern CSS Features"
+    description="Modern CSS features and how they affect Layered Semantic CSS architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modern CSS</p>
+
+        <h1>
+            Modern CSS features
+        </h1>
+
+        <p class="intro">
+            Modern CSS features reduce defensive selectors, heavy naming
+            systems, and JavaScript-driven styling. Used well, they make LSCSS
+            simpler and clearer.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Modern CSS sections">
+        <a href="#start-with-these">Start here</a>
+        <a href="#selector-tools">Selector tools</a>
+        <a href="#layout-tools">Layout tools</a>
+        <a href="#lscss-position">LSCSS position</a>
+    </nav>
+
+    <section class="content-block">
+        <h2 id="start-with-these">
+            Start with these
+        </h2>
+
+        <div class="hub-card-grid">
+            <HubCard href="/modern-css/where/" title=":where()">
+                <p>
+                    Use expressive selectors without adding specificity weight.
+                    This is one of the safest modern CSS tools for architecture.
+                </p>
+            </HubCard>
+
+            <HubCard href="/modern-css/has/" title=":has()">
+                <p>
+                    Style components based on their contents or state without
+                    reaching for extra JavaScript hooks too early.
+                </p>
+            </HubCard>
+
+            <HubCard href="/modern-css/container-queries/" title="Container queries">
+                <p>
+                    Make components respond to their container instead of the
+                    viewport. This supports more portable UI patterns.
+                </p>
+            </HubCard>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2 id="selector-tools">
+            Selector tools
+        </h2>
+
+        <div class="hub-card-grid">
+            <HubCard href="/modern-css/is/" title=":is()">
+                <p>Reduce selector repetition while keeping grouped patterns readable.</p>
+            </HubCard>
+
+            <HubCard href="/modern-css/not/" title=":not()">
+                <p>Use simple exclusions without turning selectors into puzzles.</p>
+            </HubCard>
+
+            <HubCard href="/modern-css/nesting/" title="CSS nesting">
+                <p>Keep related rules together, but avoid recreating deep selector chains.</p>
+            </HubCard>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2 id="layout-tools">
+            Layout and experience tools
+        </h2>
+
+        <div class="hub-card-grid">
+            <HubCard href="/modern-css/logical-properties/" title="Logical properties">
+                <p>Reduce left/right assumptions and improve support for different writing directions.</p>
+            </HubCard>
+
+            <HubCard href="/modern-css/view-transitions/" title="View transitions">
+                <p>Enhance navigation and interface changes while respecting progressive enhancement.</p>
+            </HubCard>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2 id="lscss-position">
+            LSCSS position
+        </h2>
+
+        <p>
+            LSCSS uses modern CSS to reduce architectural friction. The goal is
+            not more abstraction. The goal is clearer, simpler CSS with fewer
+            override battles.
+        </p>
+    </section>
+</DocsLayout>

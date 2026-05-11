@@ -1,0 +1,211 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const folderStructure = `css/
+    critical.css
+
+    settings/
+        variables.css
+        media.css
+        fonts.css
+
+    base/
+        reset.css
+        typography.css
+
+    helpers/
+        vh.css
+        a11y-link.css
+
+    atoms/
+        logo.css
+        button.css
+
+    molecules/
+        main-nav.css
+        card.css
+
+    organisms/
+        site-head.css
+
+    theme/
+        brand.css
+
+    legacy/
+        vendor.css
+        old-site.css
+
+    hacks/
+        temporary-fixes.css`;
+
+const rootCssExample = `@layer settings, base, utilities,
+atoms, molecules, organisms, theme, legacy, hacks;
+
+@import 'settings/variables' layer(settings);
+@import 'settings/media' layer(settings);
+@import 'settings/fonts' layer(settings);
+
+@import 'base/reset' layer(base);
+
+@import 'helpers/vh' layer(utilities);
+
+@import 'atoms/logo' layer(atoms);
+@import 'atoms/button' layer(atoms);
+
+@import 'molecules/main-nav' layer(molecules);
+@import 'molecules/card' layer(molecules);
+
+@import 'organisms/site-head' layer(organisms);`;
+
+const tokenExample = `:root {
+    --ff: 'Funnel Sans', system-ui;
+    --ff-display: 'Funnel Display', system-ui;
+
+    --fs: 1rem;
+    --fs-l: 1.5rem;
+
+    --space: 1rem;
+    --space-m: 1.5rem;
+
+    --c-red: hsl(343 100% 45.5%);
+    --c-blue: hsl(222 53% 35%);
+
+    --shadow-m: 0 2px 8px rgba(0, 0, 0, 0.12);
+}`;
+
+const fontExample = `@font-face {
+    font-family: 'Funnel Display';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300 800;
+    src: url('/fonts/funnel-display-variable.woff2')
+        format('woff2-variations');
+}`;
+---
+
+<DocsLayout
+    title="LSCSS Starter Template"
+    description="Starter structure for Layered Semantic CSS projects."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Starter template</p>
+
+        <h1>
+            Starter structure
+        </h1>
+
+        <p class="intro">
+            Start with a predictable structure. Good architecture should remove
+            decisions, not create new ones every Monday morning. The goal is a
+            system people can explain without opening seven files first.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Starter template sections">
+        <a href="#structure">Folder structure</a>
+        <a href="#root-file">Root file</a>
+        <a href="#tokens">Tokens</a>
+        <a href="#fonts">Fonts</a>
+        <a href="#rules">Rules</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
+
+    <section class="content-block">
+        <h2 id="structure">
+            Real-world folder structure
+        </h2>
+
+        <CodeExample code={folderStructure} language="text" />
+
+        <p>
+            Folder names may vary. Some teams prefer components. Some use
+            atoms, molecules, and organisms. The important rule is ownership,
+            not folder worship.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="root-file">
+            Root CSS file as an import map
+        </h2>
+
+        <p>
+            Your main stylesheet should define layer order first, then import
+            files into the correct place. It should not become the place where
+            emergency CSS goes to retire.
+        </p>
+
+        <CodeExample code={rootCssExample} />
+    </section>
+
+    <section class="content-block">
+        <h2 id="tokens">
+            Tokens first
+        </h2>
+
+        <p>
+            Use variables for spacing, typography, colour, shadows, radius, and
+            layout decisions. Random values spread inconsistency fast and turn
+            design into avoidable inconsistency.
+        </p>
+
+        <CodeExample code={tokenExample} />
+
+        <p>
+            Change the token, not twenty unrelated selectors hunting for the
+            correct shade of red.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="fonts">
+            Fonts belong in settings
+        </h2>
+
+        <p>
+            Font loading belongs in the settings layer. Typography defaults
+            belong in base. Components should not be quietly importing font
+            decisions like suspicious luggage.
+        </p>
+
+        <CodeExample code={fontExample} />
+    </section>
+
+    <section class="content-block">
+        <h2 id="rules">
+            Working rules
+        </h2>
+
+        <ul>
+            <li>One component, one partial.</li>
+            <li>No IDs for styling.</li>
+            <li>No important declarations unless there is a real emergency.</li>
+            <li>Base styles stay in the base layer.</li>
+            <li>Utilities stay rare and purposeful.</li>
+            <li>Theme changes presentation, not structure.</li>
+            <li>Legacy CSS stays low in the cascade.</li>
+            <li>Hacks are temporary and visible.</li>
+            <li>Large files trigger review, not pride.</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2 id="avoid">
+            What to avoid
+        </h2>
+
+        <ul>
+            <li>One giant site.css containing everything.</li>
+            <li>Component styles mixed into reset or base files.</li>
+            <li>Random colours and spacing values spread across components.</li>
+            <li>Third-party CSS imported without a legacy layer.</li>
+            <li>Temporary fixes hidden inside normal component files.</li>
+            <li>Utility chains replacing actual component architecture.</li>
+        </ul>
+
+        <p>
+            If the project becomes difficult to explain, it will become worse to maintain.
+        </p>
+    </section>
+</DocsLayout>

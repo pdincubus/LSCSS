@@ -9,20 +9,23 @@ export interface Props {
     title?: string;
     description?: string;
     schemaType?: 'Article' | 'TechArticle' | 'WebPage';
+    /** Override default OG image (`/images/og-default.svg`). Pass `""` to omit image meta tags. */
+    ogImage?: string;
+    noindex?: boolean;
 }
 
-const {
-    title,
-    description,
-    schemaType = 'WebPage'
-} = Astro.props;
+const { title, description, schemaType = 'WebPage', ogImage, noindex } = Astro.props;
 ---
 
 <BaseLayout
     title={title}
     description={description}
     schemaType={schemaType}
+    ogImage={ogImage}
+    noindex={noindex}
 >
+    <slot name="head" slot="head" />
+
     <main class="page-shell docs-layout">
         <DocsSidebar />
 

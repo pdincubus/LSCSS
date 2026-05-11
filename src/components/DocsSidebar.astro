@@ -1,10 +1,15 @@
 ---
-import { docsNavigation } from '../data/docsNavigation';
+import { docsNavigation, type DocsNavItem } from '../data/docsNavigation';
 
 const currentPath = Astro.url.pathname;
 const currentPage = docsNavigation.find((item) => item.href === currentPath);
-const currentSection = currentPage?.section ?? 'Start here';
+const currentSection = currentPage?.section ?? 'Learn';
 const links = docsNavigation.filter((item) => item.section === currentSection);
+const topLevel = links.filter((item) => !item.parentHref);
+
+function childrenOf(parentHref: string): DocsNavItem[] {
+    return links.filter((item) => item.parentHref === parentHref);
+}
 
 function isActive(href: string): boolean {
     if (href === '/') {
@@ -16,7 +21,7 @@ function isActive(href: string): boolean {
 ---
 
 <aside class="docs-sidebar">
-    <details class="docs-nav-disclosure">
+    <details class="docs-nav-disclosure" data-docs-nav-disclosure>
         <summary>
             {currentSection} navigation
         </summary>
@@ -29,33 +34,54 @@ function isActive(href: string): boolean {
 
                 <ul class="docs-nav-list">
                     {
-                        links.map((link) => (
-                            <li>
-                                <a
-                                    href={link.href}
-                                    aria-current={isActive(link.href) ? 'page' : undefined}
-                                >
-                                    {link.label}
-                                </a>
-                            </li>
-                        ))
+                        topLevel.map((link) => {
+                            const children = childrenOf(link.href);
+
+                            return (
+                                <li>
+                                    <a
+                                        href={link.href}
+                                        aria-current={isActive(link.href) ? 'page' : undefined}
+                                    >
+                                        {link.label}
+                                    </a>
+                                    {children.length > 0 && (
+                                        <ul class="docs-nav-list docs-nav-list--nested">
+                                            {children.map((child) => (
+                                                <li>
+                                                    <a
+                                                        href={child.href}
+                                                        aria-current={
+                                                            isActive(child.href) ? 'page' : undefined
+                                                        }
+                                                    >
+                                                        {child.label}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </li>
+                            );
+                        })
                     }
-                </ul>
-            </section>
-
-            <section class="docs-nav-section docs-nav-section--secondary">
-                <h2 class="docs-nav-heading">
-                    Other routes
-                </h2>
-
-                <ul class="docs-nav-list">
-                    <li><a href="/learn/what-is-lscss/">Learn</a></li>
-                    <li><a href="/apply/decision-trees/">Apply</a></li>
-                    <li><a href="/teams/adoption/">Teams</a></li>
-                    <li><a href="/writing/guides/">Writing</a></li>
-                    <li><a href="/start/search/">Search</a></li>
                 </ul>
             </section>
         </nav>
     </details>
 </aside>
+
+<script>
+    const details = document.querySelector('[data-docs-nav-disclosure]');
+
+    if (details instanceof HTMLDetailsElement) {
+        const desktopQuery = window.matchMedia('(min-width: 64rem)');
+
+        const syncDisclosureState = () => {
+            details.open = desktopQuery.matches;
+        };
+
+        syncDisclosureState();
+        desktopQuery.addEventListener('change', syncDisclosureState);
+    }
+</script>

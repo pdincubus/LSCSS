@@ -1,13 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
-
-const openingExample = `LSCSS means:
-Layered Semantic CSS
-
-A practical system for writing CSS that
-teams can understand, maintain,
-and improve without fear.`;
+import HubCard from '../../../components/HubCard.astro';
 ---
 
 <DocsLayout
@@ -34,9 +27,12 @@ and improve without fear.`;
         <a href="#start">Where to start</a>
     </nav>
 
-    <section id="definition" class="content-block">
-        <h2>What it means</h2>
-        <CodeExample code={openingExample} language="text" />
+    <section class="content-block">
+        <h2 id="definition">What it means</h2>
+        <p>
+            <strong>LSCSS means:</strong> Layered Semantic CSS — a practical system for
+            writing CSS that teams can understand, maintain, and improve without fear.
+        </p>
         <p>
             It combines clear ownership, cascade layers, semantic components,
             controlled utilities, temporary hacks, and predictable decision-making.
@@ -48,8 +44,8 @@ and improve without fear.`;
         </p>
     </section>
 
-    <section id="problem" class="content-block">
-        <h2>The problem it solves</h2>
+    <section class="content-block">
+        <h2 id="problem">The problem it solves</h2>
         <ul>
             <li>Developers disagree where CSS should live</li>
             <li>Overrides require increasing specificity</li>
@@ -63,8 +59,8 @@ and improve without fear.`;
         </p>
     </section>
 
-    <section id="solution" class="content-block">
-        <h2>The approach</h2>
+    <section class="content-block">
+        <h2 id="solution">The approach</h2>
         <ul>
             <li>Ownership before selectors</li>
             <li>Layers before specificity</li>
@@ -76,13 +72,16 @@ and improve without fear.`;
         </ul>
 
         <p>
-            LSCSS is not a framework. It works with Astro, React, Vue,
-            Eleventy, legacy systems, and existing jQuery-based projects.
+            LSCSS is not a framework. It is a way to organise CSS, so it applies
+            wherever you author stylesheets—alongside any component library or
+            site generator, in plain templates, or in codebases you are
+            improving over time. It does not depend on how you wire up
+            JavaScript in the browser; it only needs a place your CSS can live.
         </p>
     </section>
 
-    <section id="for" class="content-block">
-        <h2>Who it is for</h2>
+    <section class="content-block">
+        <h2 id="for">Who it is for</h2>
         <ul>
             <li>Front-end teams working on shared codebases</li>
             <li>Agencies delivering multiple client projects</li>
@@ -106,23 +105,20 @@ and improve without fear.`;
         </ul>
     </section>
 
-    <section id="start" class="content-block">
-        <h2>Where to start</h2>
+    <section class="content-block">
+        <h2 id="start">Where to start</h2>
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/learn/principles/">Principles</a></h3>
+            <HubCard href="/learn/principles/" title="Principles">
                 <p>The non-negotiables. Read this first.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+            <HubCard href="/apply/decision-trees/" title="Decision trees">
                 <p>Use practical rules when deciding where CSS belongs.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/examples/">Examples</a></h3>
+            <HubCard href="/apply/examples/" title="Examples">
                 <p>See before and after code instead of trusting theory alone.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 

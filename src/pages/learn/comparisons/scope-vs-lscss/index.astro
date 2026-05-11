@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import HubCard from '../../../../components/HubCard.astro';
 
 const title = '@scope and LSCSS';
 const description = 'Compare native CSS @scope and Layered Semantic CSS for scoping, architecture, naming, and long-term maintainability.';
@@ -16,16 +17,6 @@ const lscssExample = `.product-card {}
 
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
-
-const firstQuestionExample = `Ask first:
-Do you need better selector boundaries,
-or a full architecture system?
-
-Cleaner local scoping
-→ @scope helps immediately
-
-Predictable ownership across the whole project
-→ LSCSS solves more`;
 ---
 
 <DocsLayout
@@ -60,12 +51,18 @@ Predictable ownership across the whole project
             <a href="#when-to-use">When to use</a>
         </nav>
 
-        <section id="first" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="first">
                 Ask this first
             </h2>
 
-            <CodeExample code={firstQuestionExample} language="text" />
+            <p>
+                <strong>Ask first:</strong> Do you need better selector boundaries, or a full architecture system?
+            </p>
+            <ul>
+                <li>Cleaner local scoping — <code>@scope</code> helps immediately.</li>
+                <li>Predictable ownership across the whole project — LSCSS solves more.</li>
+            </ul>
 
             <p>
                 Many people see <code>@scope</code> and assume architecture is
@@ -73,8 +70,8 @@ Predictable ownership across the whole project
             </p>
         </section>
 
-        <section id="differences" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="differences">
                 Main differences
             </h2>
 
@@ -88,8 +85,8 @@ Predictable ownership across the whole project
             </ul>
         </section>
 
-        <section id="scoping" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="scoping">
                 Scoping comparison
             </h2>
 
@@ -112,8 +109,8 @@ Predictable ownership across the whole project
             </p>
         </section>
 
-        <section id="architecture" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="architecture">
                 Architecture beyond scope
             </h2>
 
@@ -131,8 +128,8 @@ Predictable ownership across the whole project
             </p>
         </section>
 
-        <section id="when-to-use" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="when-to-use">
                 Where @scope helps most
             </h2>
 
@@ -165,20 +162,17 @@ Predictable ownership across the whole project
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/apply/methodology/">Core methodology</a></h3>
-                    <p>See how LSCSS works as a full architecture system beyond selector scoping.</p>
-                </article>
+                <HubCard href="/apply/methodology/" title="Core methodology">
+                <p>See how LSCSS works as a full architecture system beyond selector scoping.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/layers/">Layers</a></h3>
-                    <p>Understand why precedence and override order still matter after @scope.</p>
-                </article>
+                <HubCard href="/apply/layers/" title="Layers">
+                <p>Understand why precedence and override order still matter after @scope.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
-                    <p>Use practical rules when deciding between scoping, naming, and ownership.</p>
-                </article>
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
+                <p>Use practical rules when deciding between scoping, naming, and ownership.</p>
+            </HubCard>
             </div>
         </section>
 

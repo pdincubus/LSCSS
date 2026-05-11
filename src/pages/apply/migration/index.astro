@@ -1,18 +1,13 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
 
 const layerOrderExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
 
 const legacyImportExample = `@import './legacy/site.css' layer(legacy);
 @import './components/product-card.css' layer(components);`;
-
-const firstDecisionExample = `Ask first:
-Can this be safely replaced now?
-
-Yes → Replace properly
-No → Contain it and improve around it`;
 ---
 
 <DocsLayout
@@ -41,12 +36,18 @@ No → Contain it and improve around it`;
         <a href="#avoid">What not to do</a>
     </nav>
 
-    <section id="first-decision" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="first-decision">
             Ask this first
         </h2>
 
-        <CodeExample code={firstDecisionExample} language="text" />
+        <p>
+            <strong>Ask first:</strong> Can this be safely replaced now?
+        </p>
+        <ul>
+            <li><strong>Yes</strong> — replace properly.</li>
+            <li><strong>No</strong> — contain it and improve around it.</li>
+        </ul>
 
         <p>
             Most migration mistakes come from trying to fix everything at once.
@@ -54,49 +55,37 @@ No → Contain it and improve around it`;
         </p>
     </section>
 
-    <section id="principles" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="principles">
             Migration principles
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3>
-                    Contain first
-                </h3>
-
+            <HubCard title="Contain first">
                 <p>
                     Put existing CSS somewhere predictable before changing how
                     new CSS is written.
                 </p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3>
-                    Improve active code
-                </h3>
-
+            <HubCard title="Improve active code">
                 <p>
                     Fix the CSS people touch every week, not the fossil no one
                     has opened since 2018.
                 </p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3>
-                    Delete over time
-                </h3>
-
+            <HubCard title="Delete over time">
                 <p>
                     Migration succeeds when legacy CSS gets smaller, not when it
                     gets renamed and promoted.
                 </p>
-            </article>
+            </HubCard>
         </div>
     </section>
 
-    <section id="path" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="path">
             Recommended migration path
         </h2>
 
@@ -140,8 +129,8 @@ No → Contain it and improve around it`;
         <CodeExample code={layerOrderExample} />
     </section>
 
-    <section id="legacy" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="legacy">
             Step 2: isolate legacy CSS
         </h2>
 
@@ -158,8 +147,8 @@ No → Contain it and improve around it`;
         </p>
     </section>
 
-    <section id="avoid" class="content-block">
-        <h2>
+    <section class="content-block">
+        <h2 id="avoid">
             What not to do
         </h2>
 
@@ -194,20 +183,17 @@ No → Contain it and improve around it`;
         </h2>
 
         <div class="hub-card-grid">
-            <article class="hub-card">
-                <h3><a href="/apply/starter-template/">Starter template</a></h3>
+            <HubCard href="/apply/starter-template/" title="Starter template">
                 <p>See what good structure looks like once legacy CSS is isolated.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/layers/">Layers</a></h3>
+            <HubCard href="/apply/layers/" title="Layers">
                 <p>Understand the cascade order first, because migration starts with precedence control.</p>
-            </article>
+            </HubCard>
 
-            <article class="hub-card">
-                <h3><a href="/apply/hacks/">Hacks</a></h3>
+            <HubCard href="/apply/hacks/" title="Hacks">
                 <p>Separate temporary fixes from real architecture while legacy code is being reduced.</p>
-            </article>
+            </HubCard>
         </div>
     </section>
 </DocsLayout>

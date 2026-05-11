@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import HubCard from '../../../../components/HubCard.astro';
 
 const title = 'BEM vs LSCSS';
 const description = 'Compare BEM and Layered Semantic CSS for naming, maintainability, readability, specificity control, and long-term front-end architecture.';
@@ -24,19 +25,6 @@ const lscssExample = `<article class="product-card">
         Product description
     </p>
 </article>`;
-
-const firstQuestionExample = `Ask first:
-Is your main problem:
-
-unclear relationships
-or
-uncontrolled architecture?
-
-If naming is the biggest issue
-→ BEM helps quickly
-
-If specificity and maintainability are the real problem
-→ LSCSS solves more`;
 ---
 
 <DocsLayout
@@ -69,12 +57,19 @@ If specificity and maintainability are the real problem
             <a href="#when-to-use">When to use</a>
         </nav>
 
-        <section id="first" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="first">
                 Ask this first
             </h2>
 
-            <CodeExample code={firstQuestionExample} language="text" />
+            <p>
+                <strong>Ask first:</strong> Is your main problem unclear relationships
+                or uncontrolled architecture?
+            </p>
+            <ul>
+                <li>If naming is the biggest issue, BEM helps quickly.</li>
+                <li>If specificity and maintainability are the real problem, LSCSS solves more.</li>
+            </ul>
 
             <p>
                 Many teams adopt BEM to solve specificity problems. BEM is not
@@ -82,8 +77,8 @@ If specificity and maintainability are the real problem
             </p>
         </section>
 
-        <section id="differences" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="differences">
                 Main differences
             </h2>
 
@@ -99,8 +94,8 @@ If specificity and maintainability are the real problem
             </ul>
         </section>
 
-        <section id="naming" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="naming">
                 Naming comparison
             </h2>
 
@@ -122,8 +117,8 @@ If specificity and maintainability are the real problem
             </p>
         </section>
 
-        <section id="architecture" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="architecture">
                 Specificity and architecture
             </h2>
 
@@ -148,8 +143,8 @@ If specificity and maintainability are the real problem
             </p>
         </section>
 
-        <section id="when-to-use" class="content-block">
-            <h2>
+        <section class="content-block">
+            <h2 id="when-to-use">
                 Where BEM works well
             </h2>
 
@@ -182,20 +177,17 @@ If specificity and maintainability are the real problem
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/apply/methodology/">Core methodology</a></h3>
-                    <p>See how LSCSS works as a full system, not only a naming convention.</p>
-                </article>
+                <HubCard href="/apply/methodology/" title="Core methodology">
+                <p>See how LSCSS works as a full system, not only a naming convention.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/layers/">Layers</a></h3>
-                    <p>Understand why controlling precedence solves more than naming alone.</p>
-                </article>
+                <HubCard href="/apply/layers/" title="Layers">
+                <p>Understand why controlling precedence solves more than naming alone.</p>
+            </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
-                    <p>Use practical rules when deciding between modifiers, state, and ownership.</p>
-                </article>
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
+                <p>Use practical rules when deciding between modifiers, state, and ownership.</p>
+            </HubCard>
             </div>
         </section>
 

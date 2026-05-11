@@ -1,16 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CodeExample from '../components/CodeExample.astro';
-
-const folderStructureExample = `css/
-    settings/
-    base/
-    utilities/
-    layout/
-    components/
-    theme/
-    legacy/
-    hacks/`;
+import HubCard from '../components/HubCard.astro';
 ---
 
 <BaseLayout
@@ -67,37 +57,25 @@ const folderStructureExample = `css/
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3>
-                        <a href="/learn/what-is-lscss/">1. What is LSCSS?</a>
-                    </h3>
-
+                <HubCard href="/learn/what-is-lscss/" title="1. What is LSCSS?">
                     <p>
                         The front door. Understand what it is, why it exists,
                         and what problems it solves.
                     </p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3>
-                        <a href="/learn/principles/">2. Learn the principles</a>
-                    </h3>
-
+                <HubCard href="/learn/principles/" title="2. Learn the principles">
                     <p>
                         The non-negotiables. Ownership, layers, utilities,
                         hacks, tokens, and calm CSS.
                     </p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3>
-                        <a href="/apply/decision-trees/">3. Use the decision trees</a>
-                    </h3>
-
+                <HubCard href="/apply/decision-trees/" title="3. Use the decision trees">
                     <p>
                         Decide where CSS belongs before specificity gets involved.
                     </p>
-                </article>
+                </HubCard>
             </div>
         </section>
 
@@ -107,35 +85,23 @@ const folderStructureExample = `css/
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3>
-                        <a href="/apply/examples/">Show me examples</a>
-                    </h3>
-
+                <HubCard href="/apply/examples/" title="Show me examples">
                     <p>
                         Before and after code examples for real architectural problems.
                     </p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3>
-                        <a href="/apply/migration/">I need to improve legacy CSS</a>
-                    </h3>
-
+                <HubCard href="/apply/migration/" title="I need to improve legacy CSS">
                     <p>
                         Reduce risk without rewriting everything at once.
                     </p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3>
-                        <a href="/apply/audit-checklist/">I need to audit a codebase</a>
-                    </h3>
-
+                <HubCard href="/apply/audit-checklist/" title="I need to audit a codebase">
                     <p>
                         Review ownership, overrides, tokens, utilities, and delivery risk.
                     </p>
-                </article>
+                </HubCard>
             </div>
         </section>
 
@@ -145,35 +111,23 @@ const folderStructureExample = `css/
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3>
-                        <a href="/teams/adoption/">Adoption</a>
-                    </h3>
-
+                <HubCard href="/teams/adoption/" title="Adoption">
                     <p>
                         Introduce LSCSS without forcing a disruptive rewrite.
                     </p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3>
-                        <a href="/teams/governance/">Governance</a>
-                    </h3>
-
+                <HubCard href="/teams/governance/" title="Governance">
                     <p>
                         Keep standards healthy after the kickoff meeting ends.
                     </p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3>
-                        <a href="/teams/contributing/">Contribution standards</a>
-                    </h3>
-
+                <HubCard href="/teams/contributing/" title="Contribution standards">
                     <p>
                         Keep pull requests maintainable over time.
                     </p>
-                </article>
+                </HubCard>
             </div>
         </section>
 
@@ -183,34 +137,18 @@ const folderStructureExample = `css/
             </h2>
 
             <div class="hub-card-grid">
-                <article class="hub-card">
-                    <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
                     <p>Use practical rules before CSS choices become hard to unwind.</p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/apply/live-examples/">Live examples</a></h3>
+                <HubCard href="/apply/live-examples/" title="Live examples">
                     <p>Review rendered component examples that reflect LSCSS architecture decisions.</p>
-                </article>
+                </HubCard>
 
-                <article class="hub-card">
-                    <h3><a href="/writing/guides/performance-and-css/">Performance and CSS</a></h3>
+                <HubCard href="/writing/guides/performance-and-css/" title="Performance and CSS">
                     <p>Improve architecture decisions that affect long-term front-end performance.</p>
-                </article>
+                </HubCard>
             </div>
-        </section>
-
-        <section class="content-block">
-            <h2>
-                Starter structure
-            </h2>
-
-            <CodeExample code={folderStructureExample} language="text" />
-
-            <p>
-                Good architecture removes repeated decisions. Start with
-                structure first, not emergency fixes later.
-            </p>
         </section>
     </main>
 </BaseLayout>
