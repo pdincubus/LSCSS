@@ -31,12 +31,12 @@ const languageClass = `language-${language}`;
     <figcaption>
         <span>{label}</span>
 
-        <button class="copy-code-button" type="button" data-copy-code>
+        <button class="copy" type="button" data-copy-code>
             Copy
         </button>
     </figcaption>
 
     <pre class={languageClass}><code class={languageClass}>{code}</code></pre>
 
-    <p class="copy-code-status" data-copy-status aria-live="polite"></p>
+    <p class="copy-status" data-copy-status aria-live="polite"></p>
 </figure>
