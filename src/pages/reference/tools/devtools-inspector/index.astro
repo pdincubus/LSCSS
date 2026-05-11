@@ -1,0 +1,97 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="DevTools-style CSS Inspector"
+    description="A simplified DevTools-style inspector for learning CSS architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            DevTools-style CSS inspector
+        </h1>
+
+        <p class="intro">
+            Inspect how layers, specificity, scope boundaries, and render stages
+            affect a component.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <form class="tool-panel" data-inspector>
+            <label for="inspector-rule">
+                CSS rule
+            </label>
+
+            <select id="inspector-rule" class="tool-input" data-inspector-rule>
+                <option value="layer">layer override</option>
+                <option value="specificity">specificity increase</option>
+                <option value="scope">scope boundary</option>
+                <option value="layout">layout-triggering change</option>
+                <option value="paint">paint-triggering change</option>
+                <option value="composite">composite-friendly change</option>
+            </select>
+        </form>
+    </section>
+
+    <section class="content-block">
+        <div class="inspector-grid">
+            <article class="inspector-panel">
+                <h2>
+                    Cascade inspector
+                </h2>
+
+                <dl class="inspector-list">
+                    <div>
+                        <dt>Layer</dt>
+                        <dd data-inspector-layer>components</dd>
+                    </div>
+
+                    <div>
+                        <dt>Specificity</dt>
+                        <dd data-inspector-specificity>0, 1, 0</dd>
+                    </div>
+
+                    <div>
+                        <dt>Scope</dt>
+                        <dd data-inspector-scope>.product-card</dd>
+                    </div>
+                </dl>
+            </article>
+
+            <article class="inspector-panel">
+                <h2>
+                    Render inspector
+                </h2>
+
+                <ol class="render-stages">
+                    <li data-stage="layout">Layout</li>
+                    <li data-stage="paint">Paint</li>
+                    <li data-stage="composite">Composite</li>
+                </ol>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <article class="example-card" data-inspector-card>
+            <h2 class="title">
+                Inspectable component
+            </h2>
+
+            <p>
+                This card represents the component being inspected.
+            </p>
+        </article>
+    </section>
+
+    <section class="content-block">
+        <p data-inspector-output>
+            Layered component styles should avoid unnecessary specificity.
+        </p>
+    </section>
+
+    <script type="module" src="/scripts/devtools-inspector.js"></script>
+</DocsLayout>

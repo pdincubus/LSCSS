@@ -1,0 +1,169 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const modifierExample = `.product-card--featured
+.product-card--compact
+.site-header--minimal`;
+
+const stateExample = `.is_active
+.is_disabled
+.is_expanded
+.is_loading`;
+
+const conditionExample = `.has_error
+.has_results
+.has_child
+.has_media`;
+
+const combinedExample = `.product-card--featured.is_loading {}
+.form-field.has_error {}
+.disclosure.is_expanded {}`;
+
+const avoidExample = `/* Avoid unclear state names */
+.active {}
+.open {}
+.error {}
+
+/* Prefer explicit state or condition names */
+.is_active {}
+.is_open {}
+.has_error {}`;
+
+const decisionExample = `Ask:
+Can this exist as a documented reusable version?
+→ Modifier
+
+Is this temporary UI behaviour?
+→ .is_*
+
+Is this describing present content or condition?
+→ .has_*`;
+---
+
+<DocsLayout
+    title="LSCSS Modifiers and State"
+    description="Modifiers, state classes, condition classes, and UI state naming in Layered Semantic CSS."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Modifiers and state</p>
+
+        <h1>
+            Modifiers and state classes
+        </h1>
+
+        <p class="intro">
+            A featured card and a loading card are different problems. One is a
+            reusable component variant. One is temporary behaviour. Mixing them
+            creates unclear CSS and JavaScript with trust issues.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Modifiers and state sections">
+        <a href="#rules">Decision rules</a>
+        <a href="#modifiers">Modifiers</a>
+        <a href="#state-classes">State classes</a>
+        <a href="#condition-classes">Condition classes</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Quick decision rules
+        </h2>
+
+        <p>
+            Before naming anything, decide what problem it is solving.
+        </p>
+
+        <CodeExample code={decisionExample} language="text" />
+
+        <p>
+            This prevents modifiers becoming state classes in disguise and keeps
+            component behaviour predictable.
+        </p>
+    </section>
+
+    <section id="modifiers" class="content-block">
+        <h2>
+            Modifiers
+        </h2>
+
+        <p>
+            Use modifiers for deliberate reusable variants. A modifier should be
+            something design can document and another developer can understand
+            without reading JavaScript.
+        </p>
+
+        <CodeExample code={modifierExample} />
+
+        <p>
+            If the state disappears after interaction, it is probably not a modifier.
+        </p>
+    </section>
+
+    <section id="state-classes" class="content-block">
+        <h2>
+            State classes
+        </h2>
+
+        <p>
+            Use <code>.is_*</code> for temporary UI state created by interaction,
+            validation, loading, or progressive enhancement.
+        </p>
+
+        <CodeExample code={stateExample} />
+
+        <p>
+            State should stay visible and explicit. Do not hide behaviour inside
+            deep selectors and make debugging harder than necessary.
+        </p>
+    </section>
+
+    <section id="condition-classes" class="content-block">
+        <h2>
+            Condition classes
+        </h2>
+
+        <p>
+            Use <code>.has_*</code> when the component has content, children, or
+            a condition that affects styling but is not itself a reusable variant.
+        </p>
+
+        <CodeExample code={conditionExample} />
+
+        <p>
+            A form field with an error is not a different form field model. It
+            is the same field with a current condition.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Combined patterns
+        </h2>
+
+        <CodeExample code={combinedExample} />
+
+        <p>
+            These classes work together because they describe different truths.
+            A featured card can be loading. A disclosure can be expanded.
+            Keep those concerns separate.
+        </p>
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid vague names
+        </h2>
+
+        <CodeExample code={avoidExample} />
+
+        <p>
+            Names like <code>.active</code> and <code>.open</code> spread fast
+            and explain nothing. Prefixes make intent obvious and prevent reuse
+            becoming accidental architecture.
+        </p>
+    </section>
+</DocsLayout>

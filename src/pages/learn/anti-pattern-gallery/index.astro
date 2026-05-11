@@ -1,0 +1,222 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const deepSelectorProblem = `.page .wrapper .content .card .title {
+    margin: 0;
+}`;
+
+const deepSelectorFix = `.product-card > .title {
+    margin: 0;
+}`;
+
+const specificityProblem = `#app .product-list .product-card .title {
+    color: red !important;
+}`;
+
+const specificityFix = `@layer components, theme;
+
+@layer theme {
+    .product-card > .title {
+        color: red;
+    }
+}`;
+
+const utilityProblem = `<article class="p-l m-b-xl bg-dark text-light radius-m grid gap-m">
+    ...
+</article>`;
+
+const utilityFix = `<article class="product-card product-card--featured">
+    ...
+</article>`;
+
+const randomValuesProblem = `.card {
+    padding: 17px;
+    border-radius: 13px;
+    color: #4a2cff;
+}`;
+
+const randomValuesFix = `.card {
+    padding: var(--space-m);
+    border-radius: var(--br-m);
+    color: var(--colour-accent);
+}`;
+
+const stateProblem = `.button--loading {}
+.button--disabled {}
+.button--active {}`;
+
+const stateFix = `.button {}
+.button.is_loading {}
+.button.is_disabled {}`;
+
+const zIndexProblem = `.modal {
+    z-index: 999999;
+}`;
+
+const zIndexFix = `.modal {
+    z-index: var(--layer-modal);
+}`;
+---
+
+<DocsLayout
+    title="CSS Anti-pattern Gallery"
+    description="Common CSS architecture anti-patterns and modern LSCSS fixes."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Anti-pattern gallery</p>
+        <h1>CSS anti-pattern gallery</h1>
+        <p class="intro">
+            Most CSS problems do not arrive dramatically. They often start as
+            small shortcuts and quick fixes that compound over time. This
+            gallery helps you recognize those patterns early.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Anti-pattern sections">
+        <a href="#recognise">Recognise first</a>
+        <a href="#deep-selectors">Deep selectors</a>
+        <a href="#specificity">Specificity</a>
+        <a href="#utilities">Utilities</a>
+        <a href="#random-values">Random values</a>
+        <a href="#state">State</a>
+        <a href="#z-index">Z-index management</a>
+    </nav>
+
+    <section id="recognise" class="content-block">
+        <h2>Recognise the root cause first</h2>
+
+        <p>
+            Most anti-patterns are symptoms, not root causes. Before fixing the
+            selector, ask what architectural decision created it.
+        </p>
+
+        <ul>
+            <li>Deep selectors usually mean unclear ownership.</li>
+            <li>Important declarations usually mean broken layer order.</li>
+            <li>Utility overload usually means missing components.</li>
+            <li>Random values usually mean missing tokens.</li>
+            <li>Modifier confusion usually means state and variants were mixed.</li>
+            <li>Large z-index values usually mean missing layering rules.</li>
+        </ul>
+
+        <p>
+            Fixing symptoms without fixing ownership creates cleaner-looking
+            bad CSS. The underlying issue remains.
+        </p>
+    </section>
+
+    <section id="deep-selectors" class="content-block">
+        <h2>Deep selectors</h2>
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <CodeExample code={deepSelectorProblem} language="css" variant="before" />
+                <p>Deep selectors couple styles to markup structure and make safe overrides harder.</p>
+            </article>
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <CodeExample code={deepSelectorFix} language="css" variant="after" />
+                <p>Use shallow scoped component selectors with clear ownership.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="specificity" class="content-block">
+        <h2>Specificity escalation</h2>
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <CodeExample code={specificityProblem} language="css" variant="before" />
+                <p>IDs and important declarations create override battles and ongoing debugging cost.</p>
+            </article>
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <CodeExample code={specificityFix} language="css" variant="after" />
+                <p>Check layer order before increasing specificity.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="utilities" class="content-block">
+        <h2>Utility overload</h2>
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <CodeExample code={utilityProblem} language="html" variant="before" />
+                <p>Too many utilities hide component intent and turn HTML into a styling spreadsheet.</p>
+            </article>
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <CodeExample code={utilityFix} language="html" variant="after" />
+                <p>Use semantic components and keep utilities rare.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="random-values" class="content-block">
+        <h2>Random values everywhere</h2>
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <CodeExample code={randomValuesProblem} language="css" variant="before" />
+                <p>Magic numbers and random colours destroy consistency and weaken design systems.</p>
+            </article>
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <CodeExample code={randomValuesFix} language="css" variant="after" />
+                <p>Use tokens so spacing, colour, and radius stay predictable.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="state" class="content-block">
+        <h2>State disguised as modifiers</h2>
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <CodeExample code={stateProblem} language="css" variant="before" />
+                <p>Temporary UI behaviour gets mixed with reusable component variants.</p>
+            </article>
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <CodeExample code={stateFix} language="css" variant="after" />
+                <p>Use modifiers for variants and <code>.is_*</code> classes for temporary state.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="z-index" class="content-block">
+        <h2>Z-index management</h2>
+        <div class="anti-pattern-pair">
+            <article class="anti-pattern-card anti-pattern-card--bad">
+                <h3>Problem</h3>
+                <CodeExample code={zIndexProblem} language="css" variant="before" />
+                <p>If your z-index needs six digits, the problem is probably not ambition.</p>
+            </article>
+            <article class="anti-pattern-card anti-pattern-card--good">
+                <h3>Fix</h3>
+                <CodeExample code={zIndexFix} language="css" variant="after" />
+                <p>Use named layer tokens and predictable stacking rules instead of arbitrary large numbers.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules to prevent these problems before they happen.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/layers/">Layers</a></h3>
+                <p>Most specificity issues begin when override order is accidental.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/migration/">Migration</a></h3>
+                <p>Legacy systems create most anti-patterns. Learn how to reduce them safely.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

@@ -1,0 +1,157 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const deepBad = `.page .content .card .header .title {
+    margin-bottom: 1rem;
+}`;
+
+const deepGood = `.product-card > .title {
+    margin-block-end: var(--space);
+}`;
+
+const utilityBad = `<article class="p-l m-b-xl bg-dark text-light radius-m grid gap-m">
+    ...
+</article>`;
+
+const utilityGood = `<article class="product-card product-card--featured">
+    ...
+</article>`;
+
+const stateBad = `.button--loading {}
+.button--active {}
+.button--disabled {}`;
+
+const stateGood = `.button {}
+.button.is_loading {}
+.button.is_disabled {}`;
+
+const legacyLayerExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
+
+const hacksExample = `@layer hacks {
+    .checkout-banner {
+        margin-top: -3px;
+    }
+}`;
+---
+
+<DocsLayout
+    title="Examples Library"
+    description="Practical before and after examples for Layered Semantic CSS."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Examples</p>
+        <h1>Show me, do not merely explain</h1>
+        <p class="intro">
+            Principles matter. Examples end arguments. These before and after
+            patterns show what architectural improvement looks like in real CSS,
+            not only in confident documentation.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Examples sections">
+        <a href="#selectors">Deep selectors</a>
+        <a href="#utilities">Utility overload</a>
+        <a href="#state">Modifier vs state</a>
+        <a href="#legacy">Legacy migration</a>
+        <a href="#hacks">Temporary fixes</a>
+    </nav>
+
+    <section id="selectors" class="content-block">
+        <h2>Deep selectors to shallow ownership</h2>
+
+        <h3>Before</h3>
+        <CodeExample code={deepBad} language="css" variant="before" />
+
+        <h3>After</h3>
+        <CodeExample code={deepGood} language="css" variant="after" />
+
+        <p>
+            Deep selectors couple CSS to markup structure. Short scoped
+            selectors make ownership obvious and safe to change.
+        </p>
+    </section>
+
+    <section id="utilities" class="content-block">
+        <h2>Utility overload to semantic components</h2>
+
+        <h3>Before</h3>
+        <CodeExample code={utilityBad} language="html" variant="before" />
+
+        <h3>After</h3>
+        <CodeExample code={utilityGood} language="html" variant="after" />
+
+        <p>
+            Repeated utility stacks usually mean a component is trying to exist.
+            Name it once instead of explaining it forever.
+        </p>
+    </section>
+
+    <section id="state" class="content-block">
+        <h2>State disguised as modifiers</h2>
+
+        <h3>Before</h3>
+        <CodeExample code={stateBad} language="css" variant="before" />
+
+        <h3>After</h3>
+        <CodeExample code={stateGood} language="css" variant="after" />
+
+        <p>
+            Permanent reusable variants are modifiers. Temporary UI behaviour
+            should be visible as state.
+        </p>
+    </section>
+
+    <section id="legacy" class="content-block">
+        <h2>Legacy migration example</h2>
+
+        <p>
+            Do not move old CSS into new components and call it progress.
+            Create a legacy layer first, then improve active work safely.
+        </p>
+
+        <CodeExample code={legacyLayerExample} language="css" />
+
+        <p>
+            Legacy should stay visible and low priority, not quietly spread.
+        </p>
+    </section>
+
+    <section id="hacks" class="content-block">
+        <h2>Temporary fixes becoming permanent residents</h2>
+
+        <p>
+            If a hack will still exist in six months, it is probably a real fix
+            pretending to be temporary.
+        </p>
+
+        <CodeExample code={hacksExample} language="css" />
+
+        <p>
+            Keep hacks visible. Hidden hacks become architecture by accident.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+                <p>Recognise the bad patterns before they become normal.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules when deciding how to improve code.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/audit-checklist/">Audit checklist</a></h3>
+                <p>Review existing codebases using the same standards shown here.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

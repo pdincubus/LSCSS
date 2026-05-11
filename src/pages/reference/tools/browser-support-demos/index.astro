@@ -1,0 +1,135 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../../components/CodeExample.astro';
+
+const progressiveEnhancementExample = `.feature-card {
+    display: block;
+}
+
+@supports (container-type: inline-size) {
+    .feature-card-wrap {
+        container-type: inline-size;
+    }
+
+    @container (min-width: 36rem) {
+        .feature-card {
+            display: grid;
+            grid-template-columns: 12rem 1fr;
+        }
+    }
+}`;
+
+const browserslistExample = `supports es6-module
+supports css-cascade-layers
+supports css-container-queries
+supports css-logical-props`;
+---
+
+<DocsLayout
+    title="Browser Support Demos"
+    description="Progressive enhancement and browser support demos for modern CSS architecture."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            Browser support demos
+        </h1>
+
+        <p class="intro">
+            LSCSS encourages support decisions based on capability, risk, and
+            project needs rather than arbitrary browser version targets.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Feature support strategy
+        </h2>
+
+        <div class="support-grid">
+            <article class="support-card">
+                <h3>
+                    Baseline
+                </h3>
+
+                <p>
+                    The experience works with simple, stable CSS.
+                </p>
+            </article>
+
+            <article class="support-card support-card--enhanced">
+                <h3>
+                    Enhanced
+                </h3>
+
+                <p>
+                    Modern features improve architecture where supported.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Progressive enhancement example
+        </h2>
+
+        <CodeExample code={progressiveEnhancementExample} language="css" />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Feature decision matrix
+        </h2>
+
+        <table class="support-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Architecture value</th>
+                    <th>Fallback strategy</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>cascade layers</td>
+                    <td>predictable overrides</td>
+                    <td>plain cascade with careful order</td>
+                </tr>
+
+                <tr>
+                    <td>@scope</td>
+                    <td>component boundaries</td>
+                    <td>shallow parent selectors</td>
+                </tr>
+
+                <tr>
+                    <td>container queries</td>
+                    <td>component responsiveness</td>
+                    <td>viewport queries or stacked layout</td>
+                </tr>
+
+                <tr>
+                    <td>:has()</td>
+                    <td>relational styling</td>
+                    <td>state classes or progressive enhancement</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Browserslist-style thinking
+        </h2>
+
+        <CodeExample code={browserslistExample} language="text" />
+
+        <p>
+            Feature-based support targets make architectural intent clearer than
+            version-only support rules.
+        </p>
+    </section>
+</DocsLayout>

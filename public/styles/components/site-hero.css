@@ -14,3 +14,22 @@
     font-size: var(--font-size-intro);
     color: var(--colour-text-soft);
 }
+
+.site-hero .summary-badge {
+    display: inline-block;
+    margin-block-start: var(--space-s);
+    margin-block-end: var(--space-s);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--colour-border-soft);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-eyebrow);
+    color: var(--colour-accent-dark);
+    background: color-mix(in oklab, var(--colour-accent-soft) 22%, white);
+}
+
+.site-hero .summary-note {
+    max-width: var(--measure);
+}

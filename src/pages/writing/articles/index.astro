@@ -1,0 +1,124 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Articles"
+    description="Articles about modern CSS architecture and Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Articles</p>
+
+        <h1>
+            Articles and essays
+        </h1>
+
+        <p class="intro">
+            Longer-form writing about modern CSS architecture, maintainability,
+            performance, accessibility, and how CSS methodologies have changed
+            as the platform has improved.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Start here
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    <a href="/writing/articles/methodology-evolution/">
+                        CSS methodology evolution
+                    </a>
+                </h3>
+
+                <p>
+                    Understand why older methodologies emerged, what problems
+                    they solved, and where modern CSS changes the trade-offs.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/writing/articles/css-scope-and-lscss/">
+                        CSS @scope and LSCSS
+                    </a>
+                </h3>
+
+                <p>
+                    Explore how @scope fits into Layered Semantic CSS and how it
+                    can reduce selector noise without replacing architecture.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Reading paths
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    Methodology thinking
+                </h3>
+
+                <p>
+                    Start with methodology evolution, then compare LSCSS against
+                    BEM, CUBE, and scoped CSS in the comparison guides.
+                </p>
+
+                <a href="/learn/comparisons/">
+                    View comparisons
+                </a>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    Platform features
+                </h3>
+
+                <p>
+                    Read the @scope article, then work through the modern CSS
+                    guides for selectors, nesting, and container queries.
+                </p>
+
+                <a href="/reference/modern-css/">
+                    View modern CSS guides
+                </a>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    Practical adoption
+                </h3>
+
+                <p>
+                    Pair the articles with migration guidance, examples, and the
+                    starter template when applying LSCSS to real projects.
+                </p>
+
+                <a href="/apply/migration/">
+                    View migration guidance
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Future article ideas
+        </h2>
+
+        <ul>
+            <li>Why cascade layers change CSS architecture</li>
+            <li>Why specificity problems are often process problems</li>
+            <li>How to migrate legacy CSS without a rewrite</li>
+            <li>How modern CSS affects BEM-style naming</li>
+            <li>Accessibility as part of CSS architecture</li>
+            <li>Performance, bundle size, and unused CSS at scale</li>
+        </ul>
+    </section>
+</DocsLayout>

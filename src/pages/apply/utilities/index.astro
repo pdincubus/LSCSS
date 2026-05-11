@@ -1,0 +1,189 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const accessibilityUtilities = `.vh {}
+.a11y-link {}
+.a11y-link--focusable {}`;
+
+const vhExample = `.vh {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}`;
+
+const skipLinkExample = `.a11y-link {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    transform: translateY(-100%);
+}
+
+.a11y-link--focusable:focus,
+.a11y-link--focusable:focus-visible {
+    transform: translateY(0);
+}`;
+
+const avoidExample = `<article class="p-4 mb-4 bg-white rounded shadow text-center grid gap-4">
+    <h2 class="text-xl font-bold mb-2">Product title</h2>
+    <p class="text-sm text-muted mb-4">Product description</p>
+</article>`;
+
+const betterExample = `<article class="product-card">
+    <h2 class="title">Product title</h2>
+    <p class="description">Product description</p>
+</article>`;
+
+const decisionExample = `Ask:
+Does this solve a universal accessibility problem?
+→ Utility
+
+Does this keep repeating as a UI pattern?
+→ Component
+
+Is this only visual presentation?
+→ Theme or component, not utility`;
+---
+
+<DocsLayout
+    title="LSCSS Utilities"
+    description="Utility classes in Layered Semantic CSS, including why most utilities should be avoided and where accessibility utilities are justified."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Utilities</p>
+
+        <h1>
+            Utility classes
+        </h1>
+
+        <p class="intro">
+            Utilities should be rare helpers, not a second styling system hiding
+            in your HTML. If utilities become the architecture, the architecture
+            has quietly left the building.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Utilities sections">
+        <a href="#rules">Decision rules</a>
+        <a href="#accessibility-utilities">Accessibility utilities</a>
+        <a href="#when-to-use">When to use one</a>
+        <a href="#avoid">Avoid</a>
+    </nav>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Quick decision rules
+        </h2>
+
+        <CodeExample code={decisionExample} language="text" />
+
+        <p>
+            A utility should have to justify its existence. Most spacing,
+            layout, colour, and typography decisions belong in components,
+            layout, or theme instead.
+        </p>
+    </section>
+
+    <section id="accessibility-utilities" class="content-block">
+        <h2>
+            Accessibility utilities
+        </h2>
+
+        <p>
+            These are the utilities that fit naturally because they solve
+            universal browser and assistive technology problems, not temporary
+            design decisions.
+        </p>
+
+        <CodeExample code={accessibilityUtilities} />
+
+        <h3>
+            Visually hidden text
+        </h3>
+
+        <CodeExample code={vhExample} />
+
+        <p>
+            Use <code>.vh</code> for content that should remain available to
+            screen readers while staying visually hidden.
+        </p>
+
+        <h3>
+            Accessible jump links
+        </h3>
+
+        <CodeExample code={skipLinkExample} />
+
+        <p>
+            Use <code>.a11y-link</code> with
+            <code>.a11y-link--focusable</code> for skip links that become visible
+            when focused.
+        </p>
+    </section>
+
+    <section id="when-to-use" class="content-block">
+        <h2>
+            When a utility is justified
+        </h2>
+
+        <ul>
+            <li>It solves a universal accessibility problem.</li>
+            <li>It behaves consistently across the whole project.</li>
+            <li>It does not replace a meaningful component class.</li>
+            <li>It stays understandable without requiring six companion utilities.</li>
+            <li>It improves clarity instead of creating class soup.</li>
+        </ul>
+
+        <p>
+            If the same utility group keeps appearing together, it is not a
+            utility pattern. It is a component asking to be named.
+        </p>
+    </section>
+
+    <section id="avoid" class="content-block">
+        <h2>
+            Avoid class soup
+        </h2>
+
+        <CodeExample code={avoidExample} language="html" />
+
+        <p>
+            This pushes layout, spacing, colour, and typography decisions into
+            the markup and turns HTML into a styling spreadsheet.
+        </p>
+
+        <CodeExample code={betterExample} language="html" />
+
+        <p>
+            Prefer semantic components when the markup represents a real UI
+            pattern. Components scale. Utility soup spreads like ivy.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Next useful pages
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/architecture/">Architecture</a></h3>
+                <p>Decide when a repeated pattern should become a real component.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/theme-layer/">Theme layer</a></h3>
+                <p>Move visual decisions into tokens and theme instead of utility chains.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+                <p>See how utility overload turns into class soup and hidden debt.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

@@ -1,0 +1,165 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const folderStructureExample = `css/
+    site.css
+
+    settings/
+    base/
+    utilities/
+    layout/
+    components/
+    theme/
+    legacy/
+    hacks/`;
+
+const rootFileExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;
+
+@import './legacy/vendor.css' layer(legacy);
+@import './settings/variables.css' layer(settings);
+@import './components/product-card.css' layer(components);
+@import './theme/brand.css' layer(theme);`;
+
+const mediaQueryExample = `.modal {
+    /* Shared styles first */
+
+    &--large {
+        /* Modifier styles */
+    }
+
+    @media (--desktop) {
+        /* Only what changes */
+    }
+
+    @media (--tablet) {
+        /* Only what changes */
+    }
+
+    @media (--mobile) {
+        /* Only what changes */
+    }
+}`;
+---
+
+<DocsLayout
+    title="LSCSS Architecture"
+    description="Recommended folder structure, partial organisation, breakpoint strategy, and maintainable component ownership for Layered Semantic CSS."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Architecture</p>
+
+        <h1>
+            CSS architecture
+        </h1>
+
+        <p class="intro">
+            Good CSS architecture should reduce decisions, not create weekly
+            debates about where a button belongs. Structure should make
+            ownership obvious and maintenance boring in the best possible way.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Architecture sections">
+        <a href="#structure">File structure</a>
+        <a href="#root-file">Root file</a>
+        <a href="#partials">Component partials</a>
+        <a href="#media-queries">Media queries</a>
+        <a href="#rules">Working rules</a>
+    </nav>
+
+    <section id="structure" class="content-block">
+        <h2>
+            File structure
+        </h2>
+
+        <CodeExample code={folderStructureExample} language="text" />
+
+        <p>
+            Root files should be import maps, not giant dumping grounds. Each
+            component should own its own partial instead of disappearing inside
+            one oversized stylesheet that is hard to maintain.
+        </p>
+    </section>
+
+    <section id="root-file" class="content-block">
+        <h2>
+            Root file as import map
+        </h2>
+
+        <CodeExample code={rootFileExample} />
+
+        <p>
+            The main stylesheet should define layer order first, then import
+            files into the correct place. If the root file becomes a working
+            area instead of an import map, architecture starts leaking.
+        </p>
+    </section>
+
+    <section id="partials" class="content-block">
+        <h2>
+            Component partials
+        </h2>
+
+        <p>
+            One component, one partial. Each file should contain stable styles,
+            child selectors, modifiers, state, and breakpoint changes for that
+            component only.
+        </p>
+
+        <h3>
+            File size and cognitive load
+        </h3>
+
+        <p>
+            Most component partials should stay small enough to understand
+            quickly. Around 50 to 250 lines is common. Larger complex
+            components may reach 300 to 400 lines, but that should trigger
+            review, not pride.
+        </p>
+
+        <p>
+            Large files usually hide sub-components, repeated patterns, old
+            hacks, or responsibilities that should have moved out months ago.
+        </p>
+    </section>
+
+    <section id="media-queries" class="content-block">
+        <h2>
+            Media query organisation
+        </h2>
+
+        <p>
+            Put shared styles first. Then add breakpoint rules only where
+            something changes. Breakpoints should describe differences, not
+            restate the entire component unnecessarily.
+        </p>
+
+        <CodeExample code={mediaQueryExample} />
+
+        <ul>
+            <li>Shared styles first.</li>
+            <li>Only changed values inside breakpoints.</li>
+            <li>Keep modifier and state breakpoint changes nearby.</li>
+            <li>Keep child selector changes near the child selector they affect.</li>
+            <li>Use named custom media queries, not remembered magic numbers.</li>
+        </ul>
+    </section>
+
+    <section id="rules" class="content-block">
+        <h2>
+            Working rules
+        </h2>
+
+        <ul>
+            <li>If a group of rules feels like its own component, it probably is.</li>
+            <li>Do not hide temporary fixes inside normal component files.</li>
+            <li>Do not let third-party CSS sit outside the legacy layer.</li>
+            <li>Do not use utility chains instead of actual ownership.</li>
+            <li>Large files trigger review, not acceptance.</li>
+            <li>If the project becomes difficult to explain, it becomes worse to maintain.</li>
+        </ul>
+    </section>
+</DocsLayout>

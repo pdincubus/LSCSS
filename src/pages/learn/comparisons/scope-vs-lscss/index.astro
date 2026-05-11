@@ -1,0 +1,191 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../../components/CodeExample.astro';
+
+const title = '@scope and LSCSS';
+const description = 'Compare native CSS @scope and Layered Semantic CSS for scoping, architecture, naming, and long-term maintainability.';
+
+const scopeExample = `@scope (.product-card) {
+    .title {}
+    .price {}
+}`;
+
+const lscssExample = `.product-card {}
+.product-card > .title {}
+.product-card > .price {}`;
+
+const layerExample = `@layer legacy, settings, base, utilities,
+layout, components, theme, hacks;`;
+
+const firstQuestionExample = `Ask first:
+Do you need better selector boundaries,
+or a full architecture system?
+
+Cleaner local scoping
+→ @scope helps immediately
+
+Predictable ownership across the whole project
+→ LSCSS solves more`;
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+    schemaType="TechArticle"
+>
+    <article>
+        <p class="eyebrow">Comparison</p>
+
+        <h1>
+            @scope and LSCSS
+        </h1>
+
+        <p>
+            Native <code>@scope</code> changes how much naming ceremony CSS
+            needs. It gives browser-level selector boundaries without long
+            BEM-style element names or build-time class hashing.
+        </p>
+
+        <p>
+            LSCSS supports that direction. It already prefers short scoped child
+            selectors, but <code>@scope</code> does not replace layers, state
+            rules, theme ownership, or design tokens.
+        </p>
+
+        <nav class="section-nav" aria-label="Scope and LSCSS comparison sections">
+            <a href="#first">Start first</a>
+            <a href="#differences">Differences</a>
+            <a href="#scoping">Scoping</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#when-to-use">When to use</a>
+        </nav>
+
+        <section id="first" class="content-block">
+            <h2>
+                Ask this first
+            </h2>
+
+            <CodeExample code={firstQuestionExample} language="text" />
+
+            <p>
+                Many people see <code>@scope</code> and assume architecture is
+                now optional. It is not. Scope is a feature. LSCSS is a methodology.
+            </p>
+        </section>
+
+        <section id="differences" class="content-block">
+            <h2>
+                Main differences
+            </h2>
+
+            <ul>
+                <li><code>@scope</code> provides native selector boundaries.</li>
+                <li>LSCSS provides naming, layers, modifiers, and state rules.</li>
+                <li><code>@scope</code> reduces selector verbosity.</li>
+                <li>LSCSS defines wider architectural responsibilities.</li>
+                <li><code>@scope</code> is a feature.</li>
+                <li>LSCSS is a methodology.</li>
+            </ul>
+        </section>
+
+        <section id="scoping" class="content-block">
+            <h2>
+                Scoping comparison
+            </h2>
+
+            <p>
+                Native browser scoping:
+            </p>
+
+            <CodeExample code={scopeExample} />
+
+            <p>
+                Current LSCSS shallow selector approach:
+            </p>
+
+            <CodeExample code={lscssExample} />
+
+            <p>
+                As browser support improves, <code>@scope</code> becomes the
+                cleaner option. It removes naming overhead while keeping
+                ownership clear.
+            </p>
+        </section>
+
+        <section id="architecture" class="content-block">
+            <h2>
+                Architecture beyond scope
+            </h2>
+
+            <p>
+                Scoped selectors do not solve override order, theme ownership,
+                legacy CSS, or emergency fixes. They improve local boundaries,
+                but they do not manage the whole system.
+            </p>
+
+            <CodeExample code={layerExample} />
+
+            <p>
+                <code>@scope</code> improves selector boundaries. LSCSS protects
+                the building around them.
+            </p>
+        </section>
+
+        <section id="when-to-use" class="content-block">
+            <h2>
+                Where @scope helps most
+            </h2>
+
+            <ul>
+                <li>modern browser support targets</li>
+                <li>component-heavy interfaces needing clearer ownership</li>
+                <li>teams wanting shorter selectors without weaker boundaries</li>
+                <li>projects moving away from verbose BEM element naming</li>
+            </ul>
+
+            <h2>
+                Where full LSCSS still matters
+            </h2>
+
+            <ul>
+                <li>legacy migration work</li>
+                <li>theme and token governance</li>
+                <li>state, modifiers, and temporary hack management</li>
+                <li>projects needing predictable full-system architecture</li>
+            </ul>
+
+            <p>
+                <code>@scope</code> makes selectors cleaner. It does not run the project.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>
+                Next useful pages
+            </h2>
+
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3><a href="/apply/methodology/">Core methodology</a></h3>
+                    <p>See how LSCSS works as a full architecture system beyond selector scoping.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/apply/layers/">Layers</a></h3>
+                    <p>Understand why precedence and override order still matter after @scope.</p>
+                </article>
+
+                <article class="hub-card">
+                    <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                    <p>Use practical rules when deciding between scoping, naming, and ownership.</p>
+                </article>
+            </div>
+        </section>
+
+        <p>
+            <code>@scope</code> is one of the best modern CSS additions because
+            it removes ceremony without removing clarity. It strengthens LSCSS.
+            It does not replace it.
+        </p>
+    </article>
+</DocsLayout>

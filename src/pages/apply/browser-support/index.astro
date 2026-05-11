@@ -1,0 +1,43 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Browser Support"
+    description="Browser support strategy for Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Browser support</p>
+
+        <h1>
+            Modern browser strategy
+        </h1>
+
+        <p class="intro">
+            LSCSS encourages progressive enhancement and modern browser
+            capabilities where appropriate.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Recommended features
+        </h2>
+
+        <ul>
+            <li>cascade layers</li>
+            <li>logical properties</li>
+            <li>custom properties</li>
+            <li>container queries</li>
+            <li>CSS nesting</li>
+            <li>scope</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <p>
+            Support decisions should follow project requirements rather than
+            arbitrary browser version targets.
+        </p>
+    </section>
+</DocsLayout>

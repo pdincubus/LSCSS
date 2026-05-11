@@ -1,0 +1,131 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Glossary"
+    description="Shared definitions for Layered Semantic CSS terminology."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Glossary</p>
+        <h1>Shared language</h1>
+        <p class="intro">
+            Good systems need consistent words. If three developers use the word
+            component to mean four different things, the CSS is usually only the
+            second problem.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Glossary sections">
+        <a href="#ownership">Ownership</a>
+        <a href="#component">Component</a>
+        <a href="#modifier">Modifier</a>
+        <a href="#state">State</a>
+        <a href="#theme">Theme</a>
+        <a href="#utility">Utility</a>
+        <a href="#hacks">Hacks</a>
+        <a href="#legacy">Legacy</a>
+        <a href="#calm">Calm CSS</a>
+    </nav>
+
+    <section id="ownership" class="content-block">
+        <h2>Ownership</h2>
+        <p>
+            The answer to where CSS belongs. Before writing selectors, decide
+            whether something belongs in base, layout, component, theme,
+            utility, or hacks. Wrong ownership creates most future problems.
+        </p>
+    </section>
+
+    <section id="component" class="content-block">
+        <h2>Component</h2>
+        <p>
+            A reusable UI pattern with clear responsibility. Components should
+            have semantic names, shallow selectors, and obvious boundaries.
+            If a repeated pattern needs explanation twice, it probably needs a component.
+        </p>
+    </section>
+
+    <section id="modifier" class="content-block">
+        <h2>Modifier</h2>
+        <p>
+            A permanent reusable variation of a component. Example: a featured
+            card or large button. Modifiers describe stable variants, not
+            temporary behaviour.
+        </p>
+    </section>
+
+    <section id="state" class="content-block">
+        <h2>State</h2>
+        <p>
+            Temporary or conditional UI behaviour. Loading, expanded, active,
+            or disabled states should use clear <code>.is_*</code> or
+            <code>.has_*</code> classes. If it disappears when the user leaves,
+            it is probably state.
+        </p>
+    </section>
+
+    <section id="theme" class="content-block">
+        <h2>Theme</h2>
+        <p>
+            Presentation changes without structural responsibility. Theme
+            changes colour, visual treatment, and appearance. It should not
+            quietly become layout or component architecture.
+        </p>
+    </section>
+
+    <section id="utility" class="content-block">
+        <h2>Utility</h2>
+        <p>
+            A small universal helper, usually for accessibility or genuinely
+            shared behaviour. Utilities are exceptions, not architecture. If
+            utility combinations repeat, they are often unnamed components.
+        </p>
+    </section>
+
+    <section id="hacks" class="content-block">
+        <h2>Hacks</h2>
+        <p>
+            Temporary fixes for urgent delivery needs. The hacks layer exists so
+            these fixes stay visible. If a hack survives six months, it is
+            probably not temporary, and should be reviewed as architecture.
+        </p>
+    </section>
+
+    <section id="legacy" class="content-block">
+        <h2>Legacy</h2>
+        <p>
+            Older CSS carried forward because rewriting everything would be
+            theatre, not engineering. Legacy belongs in a controlled low layer,
+            not quietly copied into new component files.
+        </p>
+    </section>
+
+    <section id="calm" class="content-block">
+        <h2>Calm CSS</h2>
+        <p>
+            Predictable, boring, understandable CSS. Clear ownership, shallow
+            selectors, token consistency, and fewer surprises. Calm CSS beats
+            clever CSS because teams ship faster when nobody needs detective work.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/learn/principles/">Principles</a></h3>
+                <p>See the rules these definitions are protecting.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <p>Use these terms in practical day-to-day decisions.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/teams/contributing/">Contribution standards</a></h3>
+                <p>Apply shared language consistently during reviews and pull requests.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

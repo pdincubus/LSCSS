@@ -1,0 +1,176 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'Core Methodology';
+const description = 'The core Layered Semantic CSS methodology: layers, naming, architecture, utilities, theme rules, hacks, tooling, breakpoint organisation, and long-term maintainability.';
+
+const sections = [
+    {
+        title: 'Layers',
+        href: '/apply/layers/',
+        description: 'Use explicit cascade layers to control precedence and stop specificity wars before they begin.'
+    },
+    {
+        title: 'Base styles',
+        href: '/apply/base-styles/',
+        description: 'Keep resets, typography, and true global styles in the correct base layer.'
+    },
+    {
+        title: 'Naming',
+        href: '/apply/naming/',
+        description: 'Use semantic component names, short child classes, modifiers, and state classes.'
+    },
+    {
+        title: 'Modifiers and state',
+        href: '/apply/modifiers-and-state/',
+        description: 'Separate reusable variants from temporary or conditional UI state.'
+    },
+    {
+        title: 'Architecture',
+        href: '/apply/architecture/',
+        description: 'Structure files, folders, responsibilities, and media queries predictably.'
+    },
+    {
+        title: 'Utilities',
+        href: '/apply/utilities/',
+        description: 'Use utilities deliberately, not as a replacement for component architecture.'
+    },
+    {
+        title: 'Theme layer',
+        href: '/apply/theme-layer/',
+        description: 'Keep visual overrides and brand styling separate from component logic.'
+    },
+    {
+        title: 'Hacks',
+        href: '/apply/hacks/',
+        description: 'Contain temporary fixes so they do not become permanent architecture.'
+    }
+];
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <section class="site-hero">
+        <p class="eyebrow">Core methodology</p>
+
+        <h1>
+            Core methodology
+        </h1>
+
+        <p class="intro">
+            LSCSS is not a naming trick. It is a full operating model for CSS:
+            layers, ownership, predictable overrides, safe defaults, and rules
+            that keep small shortcuts from becoming long-term maintenance debt.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Core methodology sections">
+        <a href="#first">Start first</a>
+        <a href="#sections">Sections</a>
+        <a href="#protects">What it protects</a>
+        <a href="#entry-points">Where to start</a>
+        <a href="/apply/decision-trees/">Decision trees</a>
+    </nav>
+
+    <section id="first" class="content-block">
+        <h2>
+            Ask this first
+        </h2>
+
+        <p>
+            Before writing CSS, decide what you are protecting.
+        </p>
+
+        <ul>
+            <li>Are you protecting override order?</li>
+            <li>Are you protecting ownership and readability?</li>
+            <li>Are you protecting accessibility and performance?</li>
+            <li>Are you protecting maintainability for the next developer?</li>
+            <li>Or are you solving only today while increasing future cost?</li>
+        </ul>
+
+        <p>
+            Good methodology is not about stricter rules. It is about making
+            the safe choice easier than the quick mistake.
+        </p>
+    </section>
+
+    <section id="sections" class="content-block">
+        <h2>
+            Methodology sections
+        </h2>
+
+        <p>
+            These are connected rules, not isolated preferences. Good CSS comes
+            from the system working together, not from one clever selector.
+        </p>
+
+        <div class="hub-card-grid">
+            {
+                sections.map((section) => (
+                    <article class="hub-card">
+                        <h3>
+                            <a href={section.href}>{section.title}</a>
+                        </h3>
+
+                        <p>
+                            {section.description}
+                        </p>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+
+    <section id="protects" class="content-block">
+        <h2>
+            What this protects
+        </h2>
+
+        <ul>
+            <li>Layers protect override order and reduce specificity fights.</li>
+            <li>Base styles protect global consistency and sensible defaults.</li>
+            <li>Tokens protect spacing, colour, and typography consistency.</li>
+            <li>Custom media protects breakpoint clarity and removes magic numbers.</li>
+            <li>Scoped selectors protect ownership and readability.</li>
+            <li>Modifiers and state protect intent and UI behaviour clarity.</li>
+            <li>Legacy and hacks layers protect maintainability during change.</li>
+            <li>File-size guidance protects cognitive load and code review quality.</li>
+        </ul>
+
+        <p>
+            None of these rules are complicated alone. Together they make CSS
+            easier to explain, safer to change, and much harder to quietly ruin.
+        </p>
+    </section>
+
+    <section id="entry-points" class="content-block">
+        <h2>
+            Where to start
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/layers/">Start with layers</a></h3>
+                <p>Control precedence first. Most CSS problems begin when override order is accidental.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Use decision trees</a></h3>
+                <p>When a CSS choice stops being obvious, use rules instead of instinct.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/starter-template/">Use the starter structure</a></h3>
+                <p>Begin with predictable architecture before `site.css` becomes hard to reason about.</p>
+            </article>
+        </div>
+
+        <p>
+            The goal is not perfect CSS. The goal is CSS people can trust six
+            months later without extra debugging effort.
+        </p>
+    </section>
+</DocsLayout>

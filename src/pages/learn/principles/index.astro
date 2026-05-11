@@ -1,0 +1,128 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const firstQuestionExample = `Ask first:
+Does this make the system calmer,
+or only make this ticket disappear?
+
+Good CSS reduces future decisions.
+Bad CSS creates new ones.`;
+---
+
+<DocsLayout
+    title="Core Principles"
+    description="The non-negotiable principles behind Layered Semantic CSS."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Principles</p>
+        <h1>The non-negotiables</h1>
+        <p class="intro">
+            These are the rules underneath everything else. If these stay true,
+            the system stays healthy. If these drift, the architecture quietly
+            becomes archaeology.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Principles sections">
+        <a href="#first">Start first</a>
+        <a href="#ownership">Ownership first</a>
+        <a href="#layers">Layers before specificity</a>
+        <a href="#selectors">Shallow selectors</a>
+        <a href="#utilities">Utilities are exceptions</a>
+        <a href="#hacks">Hacks are temporary</a>
+        <a href="#tokens">Tokens before values</a>
+        <a href="#calm">Calm CSS</a>
+    </nav>
+
+    <section id="first" class="content-block">
+        <h2>Ask this first</h2>
+        <CodeExample code={firstQuestionExample} language="text" />
+        <p>
+            Most architectural damage starts when short-term speed defeats
+            long-term ownership. The first question should always be where this belongs.
+        </p>
+    </section>
+
+    <section id="ownership" class="content-block">
+        <h2>Ownership before selectors</h2>
+        <p>
+            Decide whether something belongs in base, layout, component,
+            theme, utility, or hacks before writing selectors. Wrong ownership
+            creates most bad CSS long before specificity joins the argument.
+        </p>
+    </section>
+
+    <section id="layers" class="content-block">
+        <h2>Layers before specificity</h2>
+        <p>
+            If styles are fighting, check layer order first. Do not reach for
+            deeper selectors, IDs, or important declarations before checking
+            precedence. Most specificity problems are architecture problems.
+        </p>
+    </section>
+
+    <section id="selectors" class="content-block">
+        <h2>Prefer shallow selectors</h2>
+        <p>
+            Components should use short, scoped selectors with obvious
+            ownership. Deep selectors couple styling to markup structure and
+            turn safe changes into archaeological digs.
+        </p>
+    </section>
+
+    <section id="utilities" class="content-block">
+        <h2>Utilities are exceptions, not architecture</h2>
+        <p>
+            Utilities are useful for accessibility helpers and truly universal
+            patterns. If utility combinations keep repeating, they are probably
+            a component asking to be named, not a permanent utility strategy.
+        </p>
+    </section>
+
+    <section id="hacks" class="content-block">
+        <h2>Hacks are temporary by definition</h2>
+        <p>
+            The hacks layer exists for urgent delivery needs, not permanent
+            residency. If a fix will still exist in six months, it is probably
+            a real architectural problem pretending to be temporary.
+        </p>
+    </section>
+
+    <section id="tokens" class="content-block">
+        <h2>Tokens before values</h2>
+        <p>
+            Spacing, colour, typography, and radius should come from tokens,
+            not deadline-driven invention. Random values create design inconsistency,
+            not maintainable systems.
+        </p>
+    </section>
+
+    <section id="calm" class="content-block">
+        <h2>Calm CSS beats clever CSS</h2>
+        <p>
+            Good CSS should feel boring. Predictable selectors, clear naming,
+            obvious ownership, and fewer surprises matter more than cleverness.
+            Future developers should not need detective work to ship safely.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <p>Turn principles into repeatable day-to-day decisions.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/teams/contributing/">Contribution standards</a></h3>
+                <p>Use these principles during pull requests and code reviews.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/learn/anti-pattern-gallery/">Anti-pattern gallery</a></h3>
+                <p>See what happens when the principles get ignored.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

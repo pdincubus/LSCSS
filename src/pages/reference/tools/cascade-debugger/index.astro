@@ -1,0 +1,86 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Visual Cascade Debugger"
+    description="Interactive visual cascade debugger for layers, specificity, and scope."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            Visual cascade debugger
+        </h1>
+
+        <p class="intro">
+            Explore how layer order, specificity, and scope boundaries affect
+            final CSS decisions.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <form class="tool-panel" data-cascade-debugger>
+            <label for="debug-selector">
+                Selector
+            </label>
+
+            <input
+                id="debug-selector"
+                class="tool-input"
+                type="text"
+                value=".product-card > .title"
+                data-debug-selector
+            />
+
+            <label for="debug-layer">
+                Layer
+            </label>
+
+            <select id="debug-layer" class="tool-input" data-debug-layer>
+                <option>legacy</option>
+                <option>settings</option>
+                <option>base</option>
+                <option>utilities</option>
+                <option>layout</option>
+                <option selected>components</option>
+                <option>theme</option>
+                <option>hacks</option>
+            </select>
+
+            <output class="cascade-output" data-cascade-output></output>
+        </form>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Layer precedence
+        </h2>
+
+        <ol class="layer-meter" data-layer-meter>
+            <li data-layer="legacy">legacy</li>
+            <li data-layer="settings">settings</li>
+            <li data-layer="base">base</li>
+            <li data-layer="utilities">utilities</li>
+            <li data-layer="layout">layout</li>
+            <li data-layer="components">components</li>
+            <li data-layer="theme">theme</li>
+            <li data-layer="hacks">hacks</li>
+        </ol>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Scope boundary</h2>
+
+        <div class="scope-demo">
+            <article class="product-card">
+                <h3 class="title">Inside product card</h3>
+            </article>
+
+            <h3 class="title">Outside product card</h3>
+        </div>
+    </section>
+
+    <script type="module" src="/scripts/cascade-debugger.js"></script>
+</DocsLayout>

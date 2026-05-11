@@ -1,0 +1,68 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0s;
+    }
+}`;
+---
+
+<DocsLayout
+    title="Accessibility and CSS"
+    description="Accessibility-first CSS architecture guidance."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Accessibility</p>
+        <p class="summary-badge">Summary Page</p>
+
+        <h1>
+            Accessibility-first CSS
+        </h1>
+
+        <p class="intro">
+            CSS architecture should support accessibility rather than fight it.
+        </p>
+
+        <p class="summary-note">
+            This page is a summary. For full guidance, use
+            <a href="/writing/guides/accessibility-and-css/">Accessibility and CSS</a>.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            <li>visible focus states</li>
+            <li>reduced motion support</li>
+            <li>forced colours support</li>
+            <li>logical properties</li>
+            <li>reflow and zoom resilience</li>
+            <li>readable spacing</li>
+            <li>accessible target sizing</li>
+            <li>contrast strategy</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <CodeExample code={reducedMotionExample} language="css" />
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/writing/guides/accessibility-and-css/">Accessibility and CSS guide</a></h3>
+                <p>Read the complete accessibility architecture guidance and examples.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/writing/guides/accessibility-and-css/">Accessibility and CSS guide</a></h3>
+                <p>Use complete guidance for focus, motion, and interaction patterns.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/modifiers-and-state/">Modifiers and state</a></h3>
+                <p>Use explicit state patterns for accessible interaction behavior.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

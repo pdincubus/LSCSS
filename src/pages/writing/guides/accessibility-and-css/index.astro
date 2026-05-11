@@ -1,0 +1,81 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+
+const title = 'Accessibility and CSS';
+const description = 'How accessibility, CSS architecture, focus states, reduced motion, logical properties, and progressive enhancement work together.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+    schemaType="TechArticle"
+>
+    <article>
+        <p class="eyebrow">Guide</p>
+
+        <h1>
+            Accessibility and CSS
+        </h1>
+
+        <p>
+            Accessibility is not a QA checkbox added at the end of delivery.
+            It starts in the CSS architecture itself.
+        </p>
+
+        <p>
+            Focus visibility, reduced motion, readable spacing, logical
+            properties, colour contrast, and keyboard-safe interaction patterns
+            all depend on how styles are organised.
+        </p>
+
+        <h2>
+            Where CSS causes accessibility problems
+        </h2>
+
+        <ul>
+            <li>focus styles removed with no replacement</li>
+            <li>hover-only interactions</li>
+            <li>animation that ignores reduced motion preferences</li>
+            <li>fixed dimensions that break zoom and text resize</li>
+            <li>visual order that fights source order</li>
+            <li>theme overrides that damage colour contrast</li>
+        </ul>
+
+        <h2>
+            How LSCSS helps
+        </h2>
+
+        <ul>
+            <li>state classes keep interaction states explicit</li>
+            <li>theme layers isolate visual overrides safely</li>
+            <li>shallow selectors reduce override chaos</li>
+            <li>logical properties improve international support</li>
+            <li>utilities support consistent spacing and visibility rules</li>
+        </ul>
+
+        <h2>
+            Start here
+        </h2>
+
+        <p>
+            Review the accessibility demos, then compare how component state,
+            focus handling, and reduced motion fit inside maintainable CSS.
+        </p>
+
+        <h2>
+            Recommended reading
+        </h2>
+
+        <ul>
+            <li><a href="/apply/accessibility/">Accessibility summary</a></li>
+            <li><a href="/reference/modern-css/logical-properties/">Logical properties</a></li>
+            <li><a href="/apply/theme-layer/">Theme layer</a></li>
+            <li><a href="/apply/modifiers-and-state/">State classes</a></li>
+        </ul>
+
+        <p>
+            Good accessibility usually looks boring. That is often a sign it is
+            working properly.
+        </p>
+    </article>
+</DocsLayout>

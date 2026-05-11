@@ -1,0 +1,148 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const firstQuestionExample = `Ask first:
+Are you changing the system,
+or trying to win an argument?
+
+If people do not understand the problem,
+they will not protect the solution.`;
+
+const rolloutExample = `Week 1
+→ Define layers and starter rules
+
+Week 2
+→ Stop new CSS from creating old problems
+
+Week 3
+→ Improve active components only
+
+Week 4+
+→ Reduce legacy safely over time`;
+---
+
+<DocsLayout
+    title="Adopting LSCSS"
+    description="How to introduce Layered Semantic CSS to an existing team with minimal disruption."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Adoption</p>
+        <h1>How to introduce LSCSS to a team</h1>
+        <p class="intro">
+            Good CSS architecture fails when teams treat it like a naming debate
+            instead of a delivery problem. Adoption works when people see less
+            pain, fewer regressions, and clearer ownership.
+        </p>
+        <p>
+            The recommendations on this page come from hands-on project work and
+            repeatable team practices, not a formal metrics program.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Adoption sections">
+        <a href="#first">Start first</a>
+        <a href="#principles">Principles</a>
+        <a href="#rollout">Rollout</a>
+        <a href="#reviews">Code reviews</a>
+        <a href="#mistakes">Common mistakes</a>
+    </nav>
+
+    <section id="first" class="content-block">
+        <h2>Ask this first</h2>
+        <CodeExample code={firstQuestionExample} language="text" />
+        <p>
+            Most resistance is not about CSS. It is about trust, delivery risk,
+            and people assuming change means rewriting everything on a Friday.
+        </p>
+    </section>
+
+    <section id="principles" class="content-block">
+        <h2>Adoption principles</h2>
+        <ul>
+            <li>Do not begin with a rewrite pitch.</li>
+            <li>Fix active work first, not low-impact historical code.</li>
+            <li>Make good defaults easier than bad habits.</li>
+            <li>Use reviews to teach patterns, not punish people.</li>
+            <li>Protect the system with tooling where possible.</li>
+        </ul>
+        <p>
+            The goal is not perfect CSS. The goal is fewer expensive mistakes.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Is LSCSS a fit right now?</h2>
+        <ul>
+            <li>Strong fit: shared codebase, recurring overrides, unclear ownership.</li>
+            <li>Good fit: scaling team, inconsistent review outcomes, growing legacy layer.</li>
+            <li>Lower urgency: small single-owner project with stable scope and low CSS churn.</li>
+        </ul>
+        <p>
+            Even on lower-urgency projects, introducing layers and naming discipline early
+            can prevent expensive cleanup later.
+        </p>
+    </section>
+
+    <section id="rollout" class="content-block">
+        <h2>Recommended rollout</h2>
+        <CodeExample code={rolloutExample} language="text" />
+        <p>
+            Introduce layers first. This creates immediate override control and
+            stops specificity wars breeding while the rest of the system catches up.
+        </p>
+        <h3>Expected effort by project size</h3>
+        <ul>
+            <li>Small project (1-3 contributors): 1-2 weeks to establish baseline rules.</li>
+            <li>Mid-size project (4-10 contributors): 2-6 weeks to stabilize layers and review habits.</li>
+            <li>Large project (multiple teams): 1-2 quarters for full rollout with governance.</li>
+        </ul>
+    </section>
+
+    <section id="reviews" class="content-block">
+        <h2>Use code reviews as architecture training</h2>
+        <ul>
+            <li>Does this belong in base, theme, or component?</li>
+            <li>Is this state or a modifier?</li>
+            <li>Why does this need a utility instead of a component?</li>
+            <li>Why is specificity increasing here?</li>
+            <li>Is this a hack or a real fix?</li>
+        </ul>
+        <p>
+            Repeated review questions become team rules. That is how adoption sticks.
+        </p>
+    </section>
+
+    <section id="mistakes" class="content-block">
+        <h2>Common adoption mistakes</h2>
+        <ul>
+            <li>Trying to rename everything before fixing architecture.</li>
+            <li>Letting legacy CSS quietly move into component files.</li>
+            <li>Creating utilities for every inconvenience.</li>
+            <li>Treating hacks as permanent roommates.</li>
+            <li>Explaining rules without showing practical examples.</li>
+        </ul>
+        <p>
+            If adoption feels like policy instead of relief, people will route around it.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/starter-template/">Starter template</a></h3>
+                <p>Give teams a real structure instead of abstract rules.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <p>Turn architecture principles into repeatable daily choices.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/migration/">Migration</a></h3>
+                <p>Improve legacy systems safely without large, high-risk rewrites.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

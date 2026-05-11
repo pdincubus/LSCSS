@@ -1,7 +1,9 @@
 ---
+import { siteNavSections, type SiteNavSection } from '../data/nav';
+
 const currentPath = Astro.url.pathname;
 
-const normalisePath = (path) => {
+const normalisePath = (path: string) => {
     if (path === '/') {
         return path;
     }
@@ -9,78 +11,35 @@ const normalisePath = (path) => {
     return path.endsWith('/') ? path : `${path}/`;
 };
 
-const isCurrent = (href) => normalisePath(currentPath) === href;
-const isInSection = (paths) => paths.some((path) => isCurrent(path));
-
-const learnPaths = ['/what-is-lscss/', '/principles/', '/glossary/', '/faq/'];
-const applyPaths = ['/decision-trees/', '/examples/', '/starter-template/', '/migration/'];
-const teamPaths = ['/adoption/', '/governance/', '/contributing/', '/audit-checklist/'];
-const comparePaths = ['/comparisons/', '/anti-pattern-gallery/'];
-const toolPaths = [
-    '/tools/',
-    '/teaching-deck/',
-    '/specificity-visualiser/',
-    '/playground/live-editor/',
-    '/tools/container-query-visualiser/'
-];
+const isCurrent = (href: string) => normalisePath(currentPath) === normalisePath(href);
+const isInSection = (section: SiteNavSection) => {
+    const paths = [section.href, ...section.links.map((link: { href: string }) => link.href)];
+    return paths.some((path) => isCurrent(path));
+};
 ---
 
 <nav class="site-nav" aria-label="Primary">
     <ul class="nav-list">
-        <li>
-            <a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Start here</a>
-        </li>
+        {
+            siteNavSections.map((section) => (
+                <li class:list={[{ is_current: isInSection(section) }]}>
+                    <a href={section.href} aria-current={isCurrent(section.href) ? 'page' : undefined}>
+                        {section.label}
+                    </a>
 
-        <li class:list={[{ is_current: isInSection(learnPaths) }]}>
-            <a href="/what-is-lscss/" aria-current={isCurrent('/what-is-lscss/') ? 'page' : undefined}>Learn</a>
-            <ul>
-                <li><a href="/what-is-lscss/" aria-current={isCurrent('/what-is-lscss/') ? 'page' : undefined}>What is LSCSS?</a></li>
-                <li><a href="/principles/" aria-current={isCurrent('/principles/') ? 'page' : undefined}>Principles</a></li>
-                <li><a href="/glossary/" aria-current={isCurrent('/glossary/') ? 'page' : undefined}>Glossary</a></li>
-                <li><a href="/faq/" aria-current={isCurrent('/faq/') ? 'page' : undefined}>FAQ</a></li>
-            </ul>
-        </li>
-
-        <li class:list={[{ is_current: isInSection(applyPaths) }]}>
-            <a href="/decision-trees/" aria-current={isCurrent('/decision-trees/') ? 'page' : undefined}>Apply</a>
-            <ul>
-                <li><a href="/decision-trees/" aria-current={isCurrent('/decision-trees/') ? 'page' : undefined}>Decision Trees</a></li>
-                <li><a href="/examples/" aria-current={isCurrent('/examples/') ? 'page' : undefined}>Examples</a></li>
-                <li><a href="/starter-template/" aria-current={isCurrent('/starter-template/') ? 'page' : undefined}>Starter Template</a></li>
-                <li><a href="/migration/" aria-current={isCurrent('/migration/') ? 'page' : undefined}>Migration</a></li>
-            </ul>
-        </li>
-
-        <li class:list={[{ is_current: isInSection(teamPaths) }]}>
-            <a href="/adoption/" aria-current={isCurrent('/adoption/') ? 'page' : undefined}>Teams</a>
-            <ul>
-                <li><a href="/adoption/" aria-current={isCurrent('/adoption/') ? 'page' : undefined}>Adoption</a></li>
-                <li><a href="/governance/" aria-current={isCurrent('/governance/') ? 'page' : undefined}>Governance</a></li>
-                <li><a href="/contributing/" aria-current={isCurrent('/contributing/') ? 'page' : undefined}>Contribution Standards</a></li>
-                <li><a href="/audit-checklist/" aria-current={isCurrent('/audit-checklist/') ? 'page' : undefined}>Audit Checklist</a></li>
-            </ul>
-        </li>
-
-        <li class:list={[{ is_current: isInSection(comparePaths) }]}>
-            <a href="/comparisons/" aria-current={isCurrent('/comparisons/') ? 'page' : undefined}>Compare</a>
-            <ul>
-                <li><a href="/comparisons/" aria-current={isCurrent('/comparisons/') ? 'page' : undefined}>Comparisons</a></li>
-                <li><a href="/anti-pattern-gallery/" aria-current={isCurrent('/anti-pattern-gallery/') ? 'page' : undefined}>Anti-pattern Gallery</a></li>
-            </ul>
-        </li>
-
-        <li class:list={[{ is_current: isInSection(toolPaths) }]}>
-            <a href="/tools/" aria-current={isCurrent('/tools/') ? 'page' : undefined}>Tools</a>
-            <ul>
-                <li><a href="/teaching-deck/" aria-current={isCurrent('/teaching-deck/') ? 'page' : undefined}>Teaching Deck</a></li>
-                <li><a href="/specificity-visualiser/" aria-current={isCurrent('/specificity-visualiser/') ? 'page' : undefined}>Specificity Visualiser</a></li>
-                <li><a href="/playground/live-editor/" aria-current={isCurrent('/playground/live-editor/') ? 'page' : undefined}>Live Editor</a></li>
-                <li><a href="/tools/container-query-visualiser/" aria-current={isCurrent('/tools/container-query-visualiser/') ? 'page' : undefined}>Container Query Visualiser</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="/search/" aria-current={isCurrent('/search/') ? 'page' : undefined}>Search</a>
-        </li>
+                    {section.links.length > 0 && (
+                        <ul>
+                            {section.links.map((link) => (
+                                <li>
+                                    <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                                        {link.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </li>
+            ))
+        }
     </ul>
 </nav>

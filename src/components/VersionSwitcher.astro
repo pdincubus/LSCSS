@@ -26,7 +26,10 @@ import { currentVersion, versions } from '../data/versions';
 
     if (select) {
         select.addEventListener('change', (event) => {
-            window.location.href = event.target.value;
+            const target = event.target as HTMLSelectElement | null;
+            if (target) {
+                window.location.href = target.value;
+            }
         });
     }
 </script>

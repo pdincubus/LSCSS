@@ -1,0 +1,62 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const scopeExample = `@scope (.product-card) {
+    .title {
+        margin: 0;
+    }
+
+    .price {
+        color: var(--colour-accent);
+    }
+}`;
+---
+
+<DocsLayout
+    title="CSS @scope and LSCSS"
+    description="How CSS @scope fits into Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Article</p>
+
+        <h1>
+            CSS @scope and LSCSS
+        </h1>
+
+        <p class="intro">
+            CSS @scope strengthens the goals of Layered Semantic CSS by giving
+            component styles a clear boundary.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            What @scope solves
+        </h2>
+
+        <ul>
+            <li>localised styling</li>
+            <li>safer component boundaries</li>
+            <li>reduced selector depth</li>
+            <li>fewer accidental overrides</li>
+            <li>easier migration from legacy CSS</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <CodeExample code={scopeExample} language="css" />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            LSCSS position
+        </h2>
+
+        <p>
+            @scope can replace some shallow parent selectors, but it does not
+            replace semantic naming, layers, modifiers, state classes, or
+            architecture.
+        </p>
+    </section>
+</DocsLayout>

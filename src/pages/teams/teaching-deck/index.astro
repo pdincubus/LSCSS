@@ -1,0 +1,134 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const openingExample = `Ask first:
+Why does CSS feel harder than it should?
+
+Usually not because CSS is difficult.
+Usually because ownership is unclear.`;
+
+const fifteenMinuteFlow = `15 minute teaching flow
+→ The real problem
+→ The non-negotiables
+→ Decision rules
+→ Common anti-patterns
+→ Adoption without rewrites
+→ What good looks like`;
+---
+
+<DocsLayout
+    title="Teaching Deck"
+    description="Explain Layered Semantic CSS to a team in 15 minutes."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Teaching deck</p>
+        <h1>Explain LSCSS in 15 minutes</h1>
+        <p class="intro">
+            Good methodology fails when it takes an hour to explain and nobody
+            remembers it on Tuesday. This page is the short version for teams,
+            workshops, onboarding, and architecture buy-in.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Teaching deck sections">
+        <a href="#opening">Start first</a>
+        <a href="#problem">The real problem</a>
+        <a href="#principles">Non-negotiables</a>
+        <a href="#patterns">Bad patterns</a>
+        <a href="#adoption">Safe adoption</a>
+        <a href="#close">Close strong</a>
+    </nav>
+
+    <section id="opening" class="content-block">
+        <h2>Open with the real question</h2>
+        <CodeExample code={openingExample} language="text" />
+        <p>
+            Start with delivery pain, not naming theory. People adopt systems
+            when they recognise the problem first.
+        </p>
+    </section>
+
+    <section id="problem" class="content-block">
+        <h2>The real problem</h2>
+        <ul>
+            <li>Overrides feel unpredictable</li>
+            <li>Developers disagree where CSS should live</li>
+            <li>Utilities quietly become architecture</li>
+            <li>Legacy CSS spreads without clear boundaries</li>
+            <li>Everyone fears one shared stylesheet</li>
+        </ul>
+
+        <p>
+            This is rarely a CSS syntax problem. It is usually an ownership problem.
+        </p>
+    </section>
+
+    <section id="principles" class="content-block">
+        <h2>The non-negotiables</h2>
+        <ul>
+            <li>Ownership before selectors</li>
+            <li>Layers before specificity</li>
+            <li>Shallow selectors over deep nesting</li>
+            <li>Utilities are exceptions</li>
+            <li>Hacks are temporary</li>
+            <li>Tokens before random values</li>
+            <li>Calm CSS beats clever CSS</li>
+        </ul>
+    </section>
+
+    <section id="patterns" class="content-block">
+        <h2>Show common anti-patterns</h2>
+        <ul>
+            <li>Deep selectors hiding ownership problems</li>
+            <li>Important declarations replacing architecture</li>
+            <li>Modifier names hiding temporary state</li>
+            <li>Magic numbers becoming design decisions</li>
+            <li>Temporary hacks surviving multiple Christmases</li>
+        </ul>
+
+        <p>
+            People learn fast when they recognise their own code in the evidence.
+        </p>
+    </section>
+
+    <section id="adoption" class="content-block">
+        <h2>Adoption without rewrites</h2>
+        <CodeExample code={fifteenMinuteFlow} language="text" />
+        <p>
+            Start with layers. Protect new work first. Improve active
+            components. Avoid large rewrite plans without clear delivery value.
+        </p>
+    </section>
+
+    <section id="close" class="content-block">
+        <h2>Close with this</h2>
+        <p>
+            Good CSS is not impressive because it is clever. It is impressive
+            because nobody is afraid to change it.
+        </p>
+
+        <p>
+            The goal is not perfect code. The goal is safer delivery.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/learn/principles/">Principles</a></h3>
+                <p>Use the short version when teaching, and the full version when challenged.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/examples/">Examples</a></h3>
+                <p>Support the teaching deck with practical before and after proof.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/teams/adoption/">Adoption</a></h3>
+                <p>Turn team agreement into actual implementation without chaos.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

@@ -1,0 +1,64 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Performance and CSS"
+    description="Performance-focused CSS architecture guidance."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Performance</p>
+        <p class="summary-badge">Summary Page</p>
+
+        <h1>
+            Performance-first CSS
+        </h1>
+
+        <p class="intro">
+            CSS architecture affects maintainability, rendering behaviour, and
+            long-term performance.
+        </p>
+
+        <p class="summary-note">
+            This page is a summary. For full guidance, use
+            <a href="/writing/guides/performance-and-css/">Performance and CSS</a>.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            <li>reduce unused CSS</li>
+            <li>split CSS by responsibility</li>
+            <li>avoid giant global stylesheets</li>
+            <li>prefer static-first rendering</li>
+            <li>avoid framework CSS overhead where unnecessary</li>
+            <li>keep selectors predictable</li>
+            <li>contain legacy CSS</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <p>
+            Most CSS performance problems in production systems come from scale,
+            architecture, and maintainability rather than raw selector speed.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>Next useful pages</h2>
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/writing/guides/performance-and-css/">Performance and CSS guide</a></h3>
+                <p>Read complete guidance on rendering cost, bundle size, and architecture.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/writing/guides/performance-and-css/">Performance and CSS guide</a></h3>
+                <p>Review architecture trade-offs that influence rendering and delivery cost.</p>
+            </article>
+            <article class="hub-card">
+                <h3><a href="/apply/architecture/">Architecture</a></h3>
+                <p>Use clear structure and ownership to keep CSS performant at scale.</p>
+            </article>
+        </div>
+    </section>
+</DocsLayout>

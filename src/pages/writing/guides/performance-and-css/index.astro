@@ -1,0 +1,82 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+
+const title = 'Performance and CSS';
+const description = 'How CSS architecture affects rendering, bundle size, animation cost, Core Web Vitals, and long-term front-end performance.';
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+    schemaType="TechArticle"
+>
+    <article>
+        <p class="eyebrow">Guide</p>
+
+        <h1>
+            Performance and CSS
+        </h1>
+
+        <p>
+            Performance problems are often blamed on JavaScript first, but CSS
+            quietly causes plenty of damage on its own.
+        </p>
+
+        <p>
+            Large bundles, deep selectors, poor animation choices, layout
+            thrashing, and uncontrolled third-party styles all make sites slower
+            to render and harder to maintain.
+        </p>
+
+        <h2>
+            Where CSS hurts performance
+        </h2>
+
+        <ul>
+            <li>massive global stylesheets loaded everywhere</li>
+            <li>expensive selectors with deep nesting</li>
+            <li>layout-triggering animations</li>
+            <li>unused framework CSS shipped to every page</li>
+            <li>third-party widgets overriding everything</li>
+            <li>legacy overrides stacked on overrides stacked on regret</li>
+        </ul>
+
+        <h2>
+            How LSCSS helps
+        </h2>
+
+        <ul>
+            <li>explicit layers reduce override churn</li>
+            <li>component structure limits unnecessary CSS scope</li>
+            <li>isolated hacks stop performance debt spreading</li>
+            <li>utilities reduce repeated declarations</li>
+            <li>clear architecture improves long-term maintainability</li>
+        </ul>
+
+        <h2>
+            Start here
+        </h2>
+
+        <p>
+            Review the performance demos and compare animation choices,
+            container behaviour, and CSS delivery decisions before they become
+            expensive production problems.
+        </p>
+
+        <h2>
+            Recommended reading
+        </h2>
+
+        <ul>
+            <li><a href="/apply/performance/">Performance summary</a></li>
+            <li><a href="/reference/modern-css/container-queries/">Container queries</a></li>
+            <li><a href="/apply/theme-layer/">Theme layer</a></li>
+            <li><a href="/apply/utilities/">Utilities vs components</a></li>
+        </ul>
+
+        <p>
+            Fast websites are usually simpler websites. Unnecessary complexity
+            raises long-term maintenance and performance cost.
+        </p>
+    </article>
+</DocsLayout>

@@ -1,0 +1,110 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const title = 'Guides';
+const description = 'Practical guides for accessibility, performance, browser support, and migrating legacy CSS using layered semantic CSS principles.';
+
+const guides = [
+    {
+        title: 'Accessibility and CSS',
+        href: '/writing/guides/accessibility-and-css/',
+        description: 'Focus states, reduced motion, logical properties, colour contrast, and accessible CSS architecture.'
+    },
+    {
+        title: 'Performance and CSS',
+        href: '/writing/guides/performance-and-css/',
+        description: 'Bundle size, rendering cost, animation choices, selector depth, and long-term front-end performance.'
+    },
+    {
+        title: 'Browser Support Strategy',
+        href: '/writing/guides/browser-support-strategy/',
+        description: 'Support matrices, browserslist, progressive enhancement, and feature-first browser decisions.'
+    },
+    {
+        title: 'Migrating Legacy CSS',
+        href: '/writing/guides/migrating-legacy-css/',
+        description: 'Gradual adoption, cascade layers, and legacy refactors without disruptive rewrites.'
+    }
+];
+---
+
+<DocsLayout
+    title={title}
+    description={description}
+>
+    <article>
+        <p class="eyebrow">Guides</p>
+
+        <h1>
+            Practical front-end guides
+        </h1>
+
+        <p>
+            These guides focus on the problems teams deal with every day,
+            not theoretical perfection from conference slides.
+        </p>
+
+        <p>
+            Accessibility, performance, browser support, and legacy migration
+            are where front-end architecture either becomes useful or becomes
+            measurable in day-to-day delivery.
+        </p>
+
+        <nav class="section-nav" aria-label="Guide sections">
+            <a href="#guide-list">Guides</a>
+            <a href="/writing/guides/accessibility-and-css/">Accessibility</a>
+            <a href="/writing/guides/performance-and-css/">Performance</a>
+            <a href="/writing/guides/browser-support-strategy/">Browser support</a>
+            <a href="/writing/guides/migrating-legacy-css/">Legacy CSS</a>
+        </nav>
+
+        <section id="guide-list" class="content-block">
+            <h2>
+                Guides
+            </h2>
+
+            <div class="hub-card-grid">
+                {
+                    guides.map((guide) => (
+                        <article class="hub-card">
+                            <h3>
+                                <a href={guide.href}>{guide.title}</a>
+                            </h3>
+
+                            <p>
+                                {guide.description}
+                            </p>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="content-block">
+            <h2>Start by role</h2>
+            <div class="hub-card-grid">
+                <article class="hub-card">
+                    <h3>Tech lead</h3>
+                    <p>
+                        Start with <a href="/writing/guides/browser-support-strategy/">Browser Support Strategy</a>,
+                        then align on performance and migration guardrails.
+                    </p>
+                </article>
+                <article class="hub-card">
+                    <h3>Product engineer</h3>
+                    <p>
+                        Start with <a href="/writing/guides/accessibility-and-css/">Accessibility and CSS</a>,
+                        then use performance guidance to keep components efficient.
+                    </p>
+                </article>
+                <article class="hub-card">
+                    <h3>Legacy owner</h3>
+                    <p>
+                        Start with <a href="/writing/guides/migrating-legacy-css/">Migrating Legacy CSS</a>,
+                        then formalize support constraints with the browser strategy guide.
+                    </p>
+                </article>
+            </div>
+        </section>
+    </article>
+</DocsLayout>

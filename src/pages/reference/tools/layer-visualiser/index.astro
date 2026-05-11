@@ -1,0 +1,41 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="Layer Visualiser"
+    description="Visualising CSS cascade layers and precedence."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Tool</p>
+
+        <h1>
+            Layer visualiser
+        </h1>
+
+        <p class="intro">
+            Understanding cascade layer precedence is essential to modern CSS
+            architecture.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <div class="layer-stack">
+            <div class="layer-item">legacy</div>
+            <div class="layer-item">settings</div>
+            <div class="layer-item">base</div>
+            <div class="layer-item">utilities</div>
+            <div class="layer-item">layout</div>
+            <div class="layer-item">components</div>
+            <div class="layer-item">theme</div>
+            <div class="layer-item">hacks</div>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <p>
+            Higher layers override lower layers without needing specificity
+            escalation.
+        </p>
+    </section>
+</DocsLayout>

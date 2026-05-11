@@ -1,0 +1,35 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import { versions } from '../../../data/versions';
+---
+
+<DocsLayout
+    title="LSCSS Versions"
+    description="Documentation versions and release history."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Versions</p>
+
+        <h1>
+            Documentation versions
+        </h1>
+
+        <p class="intro">
+            LSCSS evolves alongside modern CSS platform capabilities.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <ul>
+            {
+                versions.map((version) => (
+                    <li>
+                        <strong>{version.label}</strong>
+                        <br />
+                        {version.description}
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</DocsLayout>

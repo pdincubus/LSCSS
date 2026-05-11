@@ -1,0 +1,115 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+    title="LSCSS Learning Paths"
+    description="Recommended learning and implementation paths for Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Learning paths</p>
+
+        <h1>
+            Learning and implementation paths
+        </h1>
+
+        <p class="intro">
+            The previous tools collection is currently being reassessed.
+            Use these documentation paths for practical implementation guidance.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Start here
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3>
+                    <a href="/learn/what-is-lscss/">What is LSCSS?</a>
+                </h3>
+
+                <p>
+                    Get the quick overview before choosing migration or implementation routes.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/learn/principles/">Principles</a>
+                </h3>
+
+                <p>
+                    Learn the non-negotiables that keep CSS maintainable over time.
+                </p>
+            </article>
+
+            <article class="hub-card">
+                <h3>
+                    <a href="/apply/decision-trees/">Decision trees</a>
+                </h3>
+
+                <p>
+                    Use practical rules for ownership, state, utilities, and override decisions.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Architecture and debugging guidance
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/layers/">Layers</a></h3>
+                <p>Control precedence with architecture before increasing selector complexity.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/architecture/">Architecture</a></h3>
+                <p>Use predictable file ownership and component structure for safer changes.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/migration/">Migration</a></h3>
+                <p>Improve legacy CSS incrementally without stopping delivery.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>Quality and compatibility</h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/writing/guides/accessibility-and-css/">Accessibility and CSS</a></h3>
+                <p>Apply accessibility patterns across state, theme, and component layers.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/writing/guides/browser-support-strategy/">Browser support strategy</a></h3>
+                <p>Define support policy based on feature needs and progressive enhancement.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="content-block">
+        <h2>Performance and rendering</h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/writing/guides/performance-and-css/">Performance and CSS</a></h3>
+                <p>Prioritize architecture choices that reduce long-term rendering and maintenance cost.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/theme-layer/">Theme layer</a></h3>
+                <p>Keep visual changes predictable so theme overrides do not create hidden performance issues.</p>
+            </article>
+        </div>
+    </section>
+
+</DocsLayout>

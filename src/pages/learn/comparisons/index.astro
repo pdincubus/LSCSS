@@ -1,0 +1,212 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+
+const comparisons = [
+    {
+        title: 'BEM vs LSCSS',
+        href: '/learn/comparisons/bem-vs-lscss/',
+        description: 'Naming conventions, modifiers, state classes, and modern CSS architecture.'
+    },
+    {
+        title: 'Tailwind vs LSCSS',
+        href: '/learn/comparisons/tailwind-vs-lscss/',
+        description: 'Utility-first speed versus semantic structure and long-term maintainability.'
+    },
+    {
+        title: 'CSS Modules vs LSCSS',
+        href: '/learn/comparisons/css-modules-vs-lscss/',
+        description: 'Component scoping, framework workflows, and system-wide architecture.'
+    },
+    {
+        title: 'Utility-first vs LSCSS',
+        href: '/learn/comparisons/utility-first-vs-lscss/',
+        description: 'Markup-led styling versus layered semantic CSS systems.'
+    },
+    {
+        title: '@scope and LSCSS',
+        href: '/learn/comparisons/scope-vs-lscss/',
+        description: 'Native browser scoping and what modern CSS changes for architecture.'
+    }
+];
+---
+
+<DocsLayout
+    title="CSS Architecture Comparisons"
+    description="Compare BEM, Tailwind, CSS Modules, utility-first CSS, and modern CSS approaches against Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Comparisons</p>
+
+        <h1>
+            CSS architecture comparisons
+        </h1>
+
+        <p class="intro">
+            Most teams are not choosing CSS from a blank sheet. They are choosing
+            between existing habits, inherited constraints, and team preferences.
+            These comparisons focus on trade-offs, not ideology.
+        </p>
+        <p>
+            These comparisons are based on implementation experience across real
+            projects, not controlled benchmark testing.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Comparison sections">
+        <a href="#first">Start first</a>
+        <a href="#comparison-guides">Guides</a>
+        <a href="#quick-reference">Quick reference</a>
+        <a href="#how-to-use">How to use this</a>
+        <a href="#starting-point">Where to start</a>
+    </nav>
+
+    <section id="first" class="content-block">
+        <h2>
+            Ask this first
+        </h2>
+
+        <p>
+            Before comparing methodologies, decide what problem you are solving.
+            Faster delivery, cleaner ownership, safer scaling, easier onboarding,
+            better accessibility, or less debugging overhead are different goals.
+        </p>
+
+        <ul>
+            <li>If speed today matters most, utility-heavy systems often win early.</li>
+            <li>If maintainability matters most, architecture matters more than shortcuts.</li>
+            <li>If multiple teams touch the same frontend, predictability becomes expensive to ignore.</li>
+            <li>If accessibility and performance matter, discipline beats convenience fast.</li>
+        </ul>
+    </section>
+
+    <section id="comparison-guides" class="content-block">
+        <h2>
+            Comparison guides
+        </h2>
+
+        <p>
+            These are not framework popularity contests. They explain where each
+            approach helps, where it creates debt, and what happens six months
+            after the launch celebration ends.
+        </p>
+
+        <div class="hub-card-grid">
+            {
+                comparisons.map((item) => (
+                    <article class="hub-card">
+                        <h3>
+                            <a href={item.href}>{item.title}</a>
+                        </h3>
+
+                        <p>
+                            {item.description}
+                        </p>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+
+    <section id="quick-reference" class="content-block">
+        <h2>
+            Quick reference
+        </h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Main focus</th>
+                    <th>Main trade-off</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>BEM</td>
+                    <td>explicit naming and ownership</td>
+                    <td>verbosity and naming overhead</td>
+                </tr>
+
+                <tr>
+                    <td>Tailwind</td>
+                    <td>speed and utility-first delivery</td>
+                    <td>HTML noise and architectural drift</td>
+                </tr>
+
+                <tr>
+                    <td>CSS Modules</td>
+                    <td>local component scoping</td>
+                    <td>scoping without wider system rules</td>
+                </tr>
+
+                <tr>
+                    <td>@scope</td>
+                    <td>native selector boundaries</td>
+                    <td>scope without full architecture</td>
+                </tr>
+
+                <tr>
+                    <td>LSCSS</td>
+                    <td>layers, semantics, maintainability</td>
+                    <td>requires discipline, not shortcuts</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            No system removes trade-offs. Good architecture means choosing them
+            deliberately instead of inheriting them by accident.
+        </p>
+    </section>
+
+    <section id="how-to-use" class="content-block">
+        <h2>
+            How to use these comparisons
+        </h2>
+
+        <p>
+            Use these pages when reviewing an inherited codebase, choosing a
+            methodology for a new project, or explaining why the current CSS
+            setup creates delivery risk.
+        </p>
+
+        <p>
+            The goal is not to prove one approach is universally correct. The
+            goal is to understand which trade-offs best match your team.
+        </p>
+    </section>
+
+    <section id="starting-point" class="content-block">
+        <h2>
+            Where to start
+        </h2>
+
+        <div class="hub-card-grid">
+            <article class="hub-card">
+                <h3><a href="/apply/methodology/">Core methodology</a></h3>
+                <p>Learn the full system before comparing naming styles and tooling choices.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/decision-trees/">Decision trees</a></h3>
+                <p>Use practical rules when a CSS choice stops being obvious.</p>
+            </article>
+
+            <article class="hub-card">
+                <h3><a href="/apply/examples/">Examples</a></h3>
+                <p>Review practical before/after architecture patterns in real CSS scenarios.</p>
+            </article>
+        </div>
+        <h3>Start by role</h3>
+        <ul>
+            <li>Tech lead: start with <a href="/learn/comparisons/css-modules-vs-lscss/">CSS Modules vs LSCSS</a> and <a href="/learn/comparisons/tailwind-vs-lscss/">Tailwind vs LSCSS</a> for team-scale trade-offs.</li>
+            <li>Individual contributor: start with <a href="/learn/comparisons/bem-vs-lscss/">BEM vs LSCSS</a> for naming and ownership decisions.</li>
+            <li>Modern CSS adopter: start with <a href="/learn/comparisons/scope-vs-lscss/">@scope and LSCSS</a> to evaluate native scoping alongside methodology.</li>
+        </ul>
+        <p>
+            Compatibility note: teams often combine approaches during migration.
+            These guides compare primary trade-offs, but mixed workflows are common in real projects.
+        </p>
+    </section>
+</DocsLayout>

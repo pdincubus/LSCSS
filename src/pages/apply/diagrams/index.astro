@@ -1,0 +1,61 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+
+const cascadeDiagram = `legacy
+  ↓
+settings
+  ↓
+base
+  ↓
+utilities
+  ↓
+layout
+  ↓
+components
+  ↓
+theme
+  ↓
+hacks`;
+
+const migrationDiagram = `legacy CSS
+    ↓
+layer separation
+    ↓
+component extraction
+    ↓
+semantic naming
+    ↓
+reduced specificity
+    ↓
+legacy removal`;
+---
+
+<DocsLayout
+    title="LSCSS Diagrams"
+    description="Visual diagrams for Layered Semantic CSS."
+>
+    <section class="site-hero">
+        <p class="eyebrow">Diagrams</p>
+
+        <h1>
+            Visual architecture
+        </h1>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Cascade precedence
+        </h2>
+
+        <CodeExample code={cascadeDiagram} language="text" />
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Migration flow
+        </h2>
+
+        <CodeExample code={migrationDiagram} language="text" />
+    </section>
+</DocsLayout>

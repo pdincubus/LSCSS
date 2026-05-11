@@ -10,12 +10,12 @@ export async function GET(context) {
 
         <item>
             <title>CSS @scope and LSCSS</title>
-            <link>${site}/articles/css-scope-and-lscss/</link>
+            <link>${site}/writing/articles/css-scope-and-lscss/</link>
         </item>
 
         <item>
             <title>CSS methodology evolution</title>
-            <link>${site}/articles/methodology-evolution/</link>
+            <link>${site}/writing/articles/methodology-evolution/</link>
         </item>
     </channel>
 </rss>`;
