@@ -15,7 +15,7 @@ const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
         <nav class="doc-pager" aria-label="Documentation pagination">
             {
                 previous ? (
-                    <a class="link link--previous" href={previous.href}>
+                    <a class="link link--previous" href={previous.href} rel="prev">
                         <span class="arrow" aria-hidden="true">←</span>
                         <span class="body">
                             <span class="label">Previous</span>
@@ -30,7 +30,7 @@ const next = currentIndex >= 0 && currentIndex < docsNavigation.length - 1
 
             {
                 next ? (
-                    <a class="link link--next" href={next.href}>
+                    <a class="link link--next" href={next.href} rel="next">
                         <span class="body">
                             <span class="label">Next</span>
                             <span class="name">{next.label}</span>

@@ -1,8 +1,15 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../../components/CodeExample.astro';
 
 const title = 'Accessibility and CSS';
 const description = 'How accessibility, CSS architecture, focus states, reduced motion, logical properties, and progressive enhancement work together.';
+
+const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0s;
+    }
+}`;
 ---
 
 <DocsLayout
@@ -54,12 +61,25 @@ const description = 'How accessibility, CSS architecture, focus states, reduced 
         </ul>
 
         <h2>
+            Respect reduced motion
+        </h2>
+
+        <p>
+            Treat <code>prefers-reduced-motion</code> as a first-class constraint in
+            base or theme layers, not a one-off patch. Start from a conservative
+            default and only opt into motion where it genuinely helps comprehension.
+        </p>
+
+        <CodeExample code={reducedMotionExample} language="css" />
+
+        <h2>
             Start here
         </h2>
 
         <p>
-            Review the accessibility demos, then compare how component state,
-            focus handling, and reduced motion fit inside maintainable CSS.
+            Align <a href="/apply/base-styles/">base styles</a> and <a href="/apply/modifiers-and-state/">modifiers and state</a>
+            with your product’s focus and keyboard model, then audit contrast and motion
+            on real pages—not only in isolation demos.
         </p>
 
         <h2>
@@ -67,8 +87,8 @@ const description = 'How accessibility, CSS architecture, focus states, reduced 
         </h2>
 
         <ul>
-            <li><a href="/apply/accessibility/">Accessibility summary</a></li>
-            <li><a href="/modern-css/logical-properties/">Logical properties</a></li>
+            <li><a href="/apply/methodology/">Core methodology overview</a></li>
+            <li><a href="/apply/base-styles/">Base styles and global defaults</a></li>
             <li><a href="/apply/theme-layer/">Theme layer</a></li>
             <li><a href="/apply/modifiers-and-state/">State classes</a></li>
         </ul>

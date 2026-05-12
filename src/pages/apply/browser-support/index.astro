@@ -1,43 +1,194 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
+
+const browserslistRc = `# https://github.com/browserslist/browserslist
+# One shared query list for Autoprefixer, Lightning CSS, @babel/preset-env, etc.
+
+last 2 versions
+> 0.5%
+not dead`;
+
+const supportsExample = `@supports (display: grid) {
+    .product-grid {
+        display: grid;
+        gap: var(--space-m);
+    }
+}
+
+@supports not (display: grid) {
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-m);
+    }
+}`;
 ---
 
 <DocsLayout
     title="LSCSS Browser Support"
-    description="Browser support strategy for Layered Semantic CSS."
+    description="Browserslist, build-time targets, @supports, and how modern CSS features fit LSCSS in production."
+    schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Browser support</p>
 
         <h1>
-            Modern browser strategy
+            Browser support in LSCSS projects
         </h1>
 
         <p class="intro">
-            LSCSS encourages progressive enhancement and modern browser
-            capabilities where appropriate.
+            Policy belongs in your team’s written strategy. This page covers the
+            engineering side: how to express targets with browserslist, how tools
+            consume them, and how to layer progressive CSS without turning every
+            page into a compatibility puzzle.
+        </p>
+
+        <p class="summary-note">
+            For product-level decisions and common mistakes, read
+            <a href="/writing/guides/browser-support-strategy/">Browser Support Strategy</a>
+            first—then wire the targets below into your build.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Browser support sections">
+        <a href="#browserslist">Browserslist</a>
+        <a href="#tooling">Tooling</a>
+        <a href="#supports">@supports</a>
+        <a href="#features">Modern CSS</a>
+        <a href="#checklist">Checklist</a>
+    </nav>
+
+    <section class="content-block">
+        <h2 id="browserslist">Browserslist</h2>
+
+        <p>
+            <a href="https://github.com/browserslist/browserslist">Browserslist</a>
+            is a shared query language for “which browsers does this project run on?”
+            PostCSS (Autoprefixer), Lightning CSS, SWC/Babel, and other tools read the
+            same configuration so prefixes and transpilation stay aligned with what
+            you actually support.
+        </p>
+
+        <p>
+            Put queries in a <code>.browserslistrc</code> at the repository root, or in
+            <code>package.json</code> under a <code>browserslist</code> key. Avoid
+            duplicating different targets per package in a monorepo unless you intend
+            different CSS output per app—shared design tokens and CSS bundles should
+            usually share one resolved list.
+        </p>
+
+        <CodeExample code={browserslistRc} language="text" />
+
+        <p>
+            Queries are data, not superstition: combine coverage stats
+            (<code>&gt; 0.5%</code>), recency (<code>last 2 versions</code>), and
+            explicit exclusions (<code>not dead</code>) with what your analytics and
+            contracts require. Run <code>npx browserslist</code> in the project to print
+            the resolved browser set whenever you change the file.
         </p>
     </section>
 
     <section class="content-block">
-        <h2>
-            Recommended features
-        </h2>
+        <h2 id="tooling">How the build uses the same targets</h2>
+
+        <p>
+            Once browserslist is set, keep these behaviours consistent:
+        </p>
 
         <ul>
-            <li>cascade layers</li>
-            <li>logical properties</li>
-            <li>custom properties</li>
-            <li>container queries</li>
-            <li>CSS nesting</li>
-            <li>scope</li>
+            <li>
+                <strong>Vendor prefixes.</strong>
+                Autoprefixer (or Lightning CSS with the right options) uses the list to
+                decide which prefixes to emit. If the list is stale, you either ship
+                unnecessary prefixes or miss real devices.
+            </li>
+            <li>
+                <strong>Syntax lowering.</strong>
+                Some pipelines transpile nesting, custom media, or other syntax. Those
+                steps should assume the same browser surface as your prefix step.
+            </li>
+            <li>
+                <strong>CI.</strong>
+                Run production builds in CI with the same environment variables and
+                config paths as local machines so browserslist resolution does not drift.
+            </li>
+        </ul>
+
+        <p>
+            More detail on PostCSS, custom media, and monorepo caveats lives under
+            <a href="/apply/tooling/">Tooling</a>.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="supports"><code>@supports</code> and progressive enhancement</h2>
+
+        <p>
+            Browserslist answers “what do we transform or prefix?”. In authored CSS,
+            <code>@supports</code> answers “does this runtime understand this capability?”
+            Use it for meaningful fallbacks—layout modes, selectors, units—not for
+            sprinkling forks around every new property.
+        </p>
+
+        <CodeExample code={supportsExample} language="css" />
+
+        <p>
+            Prefer simpler baselines first: solid layout and readable typography without
+            advanced features, then enhance where support exists. That matches how LSCSS
+            uses layers: keep the stable story in lower layers and isolate experiments.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="features">Modern features this methodology leans on</h2>
+
+        <p>
+            LSCSS examples and site CSS assume a reasonably current evergreen baseline.
+            Your exact floor is a business decision; these are the capabilities you will
+            see referenced most often in Apply and Learn:
+        </p>
+
+        <ul>
+            <li><strong>Cascade layers</strong> (<code>@layer</code>) for predictable override order</li>
+            <li><strong>Custom properties</strong> for tokens and theme boundaries</li>
+            <li><strong>Logical properties and values</strong> for direction-aware layout</li>
+            <li><strong>Container queries</strong>, <strong>nesting</strong>, and <strong><code>:is()</code> / <code>:where()</code></strong> where examples stay concise</li>
+            <li><strong><code>@scope</code></strong> where discussed explicitly—know your target support before relying on it in production</li>
+        </ul>
+
+        <p>
+            If you must support older engines, document which features are authored behind
+            build transforms, which are gated with <code>@supports</code>, and which are
+            simply off the table until the baseline moves.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="checklist">Practical checklist</h2>
+
+        <ul>
+            <li>Publish a written support matrix (browsers, versions, “best effort” rules).</li>
+            <li>Commit browserslist queries next to the code that consumes them.</li>
+            <li>Run <code>npx browserslist</code> after changes and store the output in release notes when support shifts.</li>
+            <li>Test critical journeys in at least one device class per major engine you claim.</li>
+            <li>Revisit targets when analytics, regulation, or embedded webviews change.</li>
         </ul>
     </section>
 
     <section class="content-block">
-        <p>
-            Support decisions should follow project requirements rather than
-            arbitrary browser version targets.
-        </p>
+        <h2>Next useful pages</h2>
+        <div class="hub-grid">
+            <HubCard href="/writing/guides/browser-support-strategy/" title="Browser Support Strategy">
+                <p>Decide what to support before you argue about prefixes in code review.</p>
+            </HubCard>
+            <HubCard href="/apply/tooling/" title="Tooling">
+                <p>Wire PostCSS, custom media, and shared browserslist across the pipeline.</p>
+            </HubCard>
+            <HubCard href="/apply/base-styles/" title="Base styles">
+                <p>Keep resilient defaults in the base layer before feature queries branch.</p>
+            </HubCard>
+        </div>
     </section>
 </DocsLayout>

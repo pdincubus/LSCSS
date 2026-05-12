@@ -16,11 +16,6 @@
     font-weight: 700;
 }
 
-.site-footer > .inner > .intro .meta {
-    color: var(--colour-text-muted);
-    font-size: 0.75rem;
-}
-
 .site-footer > .inner > .bottom {
     grid-column: 1 / -1;
     display: flex;

@@ -28,6 +28,25 @@ const description = 'How CSS architecture affects rendering, bundle size, animat
             to render and harder to maintain.
         </p>
 
+        <p>
+            Most CSS performance problems in production systems come from scale,
+            architecture, and maintainability rather than raw selector speed.
+        </p>
+
+        <h2>
+            Architecture checklist
+        </h2>
+
+        <ul>
+            <li>reduce unused CSS</li>
+            <li>split CSS by responsibility</li>
+            <li>avoid giant global stylesheets</li>
+            <li>prefer static-first rendering</li>
+            <li>avoid framework CSS overhead where unnecessary</li>
+            <li>keep selectors predictable</li>
+            <li>contain legacy CSS</li>
+        </ul>
+
         <h2>
             Where CSS hurts performance
         </h2>
@@ -58,9 +77,9 @@ const description = 'How CSS architecture affects rendering, bundle size, animat
         </h2>
 
         <p>
-            Review the performance demos and compare animation choices,
-            container behaviour, and CSS delivery decisions before they become
-            expensive production problems.
+            Map delivery and animation cost using <a href="/apply/layers/">layers</a>,
+            <a href="/apply/architecture/">architecture</a>, and <a href="/apply/examples/">examples</a>,
+            then measure on real routes—not only in synthetic micro-benchmarks.
         </p>
 
         <h2>
@@ -68,8 +87,8 @@ const description = 'How CSS architecture affects rendering, bundle size, animat
         </h2>
 
         <ul>
-            <li><a href="/apply/performance/">Performance summary</a></li>
-            <li><a href="/modern-css/container-queries/">Container queries</a></li>
+            <li><a href="/apply/methodology/">Core methodology overview</a></li>
+            <li><a href="/apply/examples/">Examples (layout and responsive patterns)</a></li>
             <li><a href="/apply/theme-layer/">Theme layer</a></li>
             <li><a href="/apply/utilities/">Utilities vs components</a></li>
         </ul>

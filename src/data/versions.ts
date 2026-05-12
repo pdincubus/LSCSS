@@ -31,7 +31,25 @@ export const versions: LscssVersion[] = [
         changed: [
             'Primary header mobile menu uses `.is_nav_open` on `.site-header` (state from interaction), with matching script and `site-header` styles.',
             'Documentation pagination uses a short `doc-pager` block with contextual children (`.link`, `.body`, `.name`) and modifiers `link--previous` / `link--next`, not `.is_*` classes, matching /apply/modifiers-and-state/.',
-            'Site chrome moves from BEM `__` chains to LSCSS-style roots and short children: e.g. `hub-card` > `.link` / `.body`, `site-footer` > `.inner` / `.topics`, docs sidebar `disclosure` > `.toc` > `.list`, versions `release` > `.row` / `.changes`, and `site-search` for Pagefind.'
+            'Site chrome moves from BEM `__` chains to LSCSS-style roots and short children: e.g. `hub-card` > `.link` / `.body`, `site-footer` > `.inner` / `.topics`, docs sidebar `disclosure` > `.toc` > `.list`, versions `release` > `.row` / `.changes`, and `site-search` for Pagefind.',
+            'Removed the standalone `/modern-css/` guides from the site (nav, docs map, command palette, and writing links).',
+            'Merged `/learn/anti-pattern-gallery/` into `/learn/anti-patterns/` as a single page.',
+            'Removed the `/apply/diagrams/` placeholder page.',
+            'Removed the `/apply/accessibility/` summary; accessibility and CSS live only under `/writing/guides/accessibility-and-css/`.',
+            'Removed the `/apply/performance/` summary; performance content lives only under `/writing/guides/performance-and-css/`.',
+            'Removed the `/apply/live-examples/` page in favour of `/apply/examples/`.',
+            'Removed legacy `/start/search/` Astro redirect; search is only published at `/search/`.',
+            'Dropped all `redirects` from `astro.config.mjs` so the site ships only current routes (no legacy `/reference/` or alias stubs).',
+            'Expanded `/apply/browser-support/` with browserslist, build alignment, `@supports`, and a practical checklist; tightened the Browser Support Strategy guide links.'
+        ],
+        removed: [
+            'The `/modern-css/` topic pages (overview, :where, :is, :has, :not, nesting, container queries, logical properties, view transitions). Methodology and examples remain under Learn and Apply; use MDN or similar for platform selector reference.',
+            'The `/starter-template/` Astro redirect; the starter template is only published at `/apply/starter-template/`.',
+            'The `/start/search/` Astro redirect; search lives only at `/search/`.',
+            'The `/apply/diagrams/` placeholder page (thin content). Use methodology, architecture, and examples for visual structure instead.',
+            'The `/apply/accessibility/` summary page; use the Writing guide at `/writing/guides/accessibility-and-css/` instead.',
+            'The `/apply/performance/` summary page; use the Writing guide at `/writing/guides/performance-and-css/` instead.',
+            'The `/apply/live-examples/` page; use `/apply/examples/` for documented patterns and snippets.'
         ]
     },
     {
@@ -84,7 +102,7 @@ export const versions: LscssVersion[] = [
         changed: [
             'Paths follow audience-facing categories instead of opaque folder names.',
             'Sidebars, breadcrumbs, and footer nav match the new map; internal links updated in bulk.',
-            'Starter template lives under Apply; /starter-template redirects.'
+            'Starter template lives under `/apply/starter-template/` as the canonical URL.'
         ],
         removed: [
             'Pre-migration URL shapes superseded by redirects (no duplicate pages for the same content).'

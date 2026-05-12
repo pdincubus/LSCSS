@@ -1,15 +1,15 @@
-.anti-pattern-pair {
+.pattern-pair {
     display: grid;
     gap: var(--space-l);
 }
 
 @media (min-width: 50rem) {
-    .anti-pattern-pair {
+    .pattern-pair {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-.anti-pattern-card {
+.pattern-card {
     display: grid;
     gap: var(--space-m);
     padding: var(--space-l);
@@ -18,10 +18,10 @@
     background: var(--colour-surface);
 }
 
-.anti-pattern-card--bad {
+.pattern-card--bad {
     border-color: var(--colour-status-bad);
 }
 
-.anti-pattern-card--good {
+.pattern-card--good {
     border-color: var(--colour-status-good);
 }

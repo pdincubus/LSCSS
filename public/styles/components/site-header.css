@@ -159,8 +159,11 @@
         display: none;
         position: absolute;
         inset-block-start: calc(100% - 1px);
-        inset-inline-start: 0;
+        /* Anchor trailing edge to parent so right-side top-level items do not overflow the viewport. */
+        inset-inline-start: auto;
+        inset-inline-end: 0;
         min-inline-size: var(--nav-dropdown-min);
+        max-inline-size: min(22rem, calc(100vw - var(--space-xl) * 2));
         padding: var(--space-xs);
         border: var(--border-thin) solid var(--colour-border);
         border-radius: var(--radius-s);

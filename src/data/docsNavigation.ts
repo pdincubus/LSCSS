@@ -32,8 +32,6 @@ export const docsNavigation: DocsNavItem[] = [
     { href: '/apply/starter-template/', label: 'Starter template', section: 'Apply' },
     { href: '/apply/tooling/', label: 'Tooling', section: 'Apply' },
     { href: '/apply/migration/', label: 'Migration', section: 'Apply' },
-    { href: '/apply/diagrams/', label: 'Diagrams', section: 'Apply' },
-    { href: '/apply/live-examples/', label: 'Live examples', section: 'Apply' },
 
     { href: '/teams/adoption/', label: 'Adoption', section: 'Teams' },
     { href: '/teams/teaching-deck/', label: 'Teaching deck', section: 'Teams' },
@@ -58,18 +56,8 @@ export const docsNavigation: DocsNavItem[] = [
         parentHref: '/learn/comparisons/'
     },
     { href: '/learn/comparisons/scope-vs-lscss/', label: '@scope and LSCSS', section: 'Learn', parentHref: '/learn/comparisons/' },
-    { href: '/learn/anti-pattern-gallery/', label: 'Anti-pattern gallery', section: 'Learn' },
     { href: '/learn/anti-patterns/', label: 'Anti-patterns', section: 'Learn' },
 
-    { href: '/modern-css/', label: 'Modern CSS overview', section: 'Modern CSS' },
-    { href: '/modern-css/where/', label: ':where()', section: 'Modern CSS' },
-    { href: '/modern-css/is/', label: ':is()', section: 'Modern CSS' },
-    { href: '/modern-css/has/', label: ':has()', section: 'Modern CSS' },
-    { href: '/modern-css/not/', label: ':not()', section: 'Modern CSS' },
-    { href: '/modern-css/nesting/', label: 'Nesting', section: 'Modern CSS' },
-    { href: '/modern-css/container-queries/', label: 'Container queries', section: 'Modern CSS' },
-    { href: '/modern-css/logical-properties/', label: 'Logical properties', section: 'Modern CSS' },
-    { href: '/modern-css/view-transitions/', label: 'View transitions', section: 'Modern CSS' },
     { href: '/writing/guides/', label: 'Guides overview', section: 'Writing' },
     {
         href: '/writing/guides/accessibility-and-css/',
@@ -95,9 +83,7 @@ export const docsNavigation: DocsNavItem[] = [
         section: 'Writing',
         parentHref: '/writing/guides/'
     },
-    { href: '/apply/accessibility/', label: 'Accessibility', section: 'Apply' },
     { href: '/apply/design-tokens/', label: 'Design tokens', section: 'Apply' },
-    { href: '/apply/performance/', label: 'Performance', section: 'Apply' },
     { href: '/apply/browser-support/', label: 'Browser support', section: 'Apply' },
     { href: '/writing/articles/', label: 'Articles overview', section: 'Writing' },
     {
