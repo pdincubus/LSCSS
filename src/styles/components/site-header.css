@@ -1,0 +1,260 @@
+/*
+ * Site header. `.page-shell` is a flex row on desktop; on narrow viewports it
+ * becomes a two-row grid so the brand and menu toggle share the first row and
+ * the nav spans the second. `.is_nav_open` drives the mobile disclosure.
+ */
+
+.site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-nav);
+    background: var(--c-surface);
+    border-block-end: var(--border-s) solid var(--c-border);
+}
+
+.site-header > .page-shell {
+    padding-block: var(--space-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+}
+
+.site-title {
+    color: var(--c-heading);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: none;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    padding: 0;
+    background: transparent;
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-s);
+    color: var(--c-text);
+}
+
+/* Three-line icon — no extra markup. */
+.menu-toggle::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    inline-size: 1rem;
+    block-size: 2px;
+    border-radius: 1px;
+    translate: -50% -50%;
+    background: currentcolor;
+    box-shadow: 0 -6px 0 currentcolor, 0 6px 0 currentcolor;
+}
+
+.site-nav .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav .nav-list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav .nav-list a {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-s);
+    color: var(--c-text);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+}
+
+.site-nav .nav-list a:hover {
+    background: var(--c-surface-alt);
+    color: var(--c-link);
+}
+
+.site-nav .nav-list a[aria-current='page'],
+.site-nav .nav-list .is_current > a,
+.site-nav .nav-list .is_current > .row > a {
+    color: var(--c-link);
+    font-weight: var(--fw-semibold);
+}
+
+/*
+ * Sub-nav disclosure button. Hidden on desktop (hover flyouts handle reveal);
+ * shown on touch / narrow viewports as the only way to open a sub-section.
+ */
+.site-nav .sub-toggle {
+    display: none;
+    position: relative;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    padding: 0;
+    background: transparent;
+    border: var(--border-s) solid transparent;
+    border-radius: var(--radius-s);
+    color: var(--c-text-muted);
+}
+
+.site-nav .sub-toggle:hover {
+    color: var(--c-link);
+    background: var(--c-surface-alt);
+}
+
+/* Chevron — drawn so rotation reads as open / closed without SVG. */
+.site-nav .sub-toggle::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 42%;
+    inset-inline-start: 50%;
+    inline-size: 0.45rem;
+    block-size: 0.45rem;
+    border: solid currentcolor;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform var(--transition-s);
+}
+
+@media (--reduced-motion) {
+    .site-nav .sub-toggle::after {
+        transition: none;
+    }
+}
+
+/* Desktop with a fine pointer gets flyout submenus. */
+@media (--desktop) and (pointer: fine) {
+    .site-nav .nav-list > li {
+        position: relative;
+    }
+
+    /*
+     * On desktop the disclosure button is hidden; collapse `.row` so the link
+     * sits as a direct child of the `<li>` and aligns with bare-anchor items
+     * (Home, Search) on the same baseline.
+     */
+    .site-nav .nav-list > li > .row {
+        display: contents;
+    }
+
+    .site-nav .nav-list > li > ul {
+        display: none;
+        position: absolute;
+        inset-block-start: 100%;
+        inset-inline-end: 0;
+        min-inline-size: 14rem;
+        padding: var(--space-xs);
+        background: var(--c-surface);
+        border: var(--border-s) solid var(--c-border);
+        border-radius: var(--radius-m);
+        box-shadow: var(--shadow-md);
+    }
+
+    .site-nav .nav-list > li:hover > ul,
+    .site-nav .nav-list > li:focus-within > ul {
+        display: block;
+    }
+
+    .site-nav .nav-list > li > ul a {
+        display: block;
+    }
+
+    .site-nav .nav-list .is_nested > a {
+        padding-inline-start: var(--space-lg);
+        color: var(--c-text-muted);
+    }
+}
+
+/* Narrow viewports and coarse pointers: stacked, toggle-controlled menu. */
+@media (--until-desktop), (--desktop-coarse) {
+    .site-header > .page-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto;
+        align-items: center;
+        column-gap: var(--space-md);
+        row-gap: 0;
+    }
+
+    .site-header > .page-shell > :first-child {
+        grid-column: 1;
+        grid-row: 1;
+        min-inline-size: 0;
+    }
+
+    .site-header > .page-shell > .menu-toggle {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+    }
+
+    .site-header > .page-shell > .site-nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+    }
+
+    .site-nav {
+        display: none;
+        padding-block: var(--space-sm);
+    }
+
+    .site-header.is_nav_open .site-nav {
+        display: block;
+    }
+
+    .site-nav .nav-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+    }
+
+    /* Section row: link grows, toggle hugs the trailing edge. */
+    .site-nav .nav-list > li > .row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+
+    .site-nav .nav-list > li > .row > a {
+        flex: 1 1 auto;
+    }
+
+    .site-nav .sub-toggle {
+        display: inline-flex;
+    }
+
+    /* Sub-list is closed by default; only the .is_open li shows its list. */
+    .site-nav .nav-list > li > ul {
+        display: none;
+        margin-block-start: var(--space-xs);
+        padding-inline-start: var(--space-md);
+        border-inline-start: var(--border-s) solid var(--c-border);
+    }
+
+    .site-nav .nav-list > li.is_open > ul {
+        display: block;
+    }
+
+    .site-nav .nav-list > li.is_open > .row > .sub-toggle::after {
+        transform: translate(-50%, -50%) rotate(-135deg);
+    }
+}

@@ -20,12 +20,12 @@ const skipLinkExample = `.a11y-link {
     position: absolute;
     inset-block-start: 0;
     inset-inline-start: 0;
-    transform: translateY(-100%);
+    translate: 0 -100%;
 }
 
 .a11y-link--focusable:focus,
 .a11y-link--focusable:focus-visible {
-    transform: translateY(0);
+    translate: 0 0;
 }`;
 
 const avoidExample = `<article class="p-4 mb-4 bg-white rounded shadow text-center grid gap-4">
@@ -55,7 +55,7 @@ Is this only visual presentation?
     schemaType="TechArticle"
 >
     <section class="site-hero">
-        <p class="eyebrow">Utilities</p>
+        <p class="eyebrow">Apply</p>
 
         <h1>
             Utility classes

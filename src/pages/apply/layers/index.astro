@@ -12,6 +12,17 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
 @import './components/product-card.css' layer(components);
 @import './theme/brand.css' layer(theme);
 @import './hacks/temporary-fixes.css' layer(hacks);`;
+
+/** Greenfield: no `legacy` slot, but vendor CSS still belongs on its own low layer. */
+const optionalStackExample = `@layer settings, base, utilities, thirdparty,
+    layout, components, theme, hacks;
+
+@import './vendor/maps.css' layer(thirdparty);
+@import './components/product-card.css' layer(components);`;
+
+/** Atomic Design-style boundaries: different names, same idea — order encodes precedence. */
+const alternativeNamesExample = `@layer settings, base, utilities,
+    atoms, molecules, organisms, pages, hacks;`;
 ---
 
 <DocsLayout
@@ -20,7 +31,7 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
     schemaType="TechArticle"
 >
     <section class="site-hero">
-        <p class="eyebrow">Layers</p>
+        <p class="eyebrow">Apply</p>
 
         <h1>
             Layer architecture
@@ -29,13 +40,18 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
         <p class="intro">
             Layers decide who wins before selectors start arguing. LSCSS uses
             explicit cascade layers so override order is architecture, not luck,
-            or repeated emergency <code>!important</code> declarations.
+            or repeated emergency <code>!important</code> declarations. The exact
+            layer <em>names</em> and how many you declare are a project choice; the
+            premise is a deliberate stack where lower layers lose to higher ones.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Layer sections">
         <a href="#order">Layer order</a>
+        <a href="#optional">Optional layers</a>
         <a href="#meaning">What each layer does</a>
+        <a href="#names">Names and alternatives</a>
+        <a href="#import">Imports</a>
         <a href="#legacy">Legacy</a>
         <a href="#hacks">Hacks</a>
         <a href="#rules">Working rules</a>
@@ -53,12 +69,42 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
             matters less than the declared layer order itself. This means
             architecture controls overrides before specificity becomes a problem.
         </p>
+
+        <p>
+            The list above is the stack this site and the docs use as a reference.
+            You are not obliged to declare or populate every slot on every project.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="optional">
+            Optional layers
+        </h2>
+
+        <p>
+            A brand-new codebase might never ship a <code>legacy</code> folder at all.
+            That is fine: omit the layer from the <code>@layer</code> declaration and
+            do not import anything into it. What you should not do is drop vendor
+            or third-party CSS into an arbitrary mid-stack layer because the name
+            <code>legacy</code> feels wrong. Give foreign styles their own
+            <strong>lowest intentional</strong> slot — call it <code>thirdparty</code>,
+            <code>vendor</code>, or keep <code>legacy</code> for muscle memory — so
+            your authored layers still win without selector arms races.
+        </p>
+
+        <CodeExample code={optionalStackExample} />
     </section>
 
     <section class="content-block">
         <h2 id="meaning">
             What each layer does
         </h2>
+
+        <p>
+            The bullets below describe the <strong>roles</strong> in the canonical
+            LSCSS example stack (the same names appear in <code>site.css</code> on this
+            site). Map them to your own layer names when you branch from the default.
+        </p>
 
         <ul>
             <li><code>legacy</code> keeps old and third-party CSS low in the cascade.</li>
@@ -73,7 +119,33 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
     </section>
 
     <section class="content-block">
-        <h2>
+        <h2 id="names">
+            Names and alternatives
+        </h2>
+
+        <p>
+            If you practise Atomic Design (or any other component taxonomy), you
+            might replace <code>layout</code>, <code>components</code>, and
+            <code>theme</code> with something like <code>atoms</code>,
+            <code>molecules</code>, <code>organisms</code>, and
+            <code>pages</code> (or <code>templates</code>, or whatever your team agrees
+            on). You might merge or split roles further. That is still LSCSS-shaped
+            thinking as long as the <strong>order</strong> reflects who may override
+            whom — not as long as the spellings match this page verbatim.
+        </p>
+
+        <CodeExample code={alternativeNamesExample} />
+
+        <p>
+            The same applies to <code>utilities</code>, <code>base</code>, and
+            <code>settings</code>: keep the ideas (tokens, globals, rare helpers,
+            UI ownership, presentation-only overrides, quarantined hacks), rename
+            the buckets to fit your design system language, and document the map once.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="import">
             Import into the correct layer
         </h2>
 
@@ -91,16 +163,20 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
         </h2>
 
         <p>
-            Legacy CSS and third-party styles belong in the <code>legacy</code> layer:
-            it is declared first in the <code>@layer</code> list so it stays lowest in the
-            cascade. That lets structured layers win without heavier selectors. On this
-            site, the vendored Prism syntax theme is imported with <code>layer(legacy)</code>
-            for the same reason.
+            Legacy CSS and third-party styles belong in a <strong>dedicated low
+            layer</strong> — here that layer is named <code>legacy</code> and declared
+            first in the <code>@layer</code> list so it stays lowest in the cascade.
+            That lets structured layers win without heavier selectors. On this site,
+            the vendored Prism syntax theme is imported with <code>layer(legacy)</code>
+            for the same reason. On a greenfield project you might never use that
+            name; you might still want an empty <code>thirdparty</code> (or similar)
+            layer reserved in the declaration so imports stay honest when vendors arrive.
         </p>
 
         <p>
-            Legacy should be contained, not allowed to quietly become the new
-            architecture through neglect.
+            Foreign CSS should be contained, not allowed to quietly become the new
+            architecture through neglect — regardless of whether the bucket is called
+            <code>legacy</code> or <code>thirdparty</code>.
         </p>
     </section>
 
@@ -112,7 +188,9 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
         <p>
             Sometimes production needs a fast correction before a full refactor
             is realistic. The <code>hacks</code> layer gives those fixes a
-            visible quarantine zone.
+            visible quarantine zone. Like any other slot, you can omit it until
+            you truly need it — just do not scatter “temporary” overrides through
+            normal component files instead.
         </p>
 
         <p>
@@ -131,7 +209,10 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
             <li>Check layer order before increasing specificity.</li>
             <li>Do not put component styles in base or theme files.</li>
             <li>Do not hide hacks inside normal component partials.</li>
-            <li>Do not import third-party CSS without a legacy layer.</li>
+            <li>
+                Do not leave third-party CSS outside a dedicated low-priority layer
+                (often <code>legacy</code> or <code>thirdparty</code>).
+            </li>
             <li>Theme changes presentation, not structure.</li>
             <li>Layer order should be decided once, not negotiated weekly.</li>
         </ul>

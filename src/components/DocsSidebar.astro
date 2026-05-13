@@ -75,7 +75,7 @@ function isActive(href: string): boolean {
     const details = document.querySelector('[data-doc-toc]');
 
     if (details instanceof HTMLDetailsElement) {
-        const desktopQuery = window.matchMedia('(min-width: 64rem)');
+        const desktopQuery = window.matchMedia('(min-width: 1280px)');
 
         const syncDisclosureState = () => {
             details.open = desktopQuery.matches;

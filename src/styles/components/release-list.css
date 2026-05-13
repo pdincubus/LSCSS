@@ -1,0 +1,126 @@
+/*
+ * Release history on /versions/. Each `.release` is a single card with a
+ * status badge, summary, and optional change/removed sub-lists. The
+ * `--current` modifier flags the latest release calmly, not loudly.
+ */
+
+.release-list {
+    display: grid;
+    gap: var(--space-xl);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.release {
+    max-inline-size: none;
+    padding: var(--space-xl);
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+}
+
+.release--current {
+    border-color: var(--c-link);
+    box-shadow: var(--shadow-sm);
+}
+
+.release > .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm) var(--space-md);
+    margin-block-end: var(--space-md);
+}
+
+.release > .row > .title {
+    margin: 0;
+    font-size: var(--fs-xl);
+    line-height: var(--lh-tight);
+}
+
+/*
+ * inline-flex + centred contents + tight line-height keep the chip a fixed
+ * height regardless of inherited body line-height, so the chip's visual
+ * centre lands cleanly on the title's centre via align-items: center.
+ */
+.release > .row > .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-round);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.release > .row > .badge--current {
+    background: var(--c-accent-soft);
+    color: var(--c-ink-900);
+}
+
+.release > .row > .badge--archived {
+    background: var(--c-surface-alt);
+    color: var(--c-text-muted);
+}
+
+.release > .row > .badge--draft {
+    background: hsl(37 92% 50% / 0.18);
+    color: var(--c-warning);
+}
+
+.release > .row > .date {
+    margin-inline-start: auto;
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--lh-tight);
+}
+
+.release > .blurb {
+    margin: 0;
+    color: var(--c-text-muted);
+    line-height: var(--lh-relaxed);
+}
+
+.release > .changes {
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-lg);
+    border-block-start: var(--border-s) solid var(--c-border);
+}
+
+.release > .changes > .heading {
+    margin: 0 0 var(--space-md);
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.release > .changes--removed > .heading {
+    color: var(--c-error);
+}
+
+.release > .changes > .list {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding-inline-start: var(--space-lg);
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-relaxed);
+}
+
+.release > .changes > .list > li {
+    max-inline-size: 72ch;
+}
+
+@media (--mobile) {
+    .release > .row > .date {
+        margin-inline-start: 0;
+        flex-basis: 100%;
+    }
+}

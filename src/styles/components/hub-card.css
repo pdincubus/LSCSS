@@ -1,0 +1,99 @@
+/*
+ * Hub cards: either one whole-card link (.hub-card > .link) or a static block
+ * with internal links (.hub-card--static .stack). One component, two shapes.
+ */
+
+.hub-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    margin-block-end: var(--space-xl);
+}
+
+.hub-card {
+    margin: 0;
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+    transition: border-color var(--transition-s), box-shadow var(--transition-s);
+}
+
+.hub-card:hover,
+.hub-card:focus-within {
+    border-color: var(--c-link);
+    box-shadow: var(--shadow-sm);
+}
+
+.hub-card > .link,
+.hub-card > .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    block-size: 100%;
+}
+
+.hub-card > .link {
+    color: inherit;
+    text-decoration: none;
+}
+
+/*
+ * Title and CTA wear a visible underline at rest so the card reads as a real
+ * link before interaction. Hover and focus shift colour and thicken the line
+ * so the state change is not colour-only.
+ */
+.hub-card > .title {
+    margin: 0;
+    color: var(--c-heading);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    text-decoration: underline;
+    text-decoration-color: var(--c-link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition:
+        color var(--transition-s),
+        text-decoration-thickness var(--transition-s);
+}
+
+.hub-card > .link:hover .title,
+.hub-card > .link:focus-visible .title {
+    color: var(--c-link);
+    text-decoration-thickness: 3px;
+}
+
+.hub-card > .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-relaxed);
+}
+
+.hub-card > .body > p {
+    margin: 0;
+    max-inline-size: none;
+}
+
+.hub-card .cta {
+    margin-block-start: auto;
+    color: var(--c-link);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition:
+        color var(--transition-s),
+        text-decoration-thickness var(--transition-s);
+}
+
+.hub-card > .link:hover .cta,
+.hub-card > .link:focus-visible .cta {
+    color: var(--c-link-hover);
+    text-decoration-thickness: 3px;
+}

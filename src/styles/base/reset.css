@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: light dark;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+@media (--reduced-motion) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    margin: 0;
+    min-block-size: 100vh;
+    background: var(--c-background);
+    color: var(--c-text);
+    font-family: var(--ff);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-base);
+}
+
+img,
+svg,
+video {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: 2px solid var(--c-link);
+    outline-offset: var(--outline-offset);
+    box-shadow: var(--focus-ring);
+}
+
+::selection {
+    background: var(--c-accent-soft);
+    color: var(--c-ink-900);
+}

@@ -1,0 +1,136 @@
+/*
+ * Previous / next pager beneath docs articles. The modifiers describe
+ * direction; layout shifts content alignment, not styling.
+ */
+
+.doc-pager {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-block-start: var(--space-3xl);
+    padding-block-start: var(--space-xl);
+    border-block-start: var(--border-s) solid var(--c-border);
+}
+
+.doc-pager > .spacer {
+    flex: 1 1 0;
+    max-inline-size: 16rem;
+}
+
+.doc-pager .link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex: 1 1 0;
+    max-inline-size: 24rem;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+    color: var(--c-text);
+    text-decoration: none;
+    transition:
+        border-color var(--transition-s),
+        background var(--transition-s),
+        box-shadow var(--transition-s);
+}
+
+.doc-pager .link:hover,
+.doc-pager .link:focus-visible {
+    border-color: var(--c-link);
+    background: var(--c-surface-alt);
+    box-shadow: var(--shadow-sm);
+}
+
+.doc-pager .arrow {
+    flex: 0 0 auto;
+    color: var(--c-link);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    transition: transform var(--transition-s);
+}
+
+.doc-pager .link--previous:hover .arrow,
+.doc-pager .link--previous:focus-visible .arrow {
+    transform: translateX(-2px);
+}
+
+.doc-pager .link--next:hover .arrow,
+.doc-pager .link--next:focus-visible .arrow {
+    transform: translateX(2px);
+}
+
+@media (--reduced-motion) {
+    .doc-pager .link--previous:hover .arrow,
+    .doc-pager .link--previous:focus-visible .arrow,
+    .doc-pager .link--next:hover .arrow,
+    .doc-pager .link--next:focus-visible .arrow {
+        transform: none;
+    }
+}
+
+/*
+ * Body expands to fill the card; text pushes away from centre so the two
+ * arrows meet in the middle. Mirror alignment makes the pair feel balanced.
+ */
+.doc-pager .body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 2px;
+    min-inline-size: 0;
+}
+
+.doc-pager .link--previous .body {
+    text-align: end;
+    align-items: flex-end;
+}
+
+.doc-pager .link--next .body {
+    text-align: start;
+    align-items: flex-start;
+}
+
+.doc-pager .label {
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.doc-pager .name {
+    color: var(--c-heading);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+    transition:
+        color var(--transition-s),
+        text-decoration-color var(--transition-s);
+}
+
+.doc-pager .link:hover .name,
+.doc-pager .link:focus-visible .name {
+    color: var(--c-link);
+    text-decoration-color: currentColor;
+}
+
+.doc-pager .context {
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+}
+
+@media (--mobile) {
+    .doc-pager > .spacer {
+        display: none;
+    }
+
+    .doc-pager .link {
+        max-inline-size: none;
+    }
+}

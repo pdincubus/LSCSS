@@ -1,0 +1,108 @@
+/*
+ * Docs sidebar. The `<details>` disclosure handles small viewports; desktop
+ * (>= 1280px / --desktop) renders the table of contents inline and hides the summary.
+ */
+
+.docs-sidebar {
+    align-self: start;
+    min-inline-size: 0;
+}
+
+.docs-sidebar > .disclosure {
+    background: var(--c-surface-alt);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+}
+
+.docs-sidebar > .disclosure > summary {
+    padding: var(--space-md);
+    color: var(--c-heading);
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
+    list-style: none;
+}
+
+.docs-sidebar > .disclosure > summary::-webkit-details-marker {
+    display: none;
+}
+
+.docs-sidebar .toc {
+    padding: 0 var(--space-md) var(--space-md);
+}
+
+.docs-sidebar .group {
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.docs-sidebar .heading {
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.docs-sidebar .list {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.docs-sidebar .list a {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-s);
+    color: var(--c-text);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+}
+
+.docs-sidebar .list a:hover {
+    background: var(--c-surface);
+    color: var(--c-link);
+}
+
+.docs-sidebar .list a[aria-current='page'] {
+    background: var(--c-surface);
+    color: var(--c-link);
+    font-weight: var(--fw-semibold);
+}
+
+.docs-sidebar .list--nested {
+    margin-block-start: var(--space-xs);
+    padding-inline-start: var(--space-sm);
+    border-inline-start: var(--border-s) solid var(--c-border);
+}
+
+.docs-sidebar .list--nested a {
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+}
+
+@media (--desktop) {
+    .docs-sidebar {
+        position: sticky;
+        inset-block-start: var(--site-header-offset);
+        scroll-margin-top: var(--site-header-offset);
+        max-block-size: calc(100vh - var(--site-header-offset) - var(--space-md));
+        overflow-y: auto;
+    }
+
+    .docs-sidebar > .disclosure {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .docs-sidebar > .disclosure > summary {
+        display: none;
+    }
+
+    .docs-sidebar .toc {
+        padding: 0;
+    }
+}

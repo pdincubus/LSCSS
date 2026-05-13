@@ -2,19 +2,20 @@
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
 
-const componentNames = `.product-card
-.site-header
-.filter-panel`;
+/* Empty `{}` keeps snippets valid CSS so Prism can tokenise selector lists. */
+const componentNames = `.product-card {}
+.site-header {}
+.filter-panel {}`;
 
-const childSelectors = `.product-card > .title
-.product-card > .price
-.site-header > .logo
-.filter-panel > .actions`;
+const childSelectors = `.product-card > .title {}
+.product-card > .price {}
+.site-header > .logo {}
+.filter-panel > .actions {}`;
 
-const modifierAndStateClasses = `.product-card--featured
-.product-card--compact
-.is_active
-.has_error`;
+const modifierAndStateClasses = `.product-card--featured {}
+.product-card--compact {}
+.is_active {}
+.has_error {}`;
 
 const comparisonExample = `/* BEM-style element naming */
 .product-card__title {}
@@ -24,9 +25,15 @@ const comparisonExample = `/* BEM-style element naming */
 .product-card > .title {}
 .product-card > .price {}`;
 
-const avoidExample = `.blue-box
-.big-red-button
-.left-column-text`;
+const avoidExample = `/* Avoid: names describe appearance, not responsibility */
+.blue-box {}
+.big-red-button {}
+.left-column-text {}
+
+/* Prefer: names describe purpose, so they survive redesigns */
+.callout {}
+.cta {}
+.sidebar > .summary {}`;
 ---
 
 <DocsLayout
@@ -35,7 +42,7 @@ const avoidExample = `.blue-box
     schemaType="TechArticle"
 >
     <section class="site-hero">
-        <p class="eyebrow">Naming</p>
+        <p class="eyebrow">Apply</p>
 
         <h1>
             Semantic naming
@@ -151,8 +158,10 @@ const avoidExample = `.blue-box
         <CodeExample code={avoidExample} />
 
         <p>
-            These names describe appearance, not responsibility. They age badly
-            the moment design changes and they quietly become lies in production.
+            Appearance-based names age badly the moment design changes and
+            quietly become lies in production. <code>.blue-box</code> on a
+            green card is the kind of thing that takes a week to notice and
+            an afternoon to untangle. Purpose-based names hold up.
         </p>
     </section>
 </DocsLayout>

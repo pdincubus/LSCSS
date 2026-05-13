@@ -1,0 +1,99 @@
+/*
+ * Code defaults plus our own Prism token theming. Space Mono carries the
+ * technical voice; tokens come from the system so light and dark mode follow
+ * the rest of the UI.
+ */
+
+code,
+kbd,
+samp {
+    font-family: var(--ff-mono);
+    font-size: 0.95em;
+    color: var(--c-code-text);
+}
+
+:not(pre) > code {
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-s);
+    background: var(--c-code-bg);
+}
+
+pre {
+    margin-block: var(--space-md);
+    padding: var(--space-lg);
+    overflow-x: auto;
+    border-radius: var(--radius-m);
+    background: var(--c-code-bg);
+    color: var(--c-text);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-base);
+}
+
+pre code {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* Prism token palette, written against LSCSS colour tokens. */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--c-text-muted);
+    font-style: italic;
+}
+
+.token.punctuation {
+    color: var(--c-text-muted);
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted,
+.token.selector,
+.token.attr-name {
+    color: var(--c-accent);
+}
+
+.token.boolean,
+.token.number,
+.token.atrule,
+.token.keyword {
+    color: var(--c-link);
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.builtin,
+.token.inserted {
+    color: var(--c-success);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable,
+.token.function,
+.token.class-name {
+    color: var(--c-violet-500);
+}
+
+.token.regex,
+.token.important {
+    color: var(--c-warning);
+}
+
+.token.important,
+.token.bold {
+    font-weight: var(--fw-bold);
+}
+
+.token.italic {
+    font-style: italic;
+}

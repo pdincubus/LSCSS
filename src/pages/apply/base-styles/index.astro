@@ -74,16 +74,17 @@ Is this visual branding only?
     schemaType="TechArticle"
 >
     <section class="site-hero">
-        <p class="eyebrow">Base styles</p>
+        <p class="eyebrow">Apply</p>
 
         <h1>
             Base styles
         </h1>
 
         <p class="intro">
-            Some CSS should still be genuinely global. Resets, base typography,
-            document defaults, and shared element behaviour belong in the base
-            layer. The goal is sensible defaults, not styling the entire internet.
+            Some CSS should still be genuinely global. Base typography, document
+            defaults, and shared element behaviour belong in the base layer — and
+            so does a small, intentional reset, if you choose to use one. The goal
+            is sensible defaults, not styling the entire internet.
         </p>
     </section>
 
@@ -121,12 +122,12 @@ Is this visual branding only?
         </p>
 
         <ul>
-            <li>box sizing and safe reset rules</li>
             <li>body defaults</li>
             <li>base typography</li>
             <li>default link and media behaviour</li>
             <li>shared form element defaults</li>
             <li>global focus defaults where appropriate</li>
+            <li>a small reset (optional — see below)</li>
         </ul>
     </section>
 
@@ -158,6 +159,42 @@ Is this visual branding only?
         </p>
 
         <CodeExample code={baseLayerExample} />
+
+        <h3>Resets are optional</h3>
+
+        <p>
+            Some developers do not use a reset stylesheet and would rather
+            override individual browser defaults as they go. That is a valid
+            position. CSS without a reset is not broken; you simply pay the
+            cost of those overrides one component at a time, and you trust
+            yourself to remember every place they need to land.
+        </p>
+
+        <p>
+            LSCSS recommends a <strong>very small, very deliberate</strong> reset
+            in <code>@layer base</code> instead. The reset above is roughly the
+            entire set worth adding by default: <code>box-sizing</code> for
+            predictable widths, a sensible <code>line-height</code> on
+            <code>html</code>, a <code>body</code> that starts from your tokens
+            instead of the user agent's. That is the reset paying for itself in
+            every component without ever needing to be remembered again.
+        </p>
+
+        <p>
+            What a reset should <em>not</em> be is a 300-line stylesheet that
+            erases every default the browser ships, including ones that are
+            already accessible and sensible. If a rule in your reset describes
+            one component's needs, it is a component style hiding in the wrong
+            layer. Move it.
+        </p>
+
+        <p>
+            If you would rather skip a reset entirely, omit the file and leave
+            <code>@layer base</code> for typography and element defaults only.
+            The architecture still works — the cascade still flows from
+            <code>base</code> upward — you have simply chosen to inherit the
+            user agent's baseline instead of normalising it.
+        </p>
     </section>
 
     <section class="content-block">

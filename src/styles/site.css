@@ -1,0 +1,36 @@
+/*
+ * LSCSS site stylesheet.
+ *
+ * Layer order from DESIGN.md — order beats source position. Each component
+ * lives in its own partial; this file is an import map, not a dumping ground.
+ */
+
+@layer legacy, settings, base, utilities, layout, components, theme, hacks;
+
+@import './settings/tokens.css' layer(settings);
+@import './settings/media.css' layer(settings);
+@import './settings/fonts.css' layer(settings);
+
+@import './base/reset.css' layer(base);
+@import './base/elements.css' layer(base);
+@import './base/code.css' layer(base);
+
+@import './utilities/a11y.css' layer(utilities);
+
+@import './layout/page.css' layer(layout);
+@import './layout/docs.css' layer(layout);
+
+@import './components/site-header.css' layer(components);
+@import './components/site-hero.css' layer(components);
+@import './components/content-block.css' layer(components);
+@import './components/hub-card.css' layer(components);
+@import './components/breadcrumbs.css' layer(components);
+@import './components/section-nav.css' layer(components);
+@import './components/docs-sidebar.css' layer(components);
+@import './components/doc-pager.css' layer(components);
+@import './components/related-links.css' layer(components);
+@import './components/code-example.css' layer(components);
+@import './components/pattern-pair.css' layer(components);
+@import './components/site-search.css' layer(components);
+@import './components/release-list.css' layer(components);
+@import './components/site-footer.css' layer(components);

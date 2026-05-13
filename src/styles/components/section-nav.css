@@ -1,0 +1,48 @@
+/*
+ * In-page jump list. Reads as a quiet toolbar above the article body. Chips
+ * carry their own border so dark-mode surfaces don't blur into the page.
+ */
+
+.section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-block: var(--space-lg) var(--space-2xl);
+}
+
+.section-nav a {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--c-surface);
+    color: var(--c-text);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-round);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+    transition:
+        background var(--transition-s),
+        border-color var(--transition-s),
+        color var(--transition-s);
+}
+
+.section-nav a:hover,
+.section-nav a:focus-visible {
+    background: var(--c-accent-soft);
+    border-color: var(--c-accent);
+    color: var(--c-ink-900);
+}
+
+@media (--mobile) {
+    .section-nav {
+        flex-wrap: nowrap;
+        gap: var(--space-sm);
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-block-end: var(--space-xs);
+    }
+
+    .section-nav a {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+    }
+}

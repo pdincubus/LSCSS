@@ -1,0 +1,21 @@
+# Production target list. Read by Astro/Vite, PostCSS, and lightningcss/esbuild
+# at build time. Anything supported by every browser in this set is shipped as
+# modern CSS; anything not supported gets a fallback from postcss-preset-env.
+#
+# postcss-preset-env also disables the `custom-properties` polyfill (see
+# postcss.config.mjs): our targets all support `var()`; that plugin only emitted
+# legacy duplicate declarations (`prop: resolved; prop: var(--token)`).
+#
+# Keep the list small — every extra browser here can re-introduce verbose
+# fallback CSS that the rest of the project does not need.
+
+[production]
+last 2 versions
+not dead
+> 0.5%
+
+# Development gets a wider net so dev tools work in older browsers if you ever
+# need to debug there. Not used by the production CSS bundle.
+[development]
+last 4 versions
+not dead

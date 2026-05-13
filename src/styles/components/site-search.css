@@ -1,0 +1,70 @@
+/*
+ * Pagefind search shell. `.query` is the input; `.hits` is the live result
+ * region. Status messages render with their own classes so JS can swap copy
+ * without rebuilding chrome.
+ */
+
+.site-search {
+    display: grid;
+    gap: var(--space-lg);
+    margin-block: var(--space-xl);
+}
+
+.site-search > .query {
+    inline-size: 100%;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+    color: var(--c-text);
+}
+
+.site-search > .query:disabled {
+    background: var(--c-surface-alt);
+    color: var(--c-text-muted);
+    cursor: not-allowed;
+}
+
+.site-search > .hits {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.site-search .hit {
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+}
+
+.site-search .hit a {
+    color: var(--c-heading);
+    text-decoration-color: transparent;
+}
+
+.site-search .hit a:hover,
+.site-search .hit a:focus-visible {
+    color: var(--c-link);
+    text-decoration-color: currentColor;
+}
+
+.site-search .hit p {
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+}
+
+.search-unavailable,
+.search-empty,
+.search-error,
+.search-help {
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+}
+
+.search-help code {
+    font-size: 0.95em;
+}

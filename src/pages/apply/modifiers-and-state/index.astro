@@ -2,19 +2,20 @@
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
 
-const modifierExample = `.product-card--featured
-.product-card--compact
-.site-header--minimal`;
+/* Empty `{}` keeps snippets valid CSS so Prism can tokenise selector lists. */
+const modifierExample = `.product-card--featured {}
+.product-card--compact {}
+.site-header--minimal {}`;
 
-const stateExample = `.is_active
-.is_disabled
-.is_expanded
-.is_loading`;
+const stateExample = `.is_active {}
+.is_disabled {}
+.is_expanded {}
+.is_loading {}`;
 
-const conditionExample = `.has_error
-.has_results
-.has_child
-.has_media`;
+const conditionExample = `.has_error {}
+.has_results {}
+.has_child {}
+.has_media {}`;
 
 const combinedExample = `.product-card--featured.is_loading {}
 .form-field.has_error {}
@@ -47,7 +48,7 @@ Is this describing present content or condition?
     schemaType="TechArticle"
 >
     <section class="site-hero">
-        <p class="eyebrow">Modifiers and state</p>
+        <p class="eyebrow">Apply</p>
 
         <h1>
             Modifiers and state classes

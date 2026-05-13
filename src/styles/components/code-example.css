@@ -1,0 +1,96 @@
+/*
+ * Code example figure: caption with label and copy button, pre body, and an
+ * aria-live copy status. `--before` and `--after` are visual variants used in
+ * pattern pairs and migration walk-throughs.
+ */
+
+.code-example {
+    margin-inline: 0;
+    margin-block: var(--space-md);
+    background: var(--c-code-bg);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+}
+
+.code-example--before {
+    border-color: hsl(0 84% 60% / 0.4);
+}
+
+.code-example--after {
+    border-color: hsl(160 84% 39% / 0.4);
+}
+
+.code-example > figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--c-surface-alt);
+    border-block-end: var(--border-s) solid var(--c-border);
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.code-example > pre {
+    margin: 0;
+    padding: var(--space-lg) var(--space-md);
+    border-radius: 0;
+}
+
+/*
+ * Copy button mirrors the hero CTA pattern: hover gets a lift (transform +
+ * shadow) on top of the colour swap; focus-visible keeps the global focus
+ * ring from reset.css. Reduced-motion suppresses the transform.
+ */
+.code-example .copy {
+    padding: var(--space-xs) var(--space-md);
+    background: var(--c-cta-bg);
+    border: var(--border-s) solid var(--c-cta-bg);
+    border-radius: var(--radius-s);
+    color: var(--c-cta-text);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    transition:
+        background var(--transition-s),
+        border-color var(--transition-s),
+        box-shadow var(--transition-s),
+        transform var(--transition-s);
+}
+
+.code-example .copy:hover {
+    background: var(--c-cta-bg-hover);
+    border-color: var(--c-cta-bg-hover);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+
+.code-example .copy:focus-visible {
+    background: var(--c-cta-bg-hover);
+    border-color: var(--c-cta-bg-hover);
+}
+
+@media (--reduced-motion) {
+    .code-example .copy {
+        transition: none;
+    }
+
+    .code-example .copy:hover {
+        transform: none;
+    }
+}
+
+.code-example .copy-status {
+    margin: 0;
+    padding: var(--space-xs) var(--space-md);
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+}
+
+.code-example .copy-status:empty {
+    display: none;
+}

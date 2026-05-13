@@ -10,57 +10,71 @@ const isInSection = (section: SiteNavSection) => {
 };
 ---
 
-<div class="mast">
-    <div class="bar">
-        <slot name="brand" />
+<>
+    <slot name="brand" />
 
-        <button
-            type="button"
-            class="menu-toggle"
-            data-menu-toggle
-            aria-expanded="false"
-            aria-controls="site-nav-primary"
-        >
-            <span class="bars" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-            </span>
-            <span class="visually-hidden">Menu</span>
-        </button>
-    </div>
+    <button
+        type="button"
+        class="menu-toggle"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="site-nav-primary"
+        aria-label="Menu"
+    ></button>
 
     <nav class="site-nav" id="site-nav-primary" aria-label="Primary">
         <ul class="nav-list">
             {
-                siteNavSections.map((section) => (
-                    <li class:list={[{ is_current: isInSection(section) }]}>
-                        <a href={section.href} aria-current={isCurrent(section.href) ? 'page' : undefined}>
-                            {section.label}
-                        </a>
+                siteNavSections.map((section, index) => {
+                    const subId = `site-nav-sub-${index}`;
+                    const hasChildren = section.links.length > 0;
 
-                        {section.links.length > 0 && (
-                            <ul>
-                                {section.links.map((link) => (
-                                    <li class:list={[{ is_nested: link.indent === true }]}>
-                                        <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                                            {link.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </li>
-                ))
+                    return (
+                        <li class:list={['item', { is_current: isInSection(section) }]}>
+                            {hasChildren ? (
+                                <div class="row">
+                                    <a href={section.href} aria-current={isCurrent(section.href) ? 'page' : undefined}>
+                                        {section.label}
+                                    </a>
+
+                                    <button
+                                        type="button"
+                                        class="sub-toggle"
+                                        data-sub-toggle
+                                        aria-expanded="false"
+                                        aria-controls={subId}
+                                        aria-label={`${section.label} submenu`}
+                                    ></button>
+                                </div>
+                            ) : (
+                                <a href={section.href} aria-current={isCurrent(section.href) ? 'page' : undefined}>
+                                    {section.label}
+                                </a>
+                            )}
+
+                            {hasChildren && (
+                                <ul id={subId}>
+                                    {section.links.map((link) => (
+                                        <li class:list={[{ is_nested: link.indent === true }]}>
+                                            <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                                                {link.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    );
+                })
             }
         </ul>
     </nav>
-</div>
+</>
 
 <script is:inline>
     (function () {
         const mobileNavQuery = window.matchMedia(
-            '(width < 64rem), ((width >= 64rem) and (pointer: coarse))'
+            '(width < 1280px), ((width >= 1280px) and (pointer: coarse))'
         );
         const header = document.querySelector('.site-header');
         const toggle = document.querySelector('[data-menu-toggle]');
@@ -88,11 +102,45 @@ const isInSection = (section: SiteNavSection) => {
             }
         }
 
+        const subToggles = Array.from(nav.querySelectorAll('[data-sub-toggle]'));
+
+        function closeAllSubs(except) {
+            subToggles.forEach(function (btn) {
+                if (btn === except) {
+                    return;
+                }
+                btn.setAttribute('aria-expanded', 'false');
+                const parent = btn.closest('li');
+                if (parent) {
+                    parent.classList.remove('is_open');
+                }
+            });
+        }
+
+        subToggles.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                if (!isMobileNav()) {
+                    return;
+                }
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                closeAllSubs(expanded ? null : btn);
+                btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+                const parent = btn.closest('li');
+                if (parent) {
+                    parent.classList.toggle('is_open', !expanded);
+                }
+            });
+        });
+
         toggle.addEventListener('click', function () {
             if (!isMobileNav()) {
                 return;
             }
-            setOpen(!header.classList.contains('is_nav_open'));
+            const willOpen = !header.classList.contains('is_nav_open');
+            setOpen(willOpen);
+            if (!willOpen) {
+                closeAllSubs(null);
+            }
         });
 
         nav.addEventListener('click', function (event) {
@@ -101,18 +149,23 @@ const isInSection = (section: SiteNavSection) => {
             }
             const target = event.target;
             if (target instanceof HTMLAnchorElement) {
+                closeAllSubs(null);
                 setOpen(false);
             }
         });
 
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && header.classList.contains('is_nav_open')) {
+                closeAllSubs(null);
                 setOpen(false);
                 toggle.focus();
             }
         });
 
-        mobileNavQuery.addEventListener('change', syncLayout);
+        mobileNavQuery.addEventListener('change', function () {
+            closeAllSubs(null);
+            syncLayout();
+        });
         syncLayout();
     })();
 </script>

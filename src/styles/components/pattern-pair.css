@@ -1,0 +1,37 @@
+/*
+ * Side-by-side pattern comparison used in anti-pattern pages. Modifiers carry
+ * intent (bad / good); cards stay calm and let the contained code speak.
+ */
+
+.pattern-pair {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+@media (--from-tablet) {
+    .pattern-pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.pattern-card {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--radius-m);
+}
+
+.pattern-card > h3 {
+    margin: 0;
+    font-size: var(--fs-lg);
+}
+
+.pattern-card--bad {
+    border-block-start: var(--border-l) solid var(--c-error);
+}
+
+.pattern-card--good {
+    border-block-start: var(--border-l) solid var(--c-success);
+}

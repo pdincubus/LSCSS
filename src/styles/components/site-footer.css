@@ -1,0 +1,125 @@
+/*
+ * Site footer. Two columns from tablet up (--from-tablet: 768px+), with the bottom row
+ * holding copyright and legal links beneath both. No decoration.
+ */
+
+.site-footer {
+    margin-block-start: var(--space-3xl);
+    background: var(--c-surface-alt);
+    border-block-start: var(--border-s) solid var(--c-border);
+}
+
+.site-footer > .inner {
+    display: grid;
+    gap: var(--space-xl);
+    padding-block: var(--space-3xl);
+}
+
+.site-footer .intro > .title {
+    margin: 0 0 var(--space-sm);
+    color: var(--c-heading);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+}
+
+.site-footer .intro > p {
+    margin: 0;
+    color: var(--c-text-muted);
+    line-height: var(--lh-relaxed);
+}
+
+.site-footer .topics {
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.site-footer .topics a {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+    text-decoration-color: transparent;
+}
+
+.site-footer .topics a:hover,
+.site-footer .topics a:focus-visible,
+.site-footer .topics a[aria-current='page'] {
+    color: var(--c-link);
+    text-decoration-color: currentColor;
+}
+
+/*
+ * `.bottom` stacks two rows: legal (copyright + links) above credits. Both
+ * legal halves sit in one flex line so wrapping keeps the copyright on the
+ * same baseline as the links instead of two competing baselines.
+ */
+.site-footer .bottom {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: var(--space-md);
+    padding-block-start: var(--space-xl);
+    border-block-start: var(--border-s) solid var(--c-border);
+}
+
+.site-footer .legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm) var(--space-lg);
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-base);
+}
+
+.site-footer .legal > .copyright {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.site-footer .legal-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm) var(--space-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-footer .legal-list li {
+    max-inline-size: none;
+    margin: 0;
+    line-height: inherit;
+}
+
+.site-footer .legal-list li + li {
+    margin: 0;
+}
+
+.site-footer .legal-list a {
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration-color: transparent;
+}
+
+.site-footer .legal-list a:hover,
+.site-footer .legal-list a:focus-visible {
+    color: var(--c-link);
+    text-decoration-color: currentColor;
+}
+
+.site-footer .credits {
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-base);
+}
+
+@media (--from-tablet) {
+    .site-footer > .inner {
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+    }
+}

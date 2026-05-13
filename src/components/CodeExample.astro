@@ -11,10 +11,13 @@ const {
     variant = 'neutral'
 } = Astro.props;
 
+const isPlainText = language === 'text';
+const langLabel = isPlainText ? 'Diagram' : `${language.toUpperCase()} code example`;
+
 const variantLabels = {
-    neutral: `${language.toUpperCase()} code example`,
-    before: `Before, ${language.toUpperCase()} code example`,
-    after: `After, ${language.toUpperCase()} code example`
+    neutral: langLabel,
+    before: `Before, ${langLabel.toLowerCase()}`,
+    after: `After, ${langLabel.toLowerCase()}`
 };
 
 const label = variantLabels[variant];

@@ -1,0 +1,128 @@
+/*
+ * Page hero. Used as the opening section of every page (home, docs, articles).
+ * Typography carries the weight, no decoration.
+ */
+
+.site-hero {
+    margin-block-end: var(--space-3xl);
+}
+
+.site-hero > .eyebrow {
+    margin: 0 0 var(--space-sm);
+    color: var(--c-accent);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.site-hero > h1 {
+    margin: 0 0 var(--space-lg);
+    font-size: clamp(var(--fs-2xl), 5vw, var(--fs-3xl));
+    line-height: var(--lh-tight);
+}
+
+.site-hero > .intro {
+    max-inline-size: 60ch;
+    margin: 0 0 var(--space-lg);
+    color: var(--c-text-muted);
+    font-size: var(--fs-lg);
+    line-height: var(--lh-relaxed);
+}
+
+.site-hero > .summary-badge {
+    display: inline-block;
+    margin-block-end: var(--space-md);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--c-accent-soft);
+    color: var(--c-ink-900);
+    border-radius: var(--radius-round);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.site-hero > .summary-note {
+    max-inline-size: 60ch;
+    margin-block: var(--space-md) 0;
+    color: var(--c-text-muted);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-block-start: var(--space-xl);
+}
+
+/*
+ * CTAs share a shape. Hover adds a lift (transform + shadow) on top of the
+ * colour swap; focus-visible defers to the global focus ring in reset.css so
+ * outline + shadow + colour combine as three cues. Neither state relies on
+ * colour alone, and reduced-motion suppresses the transform.
+ */
+.hero-actions > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md) var(--space-lg);
+    border: var(--border-s) solid transparent;
+    border-radius: var(--radius-s);
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    transition:
+        background var(--transition-s),
+        border-color var(--transition-s),
+        color var(--transition-s),
+        box-shadow var(--transition-s),
+        transform var(--transition-s);
+}
+
+.hero-actions > a:first-child {
+    background: var(--c-cta-bg);
+    color: var(--c-cta-text);
+    border-color: var(--c-cta-bg);
+}
+
+.hero-actions > a:first-child:hover {
+    background: var(--c-cta-bg-hover);
+    border-color: var(--c-cta-bg-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.hero-actions > a:first-child:focus-visible {
+    background: var(--c-cta-bg-hover);
+    border-color: var(--c-cta-bg-hover);
+}
+
+.hero-actions > a:not(:first-child) {
+    background: transparent;
+    color: var(--c-link);
+    border-color: var(--c-link);
+}
+
+.hero-actions > a:not(:first-child):hover {
+    background: var(--c-cta-bg);
+    color: var(--c-cta-text);
+    border-color: var(--c-cta-bg);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.hero-actions > a:not(:first-child):focus-visible {
+    background: var(--c-cta-bg);
+    color: var(--c-cta-text);
+    border-color: var(--c-cta-bg);
+}
+
+@media (--reduced-motion) {
+    .hero-actions > a {
+        transition: none;
+    }
+
+    .hero-actions > a:hover {
+        transform: none;
+    }
+}

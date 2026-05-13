@@ -1,6 +1,7 @@
 ---
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/site.css';
 
 export interface Props {
     title?: string;
@@ -13,6 +14,12 @@ export interface Props {
     ogImage?: string;
     /** When true, ask crawlers not to index this page. */
     noindex?: boolean;
+    /**
+     * Preload Space Mono 400. Defaults to false; opt in from pages or layouts
+     * that render code (e.g. anything using CodeExample or inline `<code>`).
+     * DocsLayout sets this to true by default.
+     */
+    preloadMono?: boolean;
 }
 
 const {
@@ -20,7 +27,8 @@ const {
     description = 'Layered Semantic CSS',
     schemaType = 'WebPage',
     ogImage,
-    noindex = false
+    noindex = false,
+    preloadMono = false
 } = Astro.props;
 
 const siteUrl = Astro.site?.href ?? `${Astro.url.origin}/`;
@@ -72,6 +80,24 @@ const structuredData = {
         {noindex && <meta name="robots" content="noindex, nofollow" />}
         <link rel="canonical" href={canonicalURL} />
         <link rel="alternate" type="application/rss+xml" title="LSCSS articles" href="/rss.xml" />
+        <link
+            rel="preload"
+            href="/fonts/space-grotesk-variable.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        {
+            preloadMono && (
+                <link
+                    rel="preload"
+                    href="/fonts/space-mono-400.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossorigin
+                />
+            )
+        }
         <meta property="og:type" content={ogType} />
         <meta property="og:site_name" content="LSCSS" />
         <meta property="og:title" content={documentTitle} />
@@ -83,7 +109,6 @@ const structuredData = {
         <meta name="twitter:title" content={documentTitle} />
         <meta name="twitter:description" content={description} />
         {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
-        <link rel="stylesheet" href="/styles/site.css" />
         <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
         <slot name="head" />
     </head>

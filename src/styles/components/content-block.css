@@ -1,0 +1,17 @@
+.content-block {
+    margin-block-start: var(--space-3xl);
+}
+
+.content-block > h2 {
+    scroll-margin-block-start: var(--space-2xl);
+}
+
+.content-block > h3 {
+    margin-block-start: var(--space-xl);
+}
+
+.content-block > p,
+.content-block > ul,
+.content-block > ol {
+    line-height: var(--lh-relaxed);
+}

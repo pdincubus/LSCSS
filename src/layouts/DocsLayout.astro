@@ -12,9 +12,21 @@ export interface Props {
     /** Override default OG image (`/images/og-default.svg`). Pass `""` to omit image meta tags. */
     ogImage?: string;
     noindex?: boolean;
+    /**
+     * Preload Space Mono 400. Defaults to true: every docs page renders code,
+     * either as CodeExample blocks or inline `<code>` runs.
+     */
+    preloadMono?: boolean;
 }
 
-const { title, description, schemaType = 'WebPage', ogImage, noindex } = Astro.props;
+const {
+    title,
+    description,
+    schemaType = 'WebPage',
+    ogImage,
+    noindex,
+    preloadMono = true
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -23,6 +35,7 @@ const { title, description, schemaType = 'WebPage', ogImage, noindex } = Astro.p
     schemaType={schemaType}
     ogImage={ogImage}
     noindex={noindex}
+    preloadMono={preloadMono}
 >
     <slot name="head" slot="head" />
 

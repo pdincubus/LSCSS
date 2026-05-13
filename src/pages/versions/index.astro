@@ -30,7 +30,7 @@ function statusLabel(status: 'current' | 'archived' | 'draft') {
     title="LSCSS versions"
     description="What shipped in each site release: summaries, what changed, and what we stopped publishing."
 >
-    <main class="page-shell versions-page">
+    <main class="page-shell">
         <section class="site-hero">
             <p class="eyebrow">Versions</p>
 
@@ -57,7 +57,7 @@ function statusLabel(status: 'current' | 'archived' | 'draft') {
                 Releases
             </h2>
 
-            <ol class="versions-stack">
+            <ol class="release-list">
                 {
                     versions.map((version) => (
                         <li

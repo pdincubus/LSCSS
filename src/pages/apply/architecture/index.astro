@@ -50,7 +50,7 @@ const mediaQueryExample = `.modal {
     schemaType="TechArticle"
 >
     <section class="site-hero">
-        <p class="eyebrow">Architecture</p>
+        <p class="eyebrow">Apply</p>
 
         <h1>
             CSS architecture
@@ -164,7 +164,10 @@ const mediaQueryExample = `.modal {
         <ul>
             <li>If a group of rules feels like its own component, it probably is.</li>
             <li>Do not hide temporary fixes inside normal component files.</li>
-            <li>Do not let third-party CSS sit outside the legacy layer.</li>
+            <li>
+                Do not leave third-party CSS outside a dedicated low-priority cascade layer
+                (often <code>legacy</code> or <code>thirdparty</code>).
+            </li>
             <li>Do not use utility chains instead of actual ownership.</li>
             <li>Large files trigger review, not acceptance.</li>
             <li>If the project becomes difficult to explain, it becomes worse to maintain.</li>

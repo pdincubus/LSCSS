@@ -21,13 +21,37 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
-        version: '0.5',
-        label: '0.5',
+        version: '0.6',
+        label: '0.6',
         status: 'current',
         href: '/versions/',
         description:
+            'Visual refresh built on a new design token set and a clean-slate stylesheet. Space Grotesk and Space Mono carry the wordmark and code voice; indigo and violet lead, berry pink is held back for accent. Every layer of the cascade was rewritten from scratch so the live site demonstrates the methodology it documents.',
+        releasedAt: '2026-05-13',
+        changed: [
+            'Design tokens replaced wholesale: a single `settings/tokens.css` now defines all colour, type, spacing, radius, shadow, focus, and z-index scales, with semantic tokens built on `light-dark()` for system theming.',
+            'Stylesheets rebuilt in the canonical `legacy, settings, base, utilities, layout, components, theme, hacks` cascade layers; each component lives in its own partial and `site.css` is an import map only.',
+            'Typography moved to Space Grotesk (body, headings, UI) and Space Mono (code), loaded via Google Fonts with preconnect hints in BaseLayout.',
+            'Prism syntax highlighting is now themed against LSCSS colour tokens directly rather than the vendored Okaidia theme, so code blocks respect light and dark mode alongside the rest of the UI.',
+            'Versions page markup uses `release-list` (was `versions-stack`) to match LSCSS naming: the list describes what the items are, not where they appear.',
+            'Page chrome was simplified: the unused `versions-page` wrapper class was removed; `.page-shell` alone owns container width and vertical rhythm.',
+            'Component selectors stay shallow throughout: short children under the owning root (`.hub-card > .link`, `.release > .row`, `.docs-sidebar .list`) instead of long BEM-style chains.'
+        ],
+        removed: [
+            'Vendored Prism `okaidia` and the deprecated `prism-legacy.css` shim; code syntax colours come from `base/code.css` and the LSCSS palette.',
+            'The `--colour-*`, `--font-*`, and ad-hoc design variables from the previous token system; everything now flows from the `tokens.css` semantic layer (`--c-*`, `--fs-*`, `--space-*`, `--radius-*`, `--border-*`, `--shadow-*`, `--transition-*`).',
+            'The `.versions-page` wrapper class on the versions index `<main>`; it carried no styling responsibility distinct from `.page-shell`.',
+            'Unused component CSS (`example-card`, decoupled `decision-tree` styles, the standalone `command-palette` shell) was dropped to keep `components/` aligned with what the site actually renders.'
+        ]
+    },
+    {
+        version: '0.5',
+        label: '0.5',
+        status: 'archived',
+        href: '/versions/',
+        description:
             'Site implementation aligned with LSCSS naming: temporary UI state uses `.is_*` with underscores; stable layout variants use BEM-style `--` modifiers on the owning block.',
-        releasedAt: '2026-06-14',
+        releasedAt: '2026-05-12',
         changed: [
             'Primary header mobile menu uses `.is_nav_open` on `.site-header` (state from interaction), with matching script and `site-header` styles.',
             'Documentation pagination uses a short `doc-pager` block with contextual children (`.link`, `.body`, `.name`) and modifiers `link--previous` / `link--next`, not `.is_*` classes, matching /apply/modifiers-and-state/.',
@@ -59,7 +83,7 @@ export const versions: LscssVersion[] = [
         href: '/versions/',
         description:
             'Discovery and technical SEO pass: sitemap and robots, canonical and social meta, richer RSS, structured data for FAQ and breadcrumbs, default share artwork, and cleaner legacy redirects aligned with trailing-slash URLs.',
-        releasedAt: '2026-06-13',
+        releasedAt: '2026-05-11',
         changed: [
             '@astrojs/sitemap builds sitemap-index.xml; public/robots.txt points crawlers at it and allows common documentation and AI crawlers.',
             'BaseLayout adds canonical URLs, Open Graph and Twitter Card tags, a default /images/og-default.svg share image (overridable per page), and an RSS autodiscovery link.',
@@ -79,7 +103,7 @@ export const versions: LscssVersion[] = [
         href: '/versions/',
         description:
             'Retired the old interactive toolbox; flattened routes (/modern-css/, /search/, /versions/) with redirects from /reference/. Rebuilt global styles and tokens to match DESIGN.md. Added accessibility and AI transparency pages, refreshed the footer, tightened primary navigation, and improved the header on small and touch screens. Pagefind search works after a local build, with clearer errors when the index is missing.',
-        releasedAt: '2026-06-12',
+        releasedAt: '2026-05-10',
         changed: [
             'Information architecture: Modern CSS under /modern-css/, search under /search/, this history under /versions/; old /reference/… URLs redirect.',
             'Global CSS and design tokens rebuilt against DESIGN.md so the live site matches the agreed visual spec.',
@@ -98,7 +122,7 @@ export const versions: LscssVersion[] = [
         href: '/versions/',
         description:
             'Switched documentation to category-first URLs (Learn, Apply, Teams, Writing, Reference), then realigned navigation, sidebars, breadcrumbs, and internal links.',
-        releasedAt: '2026-05-11',
+        releasedAt: '2026-05-09',
         changed: [
             'Paths follow audience-facing categories instead of opaque folder names.',
             'Sidebars, breadcrumbs, and footer nav match the new map; internal links updated in bulk.',
@@ -115,7 +139,7 @@ export const versions: LscssVersion[] = [
         href: '/versions/',
         description:
             'First public draft: layers, semantic naming, shallow selectors, modern CSS, migration, tooling, and team-facing comparisons.',
-        releasedAt: '2026-04-01',
+        releasedAt: '2026-05-08',
         changed: [
             'Core framing: layer order and ownership, semantic naming, shallow selectors, utilities as exceptions, tokens, visible hacks, and incremental change.',
             'Modern CSS (selectors, nesting, container queries, logical properties, view transitions) documented alongside the methodology.',

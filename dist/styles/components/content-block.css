@@ -1,7 +1,0 @@
-.content-block {
-    margin-block-start: var(--space-2xl);
-}
-
-.content-block > h2[id] {
-    scroll-margin-block-start: var(--anchor-scroll-margin);
-}

@@ -42,7 +42,7 @@ export const siteNavSections: SiteNavSection[] = [
         label: 'Apply',
         href: '/apply/methodology/',
         links: [
-            { href: '/apply/methodology/', label: 'Core methodology overview' },
+            { href: '/apply/methodology/', label: 'Overview' },
             { href: '/apply/layers/', label: 'Layers', indent: true },
             { href: '/apply/base-styles/', label: 'Base styles', indent: true },
             { href: '/apply/naming/', label: 'Naming', indent: true },
