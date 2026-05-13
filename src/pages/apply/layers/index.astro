@@ -113,7 +113,13 @@ const alternativeNamesExample = `@layer settings, base, utilities,
             <li><code>utilities</code> holds rare helper classes like accessibility helpers.</li>
             <li><code>layout</code> handles structural wrappers and global layout patterns.</li>
             <li><code>components</code> contains normal component styling.</li>
-            <li><code>theme</code> changes presentation, not component structure.</li>
+            <li>
+                <code>theme</code> changes presentation, not component structure. This
+                site declares the layer in <code>site.css</code> but maps palette and
+                light/dark behaviour through semantic tokens in <code>settings</code>
+                (see <a href="/apply/theme-layer/">theme layer</a> guidance and
+                <code>DESIGN.md</code> in the repository).
+            </li>
             <li><code>hacks</code> isolates urgent temporary fixes.</li>
         </ul>
     </section>
@@ -166,11 +172,16 @@ const alternativeNamesExample = `@layer settings, base, utilities,
             Legacy CSS and third-party styles belong in a <strong>dedicated low
             layer</strong> — here that layer is named <code>legacy</code> and declared
             first in the <code>@layer</code> list so it stays lowest in the cascade.
-            That lets structured layers win without heavier selectors. On this site,
-            the vendored Prism syntax theme is imported with <code>layer(legacy)</code>
-            for the same reason. On a greenfield project you might never use that
-            name; you might still want an empty <code>thirdparty</code> (or similar)
-            layer reserved in the declaration so imports stay honest when vendors arrive.
+            That lets structured layers win without heavier selectors. On this site
+            the <code>legacy</code> slot is currently empty: there is no vendor
+            stylesheet to quarantine. Prism.js still tokenises code at runtime, but
+            <code>.token.*</code> colours live in <code>base/code.css</code> and use
+            the same design tokens as the rest of the UI, not a separate vendored theme
+            imported with <code>layer(legacy)</code>. When foreign CSS does arrive,
+            import it into this layer so higher layers stay honest. On a greenfield
+            project you might never use the name <code>legacy</code>; you might still
+            want an empty <code>thirdparty</code> (or similar) layer reserved in the
+            declaration so imports stay honest when vendors arrive.
         </p>
 
         <p>

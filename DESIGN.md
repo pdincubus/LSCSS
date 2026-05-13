@@ -158,6 +158,8 @@ This layer should not fix architecture problems.
 
 It styles, it does not rescue.
 
+**This repository:** The LSCSS docs site keeps `theme` in the declared `@layer` stack in `src/styles/site.css` but does not ship a separate `theme/*.css` partial. Semantic colour and light/dark behaviour live on `:root` in `src/styles/settings/tokens.css` (`light-dark()` and `--c-*` variables); components consume those variables in `layer(components)`. That keeps a single source of truth for the palette. When you maintain a distinct brand skin, campaign overrides, or presentation-only retargeting of components, add `@import '...' layer(theme)` and keep structure out of that file.
+
 ---
 
 #### `hacks`

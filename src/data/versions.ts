@@ -31,7 +31,7 @@ export const versions: LscssVersion[] = [
         changed: [
             'Design tokens replaced wholesale: a single `settings/tokens.css` now defines all colour, type, spacing, radius, shadow, focus, and z-index scales, with semantic tokens built on `light-dark()` for system theming.',
             'Stylesheets rebuilt in the canonical `legacy, settings, base, utilities, layout, components, theme, hacks` cascade layers; each component lives in its own partial and `site.css` is an import map only.',
-            'Typography moved to Space Grotesk (body, headings, UI) and Space Mono (code), loaded via Google Fonts with preconnect hints in BaseLayout.',
+            'Typography moved to Space Grotesk (body, headings, UI) and Space Mono (code), self-hosted as WOFF2: `@font-face` in `src/styles/settings/fonts.css` (URLs under `/fonts/…` at runtime) and `<link rel="preload" as="font" crossorigin>` in BaseLayout.',
             'Prism syntax highlighting is now themed against LSCSS colour tokens directly rather than the vendored Okaidia theme, so code blocks respect light and dark mode alongside the rest of the UI.',
             'Versions page markup uses `release-list` (was `versions-stack`) to match LSCSS naming: the list describes what the items are, not where they appear.',
             'Page chrome was simplified: the unused `versions-page` wrapper class was removed; `.page-shell` alone owns container width and vertical rhythm.',
