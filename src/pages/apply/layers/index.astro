@@ -170,17 +170,17 @@ const alternativeNamesExample = `@layer settings, base, utilities,
 
         <p>
             Legacy CSS and third-party styles belong in a <strong>dedicated low
-            layer</strong> — here that layer is named <code>legacy</code> and declared
+            layer</strong> — in this example that layer is named <code>legacy</code> and declared
             first in the <code>@layer</code> list so it stays lowest in the cascade.
-            That lets structured layers win without heavier selectors. On this site
-            the <code>legacy</code> slot is currently empty: there is no vendor
-            stylesheet to quarantine. Prism.js still tokenises code at runtime, but
-            <code>.token.*</code> colours live in <code>base/code.css</code> and use
-            the same design tokens as the rest of the UI, not a separate vendored theme
-            imported with <code>layer(legacy)</code>. When foreign CSS does arrive,
-            import it into this layer so higher layers stay honest. On a greenfield
-            project you might never use the name <code>legacy</code>; you might still
-            want an empty <code>thirdparty</code> (or similar) layer reserved in the
+        </p>
+
+        <p>
+            This lets structured layers win without heavier selectors. Not all sites will need this layer, but it's a good practice to have it in place.
+            When foreign CSS does arrive, import it into this layer so higher layers stay honest.
+        </p>
+
+        <p>
+            On a greenfield project you might never use the name <code>legacy</code>; you might still want an empty <code>thirdparty</code> (or similar) layer reserved in the
             declaration so imports stay honest when vendors arrive.
         </p>
 
