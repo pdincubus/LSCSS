@@ -1,6 +1,7 @@
 ---
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import Umami from '../components/Umami.astro';
 import '../styles/site.css';
 
 export interface Props {
@@ -139,6 +140,7 @@ const structuredData = {
         {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
         {ogImageUrl && <meta name="twitter:image:alt" content={ogImageAlt} />}
         <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+        <Umami />
         <slot name="head" />
     </head>
 

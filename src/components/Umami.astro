@@ -1,0 +1,21 @@
+---
+const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const scriptUrl =
+    import.meta.env.PUBLIC_UMAMI_SCRIPT_URL ?? 'https://cloud.umami.is/script.js';
+const siteHostname = import.meta.env.SITE
+    ? new URL(import.meta.env.SITE).hostname
+    : undefined;
+---
+
+{
+    import.meta.env.PROD && websiteId && (
+        <script
+            defer
+            src={scriptUrl}
+            data-website-id={websiteId}
+            data-do-not-track="true"
+            data-domains={siteHostname}
+            data-exclude-search="true"
+        />
+    )
+}

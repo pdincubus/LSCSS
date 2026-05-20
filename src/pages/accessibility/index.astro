@@ -69,6 +69,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </section>
 
         <section class="content-block">
+            <h2>Analytics</h2>
+            <p>
+                Production pages on <code>lscss.dev</code> use
+                <a href="https://umami.is/">Umami Cloud</a> for privacy-focused,
+                cookieless analytics. Umami records aggregated visit data such as
+                page views, referrer, browser and device type, and general location
+                derived from the connection — not names, email addresses, or
+                cross-site profiles. We do not sell this data.
+            </p>
+            <p>
+                The tracker is not loaded during local development. It honours
+                browser Do Not Track when enabled, and is limited to this site’s
+                domain. See
+                <a href="https://umami.is/privacy">Umami’s privacy policy</a>
+                for how the service operator handles data.
+            </p>
+        </section>
+
+        <section class="content-block">
             <h2>Methodology vs this site</h2>
             <p>
                 LSCSS itself is a way to organise CSS in production codebases. How you
