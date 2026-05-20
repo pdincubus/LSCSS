@@ -70,6 +70,7 @@ const sections = [
 
     <nav class="section-nav" aria-label="Core methodology sections">
         <a href="#first">Start first</a>
+        <a href="#why">Why it exists</a>
         <a href="#sections">Sections</a>
         <a href="#protects">What it protects</a>
         <a href="#entry-points">Where to start</a>
@@ -97,6 +98,83 @@ const sections = [
             Good methodology is not about stricter rules. It is about making
             the safe choice easier than the quick mistake.
         </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="why">
+            Why LSCSS exists
+        </h2>
+
+        <p>
+            LSCSS comes from nearly 30 years of commercial front-end work across
+            retail, finance, public sector, agency, consultancy, and enterprise
+            delivery teams.
+        </p>
+
+        <p>
+            It exists because many CSS systems fail in the same places. They
+            become too rigid, too verbose, too utility-heavy, too dependent on
+            conventions nobody checks, or too easy to break when several teams
+            work in the same codebase.
+        </p>
+
+        <p>
+            This methodology is written from practical experience maintaining
+            large legacy front ends, rebuilding old systems, improving
+            accessibility and performance, reducing specificity fights, and
+            helping teams make CSS easier to read, review, and change.
+        </p>
+
+        <p>
+            The aim is not to invent a clever new way to write selectors. The
+            aim is to document a safer working model for real projects, where
+            CSS has to survive deadlines, design changes, browser differences,
+            team handovers, and the next person who opens the file under
+            pressure.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Where this helps
+        </h2>
+
+        <p>
+            LSCSS is designed for teams and codebases where CSS needs clear
+            rules, not personal taste.
+        </p>
+
+        <ul>
+            <li>Large websites with long-lived CSS.</li>
+            <li>Enterprise platforms with several teams contributing code.</li>
+            <li>E-commerce journeys where small UI regressions matter.</li>
+            <li>Public sector and service sites where accessibility matters.</li>
+            <li>Design systems and component libraries.</li>
+            <li>Agency projects that need clean handover and maintenance.</li>
+            <li>Legacy codebases that need gradual improvement rather than a full rewrite.</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Common problems this methodology responds to
+        </h2>
+
+        <p>
+            These are the patterns LSCSS tries to stop before they become
+            normal team behaviour.
+        </p>
+
+        <ul>
+            <li>Selectors named after layout or markup instead of purpose.</li>
+            <li>Modifiers, state, and conditions mixed together.</li>
+            <li>Utility classes used because component ownership is unclear.</li>
+            <li>Theme overrides leaking into component logic.</li>
+            <li>Browser support handled by guesswork or habit.</li>
+            <li>`!important` used because the cascade has no agreed structure.</li>
+            <li>Large CSS files that nobody wants to review.</li>
+            <li>Temporary fixes left in place until they become architecture.</li>
+        </ul>
     </section>
 
     <section class="content-block">
