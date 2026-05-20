@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lastUpdated = 'May 2026';
 ---
 
 <BaseLayout
@@ -20,6 +22,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 reading experience, while being honest about where technical
                 content (code samples, demos) is harder to make fully
                 equivalent.
+            </p>
+
+            <p class="intro">
+                <small>Last updated: {lastUpdated}.</small>
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Conformance status</h2>
+            <p>
+                We treat WCAG 2.2 Level AA as the target for templates, navigation,
+                typography, colour, and focus behaviour across the site. Full formal
+                certification has not been claimed; this statement describes intent,
+                known gaps, and how to report issues. Automated checks and manual
+                review are used as the site evolves.
             </p>
         </section>
 
@@ -69,23 +86,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </section>
 
         <section class="content-block">
-            <h2>Analytics</h2>
-            <p>
-                Production pages on <code>lscss.crayonsandco.de</code> use
-                <a href="https://umami.is/">Umami Cloud</a> for privacy-focused,
-                cookieless analytics. Umami records aggregated visit data such as
-                page views, referrer, browser and device type, and general location
-                derived from the connection — not names, email addresses, or
-                cross-site profiles. We do not sell this data.
-            </p>
-            <p>
-                The tracker is not loaded during local development. See
-                <a href="https://umami.is/privacy">Umami’s privacy policy</a>
-                for how the service operator handles data.
-            </p>
-        </section>
-
-        <section class="content-block">
             <h2>Methodology vs this site</h2>
             <p>
                 LSCSS itself is a way to organise CSS in production codebases. How you
@@ -105,6 +105,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 it). Screenshots or short screen recordings help. We cannot promise an
                 instant fix, but we will acknowledge genuine barriers and track them
                 like any other bug.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Related policies</h2>
+            <ul>
+                <li><a href="/privacy/">Privacy policy</a></li>
+                <li><a href="/cookies/">Cookie and storage policy</a></li>
+                <li><a href="/ai/">AI and this site</a></li>
+            </ul>
+            <p>
+                Analytics and data collection are described in the
+                <a href="/privacy/">privacy policy</a>, not on this page.
             </p>
         </section>
     </main>

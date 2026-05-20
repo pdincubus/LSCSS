@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lastUpdated = 'May 2026';
+---
+
+<BaseLayout
+    title="Privacy policy"
+    description="What data the LSCSS documentation site collects, how Umami analytics is used, and your rights."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Site policy</p>
+
+            <h1>Privacy policy</h1>
+
+            <p class="intro">
+                This policy describes how the LSCSS documentation site at
+                <strong>lscss.crayonsandco.de</strong> handles information. The site is
+                operated by <a href="https://crayonsandco.de/">Crayons and Code</a>
+                (Phil Steer). We keep collection to a minimum: there are no accounts,
+                newsletters, or comment forms on this site.
+            </p>
+
+            <p class="intro">
+                <small>Last updated: {lastUpdated}.</small>
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>What we collect</h2>
+            <h3>Analytics (production only)</h3>
+            <p>
+                On the live site we use
+                <a href="https://umami.is/">Umami Cloud</a>, a privacy-focused analytics
+                service. Umami is <strong>cookieless</strong> for visitors: it does not set
+                advertising or cross-site tracking cookies. It records aggregated data such
+                as:
+            </p>
+            <ul>
+                <li>Pages viewed and when</li>
+                <li>Referring site (if the browser sends it)</li>
+                <li>Browser, operating system, and device type (from the user agent)</li>
+                <li>General location derived from the connection (typically country or region)</li>
+                <li>Screen size band (for layout statistics)</li>
+            </ul>
+            <p>
+                Umami does not collect names, email addresses, or payment details on this
+                site. We do not sell analytics data. The tracker is not loaded during local
+                development builds. Collect requests are sent to
+                <code>cloud.umami.is</code> as described in our
+                <a href="/cookies/">cookie and storage policy</a>.
+            </p>
+            <p>
+                For how Umami processes data as a processor, see
+                <a href="https://umami.is/privacy">Umami’s privacy policy</a>.
+            </p>
+
+            <h3>What we do not collect on this site</h3>
+            <ul>
+                <li>Account registrations or login data (there is no login)</li>
+                <li>Form submissions via this domain (contact is through Crayons and Code separately)</li>
+                <li>Payment or billing information</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>Why we use analytics</h2>
+            <p>
+                We use Umami to understand which documentation pages are useful, whether
+                navigation is working, and how much traffic the site receives. The lawful
+                basis under UK GDPR is <strong>legitimate interest</strong> in operating
+                and improving a public documentation site, balanced against minimal
+                collection and no profiling for advertising.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Storage on your device</h2>
+            <p>
+                Browser storage used by this site (theme preference and similar) is
+                explained on the <a href="/cookies/">cookie and storage policy</a> page.
+                That is separate from Umami analytics.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Third parties</h2>
+            <ul>
+                <li>
+                    <strong>Umami Cloud</strong> — analytics processing as above.
+                </li>
+                <li>
+                    <strong>Hosting and CDN</strong> — the site is served through our
+                    hosting provider, which will process connection data (IP address,
+                    request logs) as part of delivering pages. Retention and security are
+                    governed by that provider’s terms.
+                </li>
+            </ul>
+            <p>
+                Fonts used on this site are self-hosted; page views do not trigger
+                third-party font requests.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Retention</h2>
+            <p>
+                Analytics retention is controlled in Umami Cloud (typically months, not
+                years). Hosting logs depend on the provider. If you contact us about
+                accessibility or other site issues, we keep correspondence only as long
+                as needed to handle the request.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Your rights</h2>
+            <p>
+                If UK or EEA data protection law applies to you, you may have rights to
+                access, rectify, erase, restrict, or object to processing, and to lodge a
+                complaint with the ICO (UK) or your local supervisory authority. Because
+                Umami does not identify you by name on this site, we may not be able to
+                isolate a single visit as “your” record without additional information you
+                provide voluntarily.
+            </p>
+            <p>
+                To exercise rights or ask questions, contact
+                <a href="https://crayonsandco.de/">Crayons and Code</a>.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Changes</h2>
+            <p>
+                We may update this policy when the site or analytics setup changes. The
+                “Last updated” date at the top will change when we do.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Related policies</h2>
+            <ul>
+                <li><a href="/cookies/">Cookie and storage policy</a></li>
+                <li><a href="/accessibility/">Accessibility statement</a></li>
+                <li><a href="/ai/">AI and this site</a></li>
+            </ul>
+        </section>
+    </main>
+</BaseLayout>

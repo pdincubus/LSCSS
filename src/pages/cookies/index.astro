@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lastUpdated = 'May 2026';
+---
+
+<BaseLayout
+    title="Cookie and storage policy"
+    description="Cookies, local storage, and similar technologies used on the LSCSS documentation site."
+>
+    <main class="page-shell">
+        <section class="site-hero">
+            <p class="eyebrow">Site policy</p>
+
+            <h1>Cookie and storage policy</h1>
+
+            <p class="intro">
+                This page explains cookies and browser storage used on
+                <strong>lscss.crayonsandco.de</strong>. We aim to be plain about what is
+                set, why, and how long it lasts. For wider data use (including analytics),
+                see the <a href="/privacy/">privacy policy</a>.
+            </p>
+
+            <p class="intro">
+                <small>Last updated: {lastUpdated}.</small>
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Do we use cookie banners?</h2>
+            <p>
+                No. This site does not set non-essential cookies for advertising or
+                cross-site tracking. Analytics on the live site uses
+                <a href="https://umami.is/">Umami Cloud</a> in a
+                <strong>cookieless</strong> mode, so we do not ask for consent for
+                marketing or analytics cookies. If that changes, we will update this page
+                and the privacy policy.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Cookies</h2>
+            <p>
+                At the time of writing, the LSCSS documentation site does
+                <strong>not</strong> set first-party HTTP cookies for visitors. We do not
+                use cookie-based session tracking, advertising pixels, or social embeds
+                that set third-party cookies on ordinary documentation pages.
+            </p>
+            <p>
+                Umami analytics (production only) does not rely on visitor cookies; see
+                <a href="/privacy/">privacy policy</a> for what is collected.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Local storage and similar APIs</h2>
+            <p>
+                Some features store a preference in your browser using
+                <code>localStorage</code> (not a cookie, but similar in practice for
+                visitors). These are functional, not used for advertising.
+            </p>
+
+            <ul>
+                <li>
+                    <strong><code>lscss-theme</code></strong> — remembers light or dark
+                    theme if you change it; lasts until you clear site data in the browser.
+                </li>
+                <li>
+                    <strong>Playground editors (where present)</strong> — may save draft
+                    code locally on pages that include a live playground; lasts until you
+                    clear site data.
+                </li>
+                <li>
+                    <strong>Umami (via analytics script)</strong> — may use storage only to
+                    honour a disable flag if you opt out in Umami’s UI; not set by default
+                    for normal visits.
+                </li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h2>How to clear or block storage</h2>
+            <p>
+                You can clear cookies and site data in your browser settings for
+                <code>lscss.crayonsandco.de</code>. Blocking all storage may reset your
+                theme preference. Privacy extensions and ad blockers may block the Umami
+                script or its network requests; the site still works without analytics.
+            </p>
+        </section>
+
+        <section class="content-block">
+            <h2>Related policies</h2>
+            <ul>
+                <li><a href="/privacy/">Privacy policy</a></li>
+                <li><a href="/accessibility/">Accessibility statement</a></li>
+                <li><a href="/ai/">AI and this site</a></li>
+            </ul>
+        </section>
+    </main>
+</BaseLayout>
