@@ -8,7 +8,7 @@ function escapeXml(text) {
 }
 
 export async function GET(context) {
-    const site = (context.site?.href ?? 'https://lscss.dev').replace(/\/?$/, '/');
+    const site = (context.site?.href ?? 'https://lscss.crayonsandco.de').replace(/\/?$/, '/');
 
     const items = [
         {

@@ -1,10 +1,27 @@
 ---
-const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID?.trim();
 const scriptUrl =
     import.meta.env.PUBLIC_UMAMI_SCRIPT_URL ?? 'https://cloud.umami.is/script.js';
-const siteHostname = import.meta.env.SITE
-    ? new URL(import.meta.env.SITE).hostname
-    : undefined;
+
+/** Comma-separated hostnames; defaults to SITE hostname (plus www only for apex domains). */
+function resolveDomains(): string | undefined {
+    const override = import.meta.env.PUBLIC_UMAMI_DOMAINS?.trim();
+    if (override) return override;
+
+    if (!import.meta.env.SITE) return undefined;
+
+    const hostname = new URL(import.meta.env.SITE).hostname;
+    const labels = hostname.split('.');
+    const isApex = labels.length === 2;
+
+    if (hostname.startsWith('www.')) {
+        return [hostname, hostname.slice(4)].join(',');
+    }
+
+    return isApex ? [hostname, `www.${hostname}`].join(',') : hostname;
+}
+
+const domains = resolveDomains();
 ---
 
 {
@@ -14,7 +31,7 @@ const siteHostname = import.meta.env.SITE
             src={scriptUrl}
             data-website-id={websiteId}
             data-do-not-track="true"
-            data-domains={siteHostname}
+            data-domains={domains}
             data-exclude-search="true"
         />
     )
