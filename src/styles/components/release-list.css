@@ -58,7 +58,7 @@
 
 .release > .row > .badge--current {
     background: var(--c-accent-soft);
-    color: var(--c-ink-900);
+    color: var(--c-on-accent-soft);
 }
 
 .release > .row > .badge--archived {

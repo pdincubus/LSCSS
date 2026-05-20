@@ -1,6 +1,7 @@
 /*
- * Site footer. Two columns from tablet up (--from-tablet: 768px+), with the bottom row
- * holding copyright and legal links beneath both. No decoration.
+ * Site footer. Intro block (strapline, description, doc nav) stacks above the bottom
+ * row (copyright, legal, credits). Doc nav is vertical below the strapline on
+ * smaller viewports, horizontal from --desktop up. No decoration.
  */
 
 .site-footer {
@@ -29,20 +30,29 @@
     line-height: var(--lh-relaxed);
 }
 
-.site-footer .topics {
-    display: grid;
+.site-footer .intro > .topics {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-sm);
+    margin-block-start: var(--space-lg);
 }
 
-.site-footer .topics a {
+@media (--desktop) {
+    .site-footer .intro > .topics {
+        flex-flow: row wrap;
+        gap: var(--space-md) var(--space-xl);
+    }
+}
+
+.site-footer .intro > .topics a {
     color: var(--c-text);
     font-weight: var(--fw-medium);
     text-decoration-color: transparent;
 }
 
-.site-footer .topics a:hover,
-.site-footer .topics a:focus-visible,
-.site-footer .topics a[aria-current='page'] {
+.site-footer .intro > .topics a:hover,
+.site-footer .intro > .topics a:focus-visible,
+.site-footer .intro > .topics a[aria-current='page'] {
     color: var(--c-link);
     text-decoration-color: currentColor;
 }
@@ -117,9 +127,3 @@
     line-height: var(--lh-base);
 }
 
-@media (--from-tablet) {
-    .site-footer > .inner {
-        grid-template-columns: 2fr 1fr;
-        align-items: start;
-    }
-}

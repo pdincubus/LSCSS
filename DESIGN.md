@@ -268,21 +268,23 @@ Use semibold and bold intentionally. Avoid overly heavy heading blocks.
 
 ## Type Scale
 
-| Token       | Size |
-| ----------- | ---- |
-| `--fs-xs`   | 12px |
-| `--fs-sm`   | 14px |
-| `--fs-base` | 16px |
-| `--fs-md`   | 18px |
-| `--fs-lg`   | 20px |
-| `--fs-xl`   | 24px |
-| `--fs-2xl`  | 32px |
-| `--fs-3xl`  | 48px |
+Desktop values (see `tokens.css`). Mobile scales the ladder down via `@media (--mobile)`; `--fs-xs` floors at 14px on small viewports.
+
+| Token       | Desktop |
+| ----------- | ------- |
+| `--fs-xs`   | 16px    |
+| `--fs-sm`   | 17px    |
+| `--fs-base` | 19px    |
+| `--fs-md`   | 21px    |
+| `--fs-lg`   | 24px    |
+| `--fs-xl`   | 30px    |
+| `--fs-2xl`  | 40px    |
+| `--fs-3xl`  | 64px    |
 
 ### Guidance
 
-- body copy should default to 16px minimum
-- avoid text smaller than 12px
+- body copy should default to 16px minimum on desktop (`--fs-xs`); 14px minimum on mobile
+- avoid text smaller than the mobile floor
 - long-form content should prioritise readability over compression
 - headings should feel spacious, not oversized
 
@@ -302,59 +304,137 @@ Use relaxed spacing for content-heavy pages. Use tighter spacing for headings an
 
 ## Colour System
 
-## Primary Brand Colours
+Indigo and violet carry the brand. Berry pink accents emphasis only. Most of the interface should sit on neutrals.
 
-| Token            | Hex              |
-| ---------------- | ---------------- |
-| `--c-indigo-700` | hsl(244 57% 50%) |
-| `--c-violet-500` | hsl(238 83% 66%) |
-| `--c-violet-300` | hsl(229 93% 81%) |
+### Principles
 
-These form the core identity. Use for headings, primary actions, featured areas, and visual emphasis.
+- **Colour supports, not dominates** — typography and spacing lead; accents guide attention.
+- **Semantic tokens in components** — use `--c-text`, `--c-link`, and similar in `layer(components)`. Reserve raw `--c-*` ramps for token definitions and rare one-offs.
+- **One accent at a time** — avoid neon links, saturated CTAs, and bright berry on the same view.
 
----
+### Dark mode
 
-## Accent Colours
+Dark presentation should feel like one cohesive slate environment, not competing hues on mismatched surfaces.
 
-| Token           | Hex              |
-| --------------- | ---------------- |
-| `--c-berry-500` | hsl(330 81% 60%) |
-| `--c-berry-300` | hsl(327 87% 81%) |
+- **Single neutral ramp** — background, surfaces, borders, and code blocks share hue `222°`; only lightness steps create depth.
+- **Soft text** — body copy uses `--c-mist` (low-chroma off-white), not the blue-tinted `--c-paper` from light mode.
+- **Restrained violet** — links and code accents use `--c-violet-muted`; hovers brighten slightly, not to pure white.
+- **Deeper CTAs** — solid buttons use `--c-indigo-cta-dark` with light label text; hover is one step brighter on the same ramp.
+- **Bright berry** — hero eyebrows use `--c-eyebrow` (maximum chroma); other accent text uses `--c-accent`. Both use literal `hsl()` inside `light-dark()`, not `light-dark(var(...), var(...))`, so colour computes reliably in browsers. Soft fills use `--c-berry-soft-dark` with `--c-on-accent-soft` (dark ink on both schemes) for label contrast.
 
-Use sparingly for:
+Light mode values stay largely unchanged so the refresh targets dark presentation first.
 
-- key highlights
-- call-to-action moments
-- important callouts
-- selected active states
+### Light and dark implementation
 
-Do not overuse. Berry pink should feel intentional.
+Semantic colours on `:root` in `src/styles/settings/tokens.css` use the CSS `light-dark()` function: first value for light, second for dark. `html` sets `color-scheme: light dark` in `src/styles/base/reset.css` so system preference drives which value resolves. PostCSS leaves native `light-dark()` in place (see `postcss.config.mjs`).
 
 ---
 
-## Status Colours
+### Raw brand colours (shared)
 
-| Token         | Hex              |
-| ------------- | ---------------- |
+| Token            | Value              |
+| ---------------- | ------------------ |
+| `--c-indigo-700` | hsl(244 57% 50%)   |
+| `--c-violet-500` | hsl(238 83% 66%)   |
+| `--c-violet-300` | hsl(229 93% 81%)   |
+| `--c-violet-muted` | hsl(235 70% 72%) |
+| `--c-violet-muted-hover` | hsl(235 75% 78%) |
+| `--c-indigo-cta-dark` | hsl(244 50% 58%) |
+| `--c-indigo-cta-hover-dark` | hsl(244 48% 66%) |
+
+Indigo/violet-muted are for links, CTAs, and interactive emphasis. Do not stack all three at full saturation on one screen.
+
+---
+
+### Accent colours
+
+| Token           | Value              |
+| --------------- | ------------------ |
+| `--c-berry-500` | hsl(330 86% 62%)   |
+| `--c-berry-300` | hsl(322 100% 68%)  |
+| `--c-berry-400` | hsl(330 82% 72%)   |
+| `--c-berry-bright-light` | hsl(322 100% 42%) |
+| `--c-berry-bright-dark` | hsl(322 100% 66%) |
+| `--c-berry-soft-dark` | hsl(322 75% 55%) |
+
+Use sparingly for eyebrows, badges, selection, and active chips. `--c-berry-400` and `--c-berry-soft-dark` are tuned for dark surfaces; light mode keeps `--c-berry-500` / `--c-berry-300` via semantic tokens.
+
+---
+
+### Status colours
+
+| Token         | Value              |
+| ------------- | ------------------ |
 | `--c-success` | hsl(160 84% 39%) |
 | `--c-warning` | hsl(37 92% 50%)  |
 | `--c-error`   | hsl(0 84% 60%)   |
 
-Used for feedback states only. Do not use as decorative colours.
+Feedback states only. Not decorative.
 
 ---
 
-## Neutral Palette
+### Light neutrals
 
-| Token           | Hex               |
-| --------------- | ----------------- |
-| `--c-ink-900`   | hsl(222 47% 11%)  |
-| `--c-slate-700` | hsl(215 25% 26%)  |
-| `--c-slate-300` | hsl(212 26% 83%)  |
-| `--c-paper`     | hsl(240 100% 99%) |
-| `--c-white`     | hsl(0 0% 100%)    |
+| Token           | Value              |
+| --------------- | ------------------ |
+| `--c-ink-900`   | hsl(222 47% 11%)   |
+| `--c-slate-700` | hsl(215 25% 26%)   |
+| `--c-slate-300` | hsl(212 26% 83%)   |
+| `--c-paper`     | hsl(240 100% 99%)  |
+| `--c-white`     | hsl(0 0% 100%)     |
+| `--c-code-bg-light` | hsl(235 100% 97%) |
 
-These create balance and readability. Most of the UI should live here.
+---
+
+### Dark slate ramp (hue 222°)
+
+| Token           | Value              | Role (dark)        |
+| --------------- | ------------------ | ------------------ |
+| `--c-slate-950` | hsl(222 47% 9%)    | page background    |
+| `--c-slate-900` | hsl(222 35% 12%)   | cards, header      |
+| `--c-slate-850` | hsl(222 24% 16%)   | alt panels, sidebars |
+| `--c-slate-800` | hsl(222 22% 17%)   | code block bg      |
+| `--c-slate-750` | hsl(222 16% 22%)   | borders            |
+| `--c-slate-700-dark` | hsl(222 18% 28%) | strong borders |
+| `--c-mist`      | hsl(222 15% 92%)   | body text          |
+| `--c-mist-bright` | hsl(222 18% 96%) | headings         |
+| `--c-mist-muted` | hsl(222 10% 68%)  | secondary text     |
+
+---
+
+### Semantic tokens
+
+Components and base styles should consume these. Each resolves per color scheme via `light-dark()`.
+
+| Token | Light | Dark |
+| ----- | ----- | ---- |
+| `--c-background` | `--c-paper` | `--c-slate-950` |
+| `--c-surface` | `--c-white` | `--c-slate-900` |
+| `--c-surface-alt` | hsl(240 57% 97%) | `--c-slate-850` |
+| `--c-text` | `--c-ink-900` | `--c-mist` |
+| `--c-text-muted` | `--c-slate-700` | `--c-mist-muted` |
+| `--c-heading` | `--c-ink-900` | `--c-mist-bright` |
+| `--c-text-inverse` | `--c-white` | `--c-slate-950` |
+| `--c-border` | `--c-slate-300` | `--c-slate-750` |
+| `--c-border-strong` | `--c-slate-700` | `--c-slate-700-dark` |
+| `--c-link` | `--c-indigo-700` | `--c-violet-muted` |
+| `--c-link-hover` | `--c-violet-500` | `--c-violet-muted-hover` |
+| `--c-accent` | hsl(322 100% 48%) | hsl(322 100% 70%) |
+| `--c-eyebrow` | hsl(322 100% 42%) | hsl(322 100% 66%) |
+| `--c-accent-soft` | `--c-berry-300` | `--c-berry-soft-dark` |
+| `--c-on-accent-soft` | `--c-ink-900` | `--c-ink-900` |
+| `--c-cta-bg` | `--c-indigo-700` | `--c-indigo-cta-dark` |
+| `--c-cta-bg-hover` | `--c-violet-500` | `--c-indigo-cta-hover-dark` |
+| `--c-cta-text` | `--c-white` | `--c-mist-bright` |
+| `--c-code-bg` | `--c-code-bg-light` | `--c-slate-800` |
+| `--c-code-text` | `--c-indigo-700` | `--c-violet-muted` |
+
+### Usage
+
+- Prefer semantic tokens in authored CSS. Raw ramps belong in `settings/tokens.css` and documentation.
+- Do not hardcode `--c-ink-900` on `--c-accent-soft` fills; use `--c-on-accent-soft` so light and dark both contrast correctly.
+- Do not use `--c-paper` as dark-mode body text; it is a light-mode surface tint.
+- Status colours stay scoped to validation and feedback UI.
 
 ---
 
@@ -380,12 +460,13 @@ Whitespace creates clarity. Let layouts breathe.
 
 ## Border Radius
 
-| Token         | Value |
-| ------------- | ----- |
-| `--radius-sm` | 4px   |
-| `--radius-md` | 8px   |
-| `--radius-lg` | 16px  |
-| `--radius-xl` | 24px  |
+| Token          | Value |
+| -------------- | ----- |
+| `--radius-s`   | 4px   |
+| `--radius-m`   | 8px   |
+| `--radius-l`   | 16px  |
+| `--radius-xl`  | 24px  |
+| `--radius-round` | pill |
 
 Rounded corners should feel modern but restrained. Avoid overly soft UI.
 

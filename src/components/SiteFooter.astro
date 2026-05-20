@@ -19,20 +19,20 @@ const year = new Date().getFullYear();
                 LSCSS is Layered Semantic CSS: cascade layers, clear naming, modifiers and
                 state classes, and a bounded theme layer—so large stylesheets stay navigable.
             </p>
-        </div>
 
-        <nav class="topics" aria-label="Documentation">
-            {
-                siteNavSections.map((section) => (
-                    <a
-                        href={section.href}
-                        aria-current={isCurrent(section.href) ? 'page' : undefined}
-                    >
-                        {section.label}
-                    </a>
-                ))
-            }
-        </nav>
+            <nav class="topics" aria-label="Documentation">
+                {
+                    siteNavSections.map((section) => (
+                        <a
+                            href={section.href}
+                            aria-current={isCurrent(section.href) ? 'page' : undefined}
+                        >
+                            {section.label}
+                        </a>
+                    ))
+                }
+            </nav>
+        </div>
 
         <div class="bottom">
             <nav class="legal" aria-label="Site information">
