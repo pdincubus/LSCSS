@@ -19,14 +19,14 @@ Production builds can include [Umami](https://umami.is/) for privacy-focused, co
 
 Set the same `PUBLIC_UMAMI_WEBSITE_ID` in your hosting or CI environment before deploying. Local `pnpm run dev` does not load the script unless you set the variable and build for production.
 
-Optional: `PUBLIC_UMAMI_SCRIPT_URL` overrides the default `https://cloud.umami.is/script.js` (for example, a self-hosted Umami instance). `PUBLIC_UMAMI_DOMAINS` overrides the hostname list derived from `site` in `astro.config.mjs` (useful for preview deploy hostnames).
+Optional: `PUBLIC_UMAMI_SCRIPT_URL` and `PUBLIC_UMAMI_HOST_URL` for self-hosted Umami. Set `PUBLIC_UMAMI_RESPECT_DNT=true` only if you want to honour browser Do Not Track (off by default).
+
+The tracker sets `data-host-url` to `https://cloud.umami.is` because the Cloud script alone posts to `api-gateway.umami.dev`, which many ad blockers allow the script but block the collect request.
 
 ### No data in the dashboard?
 
-The script tag can load while **no hits are sent**. Check in order:
-
-1. **Hostname** — `data-domains` must include the hostname you are actually visiting (`lscss.crayonsandco.de` vs a preview URL). `astro preview` on `localhost` will not record (by design).
-2. **Network** — In DevTools → Network, filter for `collect` or `api`. You should see successful requests to `cloud.umami.is`. Ad blockers often block these even when `script.js` loads.
-3. **Website ID** — Must match the UUID in Umami Cloud exactly; a wrong ID returns errors on the collect request.
-4. **Do Not Track** — With `data-do-not-track="true"`, browsers with DNT enabled send nothing. Test in a normal window with DNT off, or use another device.
-5. **Rebuild after env changes** — `PUBLIC_UMAMI_WEBSITE_ID` is baked in at `pnpm run build` time; changing hosting env vars requires a new production build and deploy.
+1. **Network** — DevTools → Network → filter `send`. You should see `POST https://cloud.umami.is/api/send` with status 200. If only `script.js` loads and `api-gateway.umami.dev` is blocked, redeploy with the current `Umami.astro` (uses `data-host-url`).
+2. **Ad blockers** — Test in a private window with extensions disabled.
+3. **Website ID** — Must match Umami Cloud exactly; rebuild after changing env vars.
+4. **Umami Cloud domain** — In the dashboard, set the site domain to `lscss.crayonsandco.de`.
+5. **`astro preview` / localhost** — Tracker is production-only; use the live site to test real visits.
