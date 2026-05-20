@@ -9,9 +9,11 @@ export interface Props {
     schemaType?: 'Article' | 'TechArticle' | 'WebPage';
     /**
      * Open Graph / Twitter image. Root-relative or absolute URL.
-     * Pass empty string to omit image tags (otherwise `/images/og-default.svg` is used).
+     * Pass empty string to omit image tags (otherwise `/images/og-default.png` is used).
      */
     ogImage?: string;
+    /** Alt text for the share image. Defaults to a site-level description. */
+    ogImageAlt?: string;
     /** When true, ask crawlers not to index this page. */
     noindex?: boolean;
     /**
@@ -27,6 +29,7 @@ const {
     description = 'Layered Semantic CSS',
     schemaType = 'WebPage',
     ogImage,
+    ogImageAlt = 'LSCSS — Layered Semantic CSS. Calm CSS architecture for real teams.',
     noindex = false,
     preloadMono = false
 } = Astro.props;
@@ -40,13 +43,24 @@ const canonicalURL = new URL(canonicalPath, siteOrigin).href;
 
 const documentTitle = /lscss/i.test(title) ? title : `${title} · LSCSS`;
 
-const defaultOgPath = '/images/og-default.svg';
+const defaultOgPath = '/images/og-default.png';
 const ogSource = ogImage === '' ? undefined : (ogImage ?? defaultOgPath);
 const ogImageUrl = ogSource
     ? ogSource.startsWith('http')
         ? ogSource
         : new URL(ogSource.replace(/^\//, ''), siteOrigin).href
     : undefined;
+
+const ogImageType = ogSource?.endsWith('.svg')
+    ? 'image/svg+xml'
+    : ogSource?.endsWith('.jpg') || ogSource?.endsWith('.jpeg')
+      ? 'image/jpeg'
+      : 'image/png';
+
+const defaultOgWidth = 1200;
+const defaultOgHeight = 630;
+const ogUsesDefaultDimensions =
+    !ogImage || ogImage === defaultOgPath || ogSource === defaultOgPath;
 
 const pageUrl = canonicalURL;
 const ogType = schemaType === 'WebPage' ? 'website' : 'article';
@@ -75,10 +89,14 @@ const structuredData = {
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#0f1218" />
         <title>{documentTitle}</title>
         <meta name="description" content={description} />
         {noindex && <meta name="robots" content="noindex, nofollow" />}
         <link rel="canonical" href={canonicalURL} />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="alternate" type="application/rss+xml" title="LSCSS articles" href="/rss.xml" />
         <link
             rel="preload"
@@ -105,10 +123,21 @@ const structuredData = {
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:locale" content="en_GB" />
         {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+        {ogImageUrl && <meta property="og:image:type" content={ogImageType} />}
+        {ogImageUrl && <meta property="og:image:alt" content={ogImageAlt} />}
+        {
+            ogImageUrl && ogUsesDefaultDimensions && (
+                <>
+                    <meta property="og:image:width" content={String(defaultOgWidth)} />
+                    <meta property="og:image:height" content={String(defaultOgHeight)} />
+                </>
+            )
+        }
         <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
         <meta name="twitter:title" content={documentTitle} />
         <meta name="twitter:description" content={description} />
         {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+        {ogImageUrl && <meta name="twitter:image:alt" content={ogImageAlt} />}
         <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
         <slot name="head" />
     </head>

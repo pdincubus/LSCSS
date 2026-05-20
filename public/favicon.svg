@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="LSCSS">
+    <rect width="32" height="32" rx="7" fill="hsl(222 47% 11%)"/>
+    <path fill="hsl(222 18% 96%)" stroke="hsl(222 18% 96%)" stroke-width="1.1" stroke-linejoin="round" paint-order="stroke fill" d="M13.56 20L13.56 10.9L14.39 10.9L14.39 19.25L19.18 19.25L19.18 20Z"/>
+    <rect
+        x="13.01"
+        y="21.5"
+        width="6.72"
+        height="1.08"
+        rx="0.54"
+        fill="hsl(322 100% 66%)"
+    />
+</svg>

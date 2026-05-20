@@ -1,0 +1,23 @@
+{
+    "name": "LSCSS",
+    "short_name": "LSCSS",
+    "description": "Layered Semantic CSS — calm CSS architecture for real teams",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0f1218",
+    "theme_color": "#0f1218",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "type": "image/svg+xml",
+            "sizes": "any",
+            "purpose": "any"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "type": "image/png",
+            "sizes": "180x180",
+            "purpose": "any"
+        }
+    ]
+}

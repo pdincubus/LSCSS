@@ -8,6 +8,8 @@
         "start": "astro dev",
         "check": "astro check",
         "build": "astro build && pagefind --site dist && node scripts/copy-pagefind-to-public.mjs",
+        "generate:brand": "node scripts/generate-brand-assets.mjs",
+        "generate:og": "pnpm run generate:brand",
         "preview": "astro preview"
     },
     "dependencies": {
@@ -18,6 +20,8 @@
     "devDependencies": {
         "@astrojs/check": "latest",
         "@astrojs/sitemap": "^3.7.2",
+        "@resvg/resvg-js": "^2.6.2",
+        "fontkit": "^2.0.4",
         "pagefind": "^1.1.1",
         "postcss-custom-media": "^11.0.5",
         "postcss-preset-env": "^10.1.3",
