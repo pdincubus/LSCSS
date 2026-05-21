@@ -8,10 +8,10 @@ const faqPageLd = {
     mainEntity: [
         {
             '@type': 'Question',
-            name: 'Are utility classes always bad?',
+            name: 'Are utility classes in HTML always bad?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'No. They are a problem when they quietly become your architecture. Utilities work well for accessibility helpers and universal patterns such as .vh and .a11y-link. If the same utility group keeps appearing together, promote it to a named component.'
+                text: 'Yes, when they are your styling system. Utility-first markup is not semantic, bloats HTML, and is hard to read and maintain at a glance. LSCSS allows only rare CSS helpers such as .vh and .a11y-link—not layout, spacing, and colour smeared across every element. Repeated utility stacks should become named components.'
             }
         },
         {
@@ -19,7 +19,7 @@ const faqPageLd = {
             name: 'Is Tailwind bad?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'No. Tailwind helps fast delivery, consistency, and strict utility workflows. The trade-off is long-term maintainability: utility-first often ships faster early; LSCSS is often easier to maintain over time. Choose based on project constraints and team goals.'
+                text: 'For long-lived, readable front ends, yes—Tailwind is utility-first CSS in markup. It can ship screens quickly, but it trades semantic HTML and calm maintenance for class soup. LSCSS keeps presentation in layered CSS and components; that is the approach this site recommends.'
             }
         },
         {
@@ -118,18 +118,28 @@ const faqPageLd = {
     </nav>
 
     <section class="content-block">
-        <h2 id="utilities">Are utility classes always bad?</h2>
+        <h2 id="utilities">Are utility classes in HTML always bad?</h2>
 
         <p>
-            No. They are bad when they quietly become your architecture.
-            Utilities are useful for accessibility helpers and genuinely
-            universal patterns such as <code>.vh</code> and
-            <code>.a11y-link</code>.
+            <strong>Yes—when they are how you style the UI.</strong> Utility-first
+            CSS puts presentation in the markup: spacing, layout, colour, and type
+            as long class lists on every element. That is not semantic HTML. It
+            bloats templates, hides structure behind styling noise, and becomes a
+            nightmare to read, review, and maintain at a glance—especially six
+            months after the person who wrote it has moved on.
         </p>
 
         <p>
-            If the same utility group keeps appearing together, it should
-            probably become a named component instead of an ongoing pattern.
+            LSCSS is not anti-helper; it is anti-architecture-in-markup. The
+            <code>utilities</code> layer holds <em>rare</em> CSS helpers such as
+            <code>.vh</code> and <code>.a11y-link</code> for accessibility and
+            universal browser behaviour—not <code>p-4 flex gap-2 rounded-lg</code>
+            on every card.
+        </p>
+
+        <p>
+            If the same utility group keeps appearing together, it was never a
+            utility pattern. It is a component that should be named in CSS.
         </p>
     </section>
 
@@ -137,17 +147,24 @@ const faqPageLd = {
         <h2 id="tailwind">Is Tailwind bad?</h2>
 
         <p>
-            No. Tailwind is good at fast delivery, consistency, and strict
-            utility workflows. It solves real problems.
+            <strong>For the kind of sites LSCSS is built for, yes.</strong> Tailwind
+            is utility-first CSS: styling decisions live in HTML, not in a layered,
+            owned stylesheet. Teams adopt it for speed; they often keep paying for
+            it in readability, onboarding, and refactors.
         </p>
 
         <p>
-            The trade-off is long-term maintainability. Utility-first often
-            ships quickly early. LSCSS is often easier to maintain over time.
+            That early velocity is real. It is also a trade many teams regret once
+            the product outgrows a prototype. LSCSS keeps HTML for meaning and CSS
+            for presentation—components, modifiers, state, and theme—so the system
+            stays understandable without decoding a spreadsheet of classes on every
+            node.
         </p>
 
         <p>
-            Choose based on project constraints and team goals.
+            If you inherit Tailwind, treat migration as damage control: isolate it,
+            stop growing class soup, and move repeated patterns into components. See
+            <a href="/learn/comparisons/tailwind-vs-lscss/">Tailwind vs LSCSS</a>.
         </p>
     </section>
 

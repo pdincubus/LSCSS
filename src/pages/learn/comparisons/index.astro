@@ -11,7 +11,7 @@ const comparisons = [
     {
         title: 'Tailwind vs LSCSS',
         href: '/learn/comparisons/tailwind-vs-lscss/',
-        description: 'Utility-first speed versus semantic structure and long-term maintainability.'
+        description: 'Why utility-first Tailwind hurts semantic HTML—and what LSCSS does instead.'
     },
     {
         title: 'CSS Modules vs LSCSS',
@@ -21,7 +21,7 @@ const comparisons = [
     {
         title: 'Utility-first vs LSCSS',
         href: '/learn/comparisons/utility-first-vs-lscss/',
-        description: 'Markup-led styling versus layered semantic CSS systems.'
+        description: 'Why utility-first CSS in markup fails—and how layered semantic CSS replaces it.'
     },
     {
         title: '@scope and LSCSS',
@@ -45,7 +45,9 @@ const comparisons = [
         <p class="intro">
             Most teams are not choosing CSS from a blank sheet. They are choosing
             between existing habits, inherited constraints, and team preferences.
-            These comparisons focus on trade-offs, not ideology.
+            These comparisons are opinionated where it matters: utility-first CSS
+            in HTML is poor architecture for long-lived sites. Other approaches
+            are judged on fit, not hype.
         </p>
         <p>
             These comparisons are based on implementation experience across real
@@ -73,8 +75,8 @@ const comparisons = [
         </p>
 
         <ul>
-            <li>If speed today matters most, utility-heavy systems often win early.</li>
-            <li>If maintainability matters most, architecture matters more than shortcuts.</li>
+            <li>Utility-first and Tailwind can ship prototypes quickly—that speed has a maintenance cost.</li>
+            <li>If maintainability, semantic HTML, and calm handover matter, architecture beats class soup.</li>
             <li>If multiple teams touch the same frontend, predictability becomes expensive to ignore.</li>
             <li>If accessibility and performance matter, discipline beats convenience fast.</li>
         </ul>
@@ -87,8 +89,8 @@ const comparisons = [
 
         <p>
             These are not framework popularity contests. They explain where each
-            approach helps, where it creates debt, and what happens six months
-            after the launch celebration ends.
+            approach creates debt—and why utility-first markup is a debt we
+            would not choose for a site that has to last.
         </p>
 
         <div class="hub-grid">
@@ -127,8 +129,8 @@ const comparisons = [
 
                 <tr>
                     <td>Tailwind</td>
-                    <td>speed and utility-first delivery</td>
-                    <td>HTML noise and architectural drift</td>
+                    <td>utility-first delivery speed</td>
+                    <td>non-semantic HTML, class bloat, hard maintenance</td>
                 </tr>
 
                 <tr>
@@ -169,8 +171,9 @@ const comparisons = [
         </p>
 
         <p>
-            The goal is not to prove one approach is universally correct. The
-            goal is to understand which trade-offs best match your team.
+            LSCSS is not neutral about utility-first: it is a bad fit for most
+            long-lived products. The goal is to understand why—and what to do if
+            you inherit it anyway.
         </p>
     </section>
 

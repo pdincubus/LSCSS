@@ -72,9 +72,15 @@ import HubCard from '../../../components/HubCard.astro';
     <section class="content-block">
         <h2 id="utilities">Utilities are exceptions, not architecture</h2>
         <p>
-            Utilities are useful for accessibility helpers and truly universal
-            patterns. If utility combinations keep repeating, they are probably
-            a component asking to be named, not a permanent utility strategy.
+            Utility-first CSS in HTML—spacing, layout, and colour as class stacks
+            on every element—is not what LSCSS means by utilities. That pattern
+            is not semantic, it bloats markup, and it does not maintain well.
+        </p>
+        <p>
+            The <code>utilities</code> layer is for rare CSS helpers: accessibility
+            patterns such as <code>.vh</code> and <code>.a11y-link</code>, not a
+            second design system in templates. If combinations keep repeating,
+            they are a component asking to be named.
         </p>
     </section>
 
