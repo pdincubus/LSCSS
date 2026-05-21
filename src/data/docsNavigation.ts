@@ -37,7 +37,6 @@ export const docsNavigation: DocsNavItem[] = [
     { href: '/teams/teaching-deck/', label: 'Teaching deck', section: 'Teams' },
     { href: '/teams/contributing/', label: 'Contribution standards', section: 'Teams' },
     { href: '/teams/governance/', label: 'Governance', section: 'Teams' },
-    { href: '/teams/team-governance/', label: 'Team governance', section: 'Teams' },
     { href: '/apply/audit-checklist/', label: 'Audit checklist', section: 'Teams' },
 
     { href: '/learn/comparisons/', label: 'Comparisons overview', section: 'Learn' },

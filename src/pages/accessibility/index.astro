@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteBreadcrumbs from '../../components/SiteBreadcrumbs.astro';
 
 const lastUpdated = 'May 2026';
 ---
@@ -9,6 +10,13 @@ const lastUpdated = 'May 2026';
     description="How we approach accessibility on the LSCSS documentation site, what we test, known limits, and how to report problems."
 >
     <main class="page-shell">
+        <SiteBreadcrumbs
+            items={[
+                { label: 'Home', href: '/' },
+                { label: 'Accessibility statement' }
+            ]}
+        />
+
         <section class="site-hero">
             <p class="eyebrow">Site policy</p>
 

@@ -13,6 +13,9 @@ export interface Props {
     ogImage?: string;
     ogImageAlt?: string;
     noindex?: boolean;
+    canonicalPath?: string;
+    datePublished?: string;
+    dateModified?: string;
     /**
      * Preload Space Mono 400. Defaults to true: every docs page renders code,
      * either as CodeExample blocks or inline `<code>` runs.
@@ -27,6 +30,9 @@ const {
     ogImage,
     ogImageAlt,
     noindex,
+    canonicalPath,
+    datePublished,
+    dateModified,
     preloadMono = true
 } = Astro.props;
 ---
@@ -38,6 +44,9 @@ const {
     ogImage={ogImage}
     ogImageAlt={ogImageAlt}
     noindex={noindex}
+    canonicalPath={canonicalPath}
+    datePublished={datePublished}
+    dateModified={dateModified}
     preloadMono={preloadMono}
 >
     <slot name="head" slot="head" />

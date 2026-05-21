@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteBreadcrumbs from '../../components/SiteBreadcrumbs.astro';
 
 const lastUpdated = 'May 2026';
 ---
@@ -9,6 +10,13 @@ const lastUpdated = 'May 2026';
     description="Cookies, local storage, and similar technologies used on the LSCSS documentation site."
 >
     <main class="page-shell">
+        <SiteBreadcrumbs
+            items={[
+                { label: 'Home', href: '/' },
+                { label: 'Cookie and storage policy' }
+            ]}
+        />
+
         <section class="site-hero">
             <p class="eyebrow">Site policy</p>
 

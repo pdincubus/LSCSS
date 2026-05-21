@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteBreadcrumbs from '../../components/SiteBreadcrumbs.astro';
 import { versions } from '../../data/versions';
 
 function formatReleaseDate(iso: string) {
@@ -31,6 +32,13 @@ function statusLabel(status: 'current' | 'archived' | 'draft') {
     description="What shipped in each site release: summaries, what changed, and what we stopped publishing."
 >
     <main class="page-shell">
+        <SiteBreadcrumbs
+            items={[
+                { label: 'Home', href: '/' },
+                { label: 'Versions' }
+            ]}
+        />
+
         <section class="site-hero">
             <p class="eyebrow">Versions</p>
 

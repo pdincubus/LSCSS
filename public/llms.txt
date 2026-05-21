@@ -1,0 +1,62 @@
+# LSCSS — Layered Semantic CSS
+
+> Practical CSS architecture documentation: cascade layers, semantic components, shallow selectors, modifiers, state classes, and theme—without utility-first class soup in HTML.
+
+LSCSS (Layered Semantic CSS) is a practitioner-led methodology for teams maintaining real front-end codebases. This site at https://lscss.crayonsandco.de documents how to apply it: learn the ideas, apply the patterns, adopt with teams, and compare against BEM, Tailwind, CSS Modules, utility-first CSS, and native `@scope`.
+
+The site is static, English (en-GB), operated by Crayons and Code (Phil Steer). Content is AI-assisted in places and human-reviewed. Utility-first CSS in markup is explicitly discouraged; rare CSS helpers (e.g. screen-reader utilities) live in a small `utilities` layer only.
+
+Canonical URL list: https://lscss.crayonsandco.de/urllist.txt  
+XML sitemap: https://lscss.crayonsandco.de/sitemap.xml  
+Sitemap index: https://lscss.crayonsandco.de/sitemap-index.xml  
+RSS: https://lscss.crayonsandco.de/rss.xml
+
+## Start here
+
+- [Home](https://lscss.crayonsandco.de/): Overview and common routes
+- [What is LSCSS?](https://lscss.crayonsandco.de/learn/what-is-lscss/): Definition and problem it solves
+- [Principles](https://lscss.crayonsandco.de/learn/principles/): Non-negotiables for calm CSS
+- [Core methodology](https://lscss.crayonsandco.de/apply/methodology/): Layers, naming, architecture overview
+- [FAQ](https://lscss.crayonsandco.de/learn/faq/): Utilities, Tailwind, BEM, @scope, legacy CSS
+
+## Apply (implementation)
+
+- [Layers](https://lscss.crayonsandco.de/apply/layers/): `legacy`, `settings`, `base`, `utilities`, `layout`, `components`, `theme`, `hacks`
+- [Architecture](https://lscss.crayonsandco.de/apply/architecture/): Folder and file ownership
+- [Naming](https://lscss.crayonsandco.de/apply/naming/): Semantic components and modifiers
+- [Modifiers and state](https://lscss.crayonsandco.de/apply/modifiers-and-state/)
+- [Utilities](https://lscss.crayonsandco.de/apply/utilities/): Rare helpers—not utility-first markup
+- [Decision trees](https://lscss.crayonsandco.de/apply/decision-trees/): Utility vs component, layers, hacks
+- [Examples](https://lscss.crayonsandco.de/apply/examples/): Before/after patterns
+- [Migration](https://lscss.crayonsandco.de/apply/migration/): Incremental adoption from legacy CSS
+- [Anti-patterns](https://lscss.crayonsandco.de/learn/anti-patterns/): What to stop doing
+
+## Comparisons
+
+- [Comparisons hub](https://lscss.crayonsandco.de/learn/comparisons/)
+- [Tailwind vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/tailwind-vs-lscss/)
+- [Utility-first vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/utility-first-vs-lscss/)
+- [BEM vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/bem-vs-lscss/)
+- [CSS Modules vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/css-modules-vs-lscss/)
+- [@scope and LSCSS](https://lscss.crayonsandco.de/learn/comparisons/scope-vs-lscss/)
+
+## Teams and writing
+
+- [Adoption](https://lscss.crayonsandco.de/teams/adoption/)
+- [Governance](https://lscss.crayonsandco.de/teams/governance/): team standards, review habits, and health checks
+- [Teaching deck](https://lscss.crayonsandco.de/teams/teaching-deck/)
+- [Writing guides](https://lscss.crayonsandco.de/writing/guides/): Accessibility, performance, browser support, migration
+- [Articles](https://lscss.crayonsandco.de/writing/articles/)
+
+## Site policies
+
+- [Accessibility statement](https://lscss.crayonsandco.de/accessibility/)
+- [Privacy policy](https://lscss.crayonsandco.de/privacy/)
+- [Cookie and storage policy](https://lscss.crayonsandco.de/cookies/)
+- [AI and this site](https://lscss.crayonsandco.de/ai/)
+
+## Optional
+
+- [Search](https://lscss.crayonsandco.de/search/): Client-side Pagefind (utility page; not indexed)
+- [Versions](https://lscss.crayonsandco.de/versions/): Site changelog
+- [Glossary](https://lscss.crayonsandco.de/learn/glossary/)

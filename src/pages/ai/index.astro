@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteBreadcrumbs from '../../components/SiteBreadcrumbs.astro';
 ---
 
 <BaseLayout
@@ -7,6 +8,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     description="How generative AI was used to build this young documentation site, and what was not delegated to models."
 >
     <main class="page-shell">
+        <SiteBreadcrumbs
+            items={[
+                { label: 'Home', href: '/' },
+                { label: 'AI and this site' }
+            ]}
+        />
+
         <section class="site-hero">
             <p class="eyebrow">Site policy</p>
 

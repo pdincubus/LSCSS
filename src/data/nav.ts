@@ -65,7 +65,6 @@ export const siteNavSections: SiteNavSection[] = [
             { href: '/teams/adoption/', label: 'Adoption' },
             { href: '/teams/teaching-deck/', label: 'Teaching deck' },
             { href: '/teams/governance/', label: 'Governance' },
-            { href: '/teams/team-governance/', label: 'Team governance' },
             { href: '/teams/contributing/', label: 'Contribution standards' },
             { href: '/apply/audit-checklist/', label: 'Audit checklist' }
         ]
@@ -129,7 +128,7 @@ export const docsNav = [
             { href: '/apply/migration/', label: 'Migration' },
             { href: '/learn/anti-patterns/', label: 'Anti-patterns' },
             { href: '/apply/design-tokens/', label: 'Design tokens' },
-            { href: '/teams/team-governance/', label: 'Team governance' },
+            { href: '/teams/governance/', label: 'Governance' },
             { href: '/apply/starter-template/', label: 'Starter template' },
             { href: '/learn/faq/', label: 'FAQ' }
         ]

@@ -21,9 +21,31 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '0.7',
+        label: '0.7',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'SEO and AEO pass: richer structured data, discovery files for crawlers and LLMs, legal policy pages, Umami analytics, and editorial alignment on utility-first CSS.',
+        releasedAt: '2026-05-21',
+        changed: [
+            'Canonical site URL set to lscss.crayonsandco.de across astro config, sitemap, robots, RSS, and policy copy.',
+            'JSON-LD @graph on every page: Organization (Crayons and Code), WebSite with SearchAction, Person author URL, and article datePublished where applicable.',
+            'Discovery files: sitemap.xml and urllist.txt generated at build time; public llms.txt for AI-oriented site summary; footer links to Versions, sitemap, and llms.txt.',
+            'Privacy, cookie, and accessibility policy pages; Umami Cloud analytics with data-host-url for reliable collect requests.',
+            'Sitemap excludes /search/ (noindex) and uses lastmod; comparison and FAQ copy states utility-first markup is poor architecture for long-lived sites.',
+            'SiteBreadcrumbs and BreadcrumbList JSON-LD on policy and versions pages.',
+            '/teams/team-governance/ redirects to /teams/governance/ — one governance guide, no summary stub.'
+        ],
+        removed: [
+            'The standalone /teams/team-governance/ summary page (bullet-list stub); use /teams/governance/ instead.',
+            'Neutral “utility-first is fine” framing on FAQ and Tailwind comparison pages in favour of explicit LSCSS editorial stance.'
+        ]
+    },
+    {
         version: '0.6',
         label: '0.6',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Visual refresh built on a new design token set and a clean-slate stylesheet. Space Grotesk and Space Mono carry the wordmark and code voice; indigo and violet lead, berry pink is held back for accent. Every layer of the cascade was rewritten from scratch so the live site demonstrates the methodology it documents.',

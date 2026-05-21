@@ -2,6 +2,7 @@
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Umami from '../components/Umami.astro';
+import { author, publisher } from '../data/siteSeo';
 import '../styles/site.css';
 
 export interface Props {
@@ -17,6 +18,12 @@ export interface Props {
     ogImageAlt?: string;
     /** When true, ask crawlers not to index this page. */
     noindex?: boolean;
+    /** Override canonical path (e.g. `/teams/governance/` for duplicate summary pages). */
+    canonicalPath?: string;
+    /** ISO date (YYYY-MM-DD) for Article / TechArticle schema. */
+    datePublished?: string;
+    /** ISO date (YYYY-MM-DD) for Article / TechArticle schema. */
+    dateModified?: string;
     /**
      * Preload Space Mono 400. Defaults to false; opt in from pages or layouts
      * that render code (e.g. anything using CodeExample or inline `<code>`).
@@ -32,14 +39,20 @@ const {
     ogImage,
     ogImageAlt = 'LSCSS — Layered Semantic CSS. Calm CSS architecture for real teams.',
     noindex = false,
+    canonicalPath: canonicalPathOverride,
+    datePublished,
+    dateModified,
     preloadMono = false
 } = Astro.props;
 
 const siteUrl = Astro.site?.href ?? `${Astro.url.origin}/`;
 const siteOrigin = new URL(siteUrl).origin;
+const siteHome = siteOrigin.endsWith('/') ? siteOrigin : `${siteOrigin}/`;
 
 const pathname = Astro.url.pathname;
-const canonicalPath = pathname === '/' ? '/' : pathname.endsWith('/') ? pathname : `${pathname}/`;
+const canonicalPath =
+    canonicalPathOverride ??
+    (pathname === '/' ? '/' : pathname.endsWith('/') ? pathname : `${pathname}/`);
 const canonicalURL = new URL(canonicalPath, siteOrigin).href;
 
 const documentTitle = /lscss/i.test(title) ? title : `${title} · LSCSS`;
@@ -65,23 +78,64 @@ const ogUsesDefaultDimensions =
 
 const pageUrl = canonicalURL;
 const ogType = schemaType === 'WebPage' ? 'website' : 'article';
-const structuredData = {
-    '@context': 'https://schema.org',
+
+const organizationId = `${siteHome}#organization`;
+const websiteId = `${siteHome}#website`;
+
+const organization = {
+    '@type': 'Organization',
+    '@id': organizationId,
+    name: publisher.name,
+    url: publisher.url,
+    logo: new URL('/images/og-default.png', siteOrigin).href
+};
+
+const website = {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    name: 'LSCSS',
+    url: siteHome,
+    description: 'Layered Semantic CSS — practical CSS architecture documentation.',
+    inLanguage: 'en-GB',
+    publisher: { '@id': organizationId },
+    potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${siteHome}search/`
+        },
+        'query-input': 'required name=search_term_string'
+    }
+};
+
+const pageEntity: Record<string, unknown> = {
     '@type': schemaType,
+    '@id': `${pageUrl}#webpage`,
     name: documentTitle,
     headline: documentTitle,
     description,
     url: pageUrl,
-    isPartOf: {
-        '@type': 'WebSite',
-        name: 'LSCSS',
-        url: siteOrigin.endsWith('/') ? siteOrigin : `${siteOrigin}/`
-    },
+    inLanguage: 'en-GB',
+    isPartOf: { '@id': websiteId },
     author: {
         '@type': 'Person',
-        name: 'Phil Steer'
+        name: author.name,
+        url: author.url
     },
-    inLanguage: 'en-GB'
+    publisher: { '@id': organizationId }
+};
+
+if (datePublished) {
+    pageEntity.datePublished = datePublished;
+}
+
+if (dateModified) {
+    pageEntity.dateModified = dateModified;
+}
+
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [organization, website, pageEntity]
 };
 ---
 

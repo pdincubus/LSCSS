@@ -17,4 +17,5 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+Sitemap: https://lscss.crayonsandco.de/sitemap.xml
 Sitemap: https://lscss.crayonsandco.de/sitemap-index.xml

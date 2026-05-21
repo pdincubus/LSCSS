@@ -1,0 +1,57 @@
+---
+export interface BreadcrumbItem {
+    label: string;
+    href?: string;
+}
+
+interface Props {
+    items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const siteOrigin = new URL(Astro.site?.href ?? Astro.url.origin).origin;
+
+function absHref(href: string): string {
+    const path = href.startsWith('/') ? href : `/${href}`;
+
+    return new URL(path, `${siteOrigin}/`).href;
+}
+
+const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => {
+        const position = index + 1;
+        const isLast = index === items.length - 1;
+
+        return {
+            '@type': 'ListItem',
+            position,
+            name: item.label,
+            ...(!isLast && item.href ? { item: absHref(item.href) } : {})
+        };
+    })
+};
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+        {
+            items.map((item, index) => {
+                const isLast = index === items.length - 1;
+
+                return (
+                    <li aria-current={isLast ? 'page' : undefined}>
+                        {!isLast && item.href ? (
+                            <a href={item.href}>{item.label}</a>
+                        ) : (
+                            item.label
+                        )}
+                    </li>
+                );
+            })
+        }
+    </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />

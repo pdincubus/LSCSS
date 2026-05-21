@@ -7,7 +7,7 @@
         "dev": "astro dev",
         "start": "astro dev",
         "check": "astro check",
-        "build": "astro build && pagefind --site dist && node scripts/copy-pagefind-to-public.mjs",
+        "build": "astro build && node scripts/generate-discovery-files.mjs && pagefind --site dist && node scripts/copy-pagefind-to-public.mjs",
         "generate:brand": "node scripts/generate-brand-assets.mjs",
         "generate:og": "pnpm run generate:brand",
         "preview": "astro preview"
