@@ -21,9 +21,24 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '0.8',
+        label: '0.8',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Naming guidance update: optional short component namespaces added as a collision-safety pattern without changing the default semantic naming model.',
+        releasedAt: '2026-05-27',
+        changed: [
+            'Added optional component namespacing guidance to /apply/naming/ with examples for plain and prefixed selectors.',
+            'Documented namespace guardrails: use only when collision risk is real, keep prefixes short (typically 2-4 characters), and preserve semantic component names after the prefix.',
+            'Added a dedicated Namespaces section anchor in the naming page navigation for direct linking.',
+            'Added selector-depth guidance to /apply/naming/ with practical limits for chain length, when descendant selectors are acceptable, and when to introduce a stable context hook instead of chaining through every wrapper.'
+        ]
+    },
+    {
         version: '0.7',
         label: '0.7',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'SEO and AEO pass: richer structured data, discovery files for crawlers and LLMs, legal policy pages, Umami analytics, and editorial alignment on utility-first CSS.',

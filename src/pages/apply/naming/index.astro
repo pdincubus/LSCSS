@@ -12,6 +12,31 @@ const childSelectors = `.product-card > .title {}
 .site-header > .logo {}
 .filter-panel > .actions {}`;
 
+const selectorDepthExample = `/* Good: explicit where structure matters */
+.product-card > .images > .image {}
+.product-card > .content > .title {}
+
+/* Good: shorter when structure is stable enough */
+.product-card .image {}
+.product-card .brand {}
+
+/* Avoid: deep chains for routine component styling */
+.abc-product-card > .content > .content-actions > .wishlist-button {}
+
+/* Prefer: keep one stable context hook, then target the control */
+.abc-product-card .content-actions > .wishlist-button {}
+
+/* Best: reduce depth wherever possible, sensible, and reliable */
+.abc-product-card .wishlist-button {}`;
+
+const namespacedComponents = `.abc-product-card {}
+.abc-product-card {}
+.abc-site-header {}`;
+
+const namespacedChildSelectors = `.abc-product-card > .title {}
+.abc-product-card > .price {}
+.abc-site-header > .logo {}`;
+
 const modifierAndStateClasses = `.product-card--featured {}
 .product-card--compact {}
 .is_active {}
@@ -59,6 +84,8 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         <a href="#rules">Core rules</a>
         <a href="#influences">Influences</a>
         <a href="#components">Components</a>
+        <a href="#depth">Selector depth</a>
+        <a href="#namespace">Namespaces</a>
         <a href="#state">State and modifiers</a>
         <a href="#avoid">Avoid this</a>
     </nav>
@@ -114,6 +141,58 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         <p>
             This keeps HTML readable without losing ownership. The selector
             carries structure, the class name carries meaning.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="namespace">
+            Optional component namespaces
+        </h2>
+
+        <p>
+            Namespacing adds a safety layer in environments where class names
+            can collide across teams, packages, or third-party CSS. It is
+            optional, and should stay short.
+        </p>
+
+        <CodeExample code={namespacedComponents} />
+        <CodeExample code={namespacedChildSelectors} />
+
+        <ul>
+            <li>Use namespaces when collision risk is real.</li>
+            <li>Keep namespaces short: usually 2 to 4 characters.</li>
+            <li>Keep component names semantic after the prefix.</li>
+            <li>Do not namespace by default in small isolated codebases.</li>
+            <li>Do not replace ownership and architecture with prefixes.</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2 id="depth">
+            Reasonable selector depth
+        </h2>
+
+        <p>
+            Not every component can be only direct children forever. Real UI
+            structure has wrappers such as media and content containers. Keep
+            selector depth practical: short enough to stay maintainable, deep
+            enough to be clear.
+        </p>
+
+        <ul>
+            <li>Default to root plus one or two descendants.</li>
+            <li>Use direct child selectors where ownership boundaries matter.</li>
+            <li>Use descendant selectors when the extra structure is incidental.</li>
+            <li>Avoid routine selectors that chain through every wrapper level.</li>
+            <li>If a selector feels long, introduce one stable context hook.</li>
+        </ul>
+
+        <CodeExample code={selectorDepthExample} />
+
+        <p>
+            A useful rule of thumb: if you regularly need more than three steps
+            from the component root, the markup or class architecture likely
+            needs a clearer hook.
         </p>
     </section>
 
