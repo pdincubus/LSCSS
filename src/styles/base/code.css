@@ -14,20 +14,20 @@ samp {
 
 :not(pre) > code {
     padding: 0.15em 0.4em;
-    border-radius: var(--radius-s);
+    border-radius: var(--br-s);
     background: var(--c-code-bg);
 }
 
 pre {
-    margin-block: var(--space-md);
-    padding: var(--space-lg);
+    margin-block: var(--space);
+    padding: var(--space-m);
     overflow-x: auto;
-    border-radius: var(--radius-m);
+    border-radius: var(--br-m);
     background: var(--c-code-bg);
     color: var(--c-text);
     font-family: var(--ff-mono);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-base);
+    font-size: var(--fs-s);
+    line-height: var(--lh);
 }
 
 pre code {

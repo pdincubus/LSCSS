@@ -5,16 +5,16 @@
 
 .hub-grid {
     display: grid;
-    gap: var(--space-lg);
+    gap: var(--space-m);
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-    margin-block-end: var(--space-xl);
+    margin-block-end: var(--space-l);
 }
 
 .hub-card {
     margin: 0;
     background: var(--c-surface);
     border: var(--border-s) solid var(--c-border);
-    border-radius: var(--radius-m);
+    border-radius: var(--br-m);
     transition: border-color var(--transition-s), box-shadow var(--transition-s);
 }
 
@@ -28,8 +28,8 @@
 .hub-card > .stack {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
-    padding: var(--space-lg);
+    gap: var(--space-s);
+    padding: var(--space-m);
     block-size: 100%;
 }
 
@@ -46,9 +46,9 @@
 .hub-card > .title {
     margin: 0;
     color: var(--c-heading);
-    font-size: var(--fs-md);
+    font-size: var(--fs-m);
     font-weight: var(--fw-semibold);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-s);
     text-decoration: underline;
     text-decoration-color: var(--c-link);
     text-decoration-thickness: 1px;
@@ -67,10 +67,10 @@
 .hub-card > .body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-s);
     color: var(--c-text-muted);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-relaxed);
+    font-size: var(--fs-s);
+    line-height: var(--lh-l);
 }
 
 .hub-card > .body > p {
@@ -81,7 +81,7 @@
 .hub-card .cta {
     margin-block-start: auto;
     color: var(--c-link);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-s);
     font-weight: var(--fw-semibold);
     text-decoration: underline;
     text-decoration-color: currentColor;

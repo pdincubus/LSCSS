@@ -1,5 +1,6 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CliCommand from '../../../components/CliCommand.astro';
 import CodeExample from '../../../components/CodeExample.astro';
 import HubCard from '../../../components/HubCard.astro';
 
@@ -24,11 +25,96 @@ const supportsExample = `@supports (display: grid) {
         gap: var(--space-m);
     }
 }`;
+
+const customMediaExample = `/* settings layer — define once */
+@custom-media --desktop (width >= 1280px);
+@custom-media --reduced-motion (prefers-reduced-motion: reduce);
+
+/* component CSS — readable at authoring time */
+.product-card {
+    @media (--desktop) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (--reduced-motion) {
+        transition: none;
+    }
+}
+
+/* build output — what the browser actually parses */
+/* @media (width >= 1280px) { … } */
+/* @media (prefers-reduced-motion: reduce) { … } */`;
+
+const supportMatrixTemplate = `# Browser support matrix
+
+<!-- Copy into your repo (e.g. docs/browser-support.md). Update when policy or browserslist changes. -->
+
+## Policy
+
+| Field | Value |
+| --- | --- |
+| Last updated | YYYY-MM-DD |
+| Owners | |
+| Primary baseline | Feature / Version / Both |
+| Browserslist | See .browserslistrc (queries and/or feature queries) |
+| Next review | |
+
+## Support tiers
+
+- Fully supported — critical journeys meet the baseline; defects are release blockers.
+- Best effort — core tasks work; minor visual differences acceptable.
+- Not supported — no test commitment.
+
+## Two ways to document the baseline
+
+Use a feature baseline when capability matters more than a version number (CSS, JS, and platform APIs).
+Use a version list when contracts, QA devices, or analytics name specific engines.
+Many teams treat the feature tables as source of truth and keep versions as an optional appendix.
+
+## Feature baseline (primary)
+
+Policy: Required = must work everywhere you claim fully supported.
+Progressive = enhanced path + documented fallback. Not used = off the table.
+
+| Capability | Policy | Delivery | Fallback when missing | Notes |
+| --- | --- | --- | --- | --- |
+| Cascade layers (@layer) | | Native / Build / Not used | | |
+| Design tokens (custom properties) | | Native | | |
+| Custom media (@custom-media) | | Build | Plain @media or simpler layout | Every pipeline must expand |
+| Container queries | | Native / Not used | | |
+| Nesting | | Native / Build | Flat selectors | |
+| :is(), :where(), :not() | | Native | Longer selectors | |
+| :has() | | Native / @supports | Simpler DOM or JS hook | |
+| @scope | | Native / Not used | Layers + naming discipline | |
+| Logical properties | | Native | Physical properties | |
+
+## JavaScript and platform APIs (optional, same pattern)
+
+| Capability | Policy | Delivery | Fallback when missing | Notes |
+| --- | --- | --- | --- | --- |
+| ES modules | | Native / Transpile | | |
+| fetch | | Native / Polyfill | | |
+| dynamic import() | | Native / Transpile / Not used | | |
+| IntersectionObserver | | Native / Polyfill | | |
+| (add rows your app needs) | | | | |
+
+## Browser versions (optional appendix)
+
+| Browser / environment | Minimum version | Tier | Notes |
+| --- | --- | --- | --- |
+| Chrome (desktop) | | | |
+| Firefox | | | |
+| Safari (macOS) | | | |
+| Microsoft Edge | | | |
+| Safari (iOS) | | | |
+| Chrome (Android) | | | |
+| Samsung Internet | | | |
+| Embedded webview (name product) | | | |`;
 ---
 
 <DocsLayout
     title="LSCSS Browser Support"
-    description="Browserslist, build-time targets, @supports, and how modern CSS features fit LSCSS in production."
+    description="Browserslist, custom media and build-time transforms, @supports, and how modern CSS features fit LSCSS in production."
     schemaType="TechArticle"
 >
     <section class="site-hero">
@@ -55,8 +141,10 @@ const supportsExample = `@supports (display: grid) {
     <nav class="section-nav" aria-label="Browser support sections">
         <a href="#browserslist">Browserslist</a>
         <a href="#tooling">Tooling</a>
+        <a href="#custom-media">Custom media</a>
         <a href="#supports">@supports</a>
         <a href="#features">Modern CSS</a>
+        <a href="#support-matrix">Support matrix</a>
         <a href="#checklist">Checklist</a>
     </nav>
 
@@ -85,9 +173,13 @@ const supportsExample = `@supports (display: grid) {
             Queries are data, not superstition: combine coverage stats
             (<code>&gt; 0.5%</code>), recency (<code>last 2 versions</code>), and
             explicit exclusions (<code>not dead</code>) with what your analytics and
-            contracts require. Run <code>npx browserslist</code> in the project to print
-            the resolved browser set whenever you change the file.
+            contracts require—or use <strong>feature queries</strong> such as
+            <code>supports css-grid</code> when your
+            <a href="#support-matrix">support matrix</a> is capability-first rather than
+            version-first. Run the command below whenever you change the file.
         </p>
+
+        <CliCommand command="browserslist" label="Print resolved browsers" />
     </section>
 
     <section class="content-block">
@@ -117,8 +209,83 @@ const supportsExample = `@supports (display: grid) {
         </ul>
 
         <p>
-            More detail on PostCSS, custom media, and monorepo caveats lives under
+            More detail on PostCSS plugins, Stylelint, and monorepo caveats lives under
             <a href="/apply/tooling/">Tooling</a>.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="custom-media">Custom media queries and the build step</h2>
+
+        <p>
+            <a href="https://www.w3.org/TR/mediaqueries-5/#custom-mq">Custom media</a>
+            (<code>@custom-media</code>) lets you name breakpoints and preference
+            queries once—usually in the <code>settings</code> layer—and reference them
+            in component CSS as <code>@media (--desktop)</code> instead of repeating
+            magic numbers. Directional names such as <code>--from-tablet</code> and
+            accessibility queries such as <code>--reduced-motion</code> can sit beside
+            layout breakpoints in the same file.
+        </p>
+
+        <p>
+            <strong>No major browser implements <code>@custom-media</code> yet.</strong>
+            What ships in production is ordinary <code>@media</code> after your build
+            expands the aliases (PostCSS, Lightning CSS, or equivalent). You cannot
+            paste custom-media syntax into a stylesheet that reaches the browser
+            without that transform—unlike cascade layers or <code>:is()</code>, there
+            is no progressive runtime fallback.
+        </p>
+
+        <CodeExample code={customMediaExample} language="css" />
+
+        <p>
+            The tradeoff is explicit: every path that produces CSS must run the expand
+            step—local dev, CI, preview, and any CMS or micro-frontend that might
+            inject styles. If one pipeline skips the build while the rest of the repo
+            uses <code>@media (--tablet)</code>, that CSS will not parse.
+        </p>
+
+        <h3>When the build step is worth it</h3>
+
+        <p>
+            For a small site with one author and few breakpoints, a tool only for
+            custom media may not pay for itself. A single shared constants file,
+            comments, or careful discipline can be enough.
+        </p>
+
+        <p>
+            For <strong>larger codebases</strong>—many contributors, long-lived
+            products, or a shared design system—the step is usually worth it:
+        </p>
+
+        <ul>
+            <li>
+                <strong>One source of truth.</strong>
+                Change a breakpoint once; every component that references
+                <code>--desktop</code> stays aligned.
+            </li>
+            <li>
+                <strong>Readable reviews.</strong>
+                <code>@media (--until-desktop)</code> states intent; scattered
+                <code>1279px</code> does not.
+            </li>
+            <li>
+                <strong>Fewer silent drifts.</strong>
+                Without named media, “the tablet breakpoint” slowly becomes three
+                different numbers in three folders.
+            </li>
+            <li>
+                <strong>Preference queries as first-class.</strong>
+                Treat <code>prefers-reduced-motion</code> like a layout breakpoint
+                instead of bolting one-off media blocks into random files.
+            </li>
+        </ul>
+
+        <p>
+            Wire custom media into the same browserslist-backed pipeline as prefixes
+            and other syntax lowering so expanded queries match the browsers you
+            actually support. Examples and anti-patterns for naming breakpoints live
+            under <a href="/apply/tooling/#custom-media">Tooling → Custom media queries</a>.
         </p>
     </section>
 
@@ -154,24 +321,332 @@ const supportsExample = `@supports (display: grid) {
             <li><strong>Cascade layers</strong> (<code>@layer</code>) for predictable override order</li>
             <li><strong>Custom properties</strong> for tokens and theme boundaries</li>
             <li><strong>Logical properties and values</strong> for direction-aware layout</li>
-            <li><strong>Container queries</strong>, <strong>nesting</strong>, and <strong><code>:is()</code> / <code>:where()</code></strong> where examples stay concise</li>
+            <li>
+                <strong>Custom media</strong> (<code>@custom-media</code>) for named breakpoints—
+                authored in CSS, delivered as plain <code>@media</code> via the build;
+                see <a href="#custom-media">Custom media queries and the build step</a>
+            </li>
+            <li><strong>Container queries</strong> and <strong>nesting</strong> for responsive, readable component CSS</li>
+            <li>
+                <strong>Selector features</strong> —
+                <code>:is()</code>, <code>:where()</code>, <code>:not()</code>, and
+                <code>:has()</code> where examples stay concise.
+                <code>:has()</code> has a newer support curve than
+                <code>:is()</code>, <code>:where()</code>, or <code>:not()</code>—confirm
+                it against your resolved browserslist before critical UI depends on it.
+            </li>
             <li><strong><code>@scope</code></strong> where discussed explicitly—know your target support before relying on it in production</li>
         </ul>
 
         <p>
             If you must support older engines, document which features are authored behind
-            build transforms, which are gated with <code>@supports</code>, and which are
-            simply off the table until the baseline moves.
+            build transforms, which are gated with <code>@supports</code> (for example
+            <code>@supports selector(:has(*))</code> for relational selectors), and which
+            are simply off the table until the baseline moves.
         </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="support-matrix">Support matrix template</h2>
+
+        <p>
+            Browserslist tells the build what to transform; a written matrix tells
+            people what you promise users. Keep it next to the code (for example
+            <code>docs/browser-support.md</code> or your team handbook), link it from
+            onboarding, and update it when the baseline changes—not only at project
+            kickoff.
+        </p>
+
+        <p>
+            Use three tiers so “supported” is not argued from memory in every review:
+        </p>
+
+        <ul>
+            <li>
+                <strong>Fully supported</strong> — critical journeys meet your
+                documented baseline; defects are release blockers.
+            </li>
+            <li>
+                <strong>Best effort</strong> — core tasks work; minor visual
+                differences are acceptable.
+            </li>
+            <li>
+                <strong>Not supported</strong> — no test commitment; degradation or
+                blocking is acceptable.
+            </li>
+        </ul>
+
+        <h3>Two ways to document the baseline</h3>
+
+        <p>
+            You do not have to anchor policy on version numbers. Two approaches are
+            common; pick one as primary and add the other when it helps.
+        </p>
+
+        <div class="comparison-table-wrap">
+            <table class="comparison-table comparison-table--plain">
+                <thead>
+                    <tr>
+                        <th scope="col">Approach</th>
+                        <th scope="col">What you document</th>
+                        <th scope="col">Best when</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Feature baseline</th>
+                        <td>
+                            Capabilities the product requires—CSS, JavaScript,
+                            and platform APIs—and how you deliver or fall back
+                            (native, build, polyfill, transpile)
+                        </td>
+                        <td>
+                            Progressive enhancement, polyfill/transpile
+                            strategies, or when “Chrome 120” is less useful than
+                            “<code>fetch</code> required” or “container queries
+                            required”
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Version / environment list</th>
+                        <td>
+                            Named browsers, minimum versions, webviews, and tiers
+                        </td>
+                        <td>
+                            Contracts, QA device labs, analytics-driven floors, or
+                            embedded shells you must name explicitly
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            The same idea applies outside CSS. A feature baseline for
+            <strong>JavaScript</strong> might list <code>fetch</code>, ES modules,
+            <code>dynamic import()</code>, or observers your app relies on—with
+            delivery marked as native, transpiled, or polyfilled—instead of debating
+            “which Safari version” in every ticket. You stop guessing what “we support
+            last two versions” means for a given API and document what must work, what
+            degrades, and what is off the table.
+        </p>
+
+        <p>
+            Many teams treat <strong>feature tables as source of truth</strong> for
+            engineering (CSS plus JS where relevant) and keep a version list as an
+            optional appendix for QA and stakeholders. For CSS tooling, browserslist
+            can follow coverage queries such as <code>last 2 versions</code>,
+            <strong>feature queries</strong> such as <code>supports css-grid</code>, or
+            a mix—see the
+            <a href="https://github.com/browserslist/browserslist#browserslist">browserslist docs</a>.
+            For JS, the same browserslist config often feeds Babel or SWC; align those
+            transforms with the capabilities in your matrix. Runtime checks in CSS use
+            <code>@supports</code> (see <a href="#supports"><code>@supports</code></a>
+            above); in JS use feature detection or conditional loading, not version
+            sniffing.
+        </p>
+
+        <h3 id="feature-baseline">Feature baseline (primary template)</h3>
+
+        <p>
+            Start with the CSS rows below. Extend the same columns for JavaScript and
+            platform APIs in your copied template (see the Markdown block)—policy,
+            delivery, and fallback—so one document covers the stack.
+        </p>
+
+        <p>
+            For each capability, record <strong>policy</strong> (required everywhere you
+            claim fully supported, progressive with a fallback, or not used),
+            <strong>delivery</strong> (native, build transform, polyfill, or
+            <code>@supports</code> in CSS), and what happens when the feature is
+            missing.
+        </p>
+
+        <div class="comparison-table-wrap">
+            <table class="comparison-table comparison-table--plain">
+                <thead>
+                    <tr>
+                        <th scope="col">Capability</th>
+                        <th scope="col">Policy</th>
+                        <th scope="col">Delivery</th>
+                        <th scope="col">Fallback when missing</th>
+                        <th scope="col">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Cascade layers (<code>@layer</code>)</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Design tokens</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Custom media</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Build must expand in every CSS pipeline</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Container queries</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nesting</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>:is()</code> / <code>:where()</code> / <code>:not()</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>:has()</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Often progressive; gate with <code>@supports selector(:has(*))</code></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>@scope</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Logical properties</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            <strong>Policy</strong> examples: <em>Required</em>,
+            <em>Progressive</em>, <em>Not used</em>.
+            <strong>Delivery</strong> examples: <em>Native</em>, <em>Build</em>,
+            <em><code>@supports</code></em>.
+        </p>
+
+        <h3 id="version-baseline">Browser versions (optional appendix)</h3>
+
+        <p>
+            Use this table when you need to name engines for legal text, device labs,
+            or analytics—not as a substitute for describing what CSS must do. Add rows
+            for webviews, kiosk shells, or partner embeds that matter to your product.
+        </p>
+
+        <div class="comparison-table-wrap">
+            <table class="comparison-table comparison-table--plain">
+                <thead>
+                    <tr>
+                        <th scope="col">Browser / environment</th>
+                        <th scope="col">Minimum version</th>
+                        <th scope="col">Tier</th>
+                        <th scope="col">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Chrome (desktop)</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Firefox</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Safari (macOS)</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Microsoft Edge</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Safari (iOS)</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Chrome (Android)</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Samsung Internet</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Embedded webview</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Name the product (in-app browser, partner shell, etc.)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            Copy the Markdown below into your repository and replace the placeholders.
+            It includes an optional JavaScript / platform API section using the same
+            pattern. State whether your primary baseline is feature-, version-, or
+            both-style in the policy header. Attach resolved browserslist output to
+            release notes when the baseline changes.
+        </p>
+
+        <CodeExample code={supportMatrixTemplate} language="text" />
     </section>
 
     <section class="content-block">
         <h2 id="checklist">Practical checklist</h2>
 
         <ul>
-            <li>Publish a written support matrix (browsers, versions, “best effort” rules).</li>
+            <li>
+                Publish a written support matrix using the
+                <a href="#support-matrix">template above</a>—feature baseline,
+                version list, or both—and keep it aligned with browserslist and
+                <code>@supports</code> fallbacks.
+            </li>
             <li>Commit browserslist queries next to the code that consumes them.</li>
-            <li>Run <code>npx browserslist</code> after changes and store the output in release notes when support shifts.</li>
+            <li>Run the browserslist command above after changes and store the output in release notes when support shifts.</li>
+            <li>
+                If you use <code>@custom-media</code>, confirm every CSS delivery path
+                (dev, CI, preview, embedded bundles) runs the expand step—no raw
+                <code>@media (--name)</code> in shipped CSS.
+            </li>
             <li>Test critical journeys in at least one device class per major engine you claim.</li>
             <li>Revisit targets when analytics, regulation, or embedded webviews change.</li>
         </ul>

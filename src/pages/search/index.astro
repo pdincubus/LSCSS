@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CliCommand from '../../components/CliCommand.astro';
 import SearchBox from '../../components/SearchBox.astro';
 import HubCard from '../../components/HubCard.astro';
 ---
@@ -26,6 +27,7 @@ import HubCard from '../../components/HubCard.astro';
 
         <nav class="section-nav" aria-label="Search sections">
             <a href="#site-search">Search</a>
+            <a href="#local-search">Local setup</a>
             <a href="#start">Start here</a>
             <a href="#problems">Common problems</a>
             <a href="#routes">Quick routes</a>
@@ -44,6 +46,23 @@ import HubCard from '../../components/HubCard.astro';
             </p>
 
             <SearchBox />
+        </section>
+
+        <section class="content-block">
+            <h2 id="local-search">
+                Local search setup
+            </h2>
+
+            <p>
+                Search is powered by Pagefind and indexes the built site. Run a
+                production build once so the index is copied to
+                <code>public/pagefind</code>, then use the dev server or preview
+                while you work on the site.
+            </p>
+
+            <CliCommand command="run:build" label="Build the site (indexes search)" />
+            <CliCommand command="run:dev" label="Dev server" />
+            <CliCommand command="run:preview" label="Preview production build" />
         </section>
 
         <section class="content-block">

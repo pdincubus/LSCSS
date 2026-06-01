@@ -25,18 +25,29 @@ examples.forEach((example) => {
         return;
     }
 
+    const clearStatus = () => {
+        status.textContent = '';
+        status.classList.remove('copy-status--success', 'copy-status--error');
+    };
+
+    const showStatus = (message: string, type: 'success' | 'error') => {
+        status.textContent = message;
+        status.classList.remove('copy-status--success', 'copy-status--error');
+        status.classList.add(type === 'success' ? 'copy-status--success' : 'copy-status--error');
+    };
+
     button.addEventListener('click', async () => {
         try {
             await navigator.clipboard.writeText(code.textContent || '');
-            status.textContent = 'Copied to clipboard';
+            showStatus('Copied to clipboard', 'success');
             button.textContent = 'Copied';
 
             window.setTimeout(() => {
-                status.textContent = '';
+                clearStatus();
                 button.textContent = 'Copy';
             }, 2000);
         } catch {
-            status.textContent = 'Copy failed';
+            showStatus('Copy failed', 'error');
         }
     });
 });

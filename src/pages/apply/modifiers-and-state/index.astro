@@ -1,11 +1,36 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import DecisionTree from '../../../components/DecisionTree.astro';
+import { modifiersAndStateQuickRules } from '../../../data/decisionTrees';
 
 /* Empty `{}` keeps snippets valid CSS so Prism can tokenise selector lists. */
-const modifierExample = `.product-card--featured {}
-.product-card--compact {}
-.site-header--minimal {}`;
+const modifierMarkupExample = `<!-- Base component + modifier class on the same element -->
+<article class="product-card product-card--featured">
+    <h2 class="title">Product title</h2>
+</article>`;
+
+const modifierFlatExample = `/* components/product-card.css — usual pattern in the components layer */
+.product-card {}
+
+.product-card--featured {}
+.product-card--compact {}`;
+
+const modifierGuardExample = `/* Optional extra guard when collision risk is higher */
+.product-card.product-card--featured {}
+.site-header.site-header--minimal {}`;
+
+const modifierNestedExample = `/* Same ownership when the team nests in component partials */
+.product-card {
+    &--featured {}
+    &--compact {}
+}`;
+
+const stateNamingContrastExample = `<!-- Variant: hyphenated component + double-hyphen modifier -->
+<article class="product-card product-card--featured">
+
+<!-- Behaviour: separate is_* class (underscore after the prefix) -->
+<article class="product-card is_loading">`;
 
 const stateExample = `.is_active {}
 .is_disabled {}
@@ -31,15 +56,6 @@ const avoidExample = `/* Avoid unclear state names */
 .is_open {}
 .has_error {}`;
 
-const decisionExample = `Ask:
-Can this exist as a documented reusable version?
-→ Modifier
-
-Is this temporary UI behaviour?
-→ .is_*
-
-Is this describing present content or condition?
-→ .has_*`;
 ---
 
 <DocsLayout
@@ -78,9 +94,11 @@ Is this describing present content or condition?
             Before naming anything, decide what problem it is solving.
         </p>
 
-        <CodeExample code={decisionExample} language="text" />
+        <DecisionTree tree={modifiersAndStateQuickRules} />
 
         <p>
+            For the shorter modifier vs state flow, see
+            <a href="/apply/decision-trees/#state">decision trees</a>.
             This prevents modifiers becoming state classes in disguise and keeps
             component behaviour predictable.
         </p>
@@ -97,10 +115,51 @@ Is this describing present content or condition?
             without reading JavaScript.
         </p>
 
-        <CodeExample code={modifierExample} />
+        <p>
+            A modifier is an <strong>extra class on the same element</strong> as
+            the component root — not a replacement for it. The base class
+            (<code>product-card</code>) still defines what the thing is; the
+            modifier (<code>product-card--featured</code>) documents which
+            documented variant applies. Markup needs <strong>both</strong>:
+        </p>
+
+        <CodeExample code={modifierMarkupExample} language="html" />
 
         <p>
-            If the state disappears after interaction, it is probably not a modifier.
+            In the stylesheet, keep modifier rules in the <strong>component
+            partial</strong> for that root. Layers, one-file-per-component, and
+            naming conventions are the main safety nets — so
+            <code>.product-card--featured</code> in <code>product-card.css</code>
+            is usually enough. You do not have to repeat
+            <code>.product-card</code> in every selector unless the project needs
+            extra guarding.
+        </p>
+
+        <CodeExample code={modifierFlatExample} />
+
+        <p>
+            Chained selectors such as
+            <code>.product-card.product-card--featured</code> are optional when
+            collision risk is higher (shared files, weak layer discipline, or
+            migration). Use them deliberately, not by default:
+        </p>
+
+        <CodeExample code={modifierGuardExample} />
+
+        <p>
+            Teams that use native nesting often write
+            <code>&--featured</code> inside <code>.product-card</code> — see
+            <a href="/apply/architecture/#nesting">CSS nesting</a> on the
+            architecture page:
+        </p>
+
+        <CodeExample code={modifierNestedExample} />
+
+        <p>
+            If you only add <code>product-card--featured</code> to the HTML
+            without <code>product-card</code>, you lose the base component
+            context in markup. If the behaviour disappears after interaction, it
+            is probably not a modifier — use a state class instead.
         </p>
     </section>
 
@@ -113,6 +172,24 @@ Is this describing present content or condition?
             Use <code>.is_*</code> for temporary UI state created by interaction,
             validation, loading, or progressive enhancement.
         </p>
+
+        <p>
+            LSCSS uses two punctuation habits on purpose. Component and modifier
+            names use <strong>hyphens</strong>
+            (<code>product-card</code>, <code>product-card--featured</code>).
+            State and condition names use an <strong>underscore</strong> only
+            after the <code>is</code> or <code>has</code> prefix
+            (<code>is_loading</code>, <code>has_error</code>). In markup, a
+            double hyphen reads as a documented variant of the component; an
+            <code>is_</code> or <code>has_</code> class reads as current
+            behaviour or condition — not another BEM block. That reduces
+            <code>product-card--loading</code> or
+            <code>product-card_loading</code> when someone meant temporary
+            state. Reserve underscores for state and condition class names, not
+            for component or modifier roots.
+        </p>
+
+        <CodeExample code={stateNamingContrastExample} language="html" />
 
         <CodeExample code={stateExample} />
 
@@ -130,6 +207,10 @@ Is this describing present content or condition?
         <p>
             Use <code>.has_*</code> when the component has content, children, or
             a condition that affects styling but is not itself a reusable variant.
+            Use the same underscore-after-prefix pattern as
+            <a href="#state-classes">state classes</a>
+            (<code>has_error</code>, not <code>has-error</code> or
+            <code>form-field--error</code> for a validation condition).
         </p>
 
         <CodeExample code={conditionExample} />

@@ -32,13 +32,23 @@ Layer order matters more than source order.
 
 Unlayered CSS is always more specific than layered CSS and should be avoided unless there is a deliberate reason.
 
+### Choosing a low layer
+
+The canonical stack declares `legacy` first (lowest). Projects may add an optional `thirdparty` layer **before** `legacy` when both foreign vendor CSS and inherited first-party CSS need separate buckets. First listed in `@layer` is least important.
+
+- **Only old first-party CSS** — use `legacy` only (canonical default below).
+- **Only vendor CSS, no legacy** — use `thirdparty` only; omit `legacy` from the declaration and imports.
+- **Both** — declare `thirdparty, legacy, settings, …` and import each file into the matching layer.
+
+Teams may also keep vendor CSS in `legacy` when a single low bucket is enough.
+
 ### Layer Purpose
 
 #### `legacy`
 
 Optional.
 
-Used for inherited or older CSS that cannot yet be fully refactored. This layer sits lowest so modern architecture can progressively override it safely.
+Used for inherited or older **first-party** CSS that cannot yet be fully refactored. This layer sits lowest in the canonical stack so modern architecture can progressively override it safely. Teams may also place third-party CSS here when one combined low bucket is enough.
 
 Use when:
 
@@ -48,6 +58,28 @@ Use when:
 - untangling old specificity problems
 
 Do not add new feature work here unless unavoidable.
+
+---
+
+#### `thirdparty`
+
+Optional. Not part of the canonical one-line stack; add **before** `legacy` when both layers are needed.
+
+Used for CSS you do not own: npm packages, widgets, CMS plugins, and other vendor styles you must import but cannot refactor. Sits below `legacy` when both are declared (`thirdparty` is listed first in `@layer`).
+
+Use when:
+
+- the name `legacy` is misleading because you have no inherited first-party CSS
+- vendor CSS must stay coupled to your authored layers without living in `components` or `base`
+- you need a separate bucket from first-party legacy CSS during migration
+
+Do not put first-party code you own here. Do not import vendor CSS into mid-stack layers because `legacy` feels wrong.
+
+When both `thirdparty` and `legacy` exist:
+
+```css
+@layer thirdparty, legacy, settings, base, utilities, layout, components, theme, hacks;
+```
 
 ---
 
@@ -266,24 +298,44 @@ Use semibold and bold intentionally. Avoid overly heavy heading blocks.
 
 ---
 
+## Token naming (site)
+
+This docs site uses short prefixes in `src/styles/settings/tokens.css`. Bare `--fs`, `--lh`, and `--space` are the **base** step on each ladder (body size, normal line height, default spacing). Use explicit `-m` on a scale when you need the step before `-l` (for example `--fs-m`, `--lh-m`, `--space-m`).
+
+| Prefix | Role |
+| ------ | ---- |
+| `--c-*` | Colour (semantic tokens and palette ramps) |
+| `--fs`, `--fs-*` | Font size |
+| `--lh`, `--lh-*` | Line height |
+| `--space`, `--space-*` | Spacing |
+| `--br-*` | Border radius |
+| `--border-*` | Border width (not radius) |
+| `--ff`, `--ff-mono` | Font stacks |
+| `--fw-*` | Font weights |
+| `--shadow-*`, `--transition-*`, `--z-*` | Shadows, motion, stacking |
+
+Methodology and examples: `/apply/design-tokens/` on the published site.
+
+---
+
 ## Type Scale
 
-Desktop values (see `tokens.css`). Mobile scales the ladder down via `@media (--mobile)`; `--fs-xs` floors at 14px on small viewports.
+Desktop values (see `tokens.css`). Mobile scales the ladder down via `@media (--mobile)`; `--fs-2xs` floors at 14px on small viewports.
 
 | Token       | Desktop |
 | ----------- | ------- |
-| `--fs-xs`   | 16px    |
-| `--fs-sm`   | 17px    |
-| `--fs-base` | 19px    |
-| `--fs-md`   | 21px    |
-| `--fs-lg`   | 24px    |
+| `--fs-2xs`   | 16px    |
+| `--fs-s`   | 17px    |
+| `--fs` | 19px    |
+| `--fs-m`   | 21px    |
+| `--fs-l`   | 24px    |
 | `--fs-xl`   | 30px    |
 | `--fs-2xl`  | 40px    |
 | `--fs-3xl`  | 64px    |
 
 ### Guidance
 
-- body copy should default to 16px minimum on desktop (`--fs-xs`); 14px minimum on mobile
+- body copy uses `--fs` (19px desktop); `--fs-2xs` is the small step and the mobile floor (14px)
 - avoid text smaller than the mobile floor
 - long-form content should prioritise readability over compression
 - headings should feel spacious, not oversized
@@ -294,9 +346,10 @@ Desktop values (see `tokens.css`). Mobile scales the ladder down via `@media (--
 
 | Token          | Value |
 | -------------- | ----- |
-| `--lh-tight`   | 1.2   |
-| `--lh-base`    | 1.5   |
-| `--lh-relaxed` | 1.7   |
+| `--lh-s`   | 1.2   |
+| `--lh`    | 1.5   |
+| `--lh-m`  | 1.6   |
+| `--lh-l` | 1.7   |
 
 Use relaxed spacing for content-heavy pages. Use tighter spacing for headings and labels.
 
@@ -442,13 +495,13 @@ Components and base styles should consume these. Each resolves per color scheme 
 
 | Token         | Size |
 | ------------- | ---- |
-| `--space-xs`  | 4px  |
-| `--space-sm`  | 8px  |
-| `--space-md`  | 16px |
-| `--space-lg`  | 24px |
-| `--space-xl`  | 32px |
-| `--space-2xl` | 48px |
-| `--space-3xl` | 64px |
+| `--space-2xs`  | 4px  |
+| `--space-s`  | 8px  |
+| `--space`  | 16px |
+| `--space-m`  | 24px |
+| `--space-l`  | 32px |
+| `--space-xl` | 48px |
+| `--space-2xl` | 64px |
 
 ### Guidance
 
@@ -458,15 +511,17 @@ Whitespace creates clarity. Let layouts breathe.
 
 ---
 
-## Border Radius
+## Border Radius (`--br-*`)
+
+Short prefix for border-radius tokens.
 
 | Token          | Value |
 | -------------- | ----- |
-| `--radius-s`   | 4px   |
-| `--radius-m`   | 8px   |
-| `--radius-l`   | 16px  |
-| `--radius-xl`  | 24px  |
-| `--radius-round` | pill |
+| `--br-s`   | 4px   |
+| `--br-m`   | 8px   |
+| `--br-l`   | 16px  |
+| `--br-xl`  | 24px  |
+| `--br-round` | pill |
 
 Rounded corners should feel modern but restrained. Avoid overly soft UI.
 

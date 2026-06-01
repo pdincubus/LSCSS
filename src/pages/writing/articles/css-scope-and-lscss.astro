@@ -9,7 +9,7 @@ const scopeExample = `@scope (.product-card) {
     }
 
     .price {
-        color: var(--colour-accent);
+        color: var(--c-accent);
     }
 }`;
 ---
@@ -91,7 +91,10 @@ const scopeExample = `@scope (.product-card) {
             <li>Ownership and file placement still matter.</li>
             <li>Tokens still beat magic numbers.</li>
             <li>Modifiers vs <code>.is_*</code> state still need discipline.</li>
-            <li>Legacy and third-party CSS still belong in a deliberate layer.</li>
+            <li>
+                Legacy and third-party CSS still belong in deliberate low layers
+                (<code>thirdparty</code> before <code>legacy</code> when both apply).
+            </li>
         </ul>
     </section>
 

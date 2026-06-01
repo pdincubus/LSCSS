@@ -1,17 +1,47 @@
 .content-block {
-    margin-block-start: var(--space-3xl);
+    margin-block-start: var(--space-2xl);
 }
 
 .content-block > h2 {
-    scroll-margin-block-start: var(--space-2xl);
+    scroll-margin-block-start: var(--space-xl);
+}
+
+.content-block > h2 ~ h2 {
+    margin-block-start: var(--space-l);
 }
 
 .content-block > h3 {
-    margin-block-start: var(--space-xl);
+    margin-block-start: var(--space-l);
 }
 
 .content-block > p,
 .content-block > ul,
 .content-block > ol {
-    line-height: var(--lh-relaxed);
+    line-height: var(--lh-l);
+}
+
+/*
+ * Prose before/after code examples: base margins collapse to ~16px; bump
+ * adjacency to match decision-tree spacing.
+ */
+.content-block > p + .code-example,
+.content-block > ul + .code-example,
+.content-block > ol + .code-example,
+.content-block > p + .cli-command,
+.content-block > ul + .cli-command,
+.content-block > ol + .cli-command {
+    margin-block-start: var(--space-l);
+}
+
+.content-block > .code-example + p,
+.content-block > .code-example + ul,
+.content-block > .code-example + ol,
+.content-block > .cli-command + p,
+.content-block > .cli-command + ul,
+.content-block > .cli-command + ol {
+    margin-block-start: var(--space-l);
+}
+
+.content-block > .code-example + .cli-command {
+    margin-block-start: var(--space-l);
 }

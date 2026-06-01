@@ -1,10 +1,12 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import ComparisonPairs from '../../../../components/ComparisonPairs.astro';
 import HubCard from '../../../../components/HubCard.astro';
 
-const title = 'Tailwind vs LSCSS';
-const description = 'Why utility-first Tailwind CSS conflicts with semantic HTML and long-term maintainability—and how Layered Semantic CSS keeps styling in CSS.';
+const title = 'Tailwind and utility-first CSS vs LSCSS';
+const description =
+    'Why utility-first CSS in HTML—including Tailwind—conflicts with semantic structure and long-term maintainability, and how Layered Semantic CSS keeps styling in CSS.';
 
 const tailwindExample = `<article class="p-4 mb-4 bg-white rounded shadow text-center grid gap-4">
     <h2 class="text-xl font-bold">Product title</h2>
@@ -19,6 +21,21 @@ const lscssExample = `<article class="product-card">
 const utilityExample = `.vh
 .a11y-link
 .a11y-link--focusable`;
+
+const mainDifferencePairs = [
+    {
+        left: 'Styling decisions live in markup—class stacks on every element.',
+        right: 'Styling decisions live in CSS architecture: components, modifiers, state, and theme.'
+    },
+    {
+        left: 'Less custom CSS, more composition in HTML templates.',
+        right: 'Calmer HTML; ownership and overrides live in layers.'
+    },
+    {
+        left: 'Optimises short-term delivery and typing speed.',
+        right: 'Optimises long-term readability, semantics, and team handover.'
+    }
+];
 ---
 
 <DocsLayout
@@ -30,23 +47,25 @@ const utilityExample = `.vh
         <p class="eyebrow">Comparison</p>
 
         <h1>
-            Tailwind vs LSCSS
+            Tailwind and utility-first CSS vs LSCSS
         </h1>
 
         <p>
-            Tailwind optimises for shipping screens quickly by putting styling
-            in HTML. LSCSS optimises for calm, maintainable systems by keeping
-            presentation in CSS and HTML focused on meaning. This site treats
-            utility-first markup as a structural mistake—not a neutral style
-            preference.
+            Utility-first CSS means putting presentation in HTML through many
+            small classes. Tailwind is the most common toolchain for that model;
+            older utility frameworks and hand-rolled class soup follow the same
+            trade-offs. LSCSS keeps markup semantic and puts styling in layered
+            CSS. This site treats utility-first markup as a structural mistake—not
+            a neutral style preference.
         </p>
 
-        <nav class="section-nav" aria-label="Tailwind and LSCSS comparison sections">
+        <nav class="section-nav" aria-label="Tailwind, utility-first CSS, and LSCSS comparison sections">
             <a href="#why-utility-first-hurts">Why utility-first hurts</a>
             <a href="#differences">Differences</a>
             <a href="#markup">Markup</a>
-            <a href="#utilities">What LSCSS allows</a>
-            <a href="#when-tailwind-appears">When teams still pick Tailwind</a>
+            <a href="#utilities">LSCSS utilities layer</a>
+            <a href="#when-utility-first-appears">When teams still pick it</a>
+            <a href="#migrating">Leaving utility-first</a>
         </nav>
 
         <section class="content-block">
@@ -62,29 +81,41 @@ const utilityExample = `.vh
                 </li>
                 <li>
                     <strong>HTML bloat.</strong>
-                    Every element carries a styling vocabulary instead of a role.
+                    Templates become long, repetitive, and hard to diff; every element
+                    carries a styling vocabulary instead of a role.
                 </li>
                 <li>
                     <strong>Hard to scan.</strong>
-                    Reviews and debugging mean decoding class lists, not reading
-                    components.
+                    Reviews and debugging mean decoding class lists—the page reads like
+                    a styling spreadsheet, not a document.
                 </li>
                 <li>
                     <strong>Architecture in the wrong place.</strong>
-                    Design decisions live in templates, spread across hundreds of
-                    files, with no single owner for “what a card is”.
+                    Design decisions live in templates across hundreds of files, with no
+                    single owner for “what a card is”.
                 </li>
                 <li>
-                    <strong>Debt compounds.</strong>
-                    Repeated utility stacks are unnamed components; changing a
-                    pattern means find-and-replace across markup, not one CSS file.
+                    <strong>Reuse is copy-paste.</strong>
+                    Repeated utility stacks are unnamed components; changing a pattern
+                    means find-and-replace in markup, not one CSS file.
+                </li>
+                <li>
+                    <strong>Onboarding cost.</strong>
+                    People learn a parallel styling language in attributes instead of
+                    reading the stylesheet.
+                </li>
+                <li>
+                    <strong>Global changes are painful.</strong>
+                    Theme or spacing shifts require hunting markup, not updating a
+                    component or theme layer.
                 </li>
             </ul>
 
             <p>
                 Tailwind is disciplined about <em>which</em> utilities exist. That
-                does not fix the model: styling still belongs in CSS layers and
-                named components, not on every node.
+                does not fix the model: styling still belongs in CSS layers and named
+                components, not on every node. Consistency of class names is not the
+                same as a maintainable system.
             </p>
         </section>
 
@@ -93,14 +124,7 @@ const utilityExample = `.vh
                 Main differences
             </h2>
 
-            <ul>
-                <li>Tailwind: utility classes in markup as the primary styling system.</li>
-                <li>LSCSS: semantic components, modifiers, state, and theme in CSS.</li>
-                <li>Tailwind: less custom CSS, more class composition in HTML.</li>
-                <li>LSCSS: calmer HTML; ownership and overrides live in layers.</li>
-                <li>Tailwind: optimises short-term delivery.</li>
-                <li>LSCSS: optimises long-term readability and team handover.</li>
-            </ul>
+            <ComparisonPairs leftLabel="Utility-first" pairs={mainDifferencePairs} />
         </section>
 
         <section class="content-block">
@@ -109,14 +133,16 @@ const utilityExample = `.vh
             </h2>
 
             <p>
-                Typical utility-first markup:
+                Typical Tailwind-style utility-first markup:
             </p>
 
             <CodeExample code={tailwindExample} language="html" />
 
             <p>
                 It is explicit about styling and fast to type. It is also noisy,
-                non-semantic, and tiring to maintain once the product grows.
+                non-semantic, and tiring to maintain once the product grows. The
+                same problems appear with other utility-first stacks—the class names
+                change; the architecture does not.
             </p>
 
             <p>
@@ -126,40 +152,41 @@ const utilityExample = `.vh
             <CodeExample code={lscssExample} language="html" />
 
             <p>
-                Structure stays readable; CSS owns how the card looks, including
-                responsive and theme behaviour, without polluting the template.
+                Structure stays readable; CSS owns layout, spacing, colour, responsive
+                behaviour, and theme without polluting the template.
             </p>
         </section>
 
         <section class="content-block">
             <h2 id="utilities">
-                What LSCSS allows (not utility-first)
+                The LSCSS utilities layer is not utility-first
             </h2>
 
             <p>
                 LSCSS has a <code>utilities</code> layer. That does
                 <strong>not</strong> mean “use Tailwind-style classes everywhere”.
-                It means a tiny set of universal helpers—mostly accessibility:
+                In utility-first systems, utilities <em>are</em> the system. In LSCSS,
+                the layer is a small escape hatch—mostly accessibility:
             </p>
 
             <CodeExample code={utilityExample} />
 
             <p>
-                Spacing, layout, colour, and typography belong in components,
-                layout, or theme. If a cluster of utilities keeps repeating, it
-                was always a component.
+                Spacing, layout, colour, and typography belong in components, layout,
+                or theme. If a cluster of utilities keeps repeating, it was always a
+                component—name it in CSS and move on.
             </p>
         </section>
 
         <section class="content-block">
-            <h2 id="when-tailwind-appears">
-                When teams still pick Tailwind
+            <h2 id="when-utility-first-appears">
+                When teams still pick Tailwind or utility-first CSS
             </h2>
 
             <p>
                 Prototypes, short-lived marketing pages, and teams that prioritise
                 speed over maintainability sometimes accept utility-first cost. That
-                is a business choice, not evidence that utility CSS is good
+                is a business choice, not evidence that utility CSS in markup is good
                 architecture.
             </p>
 
@@ -176,28 +203,46 @@ const utilityExample = `.vh
         </section>
 
         <section class="content-block">
+            <h2 id="migrating">
+                Leaving utility-first behind
+            </h2>
+
+            <p>
+                You do not have to rewrite everything overnight. Isolate utility-heavy
+                markup in a legacy layer, stop adding new utility stacks, and promote
+                repeated patterns into components as you touch files. See
+                <a href="/apply/migration/">migration</a> and
+                <a href="/apply/examples/#utilities">utility overload examples</a>.
+            </p>
+        </section>
+
+        <section class="content-block">
             <h2>
                 Next useful pages
             </h2>
 
             <div class="hub-grid">
                 <HubCard href="/apply/methodology/" title="Core methodology">
-                <p>Layers, naming, and ownership without utility-first markup.</p>
-            </HubCard>
+                    <p>Layers, naming, and ownership without utility-first markup.</p>
+                </HubCard>
 
                 <HubCard href="/apply/utilities/" title="Utilities">
-                <p>What rare helpers are allowed—and what should never be a utility.</p>
-            </HubCard>
+                    <p>What rare helpers are allowed—and what should never be a utility.</p>
+                </HubCard>
+
+                <HubCard href="/apply/decision-trees/" title="Decision trees">
+                    <p>Utility or component? The answer is usually component.</p>
+                </HubCard>
 
                 <HubCard href="/apply/examples/" title="Examples">
-                <p>Before/after: utility overload vs semantic components.</p>
-            </HubCard>
+                    <p>Before/after: utility overload vs semantic components.</p>
+                </HubCard>
             </div>
         </section>
 
         <p>
-            This comparison reflects lived delivery experience: utility-first
-            can ship fast; semantic layered CSS stays understandable. LSCSS
+            This comparison reflects lived delivery experience: utility-first—including
+            Tailwind—can ship fast; semantic layered CSS stays understandable. LSCSS
             chooses the second on purpose.
         </p>
     </article>

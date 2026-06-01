@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import ComparisonPairs from '../../../../components/ComparisonPairs.astro';
 import HubCard from '../../../../components/HubCard.astro';
 
 const title = 'CSS Modules vs LSCSS';
@@ -18,6 +19,25 @@ const lscssExample = `<article class="product-card">
 
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
+
+const mainDifferencePairs = [
+    {
+        left: 'Generates scoped class names.',
+        right: 'Uses explicit naming and cascade structure.'
+    },
+    {
+        left: 'Tied to build tooling and component imports.',
+        right: 'Works with plain CSS and platform features.'
+    },
+    {
+        left: 'Reduces accidental global leakage.',
+        right: 'Adds wider rules for layers, state, modifiers, and migration.'
+    },
+    {
+        left: 'A tooling solution.',
+        right: 'A methodology.'
+    }
+];
 ---
 
 <DocsLayout
@@ -76,16 +96,7 @@ layout, components, theme, hacks;`;
                 Main differences
             </h2>
 
-            <ul>
-                <li>CSS Modules generate scoped class names.</li>
-                <li>LSCSS uses explicit naming and cascade structure.</li>
-                <li>CSS Modules are tied to build tooling and component imports.</li>
-                <li>LSCSS works with plain CSS and platform features.</li>
-                <li>CSS Modules reduce accidental global leakage.</li>
-                <li>LSCSS adds wider rules for layers, state, modifiers, and migration.</li>
-                <li>CSS Modules are a tooling solution.</li>
-                <li>LSCSS is a methodology.</li>
-            </ul>
+            <ComparisonPairs leftLabel="CSS Modules" pairs={mainDifferencePairs} />
         </section>
 
         <section class="content-block">

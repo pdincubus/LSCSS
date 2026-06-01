@@ -69,12 +69,14 @@ const avoidExample = `.product-card {
             <li>Lightning CSS</li>
             <li>Stylelint</li>
             <li>Browserslist</li>
-            <li>Prettier</li>
-            <li>Astro, Eleventy, or another static-first build system</li>
+            <li>
+                Astro, 11ty (Eleventy, now Build Awesome), or another static-first
+                build system
+            </li>
         </ul>
         <h3>Choose a baseline first</h3>
         <ul>
-            <li>Minimum baseline: native CSS layers, Stylelint, and consistent formatting.</li>
+            <li>Minimum baseline: native CSS layers and Stylelint.</li>
             <li>Expanded baseline: add PostCSS or Lightning CSS when you need transforms or broader compatibility.</li>
             <li>Team baseline: keep one shared pipeline across projects to avoid divergent CSS behavior.</li>
         </ul>
@@ -103,13 +105,15 @@ const avoidExample = `.product-card {
         </p>
 
         <p>
-            This pattern needs a build step such as PostCSS or similar tooling,
-            unless your browser support target already handles the feature you
-            are using directly.
+            Authors write <code>@custom-media</code> in the settings layer; the build
+            emits normal <code>@media</code> rules browsers understand. No major engine
+            ships custom media natively yet—when the build step is worth the cost, and
+            how it fits browserslist, is covered under
+            <a href="/apply/browser-support/#custom-media">Custom media queries and the build step</a>.
         </p>
         <p>
-            Compatibility caveat: avoid writing custom media rules if your runtime
-            path skips the build step that expands them.
+            Compatibility caveat: do not ship CSS that still contains
+            <code>@media (--name)</code> if any delivery path skipped the expand step.
         </p>
 
         <CodeExample code={mediaQueryUsageExample} />
@@ -130,8 +134,8 @@ const avoidExample = `.product-card {
             Tooling should follow a written browser support strategy. Use
             browserslist where your tools support it, and prefer feature-based
             support decisions over guessing browser versions by habit. The Apply page
-            <a href="/apply/browser-support/">Browser support</a> walks through config files,
-            <code>npx browserslist</code>, and how prefixes and transpilation stay aligned.
+            <a href="/apply/browser-support/#browserslist">Browser support</a> walks through config files,
+            printing the resolved browserslist, and how prefixes and transpilation stay aligned.
         </p>
 
         <p>
@@ -147,20 +151,20 @@ const avoidExample = `.product-card {
 
     <section class="content-block">
         <h2 id="linting">
-            Linting and formatting
+            Linting
         </h2>
 
         <p>
-            Stylelint and formatting tools should support the methodology. They
-            should catch avoidable mistakes, not force a naming system the
-            project does not use.
+            Stylelint should support the methodology. It should catch avoidable
+            mistakes, not force a naming system the project does not use or
+            paper over unclear architecture with automatic formatting.
         </p>
 
         <ul>
             <li>Disallow styling with IDs.</li>
             <li>Discourage unnecessary <code>!important</code>.</li>
             <li>Flag unknown custom properties where possible.</li>
-            <li>Keep formatting consistent across partials.</li>
+            <li>Enforce layer and ownership rules where Stylelint can express them.</li>
             <li>Allow the project’s chosen naming style.</li>
         </ul>
     </section>
@@ -184,8 +188,10 @@ const avoidExample = `.product-card {
         </p>
         <p>
             Compatibility caveat: imported CSS from third-party libraries may not
-            declare layers. Wrap or isolate that CSS so it does not bypass your
-            intended layer order.
+            declare layers. Assign <code>@import … layer(thirdparty)</code> or
+            <code>layer(legacy)</code> so vendor styles stay in a dedicated low
+            bucket and do not bypass your intended layer order — see
+            <a href="/apply/layers/#legacy">legacy and third-party layers</a>.
         </p>
     </section>
 </DocsLayout>

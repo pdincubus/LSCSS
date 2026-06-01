@@ -1,0 +1,21 @@
+---
+import type { MigrationEffortTier } from '../types/migration';
+
+interface Props {
+    tiers: MigrationEffortTier[];
+}
+
+const { tiers } = Astro.props;
+---
+
+<ul class="migration-effort">
+    {
+        tiers.map((tier) => (
+            <li class="tier">
+                <p class="size">{tier.size}</p>
+                <p class="duration">{tier.duration}</p>
+                <p class="note">{tier.note}</p>
+            </li>
+        ))
+    }
+</ul>

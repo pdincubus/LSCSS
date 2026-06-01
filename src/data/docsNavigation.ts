@@ -12,6 +12,23 @@ export const docsNavigation: DocsNavItem[] = [
     { href: '/learn/glossary/', label: 'Glossary', section: 'Learn' },
     { href: '/learn/faq/', label: 'FAQ', section: 'Learn' },
 
+    { href: '/learn/comparisons/', label: 'Comparisons overview', section: 'Learn' },
+    { href: '/learn/comparisons/bem-vs-lscss/', label: 'BEM vs LSCSS', section: 'Learn', parentHref: '/learn/comparisons/' },
+    {
+        href: '/learn/comparisons/tailwind-vs-lscss/',
+        label: 'Tailwind and utility-first vs LSCSS',
+        section: 'Learn',
+        parentHref: '/learn/comparisons/'
+    },
+    {
+        href: '/learn/comparisons/css-modules-vs-lscss/',
+        label: 'CSS Modules vs LSCSS',
+        section: 'Learn',
+        parentHref: '/learn/comparisons/'
+    },
+    { href: '/learn/comparisons/scope-vs-lscss/', label: '@scope and LSCSS', section: 'Learn', parentHref: '/learn/comparisons/' },
+    { href: '/learn/anti-patterns/', label: 'Anti-patterns', section: 'Learn' },
+
     { href: '/apply/methodology/', label: 'Core methodology overview', section: 'Apply' },
     { href: '/apply/layers/', label: 'Layers', section: 'Apply', parentHref: '/apply/methodology/' },
     { href: '/apply/base-styles/', label: 'Base styles', section: 'Apply', parentHref: '/apply/methodology/' },
@@ -32,30 +49,14 @@ export const docsNavigation: DocsNavItem[] = [
     { href: '/apply/starter-template/', label: 'Starter template', section: 'Apply' },
     { href: '/apply/tooling/', label: 'Tooling', section: 'Apply' },
     { href: '/apply/migration/', label: 'Migration', section: 'Apply' },
+    { href: '/apply/design-tokens/', label: 'Design tokens', section: 'Apply' },
+    { href: '/apply/browser-support/', label: 'Browser support', section: 'Apply' },
 
     { href: '/teams/adoption/', label: 'Adoption', section: 'Teams' },
     { href: '/teams/teaching-deck/', label: 'Teaching deck', section: 'Teams' },
     { href: '/teams/contributing/', label: 'Contribution standards', section: 'Teams' },
     { href: '/teams/governance/', label: 'Governance', section: 'Teams' },
     { href: '/apply/audit-checklist/', label: 'Audit checklist', section: 'Teams' },
-
-    { href: '/learn/comparisons/', label: 'Comparisons overview', section: 'Learn' },
-    { href: '/learn/comparisons/bem-vs-lscss/', label: 'BEM vs LSCSS', section: 'Learn', parentHref: '/learn/comparisons/' },
-    { href: '/learn/comparisons/tailwind-vs-lscss/', label: 'Tailwind vs LSCSS', section: 'Learn', parentHref: '/learn/comparisons/' },
-    {
-        href: '/learn/comparisons/utility-first-vs-lscss/',
-        label: 'Utility-first vs LSCSS',
-        section: 'Learn',
-        parentHref: '/learn/comparisons/'
-    },
-    {
-        href: '/learn/comparisons/css-modules-vs-lscss/',
-        label: 'CSS Modules vs LSCSS',
-        section: 'Learn',
-        parentHref: '/learn/comparisons/'
-    },
-    { href: '/learn/comparisons/scope-vs-lscss/', label: '@scope and LSCSS', section: 'Learn', parentHref: '/learn/comparisons/' },
-    { href: '/learn/anti-patterns/', label: 'Anti-patterns', section: 'Learn' },
 
     { href: '/writing/guides/', label: 'Guides overview', section: 'Writing' },
     {
@@ -82,8 +83,6 @@ export const docsNavigation: DocsNavItem[] = [
         section: 'Writing',
         parentHref: '/writing/guides/'
     },
-    { href: '/apply/design-tokens/', label: 'Design tokens', section: 'Apply' },
-    { href: '/apply/browser-support/', label: 'Browser support', section: 'Apply' },
     { href: '/writing/articles/', label: 'Articles overview', section: 'Writing' },
     {
         href: '/writing/articles/css-scope-and-lscss/',

@@ -21,15 +21,22 @@
 @import './layout/docs.css' layer(layout);
 
 @import './components/site-header.css' layer(components);
+@import './components/eyebrow.css' layer(components);
 @import './components/site-hero.css' layer(components);
 @import './components/content-block.css' layer(components);
 @import './components/hub-card.css' layer(components);
+@import './components/comparison-table.css' layer(components);
+@import './components/comparison-pairs.css' layer(components);
+@import './components/decision-tree.css' layer(components);
+@import './components/migration-guide.css' layer(components);
 @import './components/breadcrumbs.css' layer(components);
 @import './components/section-nav.css' layer(components);
 @import './components/docs-sidebar.css' layer(components);
 @import './components/doc-pager.css' layer(components);
 @import './components/related-links.css' layer(components);
 @import './components/code-example.css' layer(components);
+@import './components/cli-command.css' layer(components);
+@import './components/file-tree.css' layer(components);
 @import './components/pattern-pair.css' layer(components);
 @import './components/site-search.css' layer(components);
 @import './components/release-list.css' layer(components);

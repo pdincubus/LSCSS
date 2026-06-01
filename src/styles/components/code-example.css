@@ -6,10 +6,10 @@
 
 .code-example {
     margin-inline: 0;
-    margin-block: var(--space-md);
+    margin-block: var(--space);
     background: var(--c-code-bg);
     border: var(--border-s) solid var(--c-border);
-    border-radius: var(--radius-m);
+    border-radius: var(--br-m);
     overflow: hidden;
 }
 
@@ -25,12 +25,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-md);
-    padding: var(--space-sm) var(--space-md);
+    gap: var(--space);
+    padding: var(--space-s) var(--space);
     background: var(--c-surface-alt);
     border-block-end: var(--border-s) solid var(--c-border);
     color: var(--c-text-muted);
-    font-size: var(--fs-xs);
+    font-size: var(--fs-2xs);
     font-weight: var(--fw-medium);
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -38,7 +38,7 @@
 
 .code-example > pre {
     margin: 0;
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-m) var(--space);
     border-radius: 0;
 }
 
@@ -48,12 +48,12 @@
  * ring from reset.css. Reduced-motion suppresses the transform.
  */
 .code-example .copy {
-    padding: var(--space-xs) var(--space-md);
+    padding: var(--space-2xs) var(--space);
     background: var(--c-cta-bg);
     border: var(--border-s) solid var(--c-cta-bg);
-    border-radius: var(--radius-s);
+    border-radius: var(--br-s);
     color: var(--c-cta-text);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-s);
     font-weight: var(--fw-semibold);
     transition:
         background var(--transition-s),
@@ -86,11 +86,39 @@
 
 .code-example .copy-status {
     margin: 0;
-    padding: var(--space-xs) var(--space-md);
-    color: var(--c-text-muted);
-    font-size: var(--fs-xs);
+    max-inline-size: none;
+    padding: var(--space-s) var(--space);
+    border-block-start: var(--border-s) solid var(--c-border);
+    font-size: var(--fs-s);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-s);
+    text-align: center;
 }
 
 .code-example .copy-status:empty {
     display: none;
+}
+
+.code-example .copy-status--success {
+    background: light-dark(
+        hsl(160 84% 39% / 0.12),
+        hsl(160 84% 39% / 0.2)
+    );
+    border-block-start-color: light-dark(
+        hsl(160 84% 39% / 0.35),
+        hsl(160 84% 39% / 0.45)
+    );
+    color: var(--c-success);
+}
+
+.code-example .copy-status--error {
+    background: light-dark(
+        hsl(0 84% 60% / 0.12),
+        hsl(0 84% 60% / 0.2)
+    );
+    border-block-start-color: light-dark(
+        hsl(0 84% 60% / 0.35),
+        hsl(0 84% 60% / 0.45)
+    );
+    color: var(--c-error);
 }

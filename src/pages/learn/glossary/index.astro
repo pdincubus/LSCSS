@@ -27,6 +27,7 @@ import HubCard from '../../../components/HubCard.astro';
         <a href="#utility">Utility</a>
         <a href="#hacks">Hacks</a>
         <a href="#legacy">Legacy</a>
+        <a href="#thirdparty">Third-party layer</a>
         <a href="#calm">Calm CSS</a>
     </nav>
 
@@ -35,7 +36,7 @@ import HubCard from '../../../components/HubCard.astro';
         <p>
             The answer to where CSS belongs. Before writing selectors, decide
             whether something belongs in settings, base, utilities, layout, components, theme,
-            legacy, or hacks. Wrong ownership creates most future problems.
+            legacy, thirdparty (low layers), or hacks. Wrong ownership creates most future problems.
         </p>
     </section>
 
@@ -53,7 +54,13 @@ import HubCard from '../../../components/HubCard.astro';
         <p>
             A permanent reusable variation of a component. Example: a featured
             card or large button. Modifiers describe stable variants, not
-            temporary behaviour.
+            temporary behaviour. In HTML, apply the modifier <strong>with</strong>
+            the base class on the same element
+            (<code>product-card product-card--featured</code>). In CSS, target the
+            variant in the component partial — flat
+            (<code>.product-card--featured</code>), nested
+            (<code>&--featured</code>), or chained when the project needs extra
+            guarding.
         </p>
     </section>
 
@@ -62,8 +69,11 @@ import HubCard from '../../../components/HubCard.astro';
         <p>
             Temporary or conditional UI behaviour. Loading, expanded, active,
             or disabled states should use clear <code>.is_*</code> or
-            <code>.has_*</code> classes. If it disappears when the user leaves,
-            it is probably state.
+            <code>.has_*</code> classes (underscore after the prefix, not
+            <code>--</code> like modifiers). If it disappears when the user leaves,
+            it is probably state. See
+            <a href="/apply/modifiers-and-state/#state-classes">modifiers and state</a>
+            for the naming signal.
         </p>
     </section>
 
@@ -98,9 +108,21 @@ import HubCard from '../../../components/HubCard.astro';
     <section class="content-block">
         <h2 id="legacy">Legacy</h2>
         <p>
-            Older CSS carried forward because rewriting everything would be
-            theatre, not engineering. Legacy belongs in a controlled low layer,
-            not quietly copied into new component files.
+            Inherited first-party CSS carried forward because rewriting everything
+            would be theatre, not engineering. Legacy belongs in a controlled low
+            layer, not quietly copied into new component files. Vendor CSS may share
+            this bucket or use a separate <a href="#thirdparty">third-party layer</a>.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="thirdparty">Third-party layer</h2>
+        <p>
+            Optional low layer for CSS you do not own: npm packages, widgets, and
+            CMS plugins. Use when <code>legacy</code> is the wrong name or when both
+            inherited first-party CSS and vendor CSS need separate buckets — declare
+            <code>thirdparty</code> before <code>legacy</code> in
+            <code>@layer</code>. See <a href="/apply/layers/#legacy">layer guidance</a>.
         </p>
     </section>
 

@@ -1,0 +1,50 @@
+---
+import type { DecisionTree } from '../data/decisionTrees';
+
+interface Props {
+    tree: DecisionTree;
+}
+
+const { tree } = Astro.props;
+const lastIndex = tree.steps.length - 1;
+---
+
+<div class="decision-tree">
+    <ol class="list">
+        {
+            tree.steps.map((step, index) => {
+                const isLast = index === lastIndex;
+                const showClosingOnNo = isLast && tree.closing && !step.continuesOnNo;
+
+                return (
+                    <li class="step">
+                        <p class="prompt">{step.prompt}</p>
+
+                        <p class="branch branch--yes">
+                            <span class="label">Yes</span>
+                            <span class="outcome" aria-hidden="true">→</span>
+                            <span class="value">{step.yes}</span>
+                        </p>
+
+                        {
+                            step.continuesOnNo ? (
+                                <p class="branch branch--continue">
+                                    <span class="label">No</span>
+                                    <span class="arrow" aria-hidden="true">↓</span>
+                                    <span class="hint">Next question</span>
+                                </p>
+                            ) : showClosingOnNo ? (
+                                <p class="branch branch--continue">
+                                    <span class="label">No</span>
+                                    <span class="arrow" aria-hidden="true">↓</span>
+                                </p>
+                            ) : null
+                        }
+
+                        {showClosingOnNo && <p class="closing">{tree.closing}</p>}
+                    </li>
+                );
+            })
+        }
+    </ol>
+</div>

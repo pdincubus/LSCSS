@@ -1,7 +1,9 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import DecisionTree from '../../../components/DecisionTree.astro';
 import HubCard from '../../../components/HubCard.astro';
+import { hacksQuickRules } from '../../../data/decisionTrees';
 
 const hacksExample = `@layer hacks {
     .legacy-slider {
@@ -17,15 +19,6 @@ const badExample = `.product-card {
     z-index: 999999;
 }`;
 
-const decisionExample = `Ask:
-Is this temporary and urgent?
-→ Hacks
-
-Is this a real structural fix?
-→ Component or layout
-
-Is this only visual presentation?
-→ Theme, not hacks`;
 ---
 
 <DocsLayout
@@ -41,9 +34,11 @@ Is this only visual presentation?
         </h1>
 
         <p class="intro">
-            Hacks are sometimes necessary. The problem is not using one. The
-            problem is pretending it is not a hack and letting it quietly become
-            architecture with a desk and calendar invite.
+            Urgent fixes are sometimes unavoidable — legacy coupling, browser
+            quirks, or a release that cannot wait for a full refactor. The
+            hacks layer keeps those changes in one place: layered last, clearly
+            named, and separate from components and theme so they stay easy to
+            find, review, and remove before they become permanent architecture.
         </p>
     </section>
 
@@ -60,11 +55,11 @@ Is this only visual presentation?
             Quick decision rules
         </h2>
 
-        <CodeExample code={decisionExample} language="text" />
+        <DecisionTree tree={hacksQuickRules} />
 
         <p>
-            A hack should be obvious, justified, and easier to remove later
-            than it was to add today.
+            For the shorter hack vs real fix flow, see
+            <a href="/apply/decision-trees/#hacks">decision trees</a>.
         </p>
     </section>
 

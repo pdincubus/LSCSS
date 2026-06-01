@@ -31,8 +31,11 @@ export const siteNavSections: SiteNavSection[] = [
             { href: '/learn/faq/', label: 'FAQ' },
             { href: '/learn/comparisons/', label: 'Comparisons overview' },
             { href: '/learn/comparisons/bem-vs-lscss/', label: 'BEM vs LSCSS', indent: true },
-            { href: '/learn/comparisons/tailwind-vs-lscss/', label: 'Tailwind vs LSCSS', indent: true },
-            { href: '/learn/comparisons/utility-first-vs-lscss/', label: 'Utility-first vs LSCSS', indent: true },
+            {
+                href: '/learn/comparisons/tailwind-vs-lscss/',
+                label: 'Tailwind and utility-first vs LSCSS',
+                indent: true
+            },
             { href: '/learn/comparisons/css-modules-vs-lscss/', label: 'CSS Modules vs LSCSS', indent: true },
             { href: '/learn/comparisons/scope-vs-lscss/', label: '@scope and LSCSS', indent: true },
             { href: '/learn/anti-patterns/', label: 'Anti-patterns' }

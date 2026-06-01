@@ -1,0 +1,14 @@
+---
+import { cliCommands, type CliCommandKey } from '../data/cliCommands';
+
+export interface Props {
+    command: CliCommandKey;
+}
+
+const { command } = Astro.props;
+const variants = cliCommands[command];
+---
+
+<span class="cli-command-inline">
+    <code>{variants.npm}</code><span class="cli-command-inline__sep" aria-hidden="true"> / </span><code>{variants.pnpm}</code><span class="cli-command-inline__sep" aria-hidden="true"> / </span><code>{variants.yarn}</code>
+</span>

@@ -5,8 +5,8 @@ import CodeExample from '../../../components/CodeExample.astro';
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
 
-const importExample = `@import './vendor/slider.css' layer(legacy);
-@import './settings/variables.css' layer(settings);
+const importExample = `@import './legacy/old-site.css' layer(legacy);
+@import './settings/tokens.css' layer(settings);
 @import './base/reset.css' layer(base);
 @import './layout/page-shell.css' layer(layout);
 @import './components/product-card.css' layer(components);
@@ -14,20 +14,43 @@ const importExample = `@import './vendor/slider.css' layer(legacy);
 @import './hacks/temporary-fixes.css' layer(hacks);`;
 
 /** Greenfield: no `legacy` slot, but vendor CSS still belongs on its own low layer. */
-const optionalStackExample = `@layer settings, base, utilities, thirdparty,
+const optionalStackExample = `@layer thirdparty, settings, base, utilities,
     layout, components, theme, hacks;
 
 @import './vendor/maps.css' layer(thirdparty);
 @import './components/product-card.css' layer(components);`;
 
+/** Migration: separate inherited first-party CSS from vendor CSS. */
+const dualStackExample = `@layer thirdparty, legacy, settings, base, utilities,
+    layout, components, theme, hacks;
+
+@import './vendor/slider.css' layer(thirdparty);
+@import './legacy/old-site.css' layer(legacy);
+@import './components/product-card.css' layer(components);`;
+
 /** Atomic Design-style boundaries: different names, same idea — order encodes precedence. */
 const alternativeNamesExample = `@layer settings, base, utilities,
     atoms, molecules, organisms, pages, hacks;`;
+
+const importantLayersExample = `@layer components, hacks;
+
+@layer components {
+    .banner {
+        margin-block-end: 2rem !important;
+    }
+}
+
+@layer hacks {
+    /* Higher layer — still loses to components for !important */
+    .banner {
+        margin-block-end: 0 !important;
+    }
+}`;
 ---
 
 <DocsLayout
     title="LSCSS Layers"
-    description="Understanding cascade layers in Layered Semantic CSS, including legacy and hacks layers."
+    description="Understanding cascade layers in Layered Semantic CSS, including optional legacy and third-party low layers and hacks."
     schemaType="TechArticle"
 >
     <section class="site-hero">
@@ -48,11 +71,13 @@ const alternativeNamesExample = `@layer settings, base, utilities,
 
     <nav class="section-nav" aria-label="Layer sections">
         <a href="#order">Layer order</a>
+        <a href="#unlayered">Unlayered CSS</a>
+        <a href="#important">!important</a>
         <a href="#optional">Optional layers</a>
         <a href="#meaning">What each layer does</a>
         <a href="#names">Names and alternatives</a>
         <a href="#import">Imports</a>
-        <a href="#legacy">Legacy</a>
+        <a href="#legacy">Legacy and third-party</a>
         <a href="#hacks">Hacks</a>
         <a href="#rules">Working rules</a>
     </nav>
@@ -77,6 +102,99 @@ const alternativeNamesExample = `@layer settings, base, utilities,
     </section>
 
     <section class="content-block">
+        <h2 id="unlayered">
+            Unlayered CSS wins
+        </h2>
+
+        <p>
+            Styles that are <strong>not</strong> assigned to a layer sit in an implicit
+            unlayered bucket. That bucket beats <em>every</em> declared layer — always,
+            regardless of how carefully you ordered
+            <code>legacy, settings, base, ..., hacks</code>. A single unlayered file can
+            override your whole stack without higher specificity or
+            <code>!important</code>.
+        </p>
+
+        <p>
+            Many teams miss this. They add an <code>@layer</code> list at the top of
+            <code>site.css</code> and assume architecture is done. The list only defines
+            precedence <em>between</em> layers. Each stylesheet still has to land inside
+            a layer — through <code>@import ... layer(name)</code>, a named
+            <code>{'@layer name { ... }'}</code> block, or equivalent. CSS left outside any
+            layer is unlayered, and unlayered wins.
+        </p>
+
+        <p>
+            That is why messy layer setups hurt so fast:
+        </p>
+
+        <ul>
+            <li>
+                A “quick fix” pasted into a global file with no
+                <code>layer()</code> import.
+            </li>
+            <li>
+                Vendor CSS bundled without
+                <code>layer(thirdparty)</code> or another agreed low slot.
+            </li>
+            <li>
+                Component CSS imported as a plain stylesheet instead of
+                <code>layer(components)</code>.
+            </li>
+            <li>
+                New features added beside the layer map “just for now”, then left there.
+            </li>
+        </ul>
+
+        <p>
+            Override order quietly reverts to luck. Specificity climbs. Emergency
+            <code>!important</code> follows. LSCSS treats
+            <strong>everything authored belongs in a declared layer</strong> as a hard
+            rule — not a nice-to-have. The stack only protects you when nothing important
+            is left outside it.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="important">
+            !important and layers
+        </h2>
+
+        <p>
+            Layers exist so you choose the winner with <strong>layer order</strong>,
+            not arms races. <code>!important</code> makes that harder, not easier:
+            for important declarations, cascade layers <strong>invert</strong> the
+            usual order. Lower layers beat higher layers when both use
+            <code>!important</code>.
+        </p>
+
+        <p>
+            Without <code>!important</code>, a rule in <code>hacks</code> wins over
+            the same property in <code>components</code> because
+            <code>hacks</code> is higher in the stack. With
+            <code>!important</code> on both, the result flips — important rules in
+            <code>components</code> can beat important rules in
+            <code>hacks</code>. A “fix” at the top of the stack is not a reliable
+            escape hatch.
+        </p>
+
+        <CodeExample code={importantLayersExample} />
+
+        <p>
+            Unlayered <code>!important</code> still beats layered
+            <code>!important</code>, the same way unlayered normal declarations
+            beat layered ones (see <a href="#unlayered">unlayered CSS</a>). Mixing
+            layered and unlayered stylesheets makes debugging worse.
+        </p>
+
+        <p>
+            LSCSS stance: fix which layer owns the rule and whether the layer
+            order is correct before reaching for <code>!important</code>. With
+            layers in play, it is even less predictable than in pre-layer CSS.
+        </p>
+    </section>
+
+    <section class="content-block">
         <h2 id="optional">
             Optional layers
         </h2>
@@ -93,6 +211,15 @@ const alternativeNamesExample = `@layer settings, base, utilities,
         </p>
 
         <CodeExample code={optionalStackExample} />
+
+        <p>
+            When you have both inherited first-party CSS and unavoidable vendor CSS,
+            declare two low layers. List <code>thirdparty</code> <strong>before</strong>
+            <code>legacy</code> so vendor styles stay lower in the cascade than your
+            own old CSS you are still retiring.
+        </p>
+
+        <CodeExample code={dualStackExample} />
     </section>
 
     <section class="content-block">
@@ -107,7 +234,11 @@ const alternativeNamesExample = `@layer settings, base, utilities,
         </p>
 
         <ul>
-            <li><code>legacy</code> keeps old and third-party CSS low in the cascade.</li>
+            <li>
+                <code>legacy</code> holds inherited first-party CSS you are retiring.
+                Optional <code>thirdparty</code> sits below it when vendor CSS needs its
+                own bucket (see <a href="#legacy">legacy and third-party</a>).
+            </li>
             <li><code>settings</code> holds tokens, fonts, variables, and custom media.</li>
             <li><code>base</code> contains resets, typography, and true global defaults.</li>
             <li><code>utilities</code> holds rare helper classes like accessibility helpers.</li>
@@ -160,34 +291,52 @@ const alternativeNamesExample = `@layer settings, base, utilities,
         <p>
             The goal is not only naming layers. Files must be imported into the
             correct place or the architecture becomes decorative paperwork.
+            Vendor CSS can live in <code>layer(thirdparty)</code> or, if you use one
+            combined bucket, <code>layer(legacy)</code> — see
+            <a href="#legacy">legacy and third-party</a>.
         </p>
     </section>
 
     <section class="content-block">
         <h2 id="legacy">
-            Why the legacy layer exists
+            Legacy and third-party layers
         </h2>
 
         <p>
-            Legacy CSS and third-party styles belong in a <strong>dedicated low
-            layer</strong> — in this example that layer is named <code>legacy</code> and declared
-            first in the <code>@layer</code> list so it stays lowest in the cascade.
+            Inherited first-party CSS belongs in a <strong>dedicated low
+            layer</strong>. In the canonical stack that layer is named
+            <code>legacy</code> and declared first so it stays lowest among the
+            default slots.
         </p>
 
         <p>
-            This lets structured layers win without heavier selectors. Not all sites will need this layer, but it's a good practice to have it in place.
-            When foreign CSS does arrive, import it into this layer so higher layers stay honest.
+            Third-party CSS — npm packages, widgets, CMS plugins — also belongs in
+            a dedicated low layer, not in <code>components</code> or
+            <code>base</code>. How you name and split that depends on the project:
         </p>
 
-        <p>
-            On a greenfield project you might never use the name <code>legacy</code>; you might still want an empty <code>thirdparty</code> (or similar) layer reserved in the
-            declaration so imports stay honest when vendors arrive.
-        </p>
+        <ul>
+            <li>
+                <strong>Legacy only</strong> — one low bucket for old first-party CSS
+                (and optionally vendor CSS too). Use the canonical
+                <code>@layer legacy, settings, …</code> declaration.
+            </li>
+            <li>
+                <strong>Third-party only</strong> — greenfield with required vendor CSS
+                but no inherited first-party CSS. Omit <code>legacy</code>; declare
+                <code>thirdparty</code> before <code>settings</code>.
+            </li>
+            <li>
+                <strong>Both</strong> — migration with old CSS and unavoidable vendor
+                imports. Declare <code>thirdparty</code> before <code>legacy</code> so
+                vendor styles stay lower than your own retired CSS.
+            </li>
+        </ul>
 
         <p>
-            Foreign CSS should be contained, not allowed to quietly become the new
-            architecture through neglect — regardless of whether the bucket is called
-            <code>legacy</code> or <code>thirdparty</code>.
+            Structured layers can then win without heavier selectors. Not every site
+            needs every slot, but foreign CSS should be contained — not allowed to
+            quietly become the new architecture through neglect.
         </p>
     </section>
 
@@ -217,12 +366,21 @@ const alternativeNamesExample = `@layer settings, base, utilities,
         </h2>
 
         <ul>
+            <li>
+                Do not ship authored or vendor CSS outside a declared layer — unlayered
+                styles beat the entire stack.
+            </li>
             <li>Check layer order before increasing specificity.</li>
+            <li>
+                Do not use <code>!important</code> to fix layer mistakes — check
+                order and ownership first (see <a href="#important">!important and layers</a>).
+            </li>
             <li>Do not put component styles in base or theme files.</li>
             <li>Do not hide hacks inside normal component partials.</li>
             <li>
                 Do not leave third-party CSS outside a dedicated low-priority layer
-                (often <code>legacy</code> or <code>thirdparty</code>).
+                (<code>thirdparty</code>, <code>legacy</code>, or both with
+                <code>thirdparty</code> listed before <code>legacy</code>).
             </li>
             <li>Theme changes presentation, not structure.</li>
             <li>Layer order should be decided once, not negotiated weekly.</li>

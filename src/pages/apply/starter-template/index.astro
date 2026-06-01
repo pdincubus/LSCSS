@@ -1,62 +1,44 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import FileTree from '../../../components/FileTree.astro';
+import { starterFolderTree } from '../../../data/fileTrees';
 
-const folderStructure = `css/
-    critical.css
-
-    settings/
-        variables.css
-        media.css
-        fonts.css
-
-    base/
-        reset.css
-        typography.css
-
-    helpers/
-        vh.css
-        a11y-link.css
-
-    layout/
-        site-head.css
-
-    components/
-        logo.css
-        button.css
-        main-nav.css
-        card.css
-
-    theme/
-        brand.css
-
-    legacy/
-        vendor.css
-        old-site.css
-
-    hacks/
-        temporary-fixes.css`;
-
-const rootCssExample = `@layer legacy, settings, base, utilities,
-layout, components, theme, hacks;
-
-@import 'legacy/vendor' layer(legacy);
-@import 'legacy/old-site' layer(legacy);
+const criticalCssExample = `/* critical.css — small bundle for first paint on every page */
+@layer legacy, settings, base, utilities, layout, components, theme, hacks;
 
 @import 'settings/variables' layer(settings);
-@import 'settings/media' layer(settings);
 @import 'settings/fonts' layer(settings);
 
 @import 'base/reset' layer(base);
-
-@import 'helpers/vh' layer(utilities);
+@import 'base/typography' layer(base);
 
 @import 'layout/site-head' layer(layout);
 
 @import 'components/logo' layer(components);
 @import 'components/button' layer(components);
-@import 'components/main-nav' layer(components);
-@import 'components/card' layer(components);`;
+@import 'components/main-nav' layer(components);`;
+
+const siteCssExample = `/* site.css — full import map; load after critical */
+@layer legacy, settings, base, utilities, layout, components, theme, hacks;
+
+@import 'legacy/vendor' layer(legacy);
+@import 'legacy/old-site' layer(legacy);
+
+@import 'settings/media' layer(settings);
+
+@import 'helpers/vh' layer(utilities);
+
+@import 'components/card' layer(components);
+
+@import 'theme/brand' layer(theme);
+
+@import 'hacks/temporary-fixes' layer(hacks);`;
+
+const stylesheetLinksExample = `<!-- HTML: critical first, remainder without blocking first paint -->
+<link rel="stylesheet" href="/css/critical.css" />
+<link rel="stylesheet" href="/css/site.css" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="/css/site.css" /></noscript>`;
 
 const tokenExample = `:root {
     --ff: 'Funnel Sans', system-ui;
@@ -71,6 +53,7 @@ const tokenExample = `:root {
     --c-red: hsl(343 100% 45.5%);
     --c-blue: hsl(222 53% 35%);
 
+    --br-m: 8px;
     --shadow-m: 0 2px 8px rgba(0, 0, 0, 0.12);
 }`;
 
@@ -86,7 +69,7 @@ const fontExample = `@font-face {
 
 <DocsLayout
     title="LSCSS Starter Template"
-    description="Starter structure for Layered Semantic CSS projects."
+    description="Starter LSCSS folder structure, critical vs site CSS delivery, tokens, fonts, and working rules for new projects."
 >
     <section class="site-hero">
         <p class="eyebrow">Apply</p>
@@ -96,15 +79,18 @@ const fontExample = `@font-face {
         </h1>
 
         <p class="intro">
-            Start with a predictable structure. Good architecture should remove
-            decisions, not create new ones every Monday morning. The goal is a
-            system people can explain without opening seven files first.
+            Start with a predictable structure. The same layer folders and
+            partials that keep ownership clear also support performance: a small
+            <code>critical.css</code> for what every page needs immediately, and
+            <code>site.css</code> as the full import map for everything else,
+            loaded when it will not delay first paint.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Starter template sections">
         <a href="#structure">Folder structure</a>
-        <a href="#root-file">Root file</a>
+        <a href="#delivery">Critical and site CSS</a>
+        <a href="#root-file">Site import map</a>
         <a href="#tokens">Tokens</a>
         <a href="#fonts">Fonts</a>
         <a href="#rules">Rules</a>
@@ -116,27 +102,76 @@ const fontExample = `@font-face {
             Real-world folder structure
         </h2>
 
-        <CodeExample code={folderStructure} language="text" />
+        <FileTree tree={starterFolderTree} />
 
         <p>
             Folder names may vary. Some teams group files under
             <code>components/</code> with subfolders. The important rule is ownership,
-            not folder worship.
+            not folder worship. The example puts vendor CSS under
+            <code>legacy/</code> in one low bucket; on a greenfield project with no
+            inherited first-party CSS you might use <code>thirdparty/</code> instead
+            (see <a href="/apply/layers/#legacy">legacy and third-party layers</a>).
+            <code>critical.css</code> and <code>site.css</code> sit at the root of
+            <code>css/</code> — delivery boundaries, not extra layers.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="delivery">
+            Critical and site CSS
+        </h2>
+
+        <p>
+            LSCSS does not require two root files, but many production sites
+            split delivery for performance. <code>critical.css</code> holds the
+            smallest set of styles the browser needs early: tokens, reset,
+            typography defaults, global layout chrome, and components that appear
+            on every page (header, nav, buttons in the shell). Load it with
+            normal priority so first paint is not waiting on card grids, legacy
+            vendor CSS, or theme overrides for pages the user has not reached yet.
+        </p>
+
+        <CodeExample code={criticalCssExample} />
+
+        <p>
+            <code>site.css</code> remains the full import map for the rest of the
+            system — same <code>@layer</code> declaration, same partials, same
+            ownership rules. It is not a dumping ground; it is the deferred bundle.
+            Declare layers in both files so cascade order stays consistent when
+            the second file arrives.
+        </p>
+
+        <CodeExample code={siteCssExample} />
+
+        <p>
+            How you load the second file depends on your stack. The pattern below
+            avoids blocking render on the full bundle while keeping a
+            <code>noscript</code> fallback.
+        </p>
+
+        <CodeExample code={stylesheetLinksExample} language="html" />
+
+        <p>
+            Keep <code>critical.css</code> small and stable. If a partial lands
+            in critical because it is convenient, the bundle grows on every page
+            visit. When in doubt, default to <code>site.css</code> and promote
+            to critical only after you can justify it with metrics (header visible
+            without flash, layout shift, and similar).
         </p>
     </section>
 
     <section class="content-block">
         <h2 id="root-file">
-            Root CSS file as an import map
+            Site CSS as an import map
         </h2>
 
         <p>
-            Your main stylesheet should define layer order first, then import
-            files into the correct place. It should not become the place where
-            emergency CSS goes to retire.
+            Whether you ship one file or two, the deferred bundle should define
+            layer order first, then import partials into the correct layer. It
+            should not become the place where emergency CSS goes to retire.
+            See <a href="/apply/architecture/#root-file">architecture</a> for the
+            same pattern on a single <code>site.css</code> project.
         </p>
-
-        <CodeExample code={rootCssExample} />
     </section>
 
     <section class="content-block">
@@ -145,9 +180,12 @@ const fontExample = `@font-face {
         </h2>
 
         <p>
-            Use variables for spacing, typography, colour, shadows, radius, and
-            layout decisions. Random values spread inconsistency fast and turn
-            design into avoidable inconsistency.
+            Use variables for spacing, typography, colour, border radius
+            (<code>--br-*</code>), shadows, and layout decisions. Random values
+            spread inconsistency fast and turn design into avoidable inconsistency.
+            See <a href="/apply/design-tokens/">design tokens</a> for the naming
+            system this site uses (<code>--c-*</code>, <code>--fs</code>,
+            <code>--space</code>, and the rest).
         </p>
 
         <CodeExample code={tokenExample} />
@@ -178,9 +216,18 @@ const fontExample = `@font-face {
         </h2>
 
         <ul>
+            <li>
+                <code>critical.css</code> stays small; <code>site.css</code> holds the
+                full import map.
+            </li>
             <li>One component, one partial.</li>
             <li>No IDs for styling.</li>
-            <li>No <code>!important</code> unless there is a real emergency.</li>
+            <li>
+                Do not use <code>!important</code> to win cascade fights — with
+                layers it often resolves the opposite of what you expect. Fix layer
+                order instead (see
+                <a href="/apply/layers/#important">!important and layers</a>).
+            </li>
             <li>Base styles stay in the base layer.</li>
             <li>Utilities stay rare and purposeful.</li>
             <li>Theme changes presentation, not structure.</li>
@@ -196,10 +243,16 @@ const fontExample = `@font-face {
         </h2>
 
         <ul>
-            <li>One giant site.css containing everything.</li>
+            <li>
+                One undivided CSS bundle when first paint matters — or a
+                <code>critical.css</code> that slowly absorbs the whole project.
+            </li>
             <li>Component styles mixed into reset or base files.</li>
             <li>Random colours and spacing values spread across components.</li>
-            <li>Third-party CSS imported without a legacy layer.</li>
+            <li>
+                Third-party CSS imported without a dedicated low layer
+                (<code>thirdparty</code> or <code>legacy</code>).
+            </li>
             <li>Temporary fixes hidden inside normal component files.</li>
             <li>Utility chains replacing actual component architecture.</li>
         </ul>

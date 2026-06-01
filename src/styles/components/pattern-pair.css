@@ -5,7 +5,12 @@
 
 .pattern-pair {
     display: grid;
-    gap: var(--space-lg);
+    gap: var(--space-m);
+    margin-block-start: var(--space-m);
+}
+
+.pattern-pair:has(+ *) {
+    margin-block-end: var(--space-l);
 }
 
 @media (--from-tablet) {
@@ -16,16 +21,16 @@
 
 .pattern-card {
     display: grid;
-    gap: var(--space-md);
-    padding: var(--space-lg);
+    gap: var(--space);
+    padding: var(--space-m);
     background: var(--c-surface);
     border: var(--border-s) solid var(--c-border);
-    border-radius: var(--radius-m);
+    border-radius: var(--br-m);
 }
 
 .pattern-card > h3 {
     margin: 0;
-    font-size: var(--fs-lg);
+    font-size: var(--fs-l);
 }
 
 .pattern-card--bad {

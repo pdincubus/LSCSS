@@ -9,19 +9,15 @@ const comparisons = [
         description: 'Naming conventions, modifiers, state classes, and modern CSS architecture.'
     },
     {
-        title: 'Tailwind vs LSCSS',
+        title: 'Tailwind and utility-first vs LSCSS',
         href: '/learn/comparisons/tailwind-vs-lscss/',
-        description: 'Why utility-first Tailwind hurts semantic HTML—and what LSCSS does instead.'
+        description:
+            'Why utility-first CSS in HTML—including Tailwind—hurts semantics and maintainability, and what LSCSS does instead.'
     },
     {
         title: 'CSS Modules vs LSCSS',
         href: '/learn/comparisons/css-modules-vs-lscss/',
         description: 'Component scoping, framework workflows, and system-wide architecture.'
-    },
-    {
-        title: 'Utility-first vs LSCSS',
-        href: '/learn/comparisons/utility-first-vs-lscss/',
-        description: 'Why utility-first CSS in markup fails—and how layered semantic CSS replaces it.'
     },
     {
         title: '@scope and LSCSS',
@@ -111,47 +107,49 @@ const comparisons = [
             Quick reference
         </h2>
 
-        <table class="comparison-table">
-            <thead>
-                <tr>
-                    <th>Approach</th>
-                    <th>Main focus</th>
-                    <th>Main trade-off</th>
-                </tr>
-            </thead>
+        <div class="comparison-table-wrap">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Approach</th>
+                        <th scope="col">Main focus</th>
+                        <th scope="col">Main trade-off</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr>
-                    <td>BEM</td>
-                    <td>explicit naming and ownership</td>
-                    <td>verbosity and naming overhead</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row">BEM</th>
+                        <td>explicit naming and ownership</td>
+                        <td>verbosity and naming overhead</td>
+                    </tr>
 
-                <tr>
-                    <td>Tailwind</td>
-                    <td>utility-first delivery speed</td>
-                    <td>non-semantic HTML, class bloat, hard maintenance</td>
-                </tr>
+                    <tr>
+                        <th scope="row">Tailwind</th>
+                        <td>utility-first delivery speed</td>
+                        <td>non-semantic HTML, class bloat, hard maintenance</td>
+                    </tr>
 
-                <tr>
-                    <td>CSS Modules</td>
-                    <td>local component scoping</td>
-                    <td>scoping without wider system rules</td>
-                </tr>
+                    <tr>
+                        <th scope="row">CSS Modules</th>
+                        <td>local component scoping</td>
+                        <td>scoping without wider system rules</td>
+                    </tr>
 
-                <tr>
-                    <td>@scope</td>
-                    <td>native selector boundaries</td>
-                    <td>scope without full architecture</td>
-                </tr>
+                    <tr>
+                        <th scope="row">@scope</th>
+                        <td>native selector boundaries</td>
+                        <td>scope without full architecture</td>
+                    </tr>
 
-                <tr>
-                    <td>LSCSS</td>
-                    <td>layers, semantics, maintainability</td>
-                    <td>requires discipline, not shortcuts</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <th scope="row">LSCSS</th>
+                        <td>layers, semantics, maintainability</td>
+                        <td>requires discipline, not shortcuts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p>
             No system removes trade-offs. Good architecture means choosing them
@@ -197,7 +195,7 @@ const comparisons = [
         </div>
         <h3>Start by role</h3>
         <ul>
-            <li>Tech lead: start with <a href="/learn/comparisons/css-modules-vs-lscss/">CSS Modules vs LSCSS</a> and <a href="/learn/comparisons/tailwind-vs-lscss/">Tailwind vs LSCSS</a> for team-scale trade-offs.</li>
+            <li>Tech lead: start with <a href="/learn/comparisons/css-modules-vs-lscss/">CSS Modules vs LSCSS</a> and <a href="/learn/comparisons/tailwind-vs-lscss/">Tailwind and utility-first vs LSCSS</a> for team-scale trade-offs.</li>
             <li>Individual contributor: start with <a href="/learn/comparisons/bem-vs-lscss/">BEM vs LSCSS</a> for naming and ownership decisions.</li>
             <li>Modern CSS adopter: start with <a href="/learn/comparisons/scope-vs-lscss/">@scope and LSCSS</a> to evaluate native scoping alongside methodology.</li>
         </ul>

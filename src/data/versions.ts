@@ -21,9 +21,31 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '0.9',
+        label: '0.9',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Design token ladder guidance, a full browser-support engineering page (custom media, feature baselines, support matrix templates), tabbed package-manager CLI examples, and a broad Apply documentation pass with shared teaching components.',
+        releasedAt: '2026-06-01',
+        changed: [
+            'Documented the token ladder in DESIGN.md and /apply/design-tokens/: bare `--fs`, `--lh`, and `--space` as base steps; explicit size steps (`--fs-s` … `--fs-3xl`, `--space-2xs` … `--space-2xl`); `--br-*` for border radius (`--border-*` stays width). Live site styles updated to match.',
+            'Rebuilt /apply/browser-support/ with browserslist (including feature queries), build-pipeline alignment, custom media and the build-step tradeoff, `@supports`, modern CSS capabilities (`:has()`, `:not()`, layers, container queries, and related), and copyable support matrix templates—feature baseline (CSS and optional JS/API rows) or version list, or both.',
+            'Added `CliCommand` and `cliCommands.ts`: npm / pnpm / yarn tabs with copy for documented shell commands; wired on browser-support (browserslist) and /search/ local Pagefind setup; search-unavailable help links to that section instead of duplicating command strings.',
+            'Expanded Apply teaching pages (layers, architecture, starter template, theme layer, migration with shared milestones/steps components, decision trees from data, comparisons hub and per-approach pages) and cross-linked tooling, tokens, and browser support across the map.',
+            'Documentation read order: design tokens and browser support now sit before Teams adoption in `docsNavigation` (pager “Next” from browser support → adoption).',
+            'Merged utility-first comparison into /learn/comparisons/tailwind-vs-lscss/ with redirects from the old utility-first URL; llms.txt and discovery copy updated.',
+            'Shared UI for docs: `DecisionTree`, `FileTree`, `MigrationEffort`, `MigrationMilestones`, `MigrationSteps`, `ComparisonPairs`, and `comparison-table--plain` for skeleton tables on browser support.'
+        ],
+        removed: [
+            'The standalone /learn/comparisons/utility-first-vs-lscss/ page; use /learn/comparisons/tailwind-vs-lscss/ (utility-first is covered there).',
+            'Site-wide `--radius-*` custom properties in favour of `--br-*` for corner radius; update any forked CSS that still references the old names.'
+        ]
+    },
+    {
         version: '0.8',
         label: '0.8',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Naming guidance update: optional short component namespaces added as a collision-safety pattern without changing the default semantic naming model.',
@@ -76,7 +98,7 @@ export const versions: LscssVersion[] = [
         ],
         removed: [
             'Vendored Prism `okaidia` and the deprecated `prism-legacy.css` shim; code syntax colours come from `base/code.css` and the LSCSS palette.',
-            'The `--colour-*`, `--font-*`, and ad-hoc design variables from the previous token system; everything now flows from the `tokens.css` semantic layer (`--c-*`, `--fs-*`, `--space-*`, `--radius-*`, `--border-*`, `--shadow-*`, `--transition-*`).',
+            'The `--colour-*`, `--font-*`, and ad-hoc design variables from the previous token system; everything now flows from the `tokens.css` semantic layer (`--c-*`, `--fs-*`, `--space-*`, `--br-*`, `--border-*`, `--shadow-*`, `--transition-*`).',
             'The `.versions-page` wrapper class on the versions index `<main>`; it carried no styling responsibility distinct from `.page-shell`.',
             'Unused component CSS (`example-card`, decoupled `decision-tree` styles, the standalone `command-palette` shell) was dropped to keep `components/` aligned with what the site actually renders.'
         ]

@@ -18,10 +18,17 @@ function sameOriginHref(raw) {
     }
 }
 
+function localSearchSetupHref() {
+    const onSearchPage = window.location.pathname.replace(/\/$/, '') === '/search';
+    return onSearchPage ? '#local-search' : '/search/#local-search';
+}
+
 function showUnavailable(results, input) {
+    const setupHref = escapeHtml(localSearchSetupHref());
+
     results.innerHTML = `
         <p class="search-unavailable" role="status">Search index is not available.</p>
-        <p class="search-help">Run <code>npm run build</code> once so Pagefind output is copied to <code>public/pagefind</code>, then use <code>npm run dev</code> or <code>npm run preview</code>.</p>
+        <p class="search-help">Run a production build first, then reload this page. Use the package-manager tabs in <a href="${setupHref}">Local search setup</a>.</p>
     `;
     input.placeholder = 'Search unavailable…';
     input.disabled = true;

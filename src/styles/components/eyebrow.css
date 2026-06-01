@@ -1,0 +1,21 @@
+/*
+ * Section label above page titles. Same treatment in .site-hero and elsewhere
+ * (e.g. comparison articles). Literal hsl + color-scheme media — matches
+ * --c-eyebrow in tokens.css (token not used here for reliable colour compute).
+ */
+
+.eyebrow {
+    margin: 0 0 var(--space-s);
+    max-inline-size: none;
+    color: hsl(322 100% 42%);
+    font-size: var(--fs-s);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (prefers-color-scheme: dark) {
+    .eyebrow {
+        color: hsl(322 100% 66%);
+    }
+}

@@ -1,0 +1,45 @@
+---
+export interface ComparisonPair {
+    left: string;
+    right: string;
+}
+
+interface Props {
+    /** Name of the approach compared against LSCSS (e.g. BEM, Tailwind). */
+    leftLabel: string;
+    /** When true, wrap leftLabel in <code> (for @scope and similar). */
+    leftLabelIsCode?: boolean;
+    rightLabel?: string;
+    pairs: ComparisonPair[];
+}
+
+const { leftLabel, leftLabelIsCode = false, rightLabel = 'LSCSS', pairs } = Astro.props;
+---
+
+<div class="comparison-pairs">
+    <div class="header">
+        <span class="label label--left">
+            {leftLabelIsCode ? <code>{leftLabel}</code> : leftLabel}
+        </span>
+        <span class="label label--right">{rightLabel}</span>
+    </div>
+
+    <ul class="list">
+        {
+            pairs.map((pair) => (
+                <li class="comparison-pair">
+                    <div class="side side--left">
+                        <span class:list={['label', 'visually-hidden']}>
+                            {leftLabelIsCode ? <code>{leftLabel}</code> : leftLabel}
+                        </span>
+                        <p class="text" set:html={pair.left} />
+                    </div>
+                    <div class="side side--right">
+                        <span class:list={['label', 'visually-hidden']}>{rightLabel}</span>
+                        <p class="text" set:html={pair.right} />
+                    </div>
+                </li>
+            ))
+        }
+    </ul>
+</div>

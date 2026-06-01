@@ -38,17 +38,24 @@ const hacksExample = `@layer hacks {
 ---
 
 <DocsLayout
-    title="Examples Library"
-    description="Practical before and after examples for Layered Semantic CSS."
+    title="LSCSS Examples"
+    description="Before and after CSS and HTML patterns for Layered Semantic CSS: selectors, utilities, modifiers and state, legacy layers, and contained hacks."
     schemaType="TechArticle"
 >
     <section class="site-hero">
         <p class="eyebrow">Apply</p>
-        <h1>Show me, do not merely explain</h1>
+
+        <h1>
+            Examples
+        </h1>
+
         <p class="intro">
-            Principles matter. Examples end arguments. These before and after
-            patterns show what architectural improvement looks like in real CSS,
-            not only in confident documentation.
+            Each section pairs a familiar problem with a clearer LSCSS
+            approach — shallow selectors instead of deep chains, named components
+            instead of utility stacks, state classes instead of modifier soup,
+            and urgent fixes kept in the hacks layer. Use these in reviews,
+            teaching, and refactors when you need concrete before-and-after
+            patterns, not only the written rules.
         </p>
     </section>
 
@@ -117,6 +124,10 @@ const hacksExample = `@layer hacks {
 
         <p>
             Legacy should stay visible and low priority, not quietly spread.
+            When vendor CSS and inherited first-party CSS both need containment,
+            declare <code>thirdparty</code> before <code>legacy</code> in
+            <code>@layer</code> and import each file into the matching layer —
+            details on <a href="/apply/layers/#legacy">layers</a>.
         </p>
     </section>
 

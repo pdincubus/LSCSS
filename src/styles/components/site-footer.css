@@ -5,19 +5,19 @@
  */
 
 .site-footer {
-    margin-block-start: var(--space-3xl);
+    margin-block-start: var(--space-2xl);
     background: var(--c-surface-alt);
     border-block-start: var(--border-s) solid var(--c-border);
 }
 
 .site-footer > .inner {
     display: grid;
-    gap: var(--space-xl);
-    padding-block: var(--space-3xl);
+    gap: var(--space-l);
+    padding-block: var(--space-2xl);
 }
 
 .site-footer .intro > .title {
-    margin: 0 0 var(--space-sm);
+    margin: 0 0 var(--space-s);
     color: var(--c-heading);
     font-size: var(--fs-xl);
     font-weight: var(--fw-bold);
@@ -27,20 +27,20 @@
 .site-footer .intro > p {
     margin: 0;
     color: var(--c-text-muted);
-    line-height: var(--lh-relaxed);
+    line-height: var(--lh-l);
 }
 
 .site-footer .intro > .topics {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
-    margin-block-start: var(--space-lg);
+    gap: var(--space-s);
+    margin-block-start: var(--space-m);
 }
 
 @media (--desktop) {
     .site-footer .intro > .topics {
         flex-flow: row wrap;
-        gap: var(--space-md) var(--space-xl);
+        gap: var(--space) var(--space-l);
     }
 }
 
@@ -65,8 +65,8 @@
 .site-footer .bottom {
     grid-column: 1 / -1;
     display: grid;
-    gap: var(--space-md);
-    padding-block-start: var(--space-xl);
+    gap: var(--space);
+    padding-block-start: var(--space-l);
     border-block-start: var(--border-s) solid var(--c-border);
 }
 
@@ -74,10 +74,10 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-sm) var(--space-lg);
+    gap: var(--space-s) var(--space-m);
     color: var(--c-text-muted);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-base);
+    font-size: var(--fs-s);
+    line-height: var(--lh);
 }
 
 .site-footer .legal > .copyright {
@@ -91,7 +91,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-sm) var(--space-lg);
+    gap: var(--space-s) var(--space-m);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -123,7 +123,7 @@
 .site-footer .credits {
     margin: 0;
     color: var(--c-text-muted);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-base);
+    font-size: var(--fs-s);
+    line-height: var(--lh);
 }
 

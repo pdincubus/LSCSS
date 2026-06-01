@@ -6,6 +6,14 @@ function bootCodeExamples(): void {
     void import('./prism-code-examples');
 }
 
+function bootCliCommands(): void {
+    if (!document.querySelector('[data-cli-command]')) {
+        return;
+    }
+
+    void import('./cli-command');
+}
+
 function bootSectionNav(): void {
     if (!document.querySelector('.section-nav')) {
         return;
@@ -15,4 +23,5 @@ function bootSectionNav(): void {
 }
 
 bootCodeExamples();
+bootCliCommands();
 bootSectionNav();

@@ -1,7 +1,9 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import DecisionTree from '../../../components/DecisionTree.astro';
 import HubCard from '../../../components/HubCard.astro';
+import { utilitiesQuickRules } from '../../../data/decisionTrees';
 
 const accessibilityUtilities = `.vh {}
 .a11y-link {}
@@ -37,16 +39,6 @@ const betterExample = `<article class="product-card">
     <h2 class="title">Product title</h2>
     <p class="description">Product description</p>
 </article>`;
-
-const decisionExample = `Ask:
-Does this solve a universal accessibility problem?
-→ Utility
-
-Does this keep repeating as a UI pattern?
-→ Component
-
-Is this only visual presentation?
-→ Theme or component, not utility`;
 ---
 
 <DocsLayout
@@ -82,12 +74,13 @@ Is this only visual presentation?
             Quick decision rules
         </h2>
 
-        <CodeExample code={decisionExample} language="text" />
+        <DecisionTree tree={utilitiesQuickRules} />
 
         <p>
-            A utility should have to justify its existence. Most spacing,
-            layout, colour, and typography decisions belong in components,
-            layout, or theme instead.
+            For the shorter utility vs component flow, see
+            <a href="/apply/decision-trees/#utility">decision trees</a>.
+            Most spacing, layout, colour, and typography decisions belong in
+            components, layout, or theme instead.
         </p>
     </section>
 

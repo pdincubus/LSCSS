@@ -11,11 +11,11 @@
 .docs-sidebar > .disclosure {
     background: var(--c-surface-alt);
     border: var(--border-s) solid var(--c-border);
-    border-radius: var(--radius-m);
+    border-radius: var(--br-m);
 }
 
 .docs-sidebar > .disclosure > summary {
-    padding: var(--space-md);
+    padding: var(--space);
     color: var(--c-heading);
     font-weight: var(--fw-semibold);
     cursor: pointer;
@@ -27,18 +27,18 @@
 }
 
 .docs-sidebar .toc {
-    padding: 0 var(--space-md) var(--space-md);
+    padding: 0 var(--space) var(--space);
 }
 
 .docs-sidebar .group {
     display: grid;
-    gap: var(--space-sm);
+    gap: var(--space-s);
 }
 
 .docs-sidebar .heading {
     margin: 0;
     color: var(--c-text-muted);
-    font-size: var(--fs-xs);
+    font-size: var(--fs-2xs);
     font-weight: var(--fw-semibold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -54,10 +54,10 @@
 
 .docs-sidebar .list a {
     display: block;
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-s);
+    padding: var(--space-2xs) var(--space-s);
+    border-radius: var(--br-s);
     color: var(--c-text);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-s);
     text-decoration: none;
 }
 
@@ -73,13 +73,13 @@
 }
 
 .docs-sidebar .list--nested {
-    margin-block-start: var(--space-xs);
-    padding-inline-start: var(--space-sm);
+    margin-block-start: var(--space-2xs);
+    padding-inline-start: var(--space-s);
     border-inline-start: var(--border-s) solid var(--c-border);
 }
 
 .docs-sidebar .list--nested a {
-    font-size: var(--fs-xs);
+    font-size: var(--fs-2xs);
     color: var(--c-text-muted);
 }
 
@@ -88,7 +88,7 @@
         position: sticky;
         inset-block-start: var(--site-header-offset);
         scroll-margin-top: var(--site-header-offset);
-        max-block-size: calc(100vh - var(--site-header-offset) - var(--space-md));
+        max-block-size: calc(100vh - var(--site-header-offset) - var(--space));
         overflow-y: auto;
     }
 

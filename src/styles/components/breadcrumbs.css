@@ -1,14 +1,14 @@
 .breadcrumbs {
-    margin-block-end: var(--space-xl);
+    margin-block-end: var(--space-l);
     color: var(--c-text-muted);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-s);
 }
 
 .breadcrumbs > ol {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--space-xs) var(--space-sm);
+    gap: var(--space-2xs) var(--space-s);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -17,7 +17,7 @@
 .breadcrumbs li {
     display: inline-flex;
     align-items: baseline;
-    gap: var(--space-sm);
+    gap: var(--space-s);
     max-inline-size: none;
 }
 

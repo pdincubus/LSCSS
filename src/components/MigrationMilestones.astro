@@ -1,0 +1,21 @@
+---
+import type { MigrationMilestone } from '../types/migration';
+
+interface Props {
+    milestones: MigrationMilestone[];
+}
+
+const { milestones } = Astro.props;
+---
+
+<ul class="migration-milestones">
+    {
+        milestones.map((milestone) => (
+            <li class="milestone">
+                <p class="phase">{milestone.phase}</p>
+                <h4 class="title">{milestone.title}</h4>
+                <p class="description">{milestone.description}</p>
+            </li>
+        ))
+    }
+</ul>

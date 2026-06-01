@@ -1,0 +1,58 @@
+---
+import {
+    cliCommands,
+    defaultPackageManager,
+    packageManagers,
+    type CliCommandKey
+} from '../data/cliCommands';
+
+export interface Props {
+    command: CliCommandKey;
+    label?: string;
+}
+
+const { command, label = 'Shell command' } = Astro.props;
+const variants = cliCommands[command];
+const initial = defaultPackageManager;
+---
+
+<figure
+    class="cli-command"
+    data-cli-command
+    data-default-pm={initial}
+    data-command-npm={variants.npm}
+    data-command-pnpm={variants.pnpm}
+    data-command-yarn={variants.yarn}
+>
+    <figcaption>
+        <span class="cli-command__label">{label}</span>
+
+        <div class="cli-command__controls">
+            <div class="cli-command__tabs" role="tablist" aria-label="Package manager">
+                {
+                    packageManagers.map((pm) => (
+                        <button
+                            type="button"
+                            class:list={['cli-command__tab', { 'is-active': pm === initial }]}
+                            role="tab"
+                            id={`cli-tab-${command}-${pm}`}
+                            aria-selected={pm === initial ? 'true' : 'false'}
+                            aria-controls={`cli-panel-${command}`}
+                            data-cli-tab={pm}
+                        >
+                            {pm}
+                        </button>
+                    ))
+                }
+            </div>
+
+            <button class="copy" type="button" data-cli-copy>
+                Copy
+            </button>
+        </div>
+    </figcaption>
+
+    <pre class="language-bash" id={`cli-panel-${command}`} role="tabpanel" aria-labelledby={`cli-tab-${command}-${initial}`}><code class="language-bash">{variants[initial]}</code></pre>
+
+    <p class="copy-status" data-cli-copy-status aria-live="polite"></p>
+</figure>

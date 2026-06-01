@@ -43,7 +43,7 @@ const faqPageLd = {
             name: 'Does this work with React, Astro, Vue, or other frameworks?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Yes. LSCSS is CSS architecture, not a framework choice. It applies wherever you write CSS—Astro, React, Vue, Svelte, Eleventy, server-rendered pages, or refactors. The JavaScript stack is largely separate.'
+                text: 'Yes. LSCSS is CSS architecture, not a framework choice. It applies wherever you write CSS—Astro, React, Vue, Svelte, 11ty (Eleventy, now Build Awesome), server-rendered pages, or refactors. The JavaScript stack is largely separate.'
             }
         },
         {
@@ -75,7 +75,7 @@ const faqPageLd = {
             name: 'What about old projects and legacy CSS?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Do not rewrite everything for sport. Add layers, isolate old CSS in a legacy layer, and improve active components as you touch them. Migration should be controlled, not disruptive.'
+                text: 'Do not rewrite everything for sport. Add layers, isolate inherited first-party CSS in a legacy layer (or use a separate thirdparty layer for vendor CSS when that name fits better), and improve active components as you touch them. Migration should be controlled, not disruptive.'
             }
         },
         {
@@ -164,7 +164,7 @@ const faqPageLd = {
         <p>
             If you inherit Tailwind, treat migration as damage control: isolate it,
             stop growing class soup, and move repeated patterns into components. See
-            <a href="/learn/comparisons/tailwind-vs-lscss/">Tailwind vs LSCSS</a>.
+            <a href="/learn/comparisons/tailwind-vs-lscss/">Tailwind and utility-first vs LSCSS</a>.
         </p>
     </section>
 
@@ -204,7 +204,8 @@ const faqPageLd = {
         <p>
             Yes. LSCSS is CSS architecture, not a framework choice. It applies
             wherever you write CSS—whether that is with Astro, React, Vue,
-            Svelte, Eleventy, server-rendered pages, or older sites you are
+            Svelte, 11ty (Eleventy, now Build Awesome), server-rendered pages, or older
+            sites you are
             refactoring. Your JavaScript stack is largely separate; LSCSS cares
             about how styles are structured, not how behaviour is attached to
             the DOM.
@@ -255,6 +256,9 @@ const faqPageLd = {
             Rare exceptions exist, especially for accessibility helpers or
             unavoidable third-party behaviour, but if your first instinct is
             <code>!important</code>, stop and check the architecture first.
+            With cascade layers, <code>!important</code> can resolve the
+            opposite of what you expect — see
+            <a href="/apply/layers/#important">!important and layers</a>.
         </p>
     </section>
 
@@ -263,8 +267,11 @@ const faqPageLd = {
 
         <p>
             Do not rewrite everything for sport. Start by adding layers,
-            isolate old CSS in the legacy layer, and improve active components
-            as you touch them. Migration should be controlled, not disruptive.
+            isolate inherited first-party CSS in the legacy layer, and improve
+            active components as you touch them. Vendor CSS can use a separate
+            <code>thirdparty</code> layer when <code>legacy</code> is the wrong
+            name — see <a href="/apply/layers/#legacy">layer guidance</a>.
+            Migration should be controlled, not disruptive.
         </p>
     </section>
 

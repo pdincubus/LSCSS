@@ -23,19 +23,21 @@ RSS: https://lscss.crayonsandco.de/rss.xml
 
 - [Layers](https://lscss.crayonsandco.de/apply/layers/): `legacy`, `settings`, `base`, `utilities`, `layout`, `components`, `theme`, `hacks`
 - [Architecture](https://lscss.crayonsandco.de/apply/architecture/): Folder and file ownership
+- [Design tokens](https://lscss.crayonsandco.de/apply/design-tokens/): CSS variables, short prefixes (`--c-*`, `--fs`, `--space`, `--br-*`, and scales)
 - [Naming](https://lscss.crayonsandco.de/apply/naming/): Semantic components and modifiers
 - [Modifiers and state](https://lscss.crayonsandco.de/apply/modifiers-and-state/)
 - [Utilities](https://lscss.crayonsandco.de/apply/utilities/): Rare helpers—not utility-first markup
 - [Decision trees](https://lscss.crayonsandco.de/apply/decision-trees/): Utility vs component, layers, hacks
 - [Examples](https://lscss.crayonsandco.de/apply/examples/): Before/after patterns
 - [Migration](https://lscss.crayonsandco.de/apply/migration/): Incremental adoption from legacy CSS
+- [Tooling](https://lscss.crayonsandco.de/apply/tooling/): PostCSS, custom media, browserslist, Stylelint
+- [Browser support](https://lscss.crayonsandco.de/apply/browser-support/): Browserslist, `@supports`, feature baselines, support matrix templates
 - [Anti-patterns](https://lscss.crayonsandco.de/learn/anti-patterns/): What to stop doing
 
 ## Comparisons
 
 - [Comparisons hub](https://lscss.crayonsandco.de/learn/comparisons/)
-- [Tailwind vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/tailwind-vs-lscss/)
-- [Utility-first vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/utility-first-vs-lscss/)
+- [Tailwind and utility-first vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/tailwind-vs-lscss/)
 - [BEM vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/bem-vs-lscss/)
 - [CSS Modules vs LSCSS](https://lscss.crayonsandco.de/learn/comparisons/css-modules-vs-lscss/)
 - [@scope and LSCSS](https://lscss.crayonsandco.de/learn/comparisons/scope-vs-lscss/)

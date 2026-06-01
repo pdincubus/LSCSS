@@ -1,0 +1,127 @@
+/*
+ * Side-by-side comparison rows for methodology pages (e.g. BEM vs LSCSS).
+ * Pairs read as one row on wide viewports; stack with labels on narrow screens.
+ */
+
+.comparison-pairs {
+    margin-block: var(--space-m) var(--space-l);
+}
+
+.comparison-pairs > .header {
+    display: none;
+}
+
+.comparison-pairs > .list {
+    display: grid;
+    gap: var(--space);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.comparison-pair {
+    display: grid;
+    gap: 0;
+    overflow: hidden;
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--br-m);
+}
+
+.comparison-pair > .side {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space);
+}
+
+/* Row labels use .visually-hidden from tablet up; undo on narrow viewports. */
+@media (--mobile) {
+    .comparison-pair > .side > .label.visually-hidden {
+        position: static;
+        inline-size: auto;
+        block-size: auto;
+        padding: 0;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+        border: 0;
+    }
+}
+
+.comparison-pair > .side > .label {
+    color: var(--c-text-muted);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.06em;
+    line-height: var(--lh-s);
+    text-transform: uppercase;
+}
+
+.comparison-pair > .side > .label > code {
+    font-size: inherit;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.comparison-pair > .side > .text {
+    margin: 0;
+    max-inline-size: none;
+    color: var(--c-text);
+    font-size: var(--fs-s);
+    line-height: var(--lh-l);
+}
+
+.comparison-pair > .side--left > .label {
+    color: var(--c-heading);
+}
+
+.comparison-pair > .side--right {
+    background: var(--c-surface-alt);
+    border-block-start: var(--border-s) solid var(--c-border);
+}
+
+.comparison-pair > .side--right > .label {
+    color: var(--c-link);
+}
+
+@media (--from-tablet) {
+    .comparison-pairs > .header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space);
+        margin-block-end: var(--space-s);
+        padding-inline: var(--space);
+    }
+
+    .comparison-pairs > .header > .label {
+        color: var(--c-text-muted);
+        font-size: var(--fs-2xs);
+        font-weight: var(--fw-semibold);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .comparison-pairs > .header > .label--left {
+        color: var(--c-heading);
+    }
+
+    .comparison-pairs > .header > .label--right {
+        color: var(--c-link);
+    }
+
+    .comparison-pairs > .header > .label > code {
+        font-size: inherit;
+        letter-spacing: 0;
+        text-transform: none;
+    }
+
+    .comparison-pair {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .comparison-pair > .side--right {
+        border-block-start: 0;
+        border-inline-start: var(--border-s) solid var(--c-border);
+    }
+}

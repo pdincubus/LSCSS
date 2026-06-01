@@ -4,10 +4,10 @@ h3,
 h4,
 h5,
 h6 {
-    margin-block: 0 var(--space-md);
+    margin-block: 0 var(--space);
     color: var(--c-heading);
     font-weight: var(--fw-semibold);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-s);
     letter-spacing: -0.01em;
     text-wrap: balance;
 }
@@ -25,12 +25,12 @@ h3 {
 }
 
 h4 {
-    font-size: var(--fs-lg);
+    font-size: var(--fs-l);
 }
 
 h5,
 h6 {
-    font-size: var(--fs-md);
+    font-size: var(--fs-m);
 }
 
 p,
@@ -39,7 +39,7 @@ ol:not([class]),
 dl:not([class]),
 blockquote,
 figure {
-    margin-block: 0 var(--space-md);
+    margin-block: 0 var(--space);
 }
 
 p,
@@ -51,13 +51,13 @@ dd:not([class]) {
 
 ul:not([class]),
 ol:not([class]) {
-    padding-inline-start: var(--space-lg);
+    padding-inline-start: var(--space-m);
 }
 
 li:not([class]) + li:not([class]),
 li:not([class]) > ul:not([class]),
 li:not([class]) > ol:not([class]) {
-    margin-block-start: var(--space-xs);
+    margin-block-start: var(--space-2xs);
 }
 
 a {
@@ -80,7 +80,7 @@ b {
 }
 
 hr {
-    margin-block: var(--space-2xl);
+    margin-block: var(--space-xl);
     border: 0;
     border-block-start: var(--border-s) solid var(--c-border);
 }

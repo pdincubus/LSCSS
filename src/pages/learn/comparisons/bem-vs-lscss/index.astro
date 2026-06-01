@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import ComparisonPairs from '../../../../components/ComparisonPairs.astro';
 import HubCard from '../../../../components/HubCard.astro';
 
 const title = 'BEM vs LSCSS';
@@ -25,6 +26,25 @@ const lscssExample = `<article class="product-card">
         Product description
     </p>
 </article>`;
+
+const mainDifferencePairs = [
+    {
+        left: 'Uses naming conventions to describe structure.',
+        right: 'Uses cascade layers and architecture first.'
+    },
+    {
+        left: 'Creates explicit relationships in class names.',
+        right: 'Prefers simpler semantic naming with controlled scope.'
+    },
+    {
+        left: 'Reduces ambiguity through verbosity.',
+        right: 'Reduces ambiguity through ownership and layering.'
+    },
+    {
+        left: 'Focuses on naming discipline.',
+        right: 'Focuses on system discipline.'
+    }
+];
 ---
 
 <DocsLayout
@@ -82,16 +102,7 @@ const lscssExample = `<article class="product-card">
                 Main differences
             </h2>
 
-            <ul>
-                <li>BEM uses naming conventions to describe structure.</li>
-                <li>LSCSS uses cascade layers and architecture first.</li>
-                <li>BEM creates explicit relationships in class names.</li>
-                <li>LSCSS prefers simpler semantic naming with controlled scope.</li>
-                <li>BEM reduces ambiguity through verbosity.</li>
-                <li>LSCSS reduces ambiguity through ownership and layering.</li>
-                <li>BEM focuses on naming discipline.</li>
-                <li>LSCSS focuses on system discipline.</li>
-            </ul>
+            <ComparisonPairs leftLabel="BEM" pairs={mainDifferencePairs} />
         </section>
 
         <section class="content-block">

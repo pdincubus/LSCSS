@@ -1,0 +1,103 @@
+/*
+ * Folder structure diagram: matches code-example shell, IDE-style guides,
+ * folder/file icons, and muted inline comments.
+ */
+
+.file-tree {
+    margin-inline: 0;
+    margin-block: var(--space);
+    background: var(--c-code-bg);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--br-m);
+    overflow: hidden;
+}
+
+.file-tree > figcaption {
+    padding: var(--space-s) var(--space);
+    background: var(--c-surface-alt);
+    border-block-end: var(--border-s) solid var(--c-border);
+    color: var(--c-text-muted);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.file-tree > .body {
+    padding: var(--space-m) var(--space);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-s);
+    line-height: var(--lh);
+}
+
+.file-tree .root {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    margin: 0 0 var(--space-s);
+    font-weight: var(--fw-semibold);
+}
+
+.file-tree .root .name {
+    color: var(--c-link);
+}
+
+.file-tree .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.file-tree .entry {
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0 var(--space-2xs);
+    margin: 0;
+    padding: 0.1em 0;
+}
+
+.file-tree .guide {
+    color: var(--c-text-muted);
+    opacity: 0.55;
+    white-space: pre;
+    user-select: none;
+}
+
+.file-tree .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+    min-inline-size: 0;
+}
+
+.file-tree .icon {
+    flex-shrink: 0;
+    block-size: 1em;
+    inline-size: 1em;
+}
+
+.file-tree .entry--folder .icon {
+    color: var(--c-link);
+}
+
+.file-tree .entry--file .icon {
+    color: var(--c-text-muted);
+}
+
+.file-tree .entry--folder .name {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+}
+
+.file-tree .entry--file .name {
+    color: var(--c-text);
+}
+
+.file-tree .comment {
+    color: var(--c-text-muted);
+    font-size: 0.92em;
+    font-style: italic;
+    font-weight: var(--fw-regular);
+}

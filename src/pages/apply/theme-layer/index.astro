@@ -1,28 +1,62 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import DecisionTree from '../../../components/DecisionTree.astro';
 import HubCard from '../../../components/HubCard.astro';
+import { themeLayerQuickRules } from '../../../data/decisionTrees';
 
-const tokenThemeExample = `:root {
-    --colour-accent: #6f3cff;
-    --colour-surface: #ffffff;
-    --radius-card: 1rem;
-}
+const themeImportExample = `@layer legacy, settings, base, utilities, layout, components, theme, hacks;
 
+@import './settings/tokens.css' layer(settings);
+@import './components/product-card.css' layer(components);
+@import './theme/brand-a.css' layer(theme);`;
+
+const themeTokensExample = `/* theme/brand-a.css — override tokens, not components */
+:root {
+    --ff-display: 'Acme Display', system-ui, sans-serif;
+    --c-accent: #b4002d;
+    --c-surface: #fffaf5;
+    --br-card: 0.5rem;
+}`;
+
+const componentUsesTokensExample = `/* components/product-card.css — written once in the components layer */
+.product-card {
+    font-family: var(--ff-display);
+    background: var(--c-surface);
+    border-radius: var(--br-card);
+    color: var(--c-text);
+}`;
+
+const brandPartialExample = `/* theme/partials/product-card--acme.css — rare, brand-specific presentation */
 @layer theme {
     .product-card {
-        background: var(--colour-surface);
-        border-radius: var(--radius-card);
+        border-width: var(--border-m);
+        box-shadow: var(--shadow-brand);
     }
 }`;
 
-const goodThemeExample = `@layer theme {
+const brandPartialImportExample = `/* theme/brand-a.css */
+:root {
+    --c-accent: #b4002d;
+    --shadow-brand: 0 4px 24px rgb(180 0 45 / 0.15);
+}
+
+@import './partials/product-card--acme.css';`;
+
+const avoidComponentTokensExample = `/* Avoid: theme re-targeting component-level custom properties */
+@layer theme {
     .button {
-        --button-background: var(--colour-accent);
+        --button-background: var(--c-accent);
+    }
+
+    .product-card {
+        background: var(--c-surface);
+        border-radius: var(--br-card);
     }
 }`;
 
-const badThemeExample = `.button {
+const badThemeExample = `/* Avoid: one-off colours on selectors */
+.button {
     background: purple;
 }
 
@@ -33,21 +67,11 @@ const badThemeExample = `.button {
 .hero-button {
     background: rgb(118 45 255);
 }`;
-
-const decisionExample = `Ask:
-Is this changing presentation only?
-→ Theme
-
-Is this changing structure or behaviour?
-→ Component
-
-Is this temporary or urgent?
-→ Hacks, not theme`;
 ---
 
 <DocsLayout
     title="LSCSS Theme Layer"
-    description="Theme layer guidance for Layered Semantic CSS, including token-driven theming, safe visual overrides, and avoiding random one-off styling."
+    description="Theme layer guidance for Layered Semantic CSS: token overrides via theme imports, simple brand switching, and rare component partials when presentation cannot be expressed in settings alone."
     schemaType="TechArticle"
 >
     <section class="site-hero">
@@ -58,17 +82,19 @@ Is this temporary or urgent?
         </h1>
 
         <p class="intro">
-            Theme changes presentation, not structure. It handles brand styling,
-            tokens, and visual consistency without quietly rewriting component
-            architecture behind everyone’s back.
+            Theme changes presentation, not structure. In most projects it is a
+            thin layer on top of the work settings, base, layout, and components
+            already did: import a <code>theme/*.css</code> file, override
+            <code>:root</code> token values, and let existing selectors pick up
+            the new brand without hunting through component files.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Theme layer sections">
         <a href="#rules">Decision rules</a>
         <a href="#purpose">Purpose</a>
-        <a href="#tokens">Tokens first</a>
-        <a href="#good-overrides">Good overrides</a>
+        <a href="#tokens">Tokens via theme imports</a>
+        <a href="#brand-partials">Brand-specific partials</a>
         <a href="#avoid">Avoid</a>
     </nav>
 
@@ -77,11 +103,13 @@ Is this temporary or urgent?
             Quick decision rules
         </h2>
 
-        <CodeExample code={decisionExample} language="text" />
+        <DecisionTree tree={themeLayerQuickRules} />
 
         <p>
-            Theme should be predictable. If a visual change needs detective
-            work to explain, the architecture is already drifting.
+            For base vs theme vs component ownership, see
+            <a href="/apply/decision-trees/#ownership">decision trees</a>.
+            Theme should be predictable — presentation only, not structure,
+            behaviour, or emergency fixes.
         </p>
     </section>
 
@@ -91,69 +119,102 @@ Is this temporary or urgent?
         </h2>
 
         <p>
-            Theme contains colour, spacing adjustments, radius, shadows,
-            typography presentation, and brand-level visual decisions shared
-            across components.
+            Theme is where brand skins land: token values that differ per brand
+            or campaign, and occasionally a small presentation-only partial
+            when tokens alone are not enough. Components should already consume
+            shared variables from <a href="/apply/design-tokens/">design tokens</a>;
+            theme retargets those variables, not individual component files.
         </p>
 
         <p>
             Theme does not contain layout fixes, accessibility repairs,
             JavaScript state handling, or emergency overrides pretending not to
-            be hacks.
+            be hacks. If a change needs new structure or behaviour, that belongs
+            in layout or components — not a theme workaround.
         </p>
     </section>
 
     <section class="content-block">
         <h2 id="tokens">
-            Tokens first
+            Tokens via theme imports
         </h2>
 
         <p>
-            Change the token, not twenty unrelated selectors. Tokens protect
-            consistency and stop branding from becoming a treasure hunt for the
-            correct shade of purple.
+            Wire the theme layer in your root import map, then keep each brand
+            in its own file. When the display font or accent colour changes,
+            update the token on <code>:root</code> in that theme file. Because
+            components already use <code>var(--…)</code>, the new values take
+            precedence without opening every partial.
         </p>
 
-        <CodeExample code={tokenThemeExample} />
+        <CodeExample code={themeImportExample} />
+
+        <CodeExample code={themeTokensExample} />
+
+        <p>
+            Components stay in the components layer and reference tokens once.
+            Switching brand means swapping (or adding) a theme import, not
+            editing component CSS.
+        </p>
+
+        <CodeExample code={componentUsesTokensExample} />
     </section>
 
     <section class="content-block">
-        <h2 id="good-overrides">
-            Safe visual overrides
+        <h2 id="brand-partials">
+            Brand-specific partials (when tokens are not enough)
         </h2>
 
         <p>
-            Good theme overrides adjust presentation without rewriting the
-            component. Prefer intentional custom properties exposed by the
-            component instead of surprise selector overrides.
+            Large multi-brand sites sometimes need presentation that tokens
+            cannot express cleanly — a thicker border, a brand-only shadow, a
+            campaign-specific radius on one pattern. That is still theme work,
+            but isolate it: add another partial under <code>theme/</code> and
+            import it from the brand’s theme file. Do not scatter overrides
+            across component files or re-declare properties on every selector
+            when a token change would do.
         </p>
 
-        <CodeExample code={goodThemeExample} />
+        <CodeExample code={brandPartialExample} />
+
+        <CodeExample code={brandPartialImportExample} />
 
         <p>
-            If the theme needs to change layout or behaviour, the problem is
-            probably in the component layer, not the theme layer.
+            Keep these partials small and rare. If the brand needs different
+            layout or behaviour, the change belongs in layout or components for
+            that brand — not a growing theme file that rewrites architecture.
         </p>
     </section>
 
     <section class="content-block">
         <h2 id="avoid">
-            Avoid random one-off styling
+            Avoid maintenance traps
         </h2>
 
-        <CodeExample code={badThemeExample} />
-
         <p>
-            Random visual overrides spread inconsistency and turn brand styling
-            into guesswork. If one button becomes purple for unclear reasons, the
-            problem is architecture, not creativity.
+            Setting token values on components from the theme layer — custom
+            properties on <code>.button</code>, re-applying
+            <code>background</code> on <code>.product-card</code> because the
+            token names are already wired — makes brand changes hard to find,
+            easy to miss, and painful to review. Prefer
+            <code>:root</code> in the brand theme file; let components keep
+            doing their job.
         </p>
 
+        <CodeExample code={avoidComponentTokensExample} variant="before" />
+
+        <p>
+            Random one-off colours on selectors are the same problem without the
+            indirection: branding becomes guesswork instead of a single import.
+        </p>
+
+        <CodeExample code={badThemeExample} variant="before" />
+
         <ul>
-            <li>Do not hard-code random colours inside components.</li>
-            <li>Do not use theme as a hiding place for hacks.</li>
-            <li>Do not override component structure from theme.</li>
-            <li>Keep theme decisions intentional and documented.</li>
+            <li>Override tokens on <code>:root</code> in theme imports, not per-component custom properties in theme.</li>
+            <li>Do not duplicate presentation components already get from <code>var(--…)</code>.</li>
+            <li>Do not use theme as a hiding place for hacks or layout fixes.</li>
+            <li>Keep brand-specific component partials rare, small, and imported from the brand theme file.</li>
             <li>If the change is temporary, it belongs in hacks, not theme.</li>
         </ul>
     </section>
@@ -164,16 +225,16 @@ Is this temporary or urgent?
         </h2>
 
         <div class="hub-grid">
+            <HubCard href="/apply/design-tokens/" title="Design tokens">
+                <p>Define the variables theme overrides so components stay stable.</p>
+            </HubCard>
+
             <HubCard href="/apply/architecture/" title="Architecture">
-                <p>Understand where structure ends and presentation should begin.</p>
+                <p>Structure <code>theme/</code> imports in the root stylesheet.</p>
             </HubCard>
 
             <HubCard href="/apply/hacks/" title="Hacks">
                 <p>Learn where urgent temporary fixes belong when they are not theme work.</p>
-            </HubCard>
-
-            <HubCard href="/learn/comparisons/" title="Comparisons">
-                <p>See how theme discipline differs from utility-first and other approaches.</p>
             </HubCard>
         </div>
     </section>

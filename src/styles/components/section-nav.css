@@ -6,17 +6,17 @@
 .section-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-block: var(--space-lg) var(--space-2xl);
+    gap: var(--space-s);
+    margin-block: var(--space-m) var(--space-xl);
 }
 
 .section-nav a {
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-s) var(--space);
     background: var(--c-surface);
     color: var(--c-text);
     border: var(--border-s) solid var(--c-border);
-    border-radius: var(--radius-round);
-    font-size: var(--fs-sm);
+    border-radius: var(--br-round);
+    font-size: var(--fs-s);
     font-weight: var(--fw-medium);
     text-decoration: none;
     transition:
@@ -35,10 +35,10 @@
 @media (--mobile) {
     .section-nav {
         flex-wrap: nowrap;
-        gap: var(--space-sm);
+        gap: var(--space-s);
         overflow-x: auto;
         scroll-snap-type: x proximity;
-        padding-block-end: var(--space-xs);
+        padding-block-end: var(--space-2xs);
     }
 
     .section-nav a {

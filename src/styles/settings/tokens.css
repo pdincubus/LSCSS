@@ -8,32 +8,36 @@
     --fw-semibold: 600;
     --fw-bold: 700;
 
-    --fs-xs: 1rem;        /* 16px */
-    --fs-sm: 1.0625rem;   /* 17px */
-    --fs-base: 1.1875rem; /* 19px */
-    --fs-md: 1.3125rem;   /* 21px */
-    --fs-lg: 1.5rem;      /* 24px */
-    --fs-xl: 1.875rem;    /* 30px */
-    --fs-2xl: 2.5rem;     /* 40px */
-    --fs-3xl: 4rem;       /* 64px */
+    /* Font size: bare --fs is base (body); scale uses 2xs–3xl including explicit -m */
+    --fs-2xs: 1rem;        /* 16px */
+    --fs-s: 1.0625rem;     /* 17px */
+    --fs: 1.1875rem;       /* 19px — base */
+    --fs-m: 1.3125rem;     /* 21px */
+    --fs-l: 1.5rem;        /* 24px */
+    --fs-xl: 1.875rem;     /* 30px */
+    --fs-2xl: 2.5rem;      /* 40px */
+    --fs-3xl: 4rem;        /* 64px */
 
-    --lh-tight: 1.2;
-    --lh-base: 1.5;
-    --lh-relaxed: 1.7;
+    /* Line height: bare --lh is base */
+    --lh-s: 1.2;
+    --lh: 1.5;
+    --lh-m: 1.6;
+    --lh-l: 1.7;
 
-    --space-xs: 0.25rem;  /* 4px */
-    --space-sm: 0.5rem;   /* 8px */
-    --space-md: 1rem;     /* 16px */
-    --space-lg: 1.5rem;   /* 24px */
-    --space-xl: 2rem;     /* 32px */
-    --space-2xl: 3rem;    /* 48px */
-    --space-3xl: 4rem;    /* 64px */
+    /* Spacing: bare --space is base (1rem); scale uses 2xs–2xl on this project */
+    --space-2xs: 0.25rem;  /* 4px */
+    --space-s: 0.5rem;     /* 8px */
+    --space: 1rem;         /* 16px — base */
+    --space-m: 1.5rem;     /* 24px */
+    --space-l: 2rem;       /* 32px */
+    --space-xl: 3rem;      /* 48px */
+    --space-2xl: 4rem;     /* 64px */
 
-    --radius-s: 4px;
-    --radius-m: 8px;
-    --radius-l: 16px;
-    --radius-xl: 24px;
-    --radius-round: 9999px;
+    --br-s: 4px;
+    --br-m: 8px;
+    --br-l: 16px;
+    --br-xl: 24px;
+    --br-round: 9999px;
 
     --border-s: 1px;
     --border-m: 2px;
@@ -241,17 +245,17 @@
 }
 
 /*
- * Mobile font scale. Anchored to a 14px floor (--fs-xs); the rest of the ladder
+ * Mobile font scale. Anchored to a 14px floor (--fs-2xs); the rest of the ladder
  * steps down proportionally so the ratios that drive headings, body, and
  * chrome match the desktop scale at a smaller size.
  */
 @media (--mobile) {
     :root {
-        --fs-xs: 0.875rem;    /* 14px */
-        --fs-sm: 0.9375rem;   /* 15px */
-        --fs-base: 1.0625rem; /* 17px */
-        --fs-md: 1.1875rem;   /* 19px */
-        --fs-lg: 1.375rem;    /* 22px */
+        --fs-2xs: 0.875rem;   /* 14px */
+        --fs-s: 0.9375rem;    /* 15px */
+        --fs: 1.0625rem;      /* 17px — base */
+        --fs-m: 1.1875rem;    /* 19px */
+        --fs-l: 1.375rem;     /* 22px */
         --fs-xl: 1.6875rem;   /* 27px */
         --fs-2xl: 2.125rem;   /* 34px */
         --fs-3xl: 3.25rem;    /* 52px */

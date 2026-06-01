@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../../components/CodeExample.astro';
+import ComparisonPairs from '../../../../components/ComparisonPairs.astro';
 import HubCard from '../../../../components/HubCard.astro';
 
 const title = '@scope and LSCSS';
@@ -17,6 +18,21 @@ const lscssExample = `.product-card {}
 
 const layerExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;`;
+
+const mainDifferencePairs = [
+    {
+        left: 'Provides native selector boundaries.',
+        right: 'Provides naming, layers, modifiers, and state rules.'
+    },
+    {
+        left: 'Reduces selector verbosity.',
+        right: 'Defines wider architectural responsibilities.'
+    },
+    {
+        left: 'A feature.',
+        right: 'A methodology.'
+    }
+];
 ---
 
 <DocsLayout
@@ -75,14 +91,7 @@ layout, components, theme, hacks;`;
                 Main differences
             </h2>
 
-            <ul>
-                <li><code>@scope</code> provides native selector boundaries.</li>
-                <li>LSCSS provides naming, layers, modifiers, and state rules.</li>
-                <li><code>@scope</code> reduces selector verbosity.</li>
-                <li>LSCSS defines wider architectural responsibilities.</li>
-                <li><code>@scope</code> is a feature.</li>
-                <li>LSCSS is a methodology.</li>
-            </ul>
+            <ComparisonPairs leftLabel="@scope" leftLabelIsCode={true} pairs={mainDifferencePairs} />
         </section>
 
         <section class="content-block">

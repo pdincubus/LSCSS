@@ -1,0 +1,65 @@
+/*
+ * Comparison quick-reference table on /learn/comparisons/. Wrapped for horizontal
+ * scroll on narrow viewports; surface card matches hub cards and release blocks.
+ */
+
+.comparison-table-wrap {
+    margin-block: var(--space-m) var(--space-l);
+    max-inline-size: 100%;
+    overflow-x: auto;
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--br-m);
+    -webkit-overflow-scrolling: touch;
+}
+
+.comparison-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    font-size: var(--fs-s);
+    line-height: var(--lh-l);
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: var(--space) var(--space-m);
+    text-align: start;
+    vertical-align: top;
+    border-block-end: var(--border-s) solid var(--c-border);
+}
+
+.comparison-table thead th {
+    background: var(--c-surface-alt);
+    color: var(--c-text-muted);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.comparison-table tbody th[scope='row'] {
+    color: var(--c-heading);
+    font-weight: var(--fw-semibold);
+    white-space: nowrap;
+}
+
+.comparison-table tbody tr:last-child td,
+.comparison-table tbody tr:last-child th {
+    border-block-end: 0;
+}
+
+.comparison-table:not(.comparison-table--plain) tbody tr:last-child {
+    background: var(--c-surface-alt);
+}
+
+.comparison-table:not(.comparison-table--plain) tbody tr:last-child th[scope='row'] {
+    color: var(--c-link);
+}
+
+@media (--mobile) {
+    .comparison-table th,
+    .comparison-table td {
+        padding: var(--space-s) var(--space);
+    }
+}

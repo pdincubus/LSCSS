@@ -29,7 +29,20 @@ const selectorDepthExample = `/* Good: explicit where structure matters */
 /* Best: reduce depth wherever possible, sensible, and reliable */
 .abc-product-card .wishlist-button {}`;
 
-const namespacedComponents = `.abc-product-card {}
+const scopeNamingExample = `@scope (.product-card) {
+    .title {}
+    .price {}
+}
+
+/* Same ownership without @scope — parent context in each selector */
+.product-card > .title {}
+.product-card > .price {}`;
+
+const namespacedComponents = `/* Legacy — leave unchanged during migration */
+.product-card {}
+.site-header {}
+
+/* New — same semantics, namespaced root */
 .abc-product-card {}
 .abc-site-header {}`;
 
@@ -37,10 +50,17 @@ const namespacedChildSelectors = `.abc-product-card > .title {}
 .abc-product-card > .price {}
 .abc-site-header > .logo {}`;
 
-const modifierAndStateClasses = `.product-card--featured {}
+const modifierAndStateClasses = `/* Modifiers — reusable variants on the component root */
+.product-card--featured {}
 .product-card--compact {}
-.is_active {}
-.has_error {}`;
+
+/* State — temporary behaviour; selector includes the component */
+.product-card.is_loading {}
+.product-card > .cta.is_disabled {}
+
+/* Conditions — content or structure present */
+.product-card.has_media {}
+.product-card > .summary.has_error {}`;
 
 const comparisonExample = `/* BEM-style element naming */
 .product-card__title {}
@@ -55,10 +75,11 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
 .big-red-button {}
 .left-column-text {}
 
-/* Prefer: names describe purpose, so they survive redesigns */
-.callout {}
-.cta {}
-.sidebar > .summary {}`;
+/* Prefer: purpose-based names that survive redesigns */
+.product-card {}
+.filter-panel {}
+.promo-callout {}
+.content-sidebar > .summary {}`;
 ---
 
 <DocsLayout
@@ -112,8 +133,7 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         </h2>
 
         <p>
-            LSCSS borrows useful parts of older systems instead of pretending
-            frontend history began yesterday.
+            LSCSS borrows useful parts of older systems:
         </p>
 
         <ul>
@@ -150,20 +170,40 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         </h2>
 
         <p>
-            Namespacing adds a safety layer in environments where class names
-            can collide across teams, packages, or third-party CSS. It is
-            optional, and should stay short.
+            Namespacing adds a short prefix to component roots, such as
+            <code>abc-product-card</code> instead of <code>product-card</code>.
+            It is optional, and the prefix should stay short — usually two to four
+            characters tied to the product, team, or migration wave.
+        </p>
+
+        <p>
+            The clearest win is often <strong>legacy coexistence</strong>, not
+            greenfield tidiness. When you are updating an old system and cannot
+            rename or remove every existing class at once, putting every
+            <em>new</em> component behind a namespace avoids collisions with
+            inherited CSS and makes ownership obvious in markup, partials, and
+            reviews. If templates still contain <code>product-card</code> beside
+            <code>abc-product-card</code>, you can tell immediately which block
+            is legacy and which is the path forward — without decoding selector
+            specificity or guessing which stylesheet won.
         </p>
 
         <CodeExample code={namespacedComponents} />
         <CodeExample code={namespacedChildSelectors} />
 
         <ul>
-            <li>Use namespaces when collision risk is real.</li>
+            <li>
+                Use namespaces when collision risk is real — especially while
+                old and new CSS live side by side during migration.
+            </li>
+            <li>
+                Namespace new work consistently during a migration so every
+                prefixed class reads as “owned by the new system”.
+            </li>
             <li>Keep namespaces short: usually 2 to 4 characters.</li>
             <li>Keep component names semantic after the prefix.</li>
-            <li>Do not namespace by default in small isolated codebases.</li>
-            <li>Do not replace ownership and architecture with prefixes.</li>
+            <li>Do not namespace by default in small isolated greenfield codebases.</li>
+            <li>Do not replace layers, scope, or ownership with prefixes alone.</li>
         </ul>
     </section>
 
@@ -194,6 +234,40 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
             from the component root, the markup or class architecture likely
             needs a clearer hook.
         </p>
+
+        <h3>
+            When <code>@scope</code> helps
+        </h3>
+
+        <p>
+            Native <code>@scope</code> is worth mentioning here because it
+            attacks the same problem from a different angle: selector length.
+            Inside a scope rooted at <code>.product-card</code>, child rules can
+            stay short (<code>.title</code>, <code>.price</code>) without
+            repeating the component name in every selector or chaining through
+            every wrapper. The browser enforces the boundary; you keep semantic
+            class names in HTML.
+        </p>
+
+        <CodeExample code={scopeNamingExample} />
+
+        <p>
+            That complements LSCSS shallow selectors — it does not replace them
+            on every project today. Layers, modifiers, state classes, and theme
+            rules still matter. Namespaces during legacy migration still help in
+            markup at a glance (<code>product-card</code> vs
+            <code>abc-product-card</code>); <code>@scope</code> is a CSS-side
+            boundary, not a substitute for that signal.
+        </p>
+
+        <p>
+            Where <code>@scope</code> is supported and agreed for production, use
+            it to simplify selectors inside a stable component root. Where it is
+            not, keep the parent context in the selector list as shown above.
+            See <a href="/learn/comparisons/scope-vs-lscss/">@scope and LSCSS</a>
+            for trade-offs, and <a href="/apply/browser-support/">browser support</a>
+            before relying on it site-wide.
+        </p>
     </section>
 
     <section class="content-block">
@@ -204,10 +278,28 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         <p>
             A featured card and a loading card are different problems. One is a
             reusable variant. One is temporary behaviour. Do not force both into
-            the same naming pattern.
+            the same naming pattern. Hyphens and <code>--</code> mark components
+            and modifiers; underscores appear only in
+            <code>is_*</code> and <code>has_*</code> names — see
+            <a href="/apply/modifiers-and-state/#state-classes">why state uses underscores</a>
+            on the modifiers and state page.
         </p>
 
         <CodeExample code={modifierAndStateClasses} />
+
+        <p>
+            Modifiers and state classes are short names in HTML
+            (<code>is_loading</code>, <code>has_error</code>), but the stylesheet
+            should still show <em>which component owns them</em> —
+            <code>.product-card.is_loading</code>, not a floating
+            <code>.is_loading</code> rule that could match anywhere.
+            Modifier roots such as <code>.product-card--featured</code> in this
+            section are shown without chaining because they belong in the
+            component partial; see
+            <a href="/apply/modifiers-and-state/#modifiers">modifiers and state</a>
+            and <a href="/apply/architecture/#nesting">CSS nesting</a> for when
+            to chain or nest selectors.
+        </p>
 
         <p>
             This separation makes CSS easier to read and JavaScript easier to
@@ -240,7 +332,10 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
             Appearance-based names age badly the moment design changes and
             quietly become lies in production. <code>.blue-box</code> on a
             green card is the kind of thing that takes a week to notice and
-            an afternoon to untangle. Purpose-based names hold up.
+            an afternoon to untangle. Purpose-based names hold up — usually as
+            two-word component roots such as <code>product-card</code> or
+            <code>filter-panel</code>, with short child classes where the parent
+            already provides context.
         </p>
     </section>
 </DocsLayout>

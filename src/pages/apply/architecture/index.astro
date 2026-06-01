@@ -1,33 +1,36 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
-
-const folderStructureExample = `css/
-    site.css
-
-    settings/
-    base/
-    utilities/
-    layout/
-    components/
-    theme/
-    legacy/
-    hacks/`;
+import FileTree from '../../../components/FileTree.astro';
+import { architectureFolderTree } from '../../../data/fileTrees';
 
 const rootFileExample = `@layer legacy, settings, base, utilities,
 layout, components, theme, hacks;
 
 @import './legacy/vendor.css' layer(legacy);
-@import './settings/variables.css' layer(settings);
+@import './settings/tokens.css' layer(settings);
 @import './layout/page-shell.css' layer(layout);
 @import './components/product-card.css' layer(components);
 @import './theme/brand.css' layer(theme);`;
+
+const nestingExample = `/* components/product-card.css — one component root per file */
+.product-card {
+    /* Base styles */
+
+    &--featured {
+        /* Modifier-only deltas; HTML still needs product-card + product-card--featured */
+    }
+
+    & > .title {
+        /* Child scoped under the same root */
+    }
+}`;
 
 const mediaQueryExample = `.modal {
     /* Shared styles first */
 
     &--large {
-        /* Modifier styles */
+        /* Modifier nested under the component root */
     }
 
     @media (--desktop) {
@@ -67,6 +70,7 @@ const mediaQueryExample = `.modal {
         <a href="#structure">File structure</a>
         <a href="#root-file">Root file</a>
         <a href="#partials">Component partials</a>
+        <a href="#nesting">CSS nesting</a>
         <a href="#media-queries">Media queries</a>
         <a href="#rules">Working rules</a>
     </nav>
@@ -76,7 +80,7 @@ const mediaQueryExample = `.modal {
             File structure
         </h2>
 
-        <CodeExample code={folderStructureExample} language="text" />
+        <FileTree tree={architectureFolderTree} />
 
         <p>
             Root files should be import maps, not giant dumping grounds. Each
@@ -96,13 +100,12 @@ const mediaQueryExample = `.modal {
             The main stylesheet should define layer order first, then import
             files into the correct place. If the root file becomes a working
             area instead of an import map, architecture starts leaking.
-        </p>
-
-        <p>
-            On this site, <code>.page-shell</code> sets width and horizontal centering for
-            any shell (including the site header). Section-sized vertical padding is
-            scoped to <code>main.page-shell</code> so the header can reuse the same class
-            without inheriting main-column rhythm.
+            Shared design values live in <code>settings/tokens.css</code> — see
+            <a href="/apply/design-tokens/">design tokens</a> for naming and scales.
+            Vendor CSS can live in <code>legacy/</code> or a separate
+            <code>thirdparty/</code> layer declared before <code>legacy</code> when
+            both buckets are needed — see
+            <a href="/apply/layers/#legacy">layer guidance</a>.
         </p>
     </section>
 
@@ -135,14 +138,53 @@ const mediaQueryExample = `.modal {
     </section>
 
     <section class="content-block">
+        <h2 id="nesting">
+            CSS nesting (team choice)
+        </h2>
+
+        <p>
+            Native CSS nesting is optional. LSCSS does not require it — some teams
+            prefer flat selectors in a component partial; others nest modifiers,
+            children, and breakpoints under the component root. Choose based on
+            browser support, build tooling, and stylelint rules. See
+            <a href="/apply/browser-support/">browser support</a> before adopting
+            it site-wide.
+        </p>
+
+        <p>
+            When nesting is allowed, keep it <strong>shallow and inside the
+            component you own</strong>. A typical partial nests
+            <code>&--featured</code> for modifiers, short child selectors, and
+            breakpoint tweaks under one root such as <code>.product-card</code>.
+            That compiles to the same ownership model as flat
+            <code>.product-card--featured</code> rules in the same file.
+        </p>
+
+        <CodeExample code={nestingExample} />
+
+        <ul>
+            <li>One component root per partial — do not nest across unrelated components.</li>
+            <li>
+                Modifiers still need the base class in HTML
+                (<code>product-card product-card--featured</code>). See
+                <a href="/apply/modifiers-and-state/#modifiers">modifiers and state</a>.
+            </li>
+            <li>Prefer shallow nesting over deep selector archaeology.</li>
+            <li>Nesting does not replace layers, unlayered CSS discipline, or state vs modifier rules.</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
         <h2 id="media-queries">
             Media query organisation
         </h2>
 
         <p>
             Put shared styles first. Then add breakpoint rules only where
-            something changes. Breakpoints should describe differences, not
-            restate the entire component unnecessarily.
+            something changes. The example below also shows a modifier
+            (<code>&--large</code>) nested under the component root — the same
+            pattern as <a href="#nesting">CSS nesting</a> for variants. Breakpoints
+            should describe differences, not restate the entire component unnecessarily.
         </p>
 
         <CodeExample code={mediaQueryExample} />

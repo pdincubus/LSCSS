@@ -1,7 +1,9 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
+import DecisionTree from '../../../components/DecisionTree.astro';
 import HubCard from '../../../components/HubCard.astro';
+import { baseStylesQuickRules } from '../../../data/decisionTrees';
 
 const baseLayerExample = `@layer base {
     *,
@@ -17,9 +19,11 @@ const baseLayerExample = `@layer base {
 
     body {
         margin: 0;
-        font-family: var(--font-body);
-        background: var(--colour-background);
-        color: var(--colour-text);
+        font-family: var(--ff);
+        font-size: var(--fs);
+        line-height: var(--lh);
+        background: var(--c-background);
+        color: var(--c-text);
     }
 }`;
 
@@ -36,7 +40,7 @@ const typographyExample = `@layer base {
     h1,
     h2,
     h3 {
-        font-family: var(--font-heading);
+        font-family: var(--ff);
         line-height: 1.1;
     }
 
@@ -57,15 +61,6 @@ const avoidExample = `.product-card h2 {
     margin-top: 0;
 }`;
 
-const decisionExample = `Ask:
-Should this apply across the whole site by default?
-→ Base layer
-
-Is this specific to one component?
-→ Component
-
-Is this visual branding only?
-→ Theme, not base`;
 ---
 
 <DocsLayout
@@ -102,11 +97,12 @@ Is this visual branding only?
             Quick decision rules
         </h2>
 
-        <CodeExample code={decisionExample} language="text" />
+        <DecisionTree tree={baseStylesQuickRules} />
 
         <p>
-            Base styles should be predictable and boring. If a global rule feels
-            surprising, it probably belongs somewhere else.
+            For the full base vs theme vs component flow, see
+            <a href="/apply/decision-trees/#ownership">decision trees</a>.
+            Base styles should be predictable and boring.
         </p>
     </section>
 

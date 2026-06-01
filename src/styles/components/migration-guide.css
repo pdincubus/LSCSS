@@ -1,0 +1,147 @@
+/*
+ * Migration path visuals: numbered steps, milestone cards, effort tiers.
+ */
+
+.migration-steps {
+    display: grid;
+    gap: 0;
+    margin: var(--space-m) 0;
+    padding: 0;
+    list-style: none;
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--br-m);
+    overflow: hidden;
+}
+
+.migration-steps > .step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space);
+    align-items: start;
+    margin: 0;
+    padding: var(--space-m) var(--space);
+    border-block-start: var(--border-s) solid var(--c-border);
+}
+
+.migration-steps > .step:first-child {
+    border-block-start: 0;
+}
+
+.migration-steps .marker {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    flex-shrink: 0;
+    background: var(--c-accent-soft);
+    border-radius: var(--br-round);
+    color: var(--c-on-accent-soft);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-s);
+    font-weight: var(--fw-bold);
+    line-height: 1;
+}
+
+.migration-steps .text {
+    margin: 0.35rem 0 0;
+    max-inline-size: none;
+    color: var(--c-text);
+    font-size: var(--fs-s);
+    line-height: var(--lh-l);
+}
+
+.migration-milestones {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+    margin: var(--space-m) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.migration-milestones > .milestone {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: var(--space-m);
+    background: var(--c-code-bg);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--br-m);
+}
+
+.migration-milestones .phase {
+    margin: 0;
+    max-inline-size: none;
+    color: var(--c-link);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.migration-milestones .title {
+    margin: 0;
+    color: var(--c-heading);
+    font-size: var(--fs-m);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-s);
+}
+
+.migration-milestones .description {
+    margin: 0;
+    max-inline-size: none;
+    color: var(--c-text-muted);
+    font-size: var(--fs-s);
+    line-height: var(--lh-l);
+}
+
+.migration-effort {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    margin: var(--space-m) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.migration-effort > .tier {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    margin: 0;
+    padding: var(--space-m);
+    background: var(--c-surface);
+    border: var(--border-s) solid var(--c-border);
+    border-radius: var(--br-m);
+    border-block-start: var(--border-l) solid var(--c-link);
+}
+
+.migration-effort .size {
+    margin: 0;
+    max-inline-size: none;
+    color: var(--c-heading);
+    font-size: var(--fs-s);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-s);
+}
+
+.migration-effort .duration {
+    margin: 0;
+    max-inline-size: none;
+    color: var(--c-link);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-m);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-s);
+}
+
+.migration-effort .note {
+    margin: 0;
+    max-inline-size: none;
+    color: var(--c-text-muted);
+    font-size: var(--fs-s);
+    line-height: var(--lh-l);
+}

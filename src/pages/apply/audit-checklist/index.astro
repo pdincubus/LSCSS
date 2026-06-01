@@ -59,7 +59,13 @@ import HubCard from '../../../components/HubCard.astro';
 
         <ul>
             <li>Are cascade layers defined clearly?</li>
-            <li>Does old CSS live in a legacy layer?</li>
+            <li>Does old first-party CSS live in a legacy layer?</li>
+            <li>Is third-party CSS in a dedicated low layer (<code>thirdparty</code>, <code>legacy</code>, or both)?</li>
+            <li>
+                If both <code>thirdparty</code> and <code>legacy</code> exist, is
+                <code>thirdparty</code> declared before <code>legacy</code> in
+                <code>@layer</code>?
+            </li>
             <li>Are overrides predictable without important declarations?</li>
             <li>Can developers explain where new CSS should live?</li>
             <li>Do files reflect ownership, not historical accidents?</li>
@@ -70,7 +76,7 @@ import HubCard from '../../../components/HubCard.astro';
         <h2 id="tokens">Tokens and consistency</h2>
 
         <ul>
-            <li>Are colours, spacing, typography, and radius tokenised?</li>
+            <li>Are colours, spacing, typography, and border radius (<code>--br-*</code>) tokenised?</li>
             <li>Are random values appearing across components?</li>
             <li>Do people invent new spacing values under deadline pressure?</li>
             <li>Are media queries named and consistent?</li>
@@ -116,6 +122,7 @@ import HubCard from '../../../components/HubCard.astro';
             <li>Is there a real hacks layer?</li>
             <li>Are temporary fixes reviewed and removed?</li>
             <li>Is legacy CSS shrinking over time?</li>
+            <li>Is vendor CSS isolated from authored component layers?</li>
             <li>Are important declarations normalised?</li>
             <li>Does anyone know why the z-index is 999999?</li>
         </ul>

@@ -1,8 +1,8 @@
 .page-shell {
-    inline-size: min(100% - var(--space-xl), var(--max-width));
+    inline-size: min(100% - var(--space-l), var(--max-width));
     margin-inline: auto;
 }
 
 main.page-shell {
-    padding-block: var(--space-3xl);
+    padding-block: var(--space-2xl);
 }

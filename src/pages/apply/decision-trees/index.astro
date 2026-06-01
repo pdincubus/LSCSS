@@ -1,108 +1,15 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
-import CodeExample from '../../../components/CodeExample.astro';
+import DecisionTree from '../../../components/DecisionTree.astro';
 import HubCard from '../../../components/HubCard.astro';
-
-const utilityOrComponent = `Does this solve a universal accessibility problem?
-
-Yes → Utility
-
-No ↓
-
-Does this same pattern repeat together often?
-
-Yes → Component
-
-No ↓
-
-Is it only a small one-off visual adjustment?
-
-Yes → Theme
-
-No ↓
-
-If you need to explain it twice,
-it probably needs a component`;
-
-const modifierOrState = `Is this a permanent reusable variation?
-
-Yes → Modifier
-
-No ↓
-
-Is this temporary, conditional, or JS-driven?
-
-Yes → State class
-
-No ↓
-
-If it disappears when the user leaves,
-it is probably state`;
-
-const baseThemeComponent = `Should this apply globally across the whole site?
-
-Yes → Base
-
-No ↓
-
-Is this only visual presentation?
-
-Yes → Theme
-
-No ↓
-
-Is this specific to one UI pattern?
-
-Yes → Component
-
-No ↓
-
-You are probably writing a hack`;
-
-const hackOrFix = `Is this urgent and temporary?
-
-Yes → Hacks layer
-
-No ↓
-
-Will this still exist in 6 months?
-
-Yes → Real fix
-
-No ↓
-
-If it feels permanent,
-stop calling it temporary`;
-
-const layoutOrComponent = `Is the issue about page structure and positioning?
-
-Yes → Layout
-
-No ↓
-
-Is it specific to one reusable UI pattern?
-
-Yes → Component
-
-No ↓
-
-If three components share it,
-it is probably layout`;
-
-const scopeBemNeither = `Do you need native selector boundaries?
-
-Yes → @scope
-
-No ↓
-
-Do you need explicit naming for legacy teams?
-
-Yes → BEM may help
-
-No ↓
-
-Use semantic ownership and shallow selectors`;
-
+import {
+    baseThemeComponent,
+    hackOrFix,
+    layoutOrComponent,
+    modifierOrState,
+    scopeBemNeither,
+    utilityOrComponent
+} from '../../../data/decisionTrees';
 ---
 
 <DocsLayout
@@ -115,7 +22,7 @@ Use semantic ownership and shallow selectors`;
         <h1>CSS architecture decision trees</h1>
         <p class="intro">
             Use these when CSS arguments start, code reviews lose clarity, or
-            someone reaches for !important before asking where the code belongs.
+            someone reaches for <code>!important</code> before asking where the code belongs.
         </p>
     </section>
 
@@ -146,32 +53,32 @@ Use semantic ownership and shallow selectors`;
 
     <section class="content-block">
         <h2 id="utility">Utility or component?</h2>
-        <CodeExample code={utilityOrComponent} language="text" />
+        <DecisionTree tree={utilityOrComponent} />
     </section>
 
     <section class="content-block">
         <h2 id="state">Modifier or state?</h2>
-        <CodeExample code={modifierOrState} language="text" />
+        <DecisionTree tree={modifierOrState} />
     </section>
 
     <section class="content-block">
         <h2 id="ownership">Base vs theme vs component</h2>
-        <CodeExample code={baseThemeComponent} language="text" />
+        <DecisionTree tree={baseThemeComponent} />
     </section>
 
     <section class="content-block">
         <h2 id="hacks">Hack or real fix?</h2>
-        <CodeExample code={hackOrFix} language="text" />
+        <DecisionTree tree={hackOrFix} />
     </section>
 
     <section class="content-block">
         <h2 id="layout">Layout problem or component problem?</h2>
-        <CodeExample code={layoutOrComponent} language="text" />
+        <DecisionTree tree={layoutOrComponent} />
     </section>
 
     <section class="content-block">
         <h2 id="scope">@scope, BEM, or neither?</h2>
-        <CodeExample code={scopeBemNeither} language="text" />
+        <DecisionTree tree={scopeBemNeither} />
     </section>
 
     <section class="content-block">

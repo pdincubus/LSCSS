@@ -3,27 +3,84 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
 import CodeExample from '../../../components/CodeExample.astro';
 
 const tokenExample = `:root {
-    --colour-background: #ffffff;
-    --colour-surface: #f7f7f7;
-    --colour-text: #111111;
-    --colour-accent: #6f3cff;
+    --ff: system-ui, sans-serif;
+    --fs: 1rem;
+    --fs-s: 0.875rem;
+    --fs-m: 1.125rem;
+    --fs-l: 1.25rem;
+    --fs-xl: 1.5rem;
+    --lh: 1.5;
+    --lh-s: 1.2;
+    --lh-m: 1.6;
+    --lh-l: 1.7;
+    --fw-semibold: 600;
 
-    --space-xs: 0.25rem;
+    --c-background: #ffffff;
+    --c-surface: #f7f7f7;
+    --c-text: #111111;
+    --c-accent: #6f3cff;
+
+    --space: 1rem;
     --space-s: 0.5rem;
-    --space-m: 1rem;
+    --space-m: 1.5rem;
     --space-l: 2rem;
-    --space-xl: 4rem;
 
-    --radius-s: 0.25rem;
-    --radius-m: 0.5rem;
-    --radius-l: 1rem;
+    --br-m: 0.5rem;
+    --br-l: 1rem;
 }`;
 
+const scaleExample = `:root {
+    /* Font size — bare --fs is base (body); */
+    --fs-2xs: 0.625rem;
+    --fs-s: 0.875rem;
+    --fs: 1rem;
+    --fs-m: 1.125rem;
+    --fs-l: 1.25rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2rem;
+
+    /* Line height — bare --lh is base */
+    --lh-s: 1.2;
+    --lh: 1.5;
+    --lh-m: 1.6;
+    --lh-l: 1.7;
+
+    /* Spacing — bare --space is base */
+    --space-2xs: 0.25rem;
+    --space-s: 0.5rem;
+    --space: 1rem;
+    --space-m: 1.5rem;
+    --space-l: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+}`;
+
+const namingMapExample = `/* Document once in settings/tokens.css (or your tokens partial) */
+
+Long prefix              →  Short prefix
+--colour-*               →  --c-*              (--c-text, --c-link, ramps)
+--font-size-*            →  --fs, --fs-*       base: --fs; ladder 2xs–2xl + -m; not -sm/-md/-lg
+--line-height-*          →  --lh, --lh-*       base: --lh; not -tight / -relaxed
+--spacing-*              →  --space, --space-*
+--border-radius-*        →  --br-*
+--font-family            →  --ff, --ff-mono
+--font-weight-*          →  --fw-*
+
+Often keep descriptive: --border-*  --shadow-*  --transition-*  --z-*  one-offs (--site-header-offset)`;
+
+const namingAvoidExample = `/* Avoid: abbreviations nobody can decode at a glance */
+--col-acc: #6f3cff;
+--fsize-m: 1rem;
+--ln-h: 1.5;
+--spc-17: 17px;`;
+
 const goodExample = `.product-card {
-    padding: var(--space-m);
-    border-radius: var(--radius-m);
-    background: var(--colour-surface);
-    color: var(--colour-text);
+    padding: var(--space);
+    border-radius: var(--br-m);
+    background: var(--c-surface);
+    color: var(--c-text);
+    font-size: var(--fs);
+    line-height: var(--lh);
 }`;
 
 const badExample = `.product-card {
@@ -36,7 +93,7 @@ const badExample = `.product-card {
 
 <DocsLayout
     title="Design Tokens"
-    description="Design token strategy in Layered Semantic CSS, including CSS variables, spacing scales, colour tokens, and avoiding arbitrary values."
+    description="Design token strategy in Layered Semantic CSS: CSS variables, sensible short names, spacing and colour scales, and avoiding arbitrary values in components."
     schemaType="TechArticle"
 >
     <section class="site-hero">
@@ -47,14 +104,19 @@ const badExample = `.product-card {
         </h1>
 
         <p class="intro">
-            CSS variables should define the shared design language. Colours,
-            spacing, radii, font sizes, borders, shadows, and layout values
-            should not be invented randomly inside component styles.
+            CSS variables should define the shared design language. Colours
+            (<code>--c-*</code>), spacing (<code>--space</code> / <code>--space-*</code>),
+            border radius (<code>--br-*</code>), typography (<code>--fs</code>,
+            <code>--lh</code>, <code>--ff</code>, <code>--fw-*</code>), border width
+            (<code>--border-*</code>), shadows, and layout values should not be
+            invented randomly inside component styles.
         </p>
     </section>
 
     <nav class="section-nav" aria-label="Design token sections">
         <a href="#tokens">Tokens</a>
+        <a href="#naming">Naming</a>
+        <a href="#prefix-map">Prefixes</a>
         <a href="#good-usage">Good usage</a>
         <a href="#avoid">Avoid</a>
         <a href="#rules">Rules</a>
@@ -72,6 +134,59 @@ const badExample = `.product-card {
         </p>
 
         <CodeExample code={tokenExample} />
+
+        <p>
+            Names can be shortened when the meaning stays obvious — see
+            <a href="#naming">token naming</a> below.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="naming">
+            Token naming
+        </h2>
+
+        <p>
+            Tokens are referenced hundreds of times. Shorten only prefixes the team
+            recognises at a glance — less noise in <code>var()</code>, not cryptic
+            codes. If a newcomer needs a cheat sheet to decode a name, it is too
+            short.
+        </p>
+
+        <h3>
+            Base step: bare token name
+        </h3>
+
+        <p>
+            For scales you use constantly, the default value is the bare name —
+            not <code>--fs-base</code> or <code>--line-height-base</code>.
+            Body font size is <code>--fs</code>; line height for normal copy is
+            <code>--lh</code>; default spacing is <code>--space</code>. Those bare
+            names are the <strong>base</strong> step on each ladder, not an
+            implicit “medium”. When you need the next step up before
+            <code>-l</code>, use an explicit <code>-m</code> (for example
+            <code>--fs-m</code>, <code>--lh-m</code>, <code>--space-m</code>). Other steps share the
+            same suffix set: <code>2xs</code>, <code>s</code>, <code>l</code>,
+            <code>xl</code>, <code>2xl</code>, and so on. Do not mix
+            <code>sm</code> / <code>md</code> / <code>lg</code> on one scale with
+            that ladder on another.
+        </p>
+
+        <CodeExample code={scaleExample} />
+
+        <h3 id="prefix-map">
+            Prefix map
+        </h3>
+
+        <p>
+            Agree one map per project. Values change; naming rules should not. Use
+            semantic tokens in components (<code>--c-text</code>, <code>--c-link</code>);
+            define ramps in settings.
+        </p>
+
+        <CodeExample code={namingMapExample} language="text" />
+
+        <CodeExample code={namingAvoidExample} variant="before" />
     </section>
 
     <section class="content-block">
@@ -108,9 +223,14 @@ const badExample = `.product-card {
 
         <ul>
             <li>Use CSS variables for shared design values.</li>
+            <li>
+                Follow the agreed prefix map: bare name for the base step,
+                <code>-m</code> before <code>-l</code> where needed, same
+                <code>2xs</code>–<code>2xl</code> ladder on every shared scale.
+            </li>
             <li>Prefer named spacing values over one-off measurements.</li>
             <li>Do not add random colours directly inside components.</li>
-            <li>Keep token names predictable and consistent.</li>
+            <li>Keep token names predictable and consistent across the project.</li>
             <li>Only add a new token when it represents a reusable decision.</li>
             <li>Use component-level custom properties only when the component genuinely needs local configuration.</li>
         </ul>
