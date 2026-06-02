@@ -21,9 +21,24 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '1.0',
+        label: '1.0',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'LSCSS 1.0 baseline: the methodology and docs are now presented as a stable, production-ready foundation across architecture, browser support policy, and team adoption guidance.',
+        releasedAt: '2026-06-02',
+        changed: [
+            'Refined /apply/browser-support/ support matrix guidance to explicitly support feature-first and version-first baselines, with feature baselines framed as useful across CSS, JavaScript, and platform APIs.',
+            'Expanded the browser-support templates and copy to document capability-based policy, delivery mode (native/build/polyfill/transpile), and fallback behaviour without forcing browser-version-first documentation.',
+            'Updated /teams/adoption/ to reuse migration visual patterns: numbered step blocks for adoption principles and rollout, plus standout fit and effort blocks for better scanability in team planning.',
+            'Removed local development setup guidance from /search/ to keep the page focused on search usage and discovery routes.'
+        ]
+    },
+    {
         version: '0.9',
         label: '0.9',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Design token ladder guidance, a full browser-support engineering page (custom media, feature baselines, support matrix templates), tabbed package-manager CLI examples, and a broad Apply documentation pass with shared teaching components.',

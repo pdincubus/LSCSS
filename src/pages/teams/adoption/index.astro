@@ -1,6 +1,60 @@
 ---
 import DocsLayout from '../../../layouts/DocsLayout.astro';
 import HubCard from '../../../components/HubCard.astro';
+import MigrationEffort from '../../../components/MigrationEffort.astro';
+import MigrationMilestones from '../../../components/MigrationMilestones.astro';
+import MigrationSteps from '../../../components/MigrationSteps.astro';
+
+const adoptionPrinciples = [
+    'Do not begin with a rewrite pitch.',
+    'Fix active work first, not low-impact historical code.',
+    'Make good defaults easier than bad habits.',
+    'Use reviews to teach patterns, not punish people.',
+    'Protect the system with tooling where possible.'
+];
+
+const fitSignals = [
+    {
+        phase: 'Fit signal',
+        title: 'Strong fit',
+        description: 'Shared codebase, recurring overrides, and unclear ownership.'
+    },
+    {
+        phase: 'Fit signal',
+        title: 'Good fit',
+        description: 'Scaling team, inconsistent review outcomes, and a growing legacy layer.'
+    },
+    {
+        phase: 'Fit signal',
+        title: 'Lower urgency',
+        description: 'Small single-owner project with stable scope and low CSS churn.'
+    }
+];
+
+const rolloutSteps = [
+    'Week 1. Define layers and starter rules.',
+    'Week 2. Stop new CSS from creating old problems.',
+    'Week 3. Improve active components only.',
+    'Week 4 onwards. Reduce legacy safely over time.'
+];
+
+const expectedEffort = [
+    {
+        size: 'Small project (1-3 contributors)',
+        duration: '1-2 weeks',
+        note: 'Enough to establish baseline rules and stop new entropy.'
+    },
+    {
+        size: 'Mid-size project (4-10 contributors)',
+        duration: '2-6 weeks',
+        note: 'Typical range to stabilize layers, review habits, and team expectations.'
+    },
+    {
+        size: 'Large project (multiple teams)',
+        duration: '1-2 quarters',
+        note: 'Common range for full rollout with governance and cross-team alignment.'
+    }
+];
 ---
 
 <DocsLayout
@@ -48,13 +102,7 @@ import HubCard from '../../../components/HubCard.astro';
 
     <section class="content-block">
         <h2 id="principles">Adoption principles</h2>
-        <ul>
-            <li>Do not begin with a rewrite pitch.</li>
-            <li>Fix active work first, not low-impact historical code.</li>
-            <li>Make good defaults easier than bad habits.</li>
-            <li>Use reviews to teach patterns, not punish people.</li>
-            <li>Protect the system with tooling where possible.</li>
-        </ul>
+        <MigrationSteps steps={adoptionPrinciples} />
         <p>
             The goal is not perfect CSS. The goal is fewer expensive mistakes.
         </p>
@@ -62,11 +110,7 @@ import HubCard from '../../../components/HubCard.astro';
 
     <section class="content-block">
         <h2>Is LSCSS a fit right now?</h2>
-        <ul>
-            <li>Strong fit: shared codebase, recurring overrides, unclear ownership.</li>
-            <li>Good fit: scaling team, inconsistent review outcomes, growing legacy layer.</li>
-            <li>Lower urgency: small single-owner project with stable scope and low CSS churn.</li>
-        </ul>
+        <MigrationMilestones milestones={fitSignals} />
         <p>
             Even on lower-urgency projects, introducing layers and naming discipline early
             can prevent expensive cleanup later.
@@ -76,22 +120,13 @@ import HubCard from '../../../components/HubCard.astro';
     <section class="content-block">
         <h2 id="rollout">Recommended rollout</h2>
         <p>A sensible default sequence looks like this:</p>
-        <ol>
-            <li><strong>Week 1.</strong> Define layers and starter rules.</li>
-            <li><strong>Week 2.</strong> Stop new CSS from creating old problems.</li>
-            <li><strong>Week 3.</strong> Improve active components only.</li>
-            <li><strong>Week 4 onwards.</strong> Reduce legacy safely over time.</li>
-        </ol>
+        <MigrationSteps steps={rolloutSteps} />
         <p>
             Introduce layers first. This creates immediate override control and
             stops specificity wars breeding while the rest of the system catches up.
         </p>
         <h3>Expected effort by project size</h3>
-        <ul>
-            <li>Small project (1-3 contributors): 1-2 weeks to establish baseline rules.</li>
-            <li>Mid-size project (4-10 contributors): 2-6 weeks to stabilize layers and review habits.</li>
-            <li>Large project (multiple teams): 1-2 quarters for full rollout with governance.</li>
-        </ul>
+        <MigrationEffort tiers={expectedEffort} />
     </section>
 
     <section class="content-block">
