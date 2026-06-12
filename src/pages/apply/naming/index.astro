@@ -50,6 +50,23 @@ const namespacedChildSelectors = `.abc-product-card > .title {}
 .abc-product-card > .price {}
 .abc-site-header > .logo {}`;
 
+const namespacedAreaComponents = `/* Shared — one namespace, used site-wide */
+.abc-product-card {}
+.abc-site-header {}
+
+/* Area-specific — primary namespace + area code + component */
+.abc-co-basket-item {}
+.abc-co-order-summary {}
+.abc-pl-line-item {}
+.abc-ac-payment-method {}
+
+/* abc = product or team prefix; co = checkout, pl = product listing, ac = account */`;
+
+const namespacedAreaChildSelectors = `.abc-co-basket-item > .title {}
+.abc-co-basket-item > .quantity {}
+.abc-pl-line-item > .image {}
+.abc-pl-line-item > .price {}`;
+
 const modifierAndStateClasses = `/* Modifiers — reusable variants on the component root */
 .product-card--featured {}
 .product-card--compact {}
@@ -172,8 +189,12 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         <p>
             Namespacing adds a short prefix to component roots, such as
             <code>abc-product-card</code> instead of <code>product-card</code>.
-            It is optional, and the prefix should stay short — usually two to four
-            characters tied to the product, team, or migration wave.
+            It is optional, and each prefix should stay short — usually two to
+            three characters tied to the product, team, or migration wave. At
+            scale, a second area prefix can sit between that root and the
+            component name — <code>abc-co-basket-item</code> where
+            <code>co</code> marks checkout. See
+            <a href="#namespace-areas">area namespaces</a> below.
         </p>
 
         <p>
@@ -191,6 +212,34 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
         <CodeExample code={namespacedComponents} />
         <CodeExample code={namespacedChildSelectors} />
 
+        <h3 id="namespace-areas">
+            Area namespaces at scale
+        </h3>
+
+        <p>
+            A single short prefix is often enough. On large e-commerce codebases,
+            though, component volume alone can make otherwise good semantic names
+            collide — <code>basket-item</code> in checkout, a mini-basket in the
+            header, and a line item on the order summary are different components
+            with similar responsibilities. When that happens, add a second short
+            prefix for the site area or journey the component belongs to:
+            <code>abc-co-basket-item</code> — primary namespace, area code,
+            then the component name.
+        </p>
+
+        <p>
+            The first prefix still marks product, team, or migration ownership
+            (<code>abc</code>). The second marks where the component lives in
+            the site (<code>co</code> for checkout, <code>pl</code> for product
+            listing, <code>ac</code> for account, and so on). Shared components
+            that appear across areas keep only the primary prefix —
+            <code>abc-product-card</code>, not
+            <code>abc-co-product-card</code>.
+        </p>
+
+        <CodeExample code={namespacedAreaComponents} />
+        <CodeExample code={namespacedAreaChildSelectors} />
+
         <ul>
             <li>
                 Use namespaces when collision risk is real — especially while
@@ -200,8 +249,16 @@ const avoidExample = `/* Avoid: names describe appearance, not responsibility */
                 Namespace new work consistently during a migration so every
                 prefixed class reads as “owned by the new system”.
             </li>
-            <li>Keep namespaces short: usually 2 to 4 characters.</li>
-            <li>Keep component names semantic after the prefix.</li>
+            <li>
+                Keep each prefix short: usually 2 to 3 characters. With two
+                prefixes, brevity matters more — long chains defeat the point.
+            </li>
+            <li>
+                Add a second area prefix when component volume or journey
+                boundaries make single semantic names ambiguous; document area
+                codes the same way you document the primary namespace.
+            </li>
+            <li>Keep component names semantic after the prefix(es).</li>
             <li>Do not namespace by default in small isolated greenfield codebases.</li>
             <li>Do not replace layers, scope, or ownership with prefixes alone.</li>
         </ul>
