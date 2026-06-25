@@ -8,6 +8,51 @@ function sitemapFilter(page) {
     return !page.includes('/search/');
 }
 
+/** Prism component files invoke `(function (Prism) { … }(Prism))`; in strict ESM that bare `Prism` is undefined. */
+function prismComponentsGlobal() {
+    const prismFreeIdentifier = /(?<![.\w$])Prism\./g;
+
+    return {
+        name: 'prism-components-global',
+        transform(code, id) {
+            if (!id.includes('node_modules/prismjs/components/')) {
+                return null;
+            }
+
+            if (!/\}\(Prism\)/.test(code) && !prismFreeIdentifier.test(code)) {
+                return null;
+            }
+
+            prismFreeIdentifier.lastIndex = 0;
+
+            return {
+                code: code
+                    .replace(/\}\(Prism\)/g, '}(globalThis.Prism)')
+                    .replace(prismFreeIdentifier, 'globalThis.Prism.'),
+                map: null
+            };
+        },
+        renderChunk(code, chunk) {
+            if (!chunk.fileName.includes('prism-setup')) {
+                return null;
+            }
+
+            prismFreeIdentifier.lastIndex = 0;
+
+            if (!prismFreeIdentifier.test(code)) {
+                return null;
+            }
+
+            prismFreeIdentifier.lastIndex = 0;
+
+            return {
+                code: code.replace(prismFreeIdentifier, 'globalThis.Prism.'),
+                map: null
+            };
+        }
+    };
+}
+
 export default defineConfig({
     site: 'https://lscss.crayonsandco.de',
     trailingSlash: 'always',
@@ -26,5 +71,9 @@ export default defineConfig({
                 return item;
             }
         })
-    ]
+    ],
+
+    vite: {
+        plugins: [prismComponentsGlobal()]
+    }
 });

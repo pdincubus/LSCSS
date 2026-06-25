@@ -1,6 +1,4 @@
-import Prism from 'prismjs';
-
-import 'prismjs/components/prism-bash';
+import Prism from './prism-setup';
 
 import type { PackageManager } from '../data/cliCommands';
 
