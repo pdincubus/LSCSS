@@ -13,9 +13,7 @@ export default defineConfig({
     trailingSlash: 'always',
 
     redirects: {
-        '/teams/team-governance': '/teams/governance',
         '/teams/team-governance/': '/teams/governance/',
-        '/learn/comparisons/utility-first-vs-lscss': '/learn/comparisons/tailwind-vs-lscss',
         '/learn/comparisons/utility-first-vs-lscss/': '/learn/comparisons/tailwind-vs-lscss/'
     },
 
