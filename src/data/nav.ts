@@ -158,7 +158,8 @@ export const navigationSections: NavigationSection[] = [
             { href: '/apply/migration/', label: 'Migration', legacyDocsGroup: 'Practice', legacyDocsOrder: 3 },
             { href: '/apply/design-tokens/', label: 'Design tokens', legacyDocsGroup: 'Practice', legacyDocsOrder: 5 },
             { href: '/apply/browser-support/', label: 'Browser support', legacyDocsGroup: 'Guides', legacyDocsOrder: 11 },
-            { href: '/apply/audit-checklist/', label: 'Audit checklist', legacyDocsGroup: 'Guides', legacyDocsOrder: 12 }
+            { href: '/apply/native-css/', label: 'Native CSS features', legacyDocsGroup: 'Guides', legacyDocsOrder: 12 },
+            { href: '/apply/audit-checklist/', label: 'Audit checklist', legacyDocsGroup: 'Guides', legacyDocsOrder: 13 }
         ]
     },
     {

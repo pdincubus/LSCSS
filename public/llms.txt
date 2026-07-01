@@ -32,6 +32,7 @@ RSS: https://lscss.crayonsandco.de/rss.xml
 - [Migration](https://lscss.crayonsandco.de/apply/migration/): Incremental adoption from legacy CSS
 - [Tooling](https://lscss.crayonsandco.de/apply/tooling/): PostCSS, custom media, browserslist, Stylelint
 - [Browser support](https://lscss.crayonsandco.de/apply/browser-support/): Browserslist, `@supports`, feature baselines, support matrix templates
+- [Native CSS features](https://lscss.crayonsandco.de/apply/native-css/): LSCSS feature radar for native CSS, build steps, support gates, and watch-list items
 - [Anti-patterns](https://lscss.crayonsandco.de/learn/anti-patterns/): What to stop doing
 
 ## Comparisons

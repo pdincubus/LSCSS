@@ -21,6 +21,35 @@
     line-height: var(--lh-l);
 }
 
+.comparison-table--feature-radar {
+    min-inline-size: 86rem;
+    table-layout: fixed;
+}
+
+.comparison-table--feature-radar col:nth-child(1) {
+    width: 11%;
+}
+
+.comparison-table--feature-radar col:nth-child(2) {
+    width: 13%;
+}
+
+.comparison-table--feature-radar col:nth-child(3) {
+    width: 12%;
+}
+
+.comparison-table--feature-radar col:nth-child(4) {
+    width: 23%;
+}
+
+.comparison-table--feature-radar col:nth-child(5) {
+    width: 23%;
+}
+
+.comparison-table--feature-radar col:nth-child(6) {
+    width: 18%;
+}
+
 .comparison-table th,
 .comparison-table td {
     padding: var(--space) var(--space-m);
@@ -41,6 +70,24 @@
 .comparison-table tbody th[scope='row'] {
     color: var(--c-heading);
     font-weight: var(--fw-semibold);
+    white-space: nowrap;
+}
+
+.comparison-table--feature-radar tbody th[scope='row'] {
+    white-space: normal;
+}
+
+.comparison-table--feature-radar th,
+.comparison-table--feature-radar td {
+    overflow-wrap: break-word;
+}
+
+.comparison-table--feature-radar td:last-child ul {
+    margin-block: 0;
+    padding-inline-start: var(--space);
+}
+
+.comparison-table--feature-radar td:last-child a {
     white-space: nowrap;
 }
 

@@ -143,6 +143,12 @@ const avoidExample = `.product-card {
             the project. They should not live as unwritten assumptions in old build config.
         </p>
         <p>
+            For feature-by-feature adoption decisions, use
+            <a href="/apply/native-css/">Native CSS features</a>. It separates
+            native use, build-time transforms, support gates, and watch-list items
+            without turning tooling into the source of product policy.
+        </p>
+        <p>
             Compatibility caveat: if one package or app in a monorepo has a
             different browserslist target, verify that shared CSS outputs stay
             aligned across those builds.

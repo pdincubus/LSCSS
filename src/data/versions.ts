@@ -26,9 +26,11 @@ export const versions: LscssVersion[] = [
         status: 'current',
         href: '/versions/',
         description:
-            'Platform-forced CSS exceptions are now documented explicitly, navigation is derived from one source of truth, and search result excerpts safely render Pagefind highlights.',
+            'Platform-forced CSS exceptions and native CSS feature recommendations are now documented explicitly, navigation is derived from one source of truth, and search result excerpts safely render Pagefind highlights.',
         releasedAt: '2026-07-01',
         changed: [
+            'Added /apply/native-css/ as an LSCSS feature radar for native CSS: what to use now, what needs a build step or `@supports` gate, and what to keep watching.',
+            'Added `@property` to native CSS guidance and the browser-support feature baseline for typed tokens, inheritance control, and animatable custom values.',
             'Expanded /apply/browser-support/ with documented platform exceptions for native popovers, customisable `<select>` elements, and `<details>` disclosure animation where fallback order, support gates, and `@starting-style` placement matter more than normal LSCSS ordering preferences.',
             'Added support-matrix rows and audit checklist prompts for `@starting-style`, `transition-behavior`, `::details-content`, `interpolate-size`, `calc-size()`, and customisable select support so reviewers can identify intentional browser-driven exceptions.',
             'Consolidated header, footer, docs sidebar, breadcrumbs, pagination, and related-link navigation data around a single canonical source; /apply/audit-checklist/ is the canonical URL and /teams/audit-checklist/ redirects there.',

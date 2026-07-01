@@ -181,6 +181,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
 | --- | --- | --- | --- | --- |
 | Cascade layers (@layer) | | Native / Build / Not used | | |
 | Design tokens (custom properties) | | Native | | |
+| Registered custom properties (@property) | | Native / Not used | Plain custom properties | Useful for typed tokens, inheritance control, and animatable custom values |
 | Custom media (@custom-media) | | Build | Plain @media or simpler layout | Every pipeline must expand |
 | Container queries | | Native / Not used | | |
 | Nesting | | Native / Build | Flat selectors | |
@@ -253,6 +254,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <a href="#features">Modern CSS</a>
         <a href="#support-matrix">Support matrix</a>
         <a href="#checklist">Checklist</a>
+        <a href="/apply/native-css/">Native CSS features</a>
     </nav>
 
     <section class="content-block">
@@ -489,6 +491,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <ul>
             <li><strong>Cascade layers</strong> (<code>@layer</code>) for predictable override order</li>
             <li><strong>Custom properties</strong> for tokens and theme boundaries</li>
+            <li><strong>Registered custom properties</strong> (<code>@property</code>) for typed tokens, inheritance control, and animatable custom values where the project target allows it</li>
             <li><strong>Logical properties and values</strong> for direction-aware layout</li>
             <li>
                 <strong>Custom media</strong> (<code>@custom-media</code>) for named breakpoints—
@@ -515,6 +518,8 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
             build transforms, which are gated with <code>@supports</code> (for example
             <code>@supports selector(:has(*))</code> for relational selectors), and which
             are simply off the table until the baseline moves.
+            <a href="/apply/native-css/">Native CSS features</a> turns that policy into
+            feature-by-feature LSCSS recommendations.
         </p>
     </section>
 
@@ -659,6 +664,13 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
                         <td>—</td>
                         <td>—</td>
                         <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Registered custom properties (<code>@property</code>)</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Plain custom properties</td>
+                        <td>Useful for typed tokens, inheritance control, and animatable custom values</td>
                     </tr>
                     <tr>
                         <th scope="row">Custom media</th>
@@ -867,6 +879,9 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
             </HubCard>
             <HubCard href="/apply/tooling/" title="Tooling">
                 <p>Wire PostCSS, custom media, and shared browserslist across the pipeline.</p>
+            </HubCard>
+            <HubCard href="/apply/native-css/" title="Native CSS features">
+                <p>Decide what to use now, what to gate, and what to keep watching.</p>
             </HubCard>
             <HubCard href="/apply/base-styles/" title="Base styles">
                 <p>Keep resilient defaults in the base layer before feature queries branch.</p>

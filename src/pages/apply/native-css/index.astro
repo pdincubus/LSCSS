@@ -1,0 +1,241 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import CodeExample from '../../../components/CodeExample.astro';
+import HubCard from '../../../components/HubCard.astro';
+import {
+    nativeCssCoreSourceIds,
+    nativeCssFeatureGroups,
+    nativeCssFeatures,
+    nativeCssSources
+} from '../../../data/nativeCssFeatures';
+
+const featureGroups = nativeCssFeatureGroups.map((group) => ({
+    ...group,
+    features: nativeCssFeatures.filter((feature) => feature.group === group.id)
+}));
+
+const featureDecisionExample = `# Native CSS feature note
+
+Feature: @scope
+Last reviewed: 2026-07-01
+Support source: MDN + Baseline
+Delivery: native CSS where the project matrix allows it
+LSCSS decision: optional for contained component subtrees
+Fallback: ordinary component roots and shallow child selectors remain the baseline`;
+---
+
+<DocsLayout
+    title="Native CSS Features"
+    description="An LSCSS feature radar for native CSS: what to use now, what needs a build step or support gate, and what to keep watching."
+    schemaType="TechArticle"
+>
+    <section class="site-hero">
+        <p class="eyebrow">Apply</p>
+
+        <h1>
+            Native CSS features
+        </h1>
+
+        <p class="intro">
+            Modern CSS removes a lot of old defensive code, JavaScript styling hooks,
+            and build-time tricks. This page is the LSCSS view of that surface:
+            what to use confidently, what to gate or transform, and what to watch
+            because it may change the methodology later.
+        </p>
+
+        <p class="summary-note">
+            This is a recommendation guide, not a live compatibility database.
+            Check <a href="https://web.dev/baseline/">Baseline</a>,{' '}
+            <a href="https://developer.mozilla.org/">MDN</a>,{' '}
+            <a href="https://caniuse.com/">Can I Use</a>, and your own{' '}
+            <a href="/apply/browser-support/">browser support matrix</a> before
+            a feature becomes a project requirement.
+        </p>
+    </section>
+
+    <nav class="section-nav" aria-label="Native CSS feature sections">
+        <a href="#how-to-read">How to read</a>
+        <a href="#use-now">Use now</a>
+        <a href="#use-with-care">Gate or build</a>
+        <a href="#watch-list">Watch list</a>
+        <a href="#sources">Sources</a>
+        <a href="#checklist">Checklist</a>
+    </nav>
+
+    <section class="content-block">
+        <h2 id="how-to-read">
+            How to read this page
+        </h2>
+
+        <p>
+            LSCSS cares less about novelty than about safe defaults. A native feature
+            earns its place when it reduces maintenance cost without weakening
+            accessibility, performance, or support policy.
+        </p>
+
+        <div class="hub-grid">
+            {
+                nativeCssFeatureGroups.map((group) => (
+                    <HubCard title={group.shortLabel}>
+                        <p>{group.description}</p>
+                    </HubCard>
+                ))
+            }
+        </div>
+
+        <p>
+            Treat each row as a project decision prompt. The support label is a
+            starting point; the project matrix and real user data decide whether
+            that feature is required, progressive, build-only, or still off the table.
+        </p>
+    </section>
+
+    {
+        featureGroups.map((group) => (
+            <section class="content-block" aria-labelledby={`${group.id}-heading`}>
+                <h2 id={`${group.id}-heading`}>
+                    {group.title}
+                </h2>
+
+                <p>{group.description}</p>
+
+                <div class="comparison-table-wrap">
+                    <table class="comparison-table comparison-table--plain comparison-table--feature-radar">
+                        <colgroup>
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Support</th>
+                                <th scope="col">Delivery</th>
+                                <th scope="col">LSCSS recommendation</th>
+                                <th scope="col">Fallback and review</th>
+                                <th scope="col">Sources</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                group.features.map((feature) => (
+                                    <tr>
+                                        <th scope="row">
+                                            <span>{feature.name}</span>
+                                            {feature.code && (
+                                                <>
+                                                    <br />
+                                                    <code>{feature.code}</code>
+                                                </>
+                                            )}
+                                        </th>
+                                        <td>{feature.supportLabel}</td>
+                                        <td>{feature.deliveryMode}</td>
+                                        <td>
+                                            <p>{feature.summary}</p>
+                                            <p>{feature.recommendation}</p>
+                                        </td>
+                                        <td>
+                                            <p>{feature.fallback}</p>
+                                            <p>
+                                                Last reviewed: <time datetime={feature.lastReviewed}>{feature.lastReviewed}</time>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                {
+                                                    feature.sources.map((sourceId) => {
+                                                        const source = nativeCssSources[sourceId];
+
+                                                        return (
+                                                            <li>
+                                                                <a href={source.href}>{source.label}</a>
+                                                            </li>
+                                                        );
+                                                    })
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        ))
+    }
+
+    <section class="content-block">
+        <h2 id="sources">
+            Sources and review
+        </h2>
+
+        <p>
+            Keep this page curated. Do not copy full support tables into LSCSS;
+            link to the live data, record the review date, and write the project
+            recommendation in plain language.
+        </p>
+
+        <CodeExample code={featureDecisionExample} language="markdown" />
+
+        <p>
+            Core sources to check when adding or changing a row:
+        </p>
+
+        <ul>
+            {
+                nativeCssCoreSourceIds.map((sourceId) => {
+                    const source = nativeCssSources[sourceId];
+
+                    return (
+                        <li>
+                            <a href={source.href}>{source.label}</a>
+                        </li>
+                    );
+                })
+            }
+        </ul>
+
+        <p>
+            If the support story is unclear, write “watch list” first. A feature can
+            move up later; over-promising is harder to unwind.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="checklist">
+            Adoption checklist
+        </h2>
+
+        <ul>
+            <li>Does the feature improve maintainability, accessibility, performance, or review clarity?</li>
+            <li>Is the support source current, and does it match the project browser matrix?</li>
+            <li>Is delivery native, build-transformed, gated with <code>@supports</code>, or deliberately not used?</li>
+            <li>Does the baseline experience still work when the feature is missing?</li>
+            <li>Does the component own the enhancement, fallback, and any required source order?</li>
+            <li>Is the last-reviewed date recent enough for a support-sensitive feature?</li>
+        </ul>
+    </section>
+
+    <section class="content-block">
+        <h2>
+            Next useful pages
+        </h2>
+
+        <div class="hub-grid">
+            <HubCard href="/apply/browser-support/" title="Browser support">
+                <p>Set the support policy, browserslist targets, and matrix before adopting a feature as required.</p>
+            </HubCard>
+            <HubCard href="/apply/tooling/" title="Tooling">
+                <p>Wire build transforms such as custom media into every CSS delivery path.</p>
+            </HubCard>
+            <HubCard href="/writing/articles/css-scope-and-lscss/" title="CSS @scope and LSCSS">
+                <p>Understand why native scoping helps, and why it does not replace the wider methodology.</p>
+            </HubCard>
+        </div>
+    </section>
+</DocsLayout>
