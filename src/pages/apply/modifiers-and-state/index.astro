@@ -128,9 +128,9 @@ const avoidExample = `/* Avoid unclear state names */
         <p>
             In the stylesheet, keep modifier rules in the <strong>component
             partial</strong> for that root. Layers, one-file-per-component, and
-            naming conventions are the main safety nets — so
-            <code>.product-card--featured</code> in <code>product-card.css</code>
-            is usually enough. You do not have to repeat
+            naming conventions are the main safety nets — so{' '}
+            <code>.product-card--featured</code> in <code>product-card.css</code>{' '}
+            is usually enough. You do not have to repeat{' '}
             <code>.product-card</code> in every selector unless the project needs
             extra guarding.
         </p>
@@ -175,7 +175,7 @@ const avoidExample = `/* Avoid unclear state names */
 
         <p>
             LSCSS uses two punctuation habits on purpose. Component and modifier
-            names use <strong>hyphens</strong>
+            names use <strong>hyphens</strong>{' '}
             (<code>product-card</code>, <code>product-card--featured</code>).
             State and condition names use an <strong>underscore</strong> only
             after the <code>is</code> or <code>has</code> prefix
@@ -208,8 +208,8 @@ const avoidExample = `/* Avoid unclear state names */
             Use <code>.has_*</code> when the component has content, children, or
             a condition that affects styling but is not itself a reusable variant.
             Use the same underscore-after-prefix pattern as
-            <a href="#state-classes">state classes</a>
-            (<code>has_error</code>, not <code>has-error</code> or
+            <a href="#state-classes">state classes</a>{' '}
+            (<code>has_error</code>, not <code>has-error</code> or{' '}
             <code>form-field--error</code> for a validation condition).
         </p>
 

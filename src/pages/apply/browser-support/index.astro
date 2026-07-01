@@ -300,18 +300,18 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
 
         <ul>
             <li>
-                <strong>Vendor prefixes.</strong>
+                <strong>Vendor prefixes.</strong>{' '}
                 Autoprefixer (or Lightning CSS with the right options) uses the list to
                 decide which prefixes to emit. If the list is stale, you either ship
                 unnecessary prefixes or miss real devices.
             </li>
             <li>
-                <strong>Syntax lowering.</strong>
+                <strong>Syntax lowering.</strong>{' '}
                 Some pipelines transpile nesting, custom media, or other syntax. Those
                 steps should assume the same browser surface as your prefix step.
             </li>
             <li>
-                <strong>CI.</strong>
+                <strong>CI.</strong>{' '}
                 Run production builds in CI with the same environment variables and
                 config paths as local machines so browserslist resolution does not drift.
             </li>
@@ -327,7 +327,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <h2 id="custom-media">Custom media queries and the build step</h2>
 
         <p>
-            <a href="https://www.w3.org/TR/mediaqueries-5/#custom-mq">Custom media</a>
+            <a href="https://www.w3.org/TR/mediaqueries-5/#custom-mq">Custom media</a>{' '}
             (<code>@custom-media</code>) lets you name breakpoints and preference
             queries once—usually in the <code>settings</code> layer—and reference them
             in component CSS as <code>@media (--desktop)</code> instead of repeating
@@ -337,7 +337,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         </p>
 
         <p>
-            <strong>No major browser implements <code>@custom-media</code> yet.</strong>
+            <strong>No major browser implements <code>@custom-media</code> yet.</strong>{' '}
             What ships in production is ordinary <code>@media</code> after your build
             expands the aliases (PostCSS, Lightning CSS, or equivalent). You cannot
             paste custom-media syntax into a stylesheet that reaches the browser
@@ -617,8 +617,8 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
             a mix—see the
             <a href="https://github.com/browserslist/browserslist#browserslist">browserslist docs</a>.
             For JS, the same browserslist config often feeds Babel or SWC; align those
-            transforms with the capabilities in your matrix. Runtime checks in CSS use
-            <code>@supports</code> (see <a href="#supports"><code>@supports</code></a>
+            transforms with the capabilities in your matrix. Runtime checks in CSS use{' '}
+            <code>@supports</code> (see <a href="#supports"><code>@supports</code></a>{' '}
             above); in JS use feature detection or conditional loading, not version
             sniffing.
         </p>
