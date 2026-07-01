@@ -21,9 +21,24 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '1.1',
+        label: '1.1',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Platform-forced CSS exceptions are now documented explicitly, navigation is derived from one source of truth, and search result excerpts safely render Pagefind highlights.',
+        releasedAt: '2026-07-01',
+        changed: [
+            'Expanded /apply/browser-support/ with documented platform exceptions for native popovers, customisable `<select>` elements, and `<details>` disclosure animation where fallback order, support gates, and `@starting-style` placement matter more than normal LSCSS ordering preferences.',
+            'Added support-matrix rows and audit checklist prompts for `@starting-style`, `transition-behavior`, `::details-content`, `interpolate-size`, `calc-size()`, and customisable select support so reviewers can identify intentional browser-driven exceptions.',
+            'Consolidated header, footer, docs sidebar, breadcrumbs, pagination, and related-link navigation data around a single canonical source; /apply/audit-checklist/ is the canonical URL and /teams/audit-checklist/ redirects there.',
+            'Fixed Pagefind search excerpts so matched terms render as safe `<mark>` highlights while code-like angle brackets remain escaped text.'
+        ]
+    },
+    {
         version: '1.0',
         label: '1.0',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'LSCSS 1.0 baseline: the methodology and docs are now presented as a stable, production-ready foundation across architecture, browser support policy, and team adoption guidance.',

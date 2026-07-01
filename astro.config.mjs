@@ -59,6 +59,7 @@ export default defineConfig({
 
     redirects: {
         '/teams/team-governance/': '/teams/governance/',
+        '/teams/audit-checklist/': '/apply/audit-checklist/',
         '/learn/comparisons/utility-first-vs-lscss/': '/learn/comparisons/tailwind-vs-lscss/'
     },
 

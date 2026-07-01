@@ -1,11 +1,3 @@
-function escapeHtml(value) {
-    return String(value ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;');
-}
-
 function sameOriginHref(raw) {
     try {
         const u = new URL(raw, window.location.origin);
@@ -18,13 +10,79 @@ function sameOriginHref(raw) {
     }
 }
 
+function createMessage(className, role, text) {
+    const message = document.createElement('p');
+    message.className = className;
+    message.textContent = text;
+
+    if (role) {
+        message.setAttribute('role', role);
+    }
+
+    return message;
+}
+
 function showUnavailable(results, input) {
-    results.innerHTML = `
-        <p class="search-unavailable" role="status">Search index is not available.</p>
-        <p class="search-help">Search is temporarily unavailable. Please try again later.</p>
-    `;
+    results.replaceChildren(
+        createMessage('search-unavailable', 'status', 'Search index is not available.'),
+        createMessage('search-help', '', 'Search is temporarily unavailable. Please try again later.'),
+    );
     input.placeholder = 'Search unavailable…';
     input.disabled = true;
+}
+
+function appendSafeExcerptNodes(source, target) {
+    source.childNodes.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+            target.append(node.textContent ?? '');
+            return;
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+            return;
+        }
+
+        const element = node;
+
+        if (element.tagName === 'SCRIPT' || element.tagName === 'STYLE') {
+            return;
+        }
+
+        if (element.tagName === 'MARK') {
+            const mark = document.createElement('mark');
+            appendSafeExcerptNodes(element, mark);
+            target.append(mark);
+            return;
+        }
+
+        appendSafeExcerptNodes(element, target);
+    });
+}
+
+function createExcerptFragment(value) {
+    const template = document.createElement('template');
+    const fragment = document.createDocumentFragment();
+    template.innerHTML = String(value ?? '');
+    appendSafeExcerptNodes(template.content, fragment);
+
+    return fragment;
+}
+
+function createHit(item) {
+    const article = document.createElement('article');
+    const link = document.createElement('a');
+    const title = document.createElement('strong');
+    const excerpt = document.createElement('p');
+
+    article.className = 'hit';
+    link.href = sameOriginHref(item.url ?? '#');
+    title.textContent = item.meta?.title ?? item.url ?? '';
+    excerpt.append(createExcerptFragment(item.excerpt));
+
+    link.append(title);
+    article.append(link, excerpt);
+
+    return article;
 }
 
 async function initSearch() {
@@ -46,10 +104,14 @@ async function initSearch() {
     }
 
     input.addEventListener('input', async (event) => {
+        if (!(event.target instanceof HTMLInputElement)) {
+            return;
+        }
+
         const term = event.target.value.trim();
 
         if (!term) {
-            results.innerHTML = '';
+            results.replaceChildren();
             return;
         }
 
@@ -60,29 +122,18 @@ async function initSearch() {
             );
 
             if (!items.length) {
-                results.innerHTML = `<p class="search-empty" role="status">No results for “${escapeHtml(term)}”.</p>`;
+                results.replaceChildren(
+                    createMessage('search-empty', 'status', `No results for “${term}”.`),
+                );
                 return;
             }
 
-            results.innerHTML = items
-                .map((item) => {
-                    const href = sameOriginHref(item.url);
-                    const title = escapeHtml(item.meta?.title ?? item.url);
-                    const excerpt = escapeHtml(item.excerpt ?? '');
-                    return `
-            <article class="hit">
-                <a href="${escapeHtml(href)}">
-                    <strong>${title}</strong>
-                </a>
-                <p>${excerpt}</p>
-            </article>
-        `;
-                })
-                .join('');
+            results.replaceChildren(...items.map((item) => createHit(item)));
         } catch (err) {
             console.error('Pagefind search failed:', err);
-            results.innerHTML =
-                '<p class="search-error" role="alert">Search failed. Please try again.</p>';
+            results.replaceChildren(
+                createMessage('search-error', 'alert', 'Search failed. Please try again.'),
+            );
         }
     });
 }

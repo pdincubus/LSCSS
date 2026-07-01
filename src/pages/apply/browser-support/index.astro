@@ -26,6 +26,107 @@ const supportsExample = `@supports (display: grid) {
     }
 }`;
 
+const popoverTransitionExample = `/* Fallback styles for old browsers first. */
+.menu-popover {
+    opacity: 0;
+    transform: translateY(var(--space-2xs));
+}
+
+/* Progressive enhancement for browsers with popover transition support. */
+@supports (transition-behavior: allow-discrete) {
+    .menu-popover {
+        transition:
+            opacity var(--transition-s),
+            transform var(--transition-s),
+            overlay var(--transition-s) allow-discrete,
+            display var(--transition-s) allow-discrete;
+    }
+
+    /* Open styles first, then exit/initial styles,
+     * then @starting-style last because of specificity.
+     * Do not change the order of these rules. */
+    .menu-popover:popover-open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .menu-popover {
+        opacity: 0;
+        transform: translateY(var(--space-2xs));
+    }
+
+    @starting-style {
+        .menu-popover:popover-open {
+            opacity: 0;
+            transform: translateY(var(--space-2xs));
+        }
+    }
+}`;
+
+const customSelectExample = `/* Fallback styles for old browsers first. */
+.form-select > select {
+    inline-size: 100%;
+    min-block-size: 2.75rem;
+    padding: var(--space-xs) var(--space-s);
+}
+
+/* Progressive enhancement for browsers with full customisable select support. */
+@supports (appearance: base-select) and selector(::picker(select)) {
+    .form-select > select,
+    .form-select > select::picker(select) {
+        appearance: base-select;
+    }
+
+    .form-select > select {
+        padding-inline-end: var(--space-xl);
+    }
+
+    .form-select > select::picker(select) {
+        border: var(--border-s) solid var(--c-border);
+        border-radius: var(--br-m);
+        background: var(--c-surface);
+    }
+}`;
+
+const disclosureTransitionExample = `/* Fallback styles for old browsers first.
+ * The disclosure opens and closes with native details behaviour. */
+.disclosure > details {
+    border: var(--border-s) solid var(--c-border);
+}
+
+@supports selector(::details-content) {
+    /* Do not change the order of these rules. */
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
+    details[open]::details-content {
+        block-size: auto;
+        block-size: calc-size(auto, size);
+        opacity: 1;
+        content-visibility: visible;
+    }
+
+    details::details-content {
+        transition:
+            var(--transition-m) block-size,
+            var(--transition-m) opacity,
+            var(--transition-m) content-visibility allow-discrete;
+        opacity: 0;
+        overflow: hidden;
+        block-size: 0;
+        content-visibility: hidden;
+    }
+
+    @starting-style {
+        details::details-content {
+            block-size: 0;
+            opacity: 0;
+            content-visibility: visible;
+        }
+    }
+}`;
+
 const customMediaExample = `/* settings layer — define once */
 @custom-media --desktop (width >= 1280px);
 @custom-media --reduced-motion (prefers-reduced-motion: reduce);
@@ -86,6 +187,11 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
 | :is(), :where(), :not() | | Native | Longer selectors | |
 | :has() | | Native / @supports | Simpler DOM or JS hook | |
 | @scope | | Native / Not used | Layers + naming discipline | |
+| @starting-style | | Native / @supports / Not used | No entry transition | Keep standalone blocks after the original rule |
+| transition-behavior | | Native / Not used | Discrete values change immediately | Needed for display, overlay, and content-visibility transitions |
+| ::details-content | | Native / @supports / Not used | Native details open/close | Progressive disclosure animation only |
+| interpolate-size / calc-size() | | Native / @supports / Not used | Instant intrinsic size change | Verify syntax and support before production use |
+| Customisable select | | Native / @supports / Not used | Classic select | Gate with appearance + ::picker(select) |
 | Logical properties | | Native | Physical properties | |
 
 ## JavaScript and platform APIs (optional, same pattern)
@@ -132,8 +238,8 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         </p>
 
         <p class="summary-note">
-            For product-level decisions and common mistakes, read
-            <a href="/writing/guides/browser-support-strategy/">Browser Support Strategy</a>
+            For product-level decisions and common mistakes, read{' '}
+            <a href="/writing/guides/browser-support-strategy/">Browser Support Strategy</a>{' '}
             first—then wire the targets below into your build.
         </p>
     </section>
@@ -143,6 +249,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <a href="#tooling">Tooling</a>
         <a href="#custom-media">Custom media</a>
         <a href="#supports">@supports</a>
+        <a href="#ordered-css">Ordered CSS</a>
         <a href="#features">Modern CSS</a>
         <a href="#support-matrix">Support matrix</a>
         <a href="#checklist">Checklist</a>
@@ -152,7 +259,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <h2 id="browserslist">Browserslist</h2>
 
         <p>
-            <a href="https://github.com/browserslist/browserslist">Browserslist</a>
+            <a href="https://github.com/browserslist/browserslist">Browserslist</a>{' '}
             is a shared query language for “which browsers does this project run on?”
             PostCSS (Autoprefixer), Lightning CSS, SWC/Babel, and other tools read the
             same configuration so prefixes and transpilation stay aligned with what
@@ -174,7 +281,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
             (<code>&gt; 0.5%</code>), recency (<code>last 2 versions</code>), and
             explicit exclusions (<code>not dead</code>) with what your analytics and
             contracts require—or use <strong>feature queries</strong> such as
-            <code>supports css-grid</code> when your
+            <code>supports css-grid</code> when your{' '}
             <a href="#support-matrix">support matrix</a> is capability-first rather than
             version-first. Run the command below whenever you change the file.
         </p>
@@ -209,7 +316,7 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         </ul>
 
         <p>
-            More detail on PostCSS plugins, Stylelint, and monorepo caveats lives under
+            More detail on PostCSS plugins, Stylelint, and monorepo caveats lives under{' '}
             <a href="/apply/tooling/">Tooling</a>.
         </p>
     </section>
@@ -260,22 +367,22 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
 
         <ul>
             <li>
-                <strong>One source of truth.</strong>
+                <strong>One source of truth.</strong>{' '}
                 Change a breakpoint once; every component that references
                 <code>--desktop</code> stays aligned.
             </li>
             <li>
-                <strong>Readable reviews.</strong>
+                <strong>Readable reviews.</strong>{' '}
                 <code>@media (--until-desktop)</code> states intent; scattered
                 <code>1279px</code> does not.
             </li>
             <li>
-                <strong>Fewer silent drifts.</strong>
+                <strong>Fewer silent drifts.</strong>{' '}
                 Without named media, “the tablet breakpoint” slowly becomes three
                 different numbers in three folders.
             </li>
             <li>
-                <strong>Preference queries as first-class.</strong>
+                <strong>Preference queries as first-class.</strong>{' '}
                 Treat <code>prefers-reduced-motion</code> like a layout breakpoint
                 instead of bolting one-off media blocks into random files.
             </li>
@@ -309,6 +416,68 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
     </section>
 
     <section class="content-block">
+        <h2 id="ordered-css">Platform-forced CSS ordering</h2>
+
+        <p>
+            Some progressive CSS has to be written in an order that looks unusual
+            by normal LSCSS standards. Native popovers, customisable selects, and
+            animated disclosure content all have browser parsing or specificity
+            rules that matter more than tidiness. Treat those cases as documented
+            platform exceptions, not hacks.
+        </p>
+
+        <ul>
+            <li>Write the fallback first so older browsers keep a complete control.</li>
+            <li>Gate enhanced selectors and newer properties with <code>@supports</code> where practical.</li>
+            <li>Keep the exception in the owning component layer, not in <code>hacks</code>.</li>
+            <li>
+                When a standalone <code>@starting-style</code> block repeats the
+                open selector, place it after the open rule because the selectors
+                have the same specificity.
+            </li>
+            <li>Add a short “do not reorder” comment when source order is part of the behaviour.</li>
+        </ul>
+
+        <h3>Popover entry and exit transitions</h3>
+
+        <p>
+            Popovers need an ordinary closed style first. The enhanced block can
+            then transition continuous properties such as <code>opacity</code> and <code>transform</code>,
+            and discrete properties such as <code>display</code> and <code>overlay</code>.
+        </p>
+
+        <CodeExample code={popoverTransitionExample} language="css" />
+
+        <h3>Customisable selects</h3>
+
+        <p>
+            Customisable select support is still a progressive enhancement. The
+            native select must remain useful before any enhanced picker styles run.
+            Use a small default gate for the core feature, then add stricter selector
+            checks when the component also depends on <code>::picker-icon</code>, <code>:open</code>, <code>::checkmark</code>,
+            or <code>&lt;selectedcontent&gt;</code>.
+        </p>
+
+        <CodeExample code={customSelectExample} language="css" />
+
+        <h3>Disclosure content animation</h3>
+
+        <p>
+            Disclosure animation has the same ordering problem: open styles first,
+            exit or initial styles second, and <code>@starting-style</code> last.
+            The fallback remains native <code>&lt;details&gt;</code> behaviour.
+        </p>
+
+        <CodeExample code={disclosureTransitionExample} language="css" />
+
+        <p>
+            Current platform references worth checking before copying these into a
+            production component: MDN on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style"><code>@starting-style</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior"><code>transition-behavior</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select">customisable select elements</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::details-content"><code>::details-content</code></a>,
+            and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@supports"><code>@supports</code></a>.
+        </p>
+    </section>
+
+    <section class="content-block">
         <h2 id="features">Modern features this methodology leans on</h2>
 
         <p>
@@ -336,6 +505,9 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
                 it against your resolved browserslist before critical UI depends on it.
             </li>
             <li><strong><code>@scope</code></strong> where discussed explicitly—know your target support before relying on it in production</li>
+            <li>
+                <strong>Platform interaction features</strong> such as <code>@starting-style</code>, <code>transition-behavior</code>, <code>::details-content</code>, and customisable selects where the fallback and rule order are documented.
+            </li>
         </ul>
 
         <p>
@@ -529,6 +701,41 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
                         <td>—</td>
                         <td>—</td>
                         <td>—</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>@starting-style</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Keep standalone blocks after the original rule</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>transition-behavior</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Needed for <code>display</code>, <code>overlay</code>, and <code>content-visibility</code> transitions</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>::details-content</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Progressive disclosure animation only</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>interpolate-size</code> / <code>calc-size()</code></th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Verify syntax and support before production use</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Customisable select</th>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Gate with <code>appearance</code> and <code>::picker(select)</code></td>
                     </tr>
                     <tr>
                         <th scope="row">Logical properties</th>

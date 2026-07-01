@@ -56,6 +56,14 @@
     font-size: var(--fs-s);
 }
 
+.site-search mark {
+    padding-inline: 0.125em;
+    background: var(--c-accent-soft);
+    border-radius: var(--br-s);
+    color: var(--c-on-accent-soft);
+    font-weight: var(--fw-semibold);
+}
+
 .search-unavailable,
 .search-empty,
 .search-error,
