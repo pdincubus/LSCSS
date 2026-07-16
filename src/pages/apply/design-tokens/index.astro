@@ -232,7 +232,11 @@ const badExample = `.product-card {
             <li>Do not add random colours directly inside components.</li>
             <li>Keep token names predictable and consistent across the project.</li>
             <li>Only add a new token when it represents a reusable decision.</li>
-            <li>Use component-level custom properties only when the component genuinely needs local configuration.</li>
+            <li>
+                Use component-level custom properties only when the component
+                genuinely needs local configuration; large component systems may
+                keep those local defaults in optional component sublayers.
+            </li>
         </ul>
     </section>
 </DocsLayout>

@@ -21,9 +21,22 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '1.1.1',
+        label: '1.1.1',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Component sublayers are now documented as an optional advanced pattern inside the existing components layer, with design-token guidance for component-local custom property defaults.',
+        releasedAt: '2026-07-16',
+        changed: [
+            'Added optional component sublayers guidance to /apply/layers/: `components.<component-name>` may be useful for large component libraries, one-file-per-component partials, CSS Modules, custom elements, or deliberately weak component-local defaults.',
+            'Clarified /apply/design-tokens/ so shared tokens stay in settings while genuine component-local custom properties may live in optional component sublayers on larger systems.'
+        ]
+    },
+    {
         version: '1.1',
         label: '1.1',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Platform-forced CSS exceptions and native CSS feature recommendations are now documented explicitly, navigation is derived from one source of truth, and search result excerpts safely render Pagefind highlights.',

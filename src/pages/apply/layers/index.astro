@@ -13,6 +13,12 @@ const importExample = `@import './legacy/old-site.css' layer(legacy);
 @import './theme/brand.css' layer(theme);
 @import './hacks/temporary-fixes.css' layer(hacks);`;
 
+const componentSublayerExample = `@layer legacy, settings, base, utilities,
+    layout, components, theme, hacks;
+
+@import './components/button.css' layer(components.button);
+@import './components/card.css' layer(components.card);`;
+
 /** Greenfield: no `legacy` slot, but vendor CSS still belongs on its own low layer. */
 const optionalStackExample = `@layer thirdparty, settings, base, utilities,
     layout, components, theme, hacks;
@@ -77,6 +83,7 @@ const importantLayersExample = `@layer components, hacks;
         <a href="#meaning">What each layer does</a>
         <a href="#names">Names and alternatives</a>
         <a href="#import">Imports</a>
+        <a href="#component-sublayers">Component sublayers</a>
         <a href="#legacy">Legacy and third-party</a>
         <a href="#hacks">Hacks</a>
         <a href="#rules">Working rules</a>
@@ -294,6 +301,37 @@ const importantLayersExample = `@layer components, hacks;
             Vendor CSS can live in <code>layer(thirdparty)</code> or, if you use one
             combined bucket, <code>layer(legacy)</code> — see
             <a href="#legacy">legacy and third-party</a>.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="component-sublayers">
+            Component sublayers
+        </h2>
+
+        <p>
+            Large component libraries may choose nested layer names such as
+            {' '}<code>components.button</code> or <code>components.card</code>.
+            These are still part of the existing <code>components</code> slot; they
+            do not add another top-level layer to the LSCSS stack.
+        </p>
+
+        <CodeExample code={componentSublayerExample} />
+
+        <p>
+            This is useful when a project has many one-file-per-component
+            partials, CSS Modules, custom elements, or deliberately weak
+            component-local custom property defaults. It can make local
+            component defaults easy to override without turning the whole
+            architecture into hundreds of vertical decisions.
+        </p>
+
+        <p>
+            Keep it optional. If the root stylesheet already imports
+            {' '}<code>button.css</code> with <code>layer(components.button)</code>, do
+            not wrap the same file in <code>{'@layer components.button { ... }'}</code> as
+            well. Pick one assignment point, document the convention, and keep
+            normal component structure inside the component partial.
         </p>
     </section>
 
