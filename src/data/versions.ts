@@ -21,9 +21,22 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '1.1.2',
+        label: '1.1.2',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'The `!important` and cascade layers guidance now explains the important-declaration ordering gotcha, including unlayered CSS and reversed layer precedence.',
+        releasedAt: '2026-07-22',
+        changed: [
+            'Corrected /apply/layers/#important so layered `!important` is documented as stronger than unlayered `!important`, while normal unlayered CSS still beats normal layered CSS.',
+            'Expanded the same section to explain how `!important` behaves without layers, how layers sort before specificity, and why lower layers can unexpectedly beat later override layers when both sides use important declarations.'
+        ]
+    },
+    {
         version: '1.1.1',
         label: '1.1.1',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Component sublayers are now documented as an optional advanced pattern inside the existing components layer, with design-token guidance for component-local custom property defaults.',

@@ -188,10 +188,22 @@ const importantLayersExample = `@layer components, hacks;
         <CodeExample code={importantLayersExample} />
 
         <p>
-            Unlayered <code>!important</code> still beats layered
-            <code>!important</code>, the same way unlayered normal declarations
-            beat layered ones (see <a href="#unlayered">unlayered CSS</a>). Mixing
-            layered and unlayered stylesheets makes debugging worse.
+            The unlayered rule changes too. Normal unlayered declarations beat
+            normal layered declarations (see <a href="#unlayered">unlayered CSS</a>).
+            Important declarations go the other way: layered
+            {' '}<code>!important</code> beats unlayered <code>!important</code>, and
+            the first declared layer beats later declared layers when both
+            declarations are important.
+        </p>
+
+        <p>
+            Without layers, <code>!important</code> lifts a declaration above normal
+            author CSS, then specificity and source order decide between competing
+            important declarations from the same origin. With layers, layer order
+            is sorted before specificity, and important layer order is reversed.
+            That is the spanner: a low layer that feels deliberately weak for
+            normal CSS can become stronger than later override layers as soon as
+            both sides use <code>!important</code>.
         </p>
 
         <p>
