@@ -2,6 +2,10 @@
 
 Layered Semantic CSS is a practical CSS methodology built around cascade layers, semantic component naming, shallow scoped selectors, explicit modifiers, and clear state classes.
 
+## Accessibility
+
+Read the [accessibility statement](ACCESSIBILITY.md) for our accessibility target, known limitations, and how to report a problem.
+
 ## Development
 
 ```bash
