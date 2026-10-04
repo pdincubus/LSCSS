@@ -5,9 +5,19 @@ import CodeExample from '../../../../components/CodeExample.astro';
 const title = 'Accessibility and CSS';
 const description = 'How accessibility, CSS architecture, focus states, reduced motion, logical properties, and progressive enhancement work together.';
 
-const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0s;
+const reducedMotionExample = `/* Import this partial into layer(components).
+ * State changes work immediately unless motion is opted into. */
+.status-message {
+    background-color: var(--c-surface);
+}
+
+.status-message.is_loading {
+    background-color: var(--c-surface-alt);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .status-message {
+        transition: background-color var(--transition-s);
     }
 }`;
 ---
@@ -65,12 +75,29 @@ const reducedMotionExample = `@media (prefers-reduced-motion: reduce) {
         </h2>
 
         <p>
-            Treat <code>prefers-reduced-motion</code> as a first-class constraint in
-            base or theme layers, not a one-off patch. Start from a conservative
-            default and only opt into motion where it genuinely helps comprehension.
+            Start with complete, immediate state changes. Add transitions and
+            animations inside <code>prefers-reduced-motion: no-preference</code>{' '}
+            in the owning component layer. This keeps the same content and controls
+            available when motion is reduced or the media query is unsupported.
         </p>
 
         <CodeExample code={reducedMotionExample} language="css" />
+
+        <p>
+            A global <code>animation-duration: 0s</code> rule does not disable
+            transitions, smooth scrolling, or JavaScript-driven motion. Review
+            those separately, include animated pseudo-elements, and never make
+            completing an animation a condition for opening a control or updating
+            its accessible state. Loading status still needs visible text; colour
+            alone does not communicate it.
+        </p>
+
+        <p>
+            See the <a href="/apply/browser-support/#ordered-css">popover and disclosure examples</a>{' '}
+            for native controls with capability checks and optional motion.
+            In projects with custom media, define a named preference query in
+            settings and expand it through the same build as other media queries.
+        </p>
 
         <h2>
             Start here

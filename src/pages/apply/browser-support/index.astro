@@ -26,39 +26,36 @@ const supportsExample = `@supports (display: grid) {
     }
 }`;
 
-const popoverTransitionExample = `/* Fallback styles for old browsers first. */
+const popoverTransitionExample = `/* Import this partial into layer(components).
+ * Native popover behaviour handles visibility without animation. */
 .menu-popover {
-    opacity: 0;
-    transform: translateY(var(--space-2xs));
+    opacity: 1;
+    transform: none;
 }
 
-/* Progressive enhancement for browsers with popover transition support. */
-@supports (transition-behavior: allow-discrete) {
-    .menu-popover {
-        transition:
-            opacity var(--transition-s),
-            transform var(--transition-s),
-            overlay var(--transition-s) allow-discrete,
-            display var(--transition-s) allow-discrete;
-    }
-
-    /* Open styles first, then exit/initial styles,
-     * then @starting-style last because of specificity.
-     * Do not change the order of these rules. */
-    .menu-popover:popover-open {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .menu-popover {
-        opacity: 0;
-        transform: translateY(var(--space-2xs));
-    }
-
-    @starting-style {
-        .menu-popover:popover-open {
+@media (prefers-reduced-motion: no-preference) {
+    @supports (transition-behavior: allow-discrete) and (overlay: auto) {
+        .menu-popover {
             opacity: 0;
             transform: translateY(var(--space-2xs));
+            transition:
+                opacity var(--transition-s),
+                transform var(--transition-s),
+                overlay var(--transition-s) allow-discrete,
+                display var(--transition-s) allow-discrete;
+        }
+
+        .menu-popover:popover-open {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Keep after the open rule: these selectors have equal specificity. */
+        @starting-style {
+            .menu-popover:popover-open {
+                opacity: 0;
+                transform: translateY(var(--space-2xs));
+            }
         }
     }
 }`;
@@ -88,41 +85,31 @@ const customSelectExample = `/* Fallback styles for old browsers first. */
     }
 }`;
 
-const disclosureTransitionExample = `/* Fallback styles for old browsers first.
+const disclosureTransitionExample = `/* Import this partial into layer(components).
  * The disclosure opens and closes with native details behaviour. */
 .disclosure > details {
     border: var(--border-s) solid var(--c-border);
 }
 
-@supports selector(::details-content) {
-    /* Do not change the order of these rules. */
-    :root {
-        interpolate-size: allow-keywords;
-    }
+@media (prefers-reduced-motion: no-preference) {
+    @supports selector(::details-content) and (interpolate-size: allow-keywords) and (transition-behavior: allow-discrete) {
+        .disclosure > details {
+            interpolate-size: allow-keywords;
+        }
 
-    details[open]::details-content {
-        block-size: auto;
-        block-size: calc-size(auto, size);
-        opacity: 1;
-        content-visibility: visible;
-    }
-
-    details::details-content {
-        transition:
-            var(--transition-m) block-size,
-            var(--transition-m) opacity,
-            var(--transition-m) content-visibility allow-discrete;
-        opacity: 0;
-        overflow: hidden;
-        block-size: 0;
-        content-visibility: hidden;
-    }
-
-    @starting-style {
-        details::details-content {
+        .disclosure > details::details-content {
             block-size: 0;
             opacity: 0;
-            content-visibility: visible;
+            overflow: clip;
+            transition:
+                block-size var(--transition-m),
+                opacity var(--transition-m),
+                content-visibility var(--transition-m) allow-discrete;
+        }
+
+        .disclosure > details[open]::details-content {
+            block-size: auto;
+            opacity: 1;
         }
     }
 }`;
@@ -421,17 +408,18 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <h2 id="ordered-css">Platform-forced CSS ordering</h2>
 
         <p>
-            Some progressive CSS has to be written in an order that looks unusual
-            by normal LSCSS standards. Native popovers, customisable selects, and
-            animated disclosure content all have browser parsing or specificity
-            rules that matter more than tidiness. Treat those cases as documented
-            platform exceptions, not hacks.
+            Native controls should work before their visual enhancements load.
+            Keep capability checks and motion preferences beside the component,
+            and explain source order where it changes the result. A standalone{' '}
+            <code>@starting-style</code> block follows the ordinary cascade;
+            it does not automatically outrank the open-state rule.
         </p>
 
         <ul>
             <li>Write the fallback first so older browsers keep a complete control.</li>
             <li>Gate enhanced selectors and newer properties with <code>@supports</code> where practical.</li>
             <li>Keep the exception in the owning component layer, not in <code>hacks</code>.</li>
+            <li>Opt into animation with <code>prefers-reduced-motion: no-preference</code>; keep state changes immediate otherwise.</li>
             <li>
                 When a standalone <code>@starting-style</code> block repeats the
                 open selector, place it after the open rule because the selectors
@@ -443,9 +431,12 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <h3>Popover entry and exit transitions</h3>
 
         <p>
-            Popovers need an ordinary closed style first. The enhanced block can
-            then transition continuous properties such as <code>opacity</code> and <code>transform</code>,
-            and discrete properties such as <code>display</code> and <code>overlay</code>.
+            This example assumes a native <code>popover</code> attribute and a{' '}
+            <code>popovertarget</code> trigger. The browser hides the closed
+            popover; the fallback CSS leaves it visible when opened. Only the
+            enhancement adds opacity, movement, and discrete transitions.
+            Support for <code>transition-behavior</code> alone does not guarantee
+            support for <code>overlay</code>, so check both.
         </p>
 
         <CodeExample code={popoverTransitionExample} language="css" />
@@ -465,9 +456,13 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
         <h3>Disclosure content animation</h3>
 
         <p>
-            Disclosure animation has the same ordering problem: open styles first,
-            exit or initial styles second, and <code>@starting-style</code> last.
-            The fallback remains native <code>&lt;details&gt;</code> behaviour.
+            Keep a native <code>&lt;summary&gt;</code> inside the{' '}
+            <code>&lt;details&gt;</code>. Size interpolation is scoped to this
+            component and gated separately from the content pseudo-element.
+            The browser still controls content visibility; the discrete transition
+            lets closing content remain painted until the animation finishes.
+            Unsupported browsers and users requesting reduced motion get an
+            immediate native disclosure.
         </p>
 
         <CodeExample code={disclosureTransitionExample} language="css" />

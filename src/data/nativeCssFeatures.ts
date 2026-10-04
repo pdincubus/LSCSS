@@ -117,13 +117,61 @@ export const nativeCssSources = {
         label: 'MDN view transitions',
         href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_view_transitions'
     },
+    mdnStartViewTransition: {
+        label: 'MDN startViewTransition()',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition'
+    },
+    mdnViewTransitionRule: {
+        label: 'MDN @view-transition',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@view-transition'
+    },
     mdnFieldSizing: {
         label: 'MDN field-sizing',
         href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing'
     },
     mdnCustomFunctions: {
-        label: 'MDN custom functions and mixins',
-        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_custom_functions_and_mixins'
+        label: 'MDN @function',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@function'
+    },
+    cssMixins: {
+        label: 'CSSWG functions and mixins draft',
+        href: 'https://drafts.csswg.org/css-mixins-1/'
+    },
+    mdnRevertRule: {
+        label: 'MDN revert-rule',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/revert-rule'
+    },
+    mdnPositionAnchor: {
+        label: 'MDN position-anchor',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position-anchor'
+    },
+    mdnScrollState: {
+        label: 'MDN scroll-state queries',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Container_scroll-state_queries'
+    },
+    mdnTextBoxTrim: {
+        label: 'MDN text-box-trim',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-box-trim'
+    },
+    mdnSiblingCount: {
+        label: 'MDN sibling-count()',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-count'
+    },
+    mdnProgress: {
+        label: 'MDN progress()',
+        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress'
+    },
+    webPlatformMay2026: {
+        label: 'May 2026 Baseline digest',
+        href: 'https://web.dev/blog/baseline-digest-may-2026'
+    },
+    webPlatformAugust2026: {
+        label: 'August 2026 platform updates',
+        href: 'https://web.dev/blog/web-platform-08-2026'
+    },
+    webPlatformSeptember2026: {
+        label: 'September 2026 platform updates',
+        href: 'https://web.dev/blog/web-platform-09-2026'
     },
     mdnSubgrid: {
         label: 'MDN subgrid',
@@ -392,13 +440,13 @@ export const nativeCssFeatures: NativeCssFeature[] = [
         code: '::details-content',
         group: 'use-with-care',
         summary: 'Enables native details content animation without replacing details behaviour.',
-        supportLabel: 'Check current support',
+        supportLabel: 'Baseline newly available since September 2025',
         deliveryMode: 'Native CSS behind @supports',
         recommendation:
-            'Use for optional disclosure animation only; never make the animation required for comprehension.',
+            'Use for optional disclosure styling; check size interpolation and discrete transitions separately, and respect reduced motion.',
         fallback:
             'Native details open and close instantly.',
-        lastReviewed: '2026-07-01',
+        lastReviewed: '2026-10-04',
         sources: ['mdnDetailsContent', 'mdnBcd']
     },
     {
@@ -431,16 +479,16 @@ export const nativeCssFeatures: NativeCssFeature[] = [
     },
     {
         name: 'Anchor positioning',
-        group: 'watch-list',
-        summary: 'Could replace a lot of fragile tooltip, flyout, and anchored overlay positioning code.',
-        supportLabel: 'Limited or evolving',
-        deliveryMode: 'Prototype only unless matrix allows',
+        group: 'use-with-care',
+        summary: 'Positions contextual UI relative to an anchor without JavaScript measurements.',
+        supportLabel: 'Core features Baseline newly available; check subfeatures',
+        deliveryMode: 'Native CSS with a usable fallback',
         recommendation:
-            'Track for menus, tooltips, and contextual UI; do not require it for core controls yet.',
+            'Use explicit anchors and overflow fallbacks in the owning component. Verify the exact positioning features in your matrix; positioning does not supply focus or dismissal behaviour.',
         fallback:
             'Use simpler static placement or a well-tested positioning helper.',
-        lastReviewed: '2026-07-01',
-        sources: ['mdnAnchorPositioning', 'mdnBcd']
+        lastReviewed: '2026-10-04',
+        sources: ['mdnAnchorPositioning', 'mdnPositionAnchor']
     },
     {
         name: 'Scroll-driven animations',
@@ -457,71 +505,199 @@ export const nativeCssFeatures: NativeCssFeature[] = [
         sources: ['mdnScrollTimeline', 'mdnBcd']
     },
     {
-        name: 'View transitions',
-        group: 'watch-list',
-        summary: 'Can improve continuity between pages and states, but motion has accessibility and support costs.',
-        supportLabel: 'Check current support by transition type',
-        deliveryMode: 'Progressive enhancement',
+        name: 'Same-document view transitions',
+        code: 'document.startViewTransition()',
+        group: 'use-with-care',
+        summary: 'Adds visual continuity to a state change within the current document.',
+        supportLabel: 'Baseline newly available; check newer options separately',
+        deliveryMode: 'JavaScript feature detection and CSS',
         recommendation:
-            'Track for navigation polish; respect reduced motion and avoid hiding real loading or focus changes.',
+            'Run the state update directly when the API is missing or reduced motion is requested. Preserve focus and loading feedback.',
         fallback:
-            'Ordinary navigation or state change.',
-        lastReviewed: '2026-07-01',
-        sources: ['mdnViewTransitions', 'baseline']
+            'Immediate state change without snapshots or animation.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnStartViewTransition', 'mdnViewTransitions']
     },
     {
-        name: 'Style and scroll-state container queries',
-        code: '@container style() / scroll-state()',
+        name: 'Cross-document view transitions',
+        code: '@view-transition',
         group: 'watch-list',
-        summary: 'Could make components react to local state without extra classes in some patterns.',
-        supportLabel: 'Subfeatures vary',
-        deliveryMode: 'Prototype and gate',
+        summary: 'Adds visual continuity between separate documents during navigation.',
+        supportLabel: 'Limited availability',
+        deliveryMode: 'Progressive CSS enhancement',
         recommendation:
-            'Track carefully; size queries are ready, but style and scroll-state queries need separate decisions.',
+            'Opt in eligible same-origin pages only where navigation remains complete without a transition. Respect reduced motion on both pages.',
         fallback:
-            'Use existing state classes, data attributes, or size queries.',
-        lastReviewed: '2026-07-01',
-        sources: ['mdnContainer', 'mdnBcd']
+            'Ordinary document navigation.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnViewTransitionRule', 'mdnViewTransitions']
+    },
+    {
+        name: 'Custom-property style queries',
+        code: '@container style()',
+        group: 'use-with-care',
+        summary: 'Lets a component respond to a custom property on an ancestor container.',
+        supportLabel: 'Baseline newly available since May 2026',
+        deliveryMode: 'Native CSS with default component styles',
+        recommendation:
+            'Use for documented context or theme contracts. This support claim covers custom-property queries, not arbitrary CSS properties or every range syntax.',
+        fallback:
+            'Keep usable default styles outside the query; use explicit variants where required by the project matrix.',
+        lastReviewed: '2026-10-04',
+        sources: ['webPlatformMay2026', 'mdnContainer']
+    },
+    {
+        name: 'Scroll-state container queries',
+        code: '@container scroll-state()',
+        group: 'watch-list',
+        summary: 'Can respond to scrolling, sticky, or snap conditions without extra styling hooks.',
+        supportLabel: 'Limited availability; check each queried state',
+        deliveryMode: 'Progressive enhancement',
+        recommendation:
+            'Keep essential controls visible without the query. Set up the scroll-state container deliberately and test keyboard scrolling.',
+        fallback:
+            'Ordinary component styles or an existing explicit state hook.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnScrollState', 'mdnBcd']
     },
     {
         name: 'Field sizing',
         code: 'field-sizing',
-        group: 'watch-list',
-        summary: 'Could reduce JavaScript for auto-growing form controls.',
-        supportLabel: 'Check current support',
+        group: 'use-with-care',
+        summary: 'Sizes form controls to their content without JavaScript measurement.',
+        supportLabel: 'Baseline newly available since June 2026',
         deliveryMode: 'Progressive enhancement',
         recommendation:
-            'Track for textareas and compact form controls; keep normal field sizing as the baseline.',
+            'Use with minimum and maximum sizes so empty controls stay discoverable and long input stays manageable. Test placeholders, zoom, and manual textarea resizing.',
         fallback:
             'Fixed or manually controlled form control sizing.',
-        lastReviewed: '2026-07-01',
+        lastReviewed: '2026-10-04',
         sources: ['mdnFieldSizing', 'mdnBcd']
     },
     {
-        name: 'CSS custom functions and mixins',
+        name: 'CSS custom functions',
+        code: '@function',
         group: 'watch-list',
-        summary: 'Could replace some preprocessor-only patterns without giving up plain CSS.',
-        supportLabel: 'Experimental',
+        summary: 'Defines reusable calculations that return a CSS value.',
+        supportLabel: 'Experimental; limited availability',
         deliveryMode: 'Do not rely on for production LSCSS yet',
         recommendation:
-            'Watch the specification and tooling; avoid designing architecture around it for now.',
+            'Evaluate value calculations independently from mixins. Keep token contracts readable and avoid making shared styles depend on experimental functions.',
         fallback:
             'Use custom properties, plain declarations, or build-time tooling where already approved.',
-        lastReviewed: '2026-07-01',
+        lastReviewed: '2026-10-04',
         sources: ['mdnCustomFunctions', 'mdnBcd']
+    },
+    {
+        name: 'CSS mixins',
+        code: '@mixin / @apply',
+        group: 'watch-list',
+        summary: 'The draft proposes reusable blocks of declarations and rules, rather than single returned values.',
+        supportLabel: 'Draft; separate from custom-function support',
+        deliveryMode: 'Do not require native mixins',
+        recommendation:
+            'Track the draft without replacing component ownership or introducing a new abstraction layer. Support for @function does not imply support for mixins.',
+        fallback:
+            'Use ordinary component rules, custom properties, or existing approved build tooling.',
+        lastReviewed: '2026-10-04',
+        sources: ['cssMixins']
     },
     {
         name: 'Subgrid adoption patterns',
         code: 'subgrid',
-        group: 'watch-list',
-        summary: 'Support has improved, but the LSCSS question is where it belongs in layout/component ownership.',
-        supportLabel: 'Ready to evaluate per project',
+        group: 'use-now',
+        summary: 'Shares parent grid tracks with nested content for consistent alignment.',
+        supportLabel: 'Baseline widely available',
         deliveryMode: 'Native CSS',
         recommendation:
             'Use when parent-child grid alignment is genuinely shared; do not let layout concerns leak through every component.',
         fallback:
             'Duplicate only the small grid structure needed, or simplify alignment.',
-        lastReviewed: '2026-07-01',
+        lastReviewed: '2026-10-04',
         sources: ['baseline', 'mdnSubgrid']
+    },
+    {
+        name: 'Rule-level cascade rollback',
+        code: 'revert-rule',
+        group: 'use-with-care',
+        summary: 'Withdraws a property decision from one rule while preserving other rules in the same layer.',
+        supportLabel: 'Baseline newly available since September 2026',
+        deliveryMode: 'Native CSS behind @supports where required',
+        recommendation:
+            'Choose revert-rule for a rule boundary, revert-layer for a layer boundary, and revert for an origin boundary. Check ownership before adding a rollback.',
+        fallback:
+            'Keep complete ordinary styles outside the feature gate.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnRevertRule', 'webPlatformSeptember2026']
+    },
+    {
+        name: 'Text-box trimming',
+        code: 'text-box / text-box-trim / text-box-edge',
+        group: 'use-with-care',
+        summary: 'Uses font metrics to control space at the block edges of text.',
+        supportLabel: 'Baseline newly available since August 2026',
+        deliveryMode: 'Progressive CSS enhancement',
+        recommendation:
+            'Use for deliberate heading or control alignment in the owning component. Check fallback fonts, accents, multiple lines, and text resizing before changing shared typography.',
+        fallback:
+            'Normal line boxes with the existing line-height and spacing tokens.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnTextBoxTrim', 'webPlatformAugust2026']
+    },
+    {
+        name: 'Sibling calculations',
+        code: 'sibling-index() / sibling-count()',
+        group: 'use-with-care',
+        summary: 'Exposes an element’s position and count among sibling elements to CSS calculations.',
+        supportLabel: 'Baseline newly available since August 2026',
+        deliveryMode: 'Native CSS with fallback values',
+        recommendation:
+            'Use for local component calculations when DOM order is intentional. Counts include the element itself and hidden siblings; they do not describe only visible matching items.',
+        fallback:
+            'Ordinary grid or flex layout and uniform values. Any staggered motion must respect reduced motion.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnSiblingCount', 'webPlatformAugust2026']
+    },
+    {
+        name: 'Progress calculations',
+        code: 'progress()',
+        group: 'use-with-care',
+        summary: 'Returns a ratio describing where a value sits between two bounds.',
+        supportLabel: 'Baseline newly available since September 2026; check no-clamp separately',
+        deliveryMode: 'Native CSS with fallback values',
+        recommendation:
+            'Use when it makes a bounded calculation clearer than existing calc() or clamp() expressions. This is a value calculation, not a scroll timeline.',
+        fallback:
+            'An explicit token value or an existing calc() or clamp() expression.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnProgress', 'webPlatformSeptember2026']
+    },
+    {
+        name: 'Relative colour alpha',
+        code: 'alpha()',
+        group: 'use-with-care',
+        summary: 'Changes the transparency of an existing colour without redefining its colour channels.',
+        supportLabel: 'Baseline newly available since September 2026',
+        deliveryMode: 'Native CSS with a supported colour fallback',
+        recommendation:
+            'Derive values from semantic colour tokens where useful, and test contrast against the actual background after compositing.',
+        fallback:
+            'An explicit semantic colour. Gate token definitions with a real colour-property @supports check; custom properties accept unsupported function text.',
+        lastReviewed: '2026-10-04',
+        sources: ['webPlatformSeptember2026']
+    },
+    {
+        name: 'Scheme-aware images',
+        code: 'light-dark() with image values',
+        group: 'use-with-care',
+        summary: 'Selects an image or gradient using the active colour scheme.',
+        supportLabel: 'Baseline newly available since September 2026',
+        deliveryMode: 'Native CSS with an ordinary image fallback',
+        recommendation:
+            'Keep colour and image support decisions separate. Set color-scheme explicitly and keep meaningful images and alternative text in HTML.',
+        fallback:
+            'A single suitable image or existing colour-scheme media rules; gate image-valued token overrides separately.',
+        lastReviewed: '2026-10-04',
+        sources: ['mdnLightDark', 'webPlatformSeptember2026']
     }
 ];
