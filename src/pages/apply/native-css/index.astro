@@ -16,12 +16,12 @@ const featureGroups = nativeCssFeatureGroups.map((group) => ({
 
 const featureDecisionExample = `# Native CSS feature note
 
-Feature: @scope
-Last reviewed: 2026-07-01
+Feature: revert-rule
+Last reviewed: 2026-10-04
 Support source: MDN + Baseline
 Delivery: native CSS where the project matrix allows it
-LSCSS decision: optional for contained component subtrees
-Fallback: ordinary component roots and shallow child selectors remain the baseline`;
+LSCSS decision: optional property rollback in the owning layer
+Fallback: complete component styles outside the @supports gate`;
 ---
 
 <DocsLayout
@@ -88,18 +88,35 @@ Fallback: ordinary component roots and shallow child selectors remain the baseli
             starting point; the project matrix and real user data decide whether
             that feature is required, progressive, build-only, or still off the table.
         </p>
+
+        <p>
+            <strong>Baseline Newly available</strong> means a feature works across
+            the latest core browsers. <strong>Widely available</strong> means
+            30 months have passed since that point. Neither label replaces your
+            support matrix, and an LSCSS recommendation can stay cautious for
+            accessibility or architectural reasons after browser support improves.
+        </p>
+
+        <p>
+            The October 2026 review adds recent typography, calculation, colour,
+            and cascade features, and separates capabilities with different support
+            stories. Each row carries its own review date. Start with the{' '}
+            <a href="/apply/layers/#rollback">cascade rollback examples</a> and the
+            {' '}<a href="/apply/browser-support/#ordered-css">native control fallbacks</a>{' '}
+            when applying these recommendations.
+        </p>
     </section>
 
     {
         featureGroups.map((group) => (
-            <section class="content-block" aria-labelledby={`${group.id}-heading`}>
+            <section class="content-block" id={group.id} aria-labelledby={`${group.id}-heading`}>
                 <h2 id={`${group.id}-heading`}>
                     {group.title}
                 </h2>
 
                 <p>{group.description}</p>
 
-                <div class="comparison-table-wrap">
+                <div class="comparison-table-wrap" role="region" aria-labelledby={`${group.id}-heading`} tabindex="0">
                     <table class="comparison-table comparison-table--plain comparison-table--feature-radar">
                         <colgroup>
                             <col />

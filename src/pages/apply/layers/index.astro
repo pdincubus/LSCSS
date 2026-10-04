@@ -52,6 +52,33 @@ const importantLayersExample = `@layer components, hacks;
         margin-block-end: 0 !important;
     }
 }`;
+
+const rollbackExample = `@layer components, theme;
+
+@layer components {
+    .notice {
+        color: var(--c-text);
+    }
+}
+
+@layer theme {
+    .notice {
+        color: var(--c-accent);
+    }
+
+    .notice--plain {
+        /* Ignore this layer for colour: use the components value. */
+        color: revert-layer;
+    }
+
+    @supports (color: revert-rule) {
+        .notice--outlined {
+            border: var(--border-s) solid currentColor;
+            /* Ignore this rule for colour: keep the theme value. */
+            color: revert-rule;
+        }
+    }
+}`;
 ---
 
 <DocsLayout
@@ -79,6 +106,7 @@ const importantLayersExample = `@layer components, hacks;
         <a href="#order">Layer order</a>
         <a href="#unlayered">Unlayered CSS</a>
         <a href="#important">!important</a>
+        <a href="#rollback">Cascade rollback</a>
         <a href="#optional">Optional layers</a>
         <a href="#meaning">What each layer does</a>
         <a href="#names">Names and alternatives</a>
@@ -97,8 +125,8 @@ const importantLayersExample = `@layer components, hacks;
         <CodeExample code={layerExample} />
 
         <p>
-            Lower layers lose to higher layers. Source order inside a layer
-            matters less than the declared layer order itself. This means
+            For normal declarations, lower layers lose to higher layers. Source
+            order inside a layer matters less than the declared layer order itself. This means
             architecture controls overrides before specificity becomes a problem.
         </p>
 
@@ -114,8 +142,8 @@ const importantLayersExample = `@layer components, hacks;
         </h2>
 
         <p>
-            Styles that are <strong>not</strong> assigned to a layer sit in an implicit
-            unlayered bucket. That bucket beats <em>every</em> declared layer — always,
+            Normal author styles that are <strong>not</strong> assigned to a layer
+            take precedence over normal styles in <em>every</em> declared layer,
             regardless of how carefully you ordered
             <code>legacy, settings, base, ..., hacks</code>. A single unlayered file can
             override your whole stack without higher specificity or
@@ -210,6 +238,71 @@ const importantLayersExample = `@layer components, hacks;
             LSCSS stance: fix which layer owns the rule and whether the layer
             order is correct before reaching for <code>!important</code>. With
             layers in play, it is even less predictable than in pre-layer CSS.
+        </p>
+    </section>
+
+    <section class="content-block">
+        <h2 id="rollback">
+            Choosing a cascade rollback
+        </h2>
+
+        <p>
+            Resetting a property to its initial value and asking the cascade to
+            look elsewhere are different decisions. Choose the boundary you
+            mean to undo; these keywords affect the property they are assigned to.
+        </p>
+
+        <div class="comparison-table-wrap" role="region" aria-labelledby="rollback" tabindex="0">
+            <table class="comparison-table comparison-table--plain">
+                <thead>
+                    <tr>
+                        <th scope="col">Keyword</th>
+                        <th scope="col">Effect in author CSS</th>
+                        <th scope="col">LSCSS use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><code>revert</code></th>
+                        <td>Roll back author-origin declarations for this property, allowing user or browser styles to determine the result.</td>
+                        <td>Restore browser or user styling deliberately; this does not mean “use my base layer”.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>revert-layer</code></th>
+                        <td>Ignore this cascade layer for this property and resolve the remaining cascade.</td>
+                        <td>Let a component value show through an optional theme override.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><code>revert-rule</code></th>
+                        <td>Ignore this style rule for this property. Other rules in the same layer can still supply the value.</td>
+                        <td>Keep the rest of a rule while withdrawing one of its property decisions.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <CodeExample code={rollbackExample} />
+
+        <p>
+            With normal declarations, the plain notice uses the component text
+            colour. The outlined notice keeps the theme accent colour; its border
+            declaration still applies. If <code>revert-rule</code> is unsupported,
+            the optional outline rule is skipped and the ordinary notice remains.
+        </p>
+
+        <p>
+            <a href="https://web.dev/blog/web-platform-09-2026">September 2026 releases</a>{' '}
+            brought <code>revert-rule</code> to Baseline Newly available. Keep a
+            complete fallback for older project targets. See
+            {' '}<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/revert-rule">MDN’s rollback comparison</a>{' '}
+            for the detailed semantics, including animation behaviour.
+        </p>
+
+        <p>
+            Use explicit property rollbacks rather than <code>all: revert</code>{' '}
+            when only one visual decision needs changing. Check ownership and
+            the <a href="#important">reversed order for important declarations</a>{' '}
+            before using a rollback to repair an override.
         </p>
     </section>
 
