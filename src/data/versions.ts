@@ -21,9 +21,25 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '1.1.3',
+        label: '1.1.3',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Updated native CSS recommendations and cascade rollback guidance, with safer progressive enhancement examples and accessibility fixes.',
+        releasedAt: '2026-10-04',
+        changed: [
+            'Refreshed /apply/native-css/ with recent platform features, current support sources, separate recommendations for capabilities with different browser support, and an explanation of Baseline Newly available and Widely available.',
+            'Added /apply/layers/#rollback to compare `revert`, `revert-layer`, and `revert-rule`, and clarified that ordinary layer precedence applies to normal declarations.',
+            'Corrected the popover and disclosure examples in /apply/browser-support/ so native controls remain usable when enhancement features are unavailable or reduced motion is requested.',
+            'Updated /writing/guides/accessibility-and-css/ to explain component-owned, optional motion and immediate state changes.',
+            'Repaired native CSS radar section links, made scrolling comparison tables keyboard-accessible, and restored missing spaces around inline text on /accessibility/ and /versions/.'
+        ]
+    },
+    {
         version: '1.1.2',
         label: '1.1.2',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'The `!important` and cascade layers guidance now explains the important-declaration ordering gotcha, including unlayered CSS and reversed layer precedence.',
