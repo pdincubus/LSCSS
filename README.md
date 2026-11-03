@@ -8,10 +8,23 @@ Read the [accessibility statement](ACCESSIBILITY.md) for our accessibility targe
 
 ## Development
 
+Use Node.js 22.23.4 or newer and pnpm. TypeScript stays on version 6 while `@astrojs/check` requires its JavaScript compiler API.
+
 ```bash
 pnpm install
 pnpm run dev
 ```
+
+Before opening a pull request, verify a reproducible installation and the production build:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm check
+pnpm build
+pnpm audit
+```
+
+There is currently no dedicated automated test suite. Check the built site in a browser, including navigation, search, code examples, keyboard access and mobile layouts.
 
 ## Analytics (Umami Cloud)
 
