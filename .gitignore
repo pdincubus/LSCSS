@@ -12,6 +12,10 @@ dist/
 # scripts/copy-pagefind-to-public.mjs during `pnpm build`)
 public/pagefind/
 
+# Browser test output
+playwright-report/
+test-results/
+
 # Logs
 *.log
 npm-debug.log*
