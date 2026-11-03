@@ -6,6 +6,8 @@
     ],
     "exclude": [
         "dist",
-        "public/pagefind"
+        "public/pagefind",
+        "playwright-report",
+        "test-results"
     ]
 }

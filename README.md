@@ -24,7 +24,22 @@ pnpm build
 pnpm audit
 ```
 
-There is currently no dedicated automated test suite. Check the built site in a browser, including navigation, search, code examples, keyboard access and mobile layouts.
+### Browser tests
+
+Install Chromium once after installing dependencies, and again whenever Playwright is updated:
+
+```bash
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
+The Playwright suite builds the production site, including its real Pagefind index, and starts a local preview at `http://127.0.0.1:4177`. That port must be free; the suite will not reuse another server. Analytics are disabled for the test build.
+
+Desktop and mobile Chromium checks cover documentation links, breadcrumbs, mobile submenus, keyboard navigation and Escape focus return, content links without JavaScript, search results and empty/unavailable states, and both code-copy controls. Copy tests check the real clipboard contents, confirmation/reset behaviour and the permission-denied message. Tests run one at a time to avoid clipboard conflicts.
+
+Run `pnpm test:e2e` alongside the checks above for monthly package maintenance. GitHub Actions runs the project check and browser suite on pull requests and pushes to `main`. Failure reports, screenshots and traces are saved outside the site build in `playwright-report/` and `test-results/` and uploaded by CI on failure. To inspect a local HTML report, run `pnpm exec playwright show-report`.
+
+This suite covers Chromium at two viewport sizes; it is not a full accessibility audit or Firefox/WebKit verification. Continue checking affected layouts, reduced motion and browser-specific behaviour when relevant to a change.
 
 ## Analytics (Umami Cloud)
 

@@ -7,6 +7,7 @@
         "dev": "astro dev",
         "start": "astro dev",
         "check": "astro check",
+        "test:e2e": "playwright test",
         "build": "astro build && node scripts/generate-discovery-files.mjs && pagefind --site dist && node scripts/copy-pagefind-to-public.mjs",
         "generate:brand": "node scripts/generate-brand-assets.mjs",
         "generate:og": "pnpm run generate:brand",
@@ -20,6 +21,7 @@
     "devDependencies": {
         "@astrojs/check": "^0.9.12",
         "@astrojs/sitemap": "^3.7.4",
+        "@playwright/test": "1.64.1",
         "@resvg/resvg-js": "^2.6.2",
         "@types/prismjs": "^1.26.6",
         "fontkit": "^2.0.4",
