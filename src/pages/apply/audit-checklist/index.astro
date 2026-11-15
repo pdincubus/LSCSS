@@ -91,7 +91,15 @@ import HubCard from '../../../components/HubCard.astro';
     <section class="content-block">
         <h2 id="components">Components and ownership</h2>
 
+        <p>
+            Inspect the rendered HTML for a representative page. Start at the
+            component root and follow its children alongside its stylesheet.
+        </p>
+
         <ul>
+            <li>Can the semantic element be the component root? Does each extra wrapper serve a layout, accessibility, or behaviour need?</li>
+            <li>When a pattern repeats across templates, does an existing shared component cover its markup, states, and behaviour?</li>
+            <li>Does the component own its markup, styles in the <code>components</code> layer, and related behaviour?</li>
             <li>Are selectors shallow and scoped?</li>
             <li>Are components named semantically?</li>
             <li>Are repeated utility groups asking to become components?</li>
@@ -112,6 +120,7 @@ import HubCard from '../../../components/HubCard.astro';
             <li>Are temporary states using clear <code>.is_*</code> classes?</li>
             <li>Is JavaScript creating styling confusion instead of state clarity?</li>
             <li>Do platform-forced CSS exceptions document their fallback, support gate, and rule order?</li>
+            <li>Have you tested browser-sensitive fallbacks in the relevant engines, including Firefox and Safari where supported?</li>
             <li>Can developers explain why something is a modifier and not state?</li>
         </ul>
     </section>

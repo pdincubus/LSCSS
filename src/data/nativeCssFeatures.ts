@@ -93,6 +93,10 @@ export const nativeCssSources = {
         label: 'MDN customisable select',
         href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select'
     },
+    webdxCustomSelect: {
+        label: 'WebDX customisable select support',
+        href: 'https://web-platform-dx.github.io/web-features-explorer/features/customizable-select/'
+    },
     mdnDetailsContent: {
         label: 'MDN ::details-content',
         href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/::details-content'
@@ -109,9 +113,9 @@ export const nativeCssSources = {
         label: 'MDN anchor positioning',
         href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning'
     },
-    mdnScrollTimeline: {
-        label: 'MDN scroll-timeline',
-        href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline'
+    webdxScrollDrivenAnimations: {
+        label: 'WebDX scroll-driven animation support',
+        href: 'https://web-platform-dx.github.io/web-features-explorer/features/scroll-driven-animations/'
     },
     mdnViewTransitions: {
         label: 'MDN view transitions',
@@ -172,6 +176,14 @@ export const nativeCssSources = {
     webPlatformSeptember2026: {
         label: 'September 2026 platform updates',
         href: 'https://web.dev/blog/web-platform-09-2026'
+    },
+    webPlatformOctober2026: {
+        label: 'October 2026 platform updates',
+        href: 'https://web.dev/blog/web-platform-10-2026'
+    },
+    webdxMarginTrim: {
+        label: 'WebDX margin-trim support',
+        href: 'https://web-platform-dx.github.io/web-features-explorer/features/margin-trim/'
     },
     mdnSubgrid: {
         label: 'MDN subgrid',
@@ -425,15 +437,15 @@ export const nativeCssFeatures: NativeCssFeature[] = [
         name: 'Customisable select',
         code: 'appearance: base-select',
         group: 'use-with-care',
-        summary: 'Promising native form styling, but still too uneven for default design-system assumptions.',
-        supportLabel: 'Limited or evolving',
+        summary: 'Styles the native form control and its picker while retaining native selection behaviour.',
+        supportLabel: 'Limited availability; check picker and field pseudo-elements separately',
         deliveryMode: 'Native CSS behind @supports',
         recommendation:
-            'Use only as progressive enhancement; the plain select must remain usable and recognisable.',
+            'Keep a labelled select with readable option text. Check each enhanced selector the component uses.',
         fallback:
             'Classic native select styling.',
-        lastReviewed: '2026-07-01',
-        sources: ['mdnCustomSelect', 'mdnBcd']
+        lastReviewed: '2026-11-15',
+        sources: ['webdxCustomSelect', 'mdnCustomSelect']
     },
     {
         name: 'Disclosure content pseudo-element',
@@ -492,17 +504,17 @@ export const nativeCssFeatures: NativeCssFeature[] = [
     },
     {
         name: 'Scroll-driven animations',
-        code: 'scroll-timeline',
-        group: 'watch-list',
-        summary: 'May remove JavaScript scroll listeners for decorative and progress-driven motion.',
-        supportLabel: 'Limited or evolving',
+        code: 'animation-timeline / scroll() / view()',
+        group: 'use-with-care',
+        summary: 'Links animation to scroll position or to an element moving through its scroll container.',
+        supportLabel: 'Baseline newly available since October 2026',
         deliveryMode: 'Progressive enhancement',
         recommendation:
-            'Use only when reduced-motion handling and no-animation fallbacks are already designed.',
+            'Keep the animation in the owning component and opt in only when the browser supports the timeline and the user has no reduced-motion preference.',
         fallback:
-            'No scroll-linked animation; content and controls remain usable.',
-        lastReviewed: '2026-07-01',
-        sources: ['mdnScrollTimeline', 'mdnBcd']
+            'Static presentation with all content visible and controls usable.',
+        lastReviewed: '2026-11-15',
+        sources: ['webdxScrollDrivenAnimations', 'webPlatformOctober2026']
     },
     {
         name: 'Same-document view transitions',
@@ -659,6 +671,20 @@ export const nativeCssFeatures: NativeCssFeature[] = [
         sources: ['mdnSiblingCount', 'webPlatformAugust2026']
     },
     {
+        name: 'Typed CSS arithmetic',
+        code: 'calc(length / length)',
+        group: 'use-with-care',
+        summary: 'Divides two lengths to produce a unitless ratio, even when the lengths use different units.',
+        supportLabel: 'Baseline newly available since October 2026',
+        deliveryMode: 'Native CSS behind @supports, or build-time simplification for known values',
+        recommendation:
+            'Use a ratio to interpolate a local component token. Check the division on a typed property inside the feature query.',
+        fallback:
+            'Set a usable default token value before the enhancement. Resolve constant expressions at build time where the tool supports them.',
+        lastReviewed: '2026-11-15',
+        sources: ['webPlatformOctober2026']
+    },
+    {
         name: 'Progress calculations',
         code: 'progress()',
         group: 'use-with-care',
@@ -671,6 +697,20 @@ export const nativeCssFeatures: NativeCssFeature[] = [
             'An explicit token value or an existing calc() or clamp() expression.',
         lastReviewed: '2026-10-04',
         sources: ['mdnProgress', 'webPlatformSeptember2026']
+    },
+    {
+        name: 'Block-edge margin trimming',
+        code: 'margin-trim: block',
+        group: 'watch-list',
+        summary: 'Lets a container trim child margins that meet its block edges.',
+        supportLabel: 'Limited availability; Firefox support is missing',
+        deliveryMode: 'Optional native CSS behind @supports',
+        recommendation:
+            'Watch for broader support before depending on margin trimming in shared layout primitives.',
+        fallback:
+            'Use gap for spacing between siblings or scope first- and last-child margin rules to the container.',
+        lastReviewed: '2026-11-15',
+        sources: ['webdxMarginTrim', 'webPlatformOctober2026']
     },
     {
         name: 'Relative colour alpha',

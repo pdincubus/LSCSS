@@ -60,14 +60,21 @@ const popoverTransitionExample = `/* Import this partial into layer(components).
     }
 }`;
 
-const customSelectExample = `/* Fallback styles for old browsers first. */
+const customSelectMarkup = `<label class="form-select">
+    Delivery method
+    <select name="delivery">
+        <option value="standard">Standard delivery</option>
+        <option value="express">Express delivery</option>
+    </select>
+</label>`;
+
+const customSelectExample = `/* Import this partial into layer(components). */
 .form-select > select {
     inline-size: 100%;
     min-block-size: 2.75rem;
     padding: var(--space-xs) var(--space-s);
 }
 
-/* Progressive enhancement for browsers with full customisable select support. */
 @supports (appearance: base-select) and selector(::picker(select)) {
     .form-select > select,
     .form-select > select::picker(select) {
@@ -82,6 +89,12 @@ const customSelectExample = `/* Fallback styles for old browsers first. */
         border: var(--border-s) solid var(--c-border);
         border-radius: var(--br-m);
         background: var(--c-surface);
+    }
+
+    @supports selector(select::field-content) {
+        .form-select > select::field-content {
+            font-weight: 600;
+        }
     }
 }`;
 
@@ -111,6 +124,39 @@ const disclosureTransitionExample = `/* Import this partial into layer(component
             block-size: auto;
             opacity: 1;
         }
+    }
+}`;
+
+const scrollDrivenAnimationExample = `/* Import this partial into layer(components). */
+@media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) and (animation-range: entry) {
+        .product-card > .image {
+            animation: product-card-image-entry auto linear both;
+            animation-timeline: view();
+            animation-range: entry;
+        }
+
+        @keyframes product-card-image-entry {
+            from { transform: scale(0.95); }
+            to { transform: none; }
+        }
+    }
+}`;
+
+const typedArithmeticExample = `/* Layout stylesheet */
+.product-grid {
+    container-type: inline-size;
+}
+
+/* Component stylesheet */
+.product-card {
+    --card-padding: 1rem;
+    padding: var(--card-padding);
+}
+
+@supports (opacity: calc(1px / 1px)) {
+    .product-card {
+        --card-padding: clamp(1rem, calc(1rem + 0.5rem * ((100cqi - 20rem) / 20rem)), 1.5rem);
     }
 }`;
 
@@ -179,7 +225,9 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
 | transition-behavior | | Native / Not used | Discrete values change immediately | Needed for display, overlay, and content-visibility transitions |
 | ::details-content | | Native / @supports / Not used | Native details open/close | Progressive disclosure animation only |
 | interpolate-size / calc-size() | | Native / @supports / Not used | Instant intrinsic size change | Verify syntax and support before production use |
-| Customisable select | | Native / @supports / Not used | Classic select | Gate with appearance + ::picker(select) |
+| Customisable select | | Native / @supports / Not used | Classic select | Gate the picker and optional pseudo-elements separately |
+| Scroll-driven animations | | Native / @supports / Not used | Static content | Test the timeline, range and reduced-motion preference |
+| Typed CSS arithmetic (length division) | | Native / @supports / Build / Not used | Default token value | Build-time simplification only where values can be resolved |
 | Logical properties | | Native | Physical properties | |
 
 ## JavaScript and platform APIs (optional, same pattern)
@@ -441,16 +489,28 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
 
         <CodeExample code={popoverTransitionExample} language="css" />
 
-        <h3>Customisable selects</h3>
+        <h3 id="customisable-selects">Customisable selects</h3>
 
         <p>
             Customisable select support is still a progressive enhancement. The
             native select must remain useful before any enhanced picker styles run.
             Use a small default gate for the core feature, then add stricter selector
-            checks when the component also depends on <code>::picker-icon</code>, <code>:open</code>, <code>::checkmark</code>,
-            or <code>&lt;selectedcontent&gt;</code>.
+            checks when the component also depends on <code>::picker-icon</code>,{' '}
+            <code>:open</code>, or <code>::checkmark</code>. Keep the select labelled
+            and give every option meaningful text.
         </p>
 
+        <p>
+            Safari 27.2 added <code>::field-content</code> for styling the selected
+            option’s text with plain <code>&lt;option&gt;</code> markup. The example
+            checks for it separately so browsers can apply the core picker styles on
+            their own. Use <code>&lt;selectedcontent&gt;</code> when the design needs
+            to customise the selected option’s markup, and check support for that
+            element separately.
+            {' '}<a href="https://webkit.org/blog/18515/webkit-features-for-safari-27-2/">WebKit’s Safari 27.2 notes</a>.
+        </p>
+
+        <CodeExample code={customSelectMarkup} language="html" />
         <CodeExample code={customSelectExample} language="css" />
 
         <h3>Disclosure content animation</h3>
@@ -515,6 +575,42 @@ Progressive = enhanced path + documented fallback. Not used = off the table.
             are simply off the table until the baseline moves.
             <a href="/apply/native-css/">Native CSS features</a> turns that policy into
             feature-by-feature LSCSS recommendations.
+        </p>
+
+        <h3 id="scroll-driven-animations">Scroll-driven animations</h3>
+
+        <p>
+            Core CSS scroll-driven animations became Baseline Newly available in
+            October 2026. The example scales a card image slightly as it enters the
+            scrollport. The image and the rest of the card stay visible throughout.
+            Put the animation shorthand before <code>animation-timeline</code> and{' '}
+            <code>animation-range</code>, since the shorthand resets both. Browsers
+            without support and users who request reduced motion get the static card.
+        </p>
+
+        <CodeExample code={scrollDrivenAnimationExample} language="css" />
+
+        <h3 id="typed-arithmetic">Typed CSS arithmetic</h3>
+
+        <p>
+            Dividing two lengths in <code>calc()</code> gives a unitless number.
+            In this example the product grid is the query container. The ratio goes
+            from zero to one as the grid grows from <code>20rem</code> to{' '}
+            <code>40rem</code>, taking card padding from <code>1rem</code> to{' '}
+            <code>1.5rem</code>. The feature query checks division on a property
+            that accepts a number, and the card keeps its default padding elsewhere.
+        </p>
+
+        <CodeExample code={typedArithmeticExample} language="css" />
+
+        <p>
+            For projects with older browser targets, <code>postcss-calc</code> can
+            resolve values known at build time. For example, a version that supports
+            typed division can reduce <code>line-height: calc(24px / 16px)</code>{' '}
+            to <code>line-height: calc(1.5)</code>. The card’s <code>100cqi</code> depends on
+            the rendered container, so keep the CSS fallback and check the output of
+            your project’s build. See the{' '}
+            <a href="https://github.com/postcss/postcss-calc">postcss-calc documentation</a>.
         </p>
     </section>
 
