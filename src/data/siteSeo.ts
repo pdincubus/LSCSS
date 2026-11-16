@@ -10,4 +10,4 @@ export const author = {
 } as const;
 
 /** Default lastmod for sitemap entries. Bump when shipping substantive site updates (also scripts/site-seo-constants.mjs). */
-export const siteContentUpdated = '2026-10-04';
+export const siteContentUpdated = '2026-11-16';

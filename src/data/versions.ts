@@ -21,9 +21,24 @@ export interface LscssVersion {
 
 export const versions: LscssVersion[] = [
     {
+        version: '1.1.4',
+        label: '1.1.4',
+        status: 'current',
+        href: '/versions/',
+        description:
+            'Updated native CSS guidance for scroll-driven animations, customisable selects and typed arithmetic, with new checks for rendered HTML and component ownership.',
+        releasedAt: '2026-11-16',
+        changed: [
+            'Moved scroll-driven animations to Use with care and added an example that respects reduced motion and keeps content visible.',
+            'Updated the customisable select example with a separate support check for ::field-content and a native select fallback.',
+            'Added typed CSS arithmetic guidance, including when postcss-calc can simplify known values at build time and when to keep a browser fallback. Added margin-trim to the watch list.',
+            'Expanded the audit checklist to cover rendered HTML, wrapper purpose, shared components and browser-sensitive fallbacks.'
+        ]
+    },
+    {
         version: '1.1.3',
         label: '1.1.3',
-        status: 'current',
+        status: 'archived',
         href: '/versions/',
         description:
             'Updated native CSS recommendations and cascade rollback guidance, with safer progressive enhancement examples and accessibility fixes.',
